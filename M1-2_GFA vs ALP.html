@@ -103,8 +103,20 @@ a{color:var(--blue);text-decoration:none}
   .reason-grid{grid-template-columns:1fr}
 }
 </style>
+  <!-- Firebase CDN -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore-compat.js"></script>
+  <script src="tp-firebase.js"></script>
 </head>
 <body>
+<div id="tpLoading" style="position:fixed;top:0;left:0;width:100%;height:100%;background:#1a5fa8;display:flex;align-items:center;justify-content:center;z-index:9999;color:#fff;font-family:'Noto Sans KR',Arial,sans-serif">
+  <div style="text-align:center">
+    <div style="font-size:2.5rem;margin-bottom:.8rem">📚</div>
+    <div style="font-size:1rem;font-weight:600">대주 이전가격 교육</div>
+    <div style="font-size:.82rem;opacity:.75;margin-top:.4rem">로딩 중...</div>
+  </div>
+</div>
 
 <!-- 헤더 -->
 <header class="mod-header">
@@ -112,6 +124,10 @@ a{color:var(--blue);text-decoration:none}
   <h1>M1-2. 글로벌 내부규정 접근방법 vs 정상가격원칙</h1>
   <div class="sub">§1.16 – §1.32 · 예상 학습시간: 40분</div>
   <div class="prog-strip"><div class="prog-strip-inner" id="topBar" style="width:0%"></div></div>
+  <div style="display:flex;justify-content:flex-end;align-items:center;gap:.7rem;margin-top:.5rem;font-size:.82rem">
+    <span id="topUserName" style="color:rgba(255,255,255,.85)"></span>
+    <button onclick="tpSignOut()" style="background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.35);color:#fff;padding:3px 14px;border-radius:20px;cursor:pointer;font-size:.78rem;font-family:inherit">로그아웃</button>
+  </div>
 </header>
 
 <div class="layout">
@@ -608,9 +624,9 @@ function submitQuiz(){
 }
 
 function finishQuiz(pct){
-  localStorage.setItem('ch1_m2_quiz',pct);
+  tpSet('ch1_m2_quiz',pct);
   const prog=pct>=60?100:50;
-  localStorage.setItem('ch1_m2_pct',prog);
+  tpSet('ch1_m2_pct',prog);
   document.getElementById('topBar').style.width=prog+'%';
   document.getElementById('pctDisp').textContent=prog+'%';
 }
@@ -634,10 +650,10 @@ function toggleCheck(item,idx){
 }
 function saveChecks(){
   const items=document.querySelectorAll('#checkList .check-item input');
-  localStorage.setItem('ch1_m2_checks',[...items].map(i=>i.checked?'1':'0').join(''));
+  tpSet('ch1_m2_checks',[...items].map(i=>i.checked?'1':'0').join(''));
 }
 function loadChecks(){
-  const saved=localStorage.getItem('ch1_m2_checks')||'';
+  const saved=tpGet('ch1_m2_checks')||'';
   const items=document.querySelectorAll('#checkList .check-item input');
   [...items].forEach((cb,i)=>{
     if(saved[i]==='1'){cb.checked=true;cb.closest('.check-item').classList.add('checked');}
@@ -645,20 +661,20 @@ function loadChecks(){
 }
 
 // ── 진도 업데이트 ──
-let openedCount=parseInt(localStorage.getItem('ch1_m2_opened')||'0');
+let openedCount=parseInt(tpGet('ch1_m2_opened')||'0');
 function trackOpen(){
   openedCount++;
-  localStorage.setItem('ch1_m2_opened',openedCount);
+  tpSet('ch1_m2_opened',openedCount);
   updateProg();
 }
 function updateProg(){
-  const quiz=parseInt(localStorage.getItem('ch1_m2_quiz')||'0');
+  const quiz=parseInt(tpGet('ch1_m2_quiz')||'0');
   const checks=[...document.querySelectorAll('#checkList input:checked')].length;
-  const opens=parseInt(localStorage.getItem('ch1_m2_opened')||'0');
+  const opens=parseInt(tpGet('ch1_m2_opened')||'0');
   let pct=0;
   if(quiz>0) pct=Math.max(pct,quiz>=60?100:50);
   pct=Math.max(pct,Math.min(40,Math.round(opens/7*25)+Math.round(checks/6*15)));
-  localStorage.setItem('ch1_m2_pct',pct);
+  tpSet('ch1_m2_pct',pct);
   document.getElementById('topBar').style.width=pct+'%';
   document.getElementById('pctDisp').textContent=pct+'%';
 }
@@ -667,13 +683,16 @@ function updateProg(){
 function scrollTo(id){document.getElementById(id).scrollIntoView({behavior:'smooth',block:'start'});}
 
 // ── 초기화 ──
-window.addEventListener('DOMContentLoaded',()=>{
+tpOnReady(function(user){
+  document.getElementById('tpLoading').style.display='none';
+  document.getElementById('topUserName').textContent=user.displayName||user.email;
+
   loadChecks();
-  const saved=parseInt(localStorage.getItem('ch1_m2_pct')||'0');
+  const saved=parseInt(tpGet('ch1_m2_pct')||'0');
   document.getElementById('topBar').style.width=saved+'%';
   document.getElementById('pctDisp').textContent=saved+'%';
   // 저장된 퀴즈 점수 있으면 버튼 비활성
-  const savedQuiz=localStorage.getItem('ch1_m2_quiz');
+  const savedQuiz=tpGet('ch1_m2_quiz');
   if(savedQuiz){
     const pct=parseInt(savedQuiz);
     const sb=document.getElementById('scoreBox');

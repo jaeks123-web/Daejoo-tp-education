@@ -91,14 +91,30 @@ a{color:var(--blue);text-decoration:none}
 .btn-nav.secondary{background:#fff;color:var(--blue);border:2px solid var(--blue)}
 @media(max-width:720px){.layout{flex-direction:column}.sidebar{width:100%;position:static}.nav-card{position:static}.two-col,.three-col{grid-template-columns:1fr}.econ-grid{grid-template-columns:1fr}}
 </style>
+  <!-- Firebase CDN -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore-compat.js"></script>
+  <script src="tp-firebase.js"></script>
 </head>
 <body>
+<div id="tpLoading" style="position:fixed;top:0;left:0;width:100%;height:100%;background:#1a5fa8;display:flex;align-items:center;justify-content:center;z-index:9999;color:#fff;font-family:'Noto Sans KR',Arial,sans-serif">
+  <div style="text-align:center">
+    <div style="font-size:2.5rem;margin-bottom:.8rem">📚</div>
+    <div style="font-size:1rem;font-weight:600">대주 이전가격 교육</div>
+    <div style="font-size:.82rem;opacity:.75;margin-top:.4rem">로딩 중...</div>
+  </div>
+</div>
 
 <header class="mod-header">
   <div class="breadcrumb">기초과정 › Chapter I › M1-6</div>
   <h1>M1-6. 비교가능성 분석 II: 제품·경제환경·사업전략</h1>
   <div class="sub">§1.127 – §1.138 · 예상 학습시간: 35분</div>
   <div class="prog-strip"><div class="prog-strip-inner" id="topBar" style="width:0%"></div></div>
+  <div style="display:flex;justify-content:flex-end;align-items:center;gap:.7rem;margin-top:.5rem;font-size:.82rem">
+    <span id="topUserName" style="color:rgba(255,255,255,.85)"></span>
+    <button onclick="tpSignOut()" style="background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.35);color:#fff;padding:3px 14px;border-radius:20px;cursor:pointer;font-size:.78rem;font-family:inherit">로그아웃</button>
+  </div>
 </header>
 
 <div class="layout">
@@ -529,8 +545,8 @@ function toggleAcc(btn,id){
   body.classList.toggle('open');
   btn.classList.toggle('open');
   if(!isOpen){
-    const n=parseInt(localStorage.getItem(KEY_OPENED)||'0')+1;
-    localStorage.setItem(KEY_OPENED,n);
+    const n=parseInt(tpGet(KEY_OPENED)||'0')+1;
+    tpSet(KEY_OPENED,n);
     updateProg();
   }
 }
@@ -559,13 +575,13 @@ function submitQuiz(){
   sb.style.display='block';
   document.getElementById('scoreNum').textContent=score+'/5점 ('+pct+'%)';
   document.getElementById('scoreMsg').textContent=pct>=80?'🎉 우수합니다! 다음 모듈로 넘어가세요.':pct>=60?'👍 합격입니다. 오답을 복습하세요.':'📖 다시 학습 후 재시도해 보세요.';
-  localStorage.setItem(KEY_QUIZ,pct);
+  tpSet(KEY_QUIZ,pct);
   finishQuiz(pct);
 }
 
 function finishQuiz(pct){
   const prog=pct>=60?100:50;
-  localStorage.setItem(KEY_PCT,prog);
+  tpSet(KEY_PCT,prog);
   updateDisplay(prog);
 }
 
@@ -578,25 +594,25 @@ function toggleCheck(item){
 
 function saveChecks(){
   const checks=[...document.querySelectorAll('#checkList input')].map(c=>c.checked?'1':'0').join('');
-  localStorage.setItem(KEY_CHECKS,checks);
+  tpSet(KEY_CHECKS,checks);
 }
 
 function loadChecks(){
-  const s=localStorage.getItem(KEY_CHECKS)||'';
+  const s=tpGet(KEY_CHECKS)||'';
   document.querySelectorAll('#checkList .check-item').forEach((item,i)=>{
     if(s[i]==='1'){item.querySelector('input').checked=true;item.classList.add('checked');}
   });
 }
 
 function updateProg(){
-  const quiz=parseInt(localStorage.getItem(KEY_QUIZ)||'0');
+  const quiz=parseInt(tpGet(KEY_QUIZ)||'0');
   const checks=[...document.querySelectorAll('#checkList input:checked')].length;
-  const opens=parseInt(localStorage.getItem(KEY_OPENED)||'0');
+  const opens=parseInt(tpGet(KEY_OPENED)||'0');
   let pct=0;
   if(quiz>0)pct=Math.max(pct,quiz>=60?100:50);
   pct=Math.max(pct,Math.min(40,Math.round(opens/4*20)));
   pct=Math.max(pct,Math.min(30,Math.round(checks/6*30)));
-  localStorage.setItem(KEY_PCT,pct);
+  tpSet(KEY_PCT,pct);
   updateDisplay(pct);
 }
 
@@ -610,10 +626,13 @@ function scrollTo(id){
 }
 
 // 초기화
-(function init(){
+tpOnReady(function(user){
+  document.getElementById('tpLoading').style.display='none';
+  document.getElementById('topUserName').textContent=user.displayName||user.email;
+
   loadChecks();
-  const savedPct=parseInt(localStorage.getItem(KEY_PCT)||'0');
-  const savedQuiz=parseInt(localStorage.getItem(KEY_QUIZ)||'0');
+  const savedPct=parseInt(tpGet(KEY_PCT)||'0');
+  const savedQuiz=parseInt(tpGet(KEY_QUIZ)||'0');
   updateDisplay(savedPct);
   if(savedQuiz>0){
     document.getElementById('submitBtn').disabled=true;
@@ -621,7 +640,7 @@ function scrollTo(id){
     document.getElementById('scoreNum').textContent=Math.round(savedQuiz/100*5)+'/5점 ('+savedQuiz+'%)';
     document.getElementById('scoreMsg').textContent=savedQuiz>=80?'🎉 우수합니다!':savedQuiz>=60?'👍 합격입니다.':'📖 재학습을 권장합니다.';
   }
-})();
+});
 </script>
 </body>
 </html>

@@ -116,13 +116,29 @@ a{color:var(--blue);text-decoration:none}
 /* ── 반응형 ── */
 @media(max-width:720px){.layout{flex-direction:column}.sidebar{width:100%;position:static}.nav-card{position:static}}
 </style>
+  <!-- Firebase CDN -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore-compat.js"></script>
+  <script src="tp-firebase.js"></script>
 </head>
 <body>
+<div id="tpLoading" style="position:fixed;top:0;left:0;width:100%;height:100%;background:#1a5fa8;display:flex;align-items:center;justify-content:center;z-index:9999;color:#fff;font-family:'Noto Sans KR',Arial,sans-serif">
+  <div style="text-align:center">
+    <div style="font-size:2.5rem;margin-bottom:.8rem">📚</div>
+    <div style="font-size:1rem;font-weight:600">대주 이전가격 교육</div>
+    <div style="font-size:.82rem;opacity:.75;margin-top:.4rem">로딩 중...</div>
+  </div>
+</div>
 <header class="mod-header">
   <div class="breadcrumb"><a href="index.html" style="color:#fff8">← Chapter I 목록으로</a></div>
   <h1>Module 1 — 정상가격원칙(ALP) 소개</h1>
   <div class="sub">§1.1 ~ §1.15 · OECD Transfer Pricing Guidelines Chapter I · A&B</div>
   <div class="prog-strip"><div class="prog-strip-inner" id="mod-prog" style="width:0%"></div></div>
+  <div style="display:flex;justify-content:flex-end;align-items:center;gap:.7rem;margin-top:.5rem;font-size:.82rem">
+    <span id="topUserName" style="color:rgba(255,255,255,.85)"></span>
+    <button onclick="tpSignOut()" style="background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.35);color:#fff;padding:3px 14px;border-radius:20px;cursor:pointer;font-size:.78rem;font-family:inherit">로그아웃</button>
+  </div>
 </header>
 
 <div class="layout">
@@ -510,8 +526,8 @@ function checkAllAnswered(){
 function finishQuiz(){
   var score=Math.round(correctCount/totalQ*100);
   var pct=score>=70?100:Math.max(60,score);
-  localStorage.setItem(MODKEY+'_pct',pct);
-  localStorage.setItem(MODKEY+'_quiz',score);
+  tpSet(MODKEY+'_pct',pct);
+  tpSet(MODKEY+'_quiz',score);
   updateProgress(pct);
   document.getElementById('complete-banner').classList.add('show');
   window.scrollTo({top:0,behavior:'smooth'});
@@ -527,12 +543,12 @@ function saveCheck(){
   for(var i=1;i<=6;i++){
     checks.push(document.getElementById('c'+i).checked?'1':'0');
   }
-  localStorage.setItem(MODKEY+'_checks',checks.join(''));
+  tpSet(MODKEY+'_checks',checks.join(''));
   var done=checks.filter(function(c){return c==='1';}).length;
   var pct=Math.round(done/6*40);
-  var existing=parseInt(localStorage.getItem(MODKEY+'_pct')||'0');
+  var existing=parseInt(tpGet(MODKEY+'_pct')||'0');
   if(existing<pct){
-    localStorage.setItem(MODKEY+'_pct',pct);
+    tpSet(MODKEY+'_pct',pct);
     updateProgress(Math.max(existing,pct));
   }
 }
@@ -550,29 +566,32 @@ function toggleAcc(btn){
   btn.classList.toggle('open');
   // track reading progress
   if(!isOpen){
-    var opened=parseInt(localStorage.getItem(MODKEY+'_opened')||'0')+1;
-    localStorage.setItem(MODKEY+'_opened',opened);
+    var opened=parseInt(tpGet(MODKEY+'_opened')||'0')+1;
+    tpSet(MODKEY+'_opened',opened);
     var pct=Math.min(50,opened*7);
-    var existing=parseInt(localStorage.getItem(MODKEY+'_pct')||'0');
+    var existing=parseInt(tpGet(MODKEY+'_pct')||'0');
     if(pct>existing){
-      localStorage.setItem(MODKEY+'_pct',pct);
+      tpSet(MODKEY+'_pct',pct);
       updateProgress(pct);
     }
   }
 }
 
 // 저장된 진도 복원
-(function(){
-  var pct=parseInt(localStorage.getItem(MODKEY+'_pct')||'0');
+tpOnReady(function(user){
+  document.getElementById('tpLoading').style.display='none';
+  document.getElementById('topUserName').textContent=user.displayName||user.email;
+
+  var pct=parseInt(tpGet(MODKEY+'_pct')||'0');
   updateProgress(pct);
-  var checks=localStorage.getItem(MODKEY+'_checks')||'';
+  var checks=tpGet(MODKEY+'_checks')||'';
   for(var i=0;i<checks.length;i++){
     if(checks[i]==='1'&&document.getElementById('c'+(i+1))){
       document.getElementById('c'+(i+1)).checked=true;
     }
   }
   if(pct===100) document.getElementById('complete-banner').classList.add('show');
-})();
+});
 </script>
 </body>
 </html>
