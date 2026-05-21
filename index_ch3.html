@@ -7,55 +7,35 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --teal:#0f7a7a;--teal-light:#e0f5f5;--teal-mid:#1a9a9a;
-  --blue:#1a5fa8;--blue-light:#e8f0fa;--blue-mid:#3b7dd8;
+  --teal:#0f7a7a;--teal-light:#e0f5f5;--teal-mid:#1a9a9a;--teal-dark:#0a5a5a;
   --green:#1a7a4a;--green-light:#e6f5ee;
   --orange:#c06000;--orange-light:#fff3e0;
-  --red:#b02020;--red-light:#fdecea;
-  --purple:#6a1fa8;--purple-light:#f3e8fa;
   --gray:#555;--gray-light:#f5f5f5;--gray-border:#ddd;
   --text:#222;--text2:#555;--white:#fff;
   --radius:10px;--shadow:0 2px 8px rgba(0,0,0,.10);
 }
-body{font-family:'Noto Sans KR',Arial,sans-serif;background:#f0f4f8;color:var(--text);line-height:1.7;font-size:16px}
+body{font-family:'Malgun Gothic','Apple SD Gothic Neo',Arial,sans-serif;background:#f0f4f8;color:var(--text);line-height:1.7;font-size:16px}
 a{color:var(--teal);text-decoration:none}
 .page-header{background:var(--teal);color:#fff;padding:2rem 2.5rem 1.5rem;border-bottom:4px solid var(--teal-mid)}
 .page-header h1{font-size:1.6rem;font-weight:700;margin-bottom:.3rem}
 .page-header p{font-size:.95rem;opacity:.85}
 .badge{display:inline-block;font-size:.75rem;padding:3px 10px;border-radius:20px;font-weight:600;margin-left:8px}
-.badge-basic{background:#fff3;color:#fff;border:1px solid #fff6}
-.badge-ch3{background:rgba(15,122,122,.4);color:#fff;border:1px solid rgba(255,255,255,.3)}
+.badge-basic{background:rgba(255,255,255,.2);color:#fff;border:1px solid rgba(255,255,255,.4)}
+.badge-ch3{background:rgba(15,122,122,.5);color:#fff;border:1px solid rgba(255,255,255,.3)}
 .main{max-width:960px;margin:2.5rem auto;padding:0 1.5rem 4rem}
 .intro-box{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:1.8rem 2rem;margin-bottom:2rem;border-left:5px solid var(--teal)}
 .intro-box h2{font-size:1.1rem;color:var(--teal);margin-bottom:.8rem}
 .intro-box p{font-size:.95rem;color:var(--text2);margin-bottom:.5rem}
-.overall-progress{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:1.5rem 2rem;margin-bottom:2rem}
-.overall-progress h3{font-size:1rem;color:var(--gray);margin-bottom:1rem}
-.prog-outer{background:#e9ecef;border-radius:99px;height:12px;overflow:hidden;margin-bottom:.4rem}
-.prog-inner{height:100%;background:linear-gradient(90deg,var(--teal),var(--teal-mid));border-radius:99px;transition:width .5s}
-.prog-label{display:flex;justify-content:space-between;font-size:.85rem;color:var(--gray)}
 .module-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.2rem}
-.module-card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:1.5rem;border-top:4px solid var(--gray-border);transition:transform .15s,box-shadow .15s;position:relative;overflow:hidden}
+.module-card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:1.5rem;border-top:4px solid var(--teal);transition:transform .15s,box-shadow .15s;position:relative;overflow:hidden}
 .module-card:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,.13)}
-.module-card.done{border-top-color:var(--green)}
-.module-card.inprog{border-top-color:var(--teal)}
-.module-card .num{font-size:.8rem;font-weight:700;color:var(--gray);margin-bottom:.4rem;letter-spacing:.05em}
+.module-card .num{font-size:.8rem;font-weight:700;color:var(--teal-dark);margin-bottom:.4rem;letter-spacing:.05em}
 .module-card h3{font-size:1rem;font-weight:700;color:var(--text);margin-bottom:.5rem}
 .module-card p{font-size:.85rem;color:var(--text2);margin-bottom:1rem}
 .module-card .para-range{font-size:.78rem;color:var(--teal);background:var(--teal-light);padding:2px 8px;border-radius:20px;display:inline-block;margin-bottom:.8rem}
-.module-card .method-tag{font-size:.75rem;color:var(--blue);background:var(--blue-light);padding:2px 8px;border-radius:20px;display:inline-block;margin-bottom:.8rem;margin-left:4px}
-.module-card .status-bar{height:4px;background:#eee;border-radius:99px;overflow:hidden;margin-bottom:1rem}
-.module-card .status-fill{height:100%;background:var(--green);border-radius:99px}
-.btn{display:inline-block;padding:.6rem 1.4rem;border-radius:8px;font-size:.88rem;font-weight:600;cursor:pointer;border:none;transition:all .15s}
+.btn{display:inline-block;padding:.6rem 1.4rem;border-radius:8px;font-size:.88rem;font-weight:600;cursor:pointer;border:none;transition:all .15s;text-decoration:none}
 .btn-primary{background:var(--teal);color:#fff}
 .btn-primary:hover{background:var(--teal-mid)}
-.btn-outline{background:#fff;color:var(--teal);border:1.5px solid var(--teal)}
-.btn-outline:hover{background:var(--teal-light)}
-.btn-done{background:var(--green);color:#fff}
-.status-tag{position:absolute;top:12px;right:12px;font-size:.72rem;font-weight:700;padding:3px 9px;border-radius:20px}
-.tag-done{background:var(--green-light);color:var(--green)}
-.tag-inprog{background:var(--teal-light);color:var(--teal)}
-.tag-pending{background:var(--gray-light);color:var(--gray)}
 .learn-path{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:1.5rem 2rem;margin-bottom:2rem}
 .learn-path h3{font-size:1rem;color:var(--gray);margin-bottom:1rem}
 .path-steps{display:flex;align-items:center;flex-wrap:wrap;gap:.5rem}
@@ -77,32 +57,28 @@ a{color:var(--teal);text-decoration:none}
 .comp-pill small{display:block;font-size:.7rem;font-weight:400;margin-top:2px;opacity:.8}
 .nav-back{display:inline-flex;align-items:center;gap:.4rem;color:var(--teal);font-size:.88rem;font-weight:600;margin-bottom:1.5rem;padding:.4rem .9rem;background:#fff;border-radius:8px;box-shadow:var(--shadow);border:1px solid var(--gray-border)}
 .nav-back:hover{background:var(--teal-light)}
+.process-box{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:1.5rem 2rem;margin-bottom:2rem}
+.process-box h3{font-size:1rem;color:var(--gray);margin-bottom:1rem}
+.process-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem}
+.ps-item{background:var(--teal-light);border-radius:8px;padding:.7rem 1rem;border-left:3px solid var(--teal)}
+.ps-item .ps-num{font-size:.72rem;font-weight:700;color:var(--teal);margin-bottom:2px}
+.ps-item .ps-text{font-size:.82rem;color:var(--teal-dark);font-weight:600}
+@media(max-width:600px){
+  .process-steps{grid-template-columns:1fr 1fr}
+  .comp-row{flex-direction:column}
+}
 </style>
-  <!-- Firebase CDN -->
-  <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore-compat.js"></script>
-  <script src="tp-firebase.js"></script>
 </head>
 <body>
-<div id="tpLoading" style="position:fixed;top:0;left:0;width:100%;height:100%;background:#0f7a7a;display:flex;align-items:center;justify-content:center;z-index:9999;color:#fff;font-family:'Noto Sans KR',Arial,sans-serif">
-  <div style="text-align:center">
-    <div style="font-size:2.5rem;margin-bottom:.8rem">📚</div>
-    <div style="font-size:1rem;font-weight:600">대주 이전가격 교육</div>
-    <div style="font-size:.82rem;opacity:.75;margin-top:.4rem">로딩 중...</div>
-  </div>
-</div>
+
 <header class="page-header">
   <h1>OECD 이전가격 지침서 — Chapter III <span class="badge badge-basic">기초과정</span> <span class="badge badge-ch3">비교가능성 분석</span></h1>
   <p>Comparability Analysis · 비교가능성 분석 · 자기주도 학습 프로그램</p>
-  <div style="display:flex;justify-content:flex-end;align-items:center;gap:.7rem;margin-top:.5rem;font-size:.82rem">
-    <span id="topUserName" style="color:rgba(255,255,255,.85)"></span>
-    <button onclick="tpSignOut()" style="background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.35);color:#fff;padding:3px 14px;border-radius:20px;cursor:pointer;font-size:.78rem;font-family:inherit">로그아웃</button>
-  </div>
 </header>
+
 <div class="main">
 
-  <a href="index_ch2.html" class="nav-back">← Chapter II로 돌아가기</a>
+  <a href="index_ch2.html" class="nav-back">← Chapter II: 정상가격산출방법(TPM)으로</a>
 
   <div class="intro-box">
     <h2>📗 Chapter III 과정에 대하여</h2>
@@ -112,7 +88,7 @@ a{color:var(--teal);text-decoration:none}
   </div>
 
   <div class="comparability-overview">
-    <h3>📌 Chapter III — 비교가능성 5대 요소 한눈에 보기</h3>
+    <h3>📌 Chapter III — 비교가능성 5대 요소</h3>
     <div class="comp-row">
       <div class="comp-pill cp-1">제품·서비스<small>재화·서비스의 특성</small></div>
       <div class="comp-pill cp-2">기능 분석<small>FAR 분석</small></div>
@@ -122,10 +98,19 @@ a{color:var(--teal);text-decoration:none}
     </div>
   </div>
 
-  <div class="overall-progress" id="overall-progress-box">
-    <h3>📊 전체 학습 진도 (Chapter III)</h3>
-    <div class="prog-outer"><div class="prog-inner" id="overall-bar" style="width:0%"></div></div>
-    <div class="prog-label"><span id="prog-text">0 / 6 모듈 완료</span><span id="prog-pct">0%</span></div>
+  <div class="process-box">
+    <h3>🗂 비교가능성 분석 9단계 프로세스 (§3.4)</h3>
+    <div class="process-steps">
+      <div class="ps-item"><div class="ps-num">Step 1</div><div class="ps-text">분석대상 연도 결정</div></div>
+      <div class="ps-item"><div class="ps-num">Step 2</div><div class="ps-text">납세자 상황 광범위 분석</div></div>
+      <div class="ps-item"><div class="ps-num">Step 3</div><div class="ps-text">특수관계거래 이해 및 기능분석</div></div>
+      <div class="ps-item"><div class="ps-num">Step 4</div><div class="ps-text">기존 내부비교가능거래 검토</div></div>
+      <div class="ps-item"><div class="ps-num">Step 5</div><div class="ps-text">외부비교가능거래 정보 결정</div></div>
+      <div class="ps-item"><div class="ps-num">Step 6</div><div class="ps-text">가장 합리적 방법 선택</div></div>
+      <div class="ps-item"><div class="ps-num">Step 7</div><div class="ps-text">잠재적 비교가능거래 식별</div></div>
+      <div class="ps-item"><div class="ps-num">Step 8</div><div class="ps-text">비교가능성 조정 결정·시행</div></div>
+      <div class="ps-item"><div class="ps-num">Step 9</div><div class="ps-text">수집 데이터 해석 및 정상가격 결정</div></div>
+    </div>
   </div>
 
   <div class="learn-path" style="margin-bottom:1.5rem">
@@ -147,112 +132,67 @@ a{color:var(--teal);text-decoration:none}
       <li>M3-2(분석대상회사)와 M3-3(비교가능거래 탐색)은 실무에서 가장 빈번하게 활용되는 내용으로, <strong>순서대로</strong> 학습하면 연계 이해가 명확해집니다.</li>
       <li>M3-4(비교가능회사 선정) → M3-5(정상가격범위)는 연속 학습을 권장합니다. WCA 조정과 IQR 적용이 논리적으로 연결됩니다.</li>
       <li>M3-6(시간적 비교가능성)은 Chapter III의 마지막 모듈로, 실무적 이행 사항과 한계를 정리합니다.</li>
-      <li>학습 진도는 Google 계정으로 자동 클라우드 저장됩니다. 다음 접속 시 이어서 학습할 수 있습니다.</li>
     </ul>
   </div>
 
-  <div class="module-grid" id="module-grid">
+  <div class="module-grid">
 
-    <div class="module-card" id="card-m1">
-      <span class="status-tag tag-pending" id="tag-m1">미시작</span>
+    <div class="module-card">
       <div class="num">MODULE 1 — 비교가능성 기초</div>
       <span class="para-range">§3.1 – §3.12</span>
       <h3>비교가능성 분석 개관</h3>
       <p>9단계 프로세스, 광범위한 분석, 개별·통합 거래 접근법, 비교가능성 5대 요소 개관을 학습합니다.</p>
-      <div class="status-bar"><div class="status-fill" id="fill-m1" style="width:0%"></div></div>
-      <a href="M3-1_비교가능성개관.html" class="btn btn-primary" id="btn-m1">학습 시작 →</a>
+      <a href="M3-1_비교가능성개관.html" class="btn btn-primary">학습 시작 →</a>
     </div>
 
-    <div class="module-card" id="card-m2">
-      <span class="status-tag tag-pending" id="tag-m2">미시작</span>
+    <div class="module-card">
       <div class="num">MODULE 2 — 분석대상 선정</div>
       <span class="para-range">§3.13 – §3.23</span>
-      <h3>분석대상회사 선정 & 통제거래 정보</h3>
-      <p>의도적 상계, Tested Party 선정 기준(무형자산 非보유 + 단순 기능), 자료 수집 범위를 학습합니다.</p>
-      <div class="status-bar"><div class="status-fill" id="fill-m2" style="width:0%"></div></div>
-      <a href="M3-2_분석대상회사.html" class="btn btn-primary" id="btn-m2">학습 시작 →</a>
+      <h3>분석대상회사 선정 &amp; 통제거래 정보</h3>
+      <p>의도적 상계(Intentional Set-offs), Tested Party 선정 기준(무형자산 非보유 + 단순 기능), 자료 수집 범위를 학습합니다.</p>
+      <a href="M3-2_분석대상회사.html" class="btn btn-primary">학습 시작 →</a>
     </div>
 
-    <div class="module-card" id="card-m3">
-      <span class="status-tag tag-pending" id="tag-m3">미시작</span>
+    <div class="module-card">
       <div class="num">MODULE 3 — 비교가능거래 탐색</div>
       <span class="para-range">§3.24 – §3.39</span>
       <h3>비교가능 비통제거래 탐색</h3>
-      <p>내부/외부 비교가능거래의 정의 및 우선순위, 데이터베이스 활용 방법, 비교가능성 검토 기준을 학습합니다.</p>
-      <div class="status-bar"><div class="status-fill" id="fill-m3" style="width:0%"></div></div>
-      <a href="M3-3_비교가능거래탐색.html" class="btn btn-primary" id="btn-m3">학습 시작 →</a>
+      <p>내부/외부 비교가능거래의 정의 및 우선순위, 상업DB 활용·한계, 해외비교가능거래, 비공개정보 이슈를 학습합니다.</p>
+      <a href="M3-3_비교가능거래탐색.html" class="btn btn-primary">학습 시작 →</a>
     </div>
 
-    <div class="module-card" id="card-m4">
-      <span class="status-tag tag-pending" id="tag-m4">미시작</span>
+    <div class="module-card">
       <div class="num">MODULE 4 — 비교가능회사 선정</div>
       <span class="para-range">§3.40 – §3.54</span>
-      <h3>비교가능회사 선정 & 비교가능성 조정</h3>
-      <p>가산법 vs 연역법, WCA(운전자본조정)이 가장 일반적인 비교가능성 조정 방법임을 학습합니다.</p>
-      <div class="status-bar"><div class="status-fill" id="fill-m4" style="width:0%"></div></div>
-      <a href="M3-4_비교가능회사선정.html" class="btn btn-primary" id="btn-m4">학습 시작 →</a>
+      <h3>비교가능회사 선정 &amp; 비교가능성 조정</h3>
+      <p>가산법 vs 연역법, 정량적 검색기준(R&amp;D·무형자산 비율 등), WCA(운전자본조정) 등 비교가능성 조정 방법을 학습합니다.</p>
+      <a href="M3-4_비교가능회사선정.html" class="btn btn-primary">학습 시작 →</a>
     </div>
 
-    <div class="module-card" id="card-m5">
-      <span class="status-tag tag-pending" id="tag-m5">미시작</span>
+    <div class="module-card">
       <div class="num">MODULE 5 — 정상가격범위</div>
       <span class="para-range">§3.55 – §3.66</span>
-      <h3>정상가격범위 & 극단값 처리</h3>
-      <p>IQR(사분위범위) 적용 원칙, 중위값 선택 기준, 손실·고이익 비교가능회사 처리 방법을 학습합니다.</p>
-      <div class="status-bar"><div class="status-fill" id="fill-m5" style="width:0%"></div></div>
-      <a href="M3-5_정상가격범위.html" class="btn btn-primary" id="btn-m5">학습 시작 →</a>
+      <h3>정상가격범위 &amp; 극단값 처리</h3>
+      <p>단일가격 vs 범위, IQR(사분위범위) 적용 원칙, 중위값 선택 기준, 손실·고이익 비교가능회사 처리 방법을 학습합니다.</p>
+      <a href="M3-5_정상가격범위.html" class="btn btn-primary">학습 시작 →</a>
     </div>
 
-    <div class="module-card" id="card-m6">
-      <span class="status-tag tag-pending" id="tag-m6">미시작</span>
+    <div class="module-card">
       <div class="num">MODULE 6 — 시간적 비교가능성 (최종)</div>
       <span class="para-range">§3.68 – §3.83</span>
-      <h3>시간적 비교가능성 & 이행 사항</h3>
-      <p>동일회계연도 원칙, 다중연도 데이터 허용 조건, 납세자 이행 부담과 비용편익 원칙을 학습합니다.</p>
-      <div class="status-bar"><div class="status-fill" id="fill-m6" style="width:0%"></div></div>
-      <a href="M3-6_시간적비교가능성.html" class="btn btn-primary" id="btn-m6">학습 시작 →</a>
+      <h3>시간적 비교가능성 &amp; 이행 사항</h3>
+      <p>동일회계연도 원칙, HTVI 관련 사후 자료 한계, 다중연도 데이터 허용 조건, 납세자 이행 부담 원칙을 학습합니다.</p>
+      <a href="M3-6_시간적비교가능성.html" class="btn btn-primary">학습 시작 →</a>
     </div>
 
   </div>
 
   <div style="margin-top:2rem;text-align:center">
-    <a href="index_ch2.html" style="color:var(--teal);font-size:.9rem;font-weight:600">← Chapter II: 정상가격산출방법(TPM) 기초과정으로</a>
+    <a href="index.html" style="color:var(--teal);font-size:.9rem;font-weight:600">← 전체 과정 목차로 돌아가기</a>
+    &nbsp;&nbsp;|&nbsp;&nbsp;
+    <a href="index_ch2.html" style="color:var(--teal);font-size:.9rem;font-weight:600">← Chapter II: 정상가격산출방법(TPM)으로</a>
   </div>
 
 </div>
-
-<script>
-var modules=['m1','m2','m3','m4','m5','m6'];
-function loadProgress(){
-  var done=0;
-  modules.forEach(function(m,i){
-    var pct=parseInt(tpGet('ch3_'+m+'_pct')||'0');
-    var fill=document.getElementById('fill-'+m);
-    var tag=document.getElementById('tag-'+m);
-    var btn=document.getElementById('btn-'+m);
-    var card=document.getElementById('card-'+m);
-    if(fill)fill.style.width=pct+'%';
-    if(pct===100){
-      done++;
-      tag.textContent='완료 ✓';tag.className='status-tag tag-done';
-      card.classList.add('done');
-      btn.textContent='복습하기';btn.className='btn btn-done';
-    } else if(pct>0){
-      tag.textContent='학습중';tag.className='status-tag tag-inprog';
-      card.classList.add('inprog');
-      btn.textContent='이어서 학습 →';
-    }
-  });
-  var pct=Math.round(done/6*100);
-  document.getElementById('overall-bar').style.width=pct+'%';
-  document.getElementById('prog-text').textContent=done+' / 6 모듈 완료';
-  document.getElementById('prog-pct').textContent=pct+'%';
-}
-tpOnReady(function(user){
-  document.getElementById('tpLoading').style.display='none';
-  document.getElementById('topUserName').textContent=user.displayName||user.email;
-  loadProgress();
-});
-</script>
 </body>
 </html>
