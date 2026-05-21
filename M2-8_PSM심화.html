@@ -139,7 +139,14 @@
     }
 
     /* ===== 섹션 표시/숨김 (M2-2 방식) ===== */
-    .card { display: none !important; margin-bottom: 22px; }
+    .card {
+      display: none !important;
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 24px 28px;
+      margin-bottom: 22px;
+    }
     .card.active { display: block !important; }
 
     /* ===== 사이드바 내비게이션 버튼 ===== */
@@ -196,14 +203,6 @@
     /* ===== 메인 ===== */
     .main { flex: 1; min-width: 0; }
 
-    /* ===== 카드 ===== */
-    .card {
-      background: var(--card-bg);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 24px 28px;
-      margin-bottom: 22px;
-    }
     .card-title {
       font-size: 1.1rem;
       font-weight: 700;
@@ -666,7 +665,6 @@
           </div>
         </div>
 
-      </div>
     </div>
 
     <!-- ===== 섹션 2 ===== -->
@@ -702,7 +700,6 @@
           </div>
         </div>
 
-      </div>
     </div>
 
     <!-- ===== 섹션 3 ===== -->
@@ -736,7 +733,6 @@
           </div>
         </div>
 
-      </div>
     </div>
 
     <!-- ===== 섹션 4 ===== -->
@@ -759,7 +755,6 @@
           </div>
         </div>
 
-      </div>
     </div>
 
     <!-- ===== 사례 탐구 ===== -->
@@ -989,34 +984,6 @@
     save('progress', pct);
   }
 
-  // --- 아코디언 ---
-  document.querySelectorAll('.accordion-btn').forEach(btn => {
-    const accId = btn.dataset.acc;
-    const content = document.getElementById(accId);
-
-    // 복원
-    const num = parseInt(accId.replace('acc', ''));
-    if (openedAccs.includes(num)) {
-      content.classList.add('open');
-      btn.classList.add('open');
-    }
-
-    btn.addEventListener('click', function() {
-      const isOpen = content.classList.contains('open');
-      if (!isOpen) {
-        content.classList.add('open');
-        btn.classList.add('open');
-        if (!openedAccs.includes(num)) {
-          openedAccs.push(num);
-          save('openedAccs', openedAccs);
-          updateProgress();
-        }
-      } else {
-        content.classList.remove('open');
-        btn.classList.remove('open');
-      }
-    });
-  });
 
   // --- 퀴즈 ---
   let quizAnswered = load('quizAnswered', {});

@@ -165,6 +165,11 @@ body{font-family:'Noto Sans KR',Arial,sans-serif;background:#f0f4f8;color:var(--
   .indicator-grid{grid-template-columns:1fr}
   .nav-btns{flex-direction:column}
 }
+
+/* card-inner: case study inner box */
+.card-inner{background:#f8fff8;border:1.5px solid #80d0a0;border-radius:10px;padding:1.2rem 1.5rem;margin:.9rem 0}
+.card-inner h3{font-size:.95rem;font-weight:700;color:var(--accent);margin-bottom:.6rem}
+.card-inner p{font-size:.9rem;color:var(--text2);margin-bottom:.5rem}
 </style>
 </head>
 <body>
@@ -769,14 +774,14 @@ function calcScore() {
   } else if (score >= 3) {
     box.innerHTML = `&#128077; ${score}/5문항 정답 (${pct}%) &#8212; 좋습니다! 틀린 문항을 다시 한 번 확인해 보십시오.`;
   } else {
-    box.innerHTML = `&#128218; ${score}/5문항 정답 (${pct}%) &#8212; 본문을 다시 읽고 복습해 보십시오.`;
+    box.innerHTML = `&#128218; ${score}/5문항 정답 (${pct}%) &#8212; 조금 더 학습이 필요합니다. 각 섹션을 다시 검토해 주십시오.`;
   }
 }
 
-function toggleCheck(item) {
-  const cb = item.querySelector('input[type=checkbox]');
-  cb.checked = !cb.checked;
-  item.classList.toggle('checked', cb.checked);
+function toggleCheck(el) {
+  el.classList.toggle('checked');
+  const cb = el.querySelector('input[type=checkbox]');
+  if (cb) cb.checked = el.classList.contains('checked');
 }
 </script>
 </body>
