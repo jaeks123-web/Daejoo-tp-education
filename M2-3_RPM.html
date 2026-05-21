@@ -2,394 +2,548 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>M2-3: 재판매가격방법(RPM) &#8212; OECD 이전가격 지침서</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>M2-3 재판매가격법(RPM) | OECD 이전가격 지침서 기초과정</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --blue:#1a5fa8;--blue-light:#e8f0fa;--blue-mid:#3b7dd8;
-  --purple:#6a1fa8;--purple-light:#f3e8fa;--purple-mid:#8b3dd8;
-  --green:#1a7a4a;--green-light:#e6f5ee;
-  --orange:#c06000;--orange-light:#fff3e0;
-  --red:#b02020;--red-light:#fdecea;
-  --teal:#0f7a7a;--teal-light:#e0f5f5;
-  --gray:#555;--gray-light:#f5f5f5;--gray-border:#ddd;
-  --text:#222;--text2:#555;--white:#fff;
-  --radius:10px;--shadow:0 2px 8px rgba(0,0,0,.10);
-}
+:root{--accent:#1a5fa8;--accent-light:#e8f0fa;--accent-mid:#3b7dd8;--green:#1a7a4a;--green-light:#e6f5ee;--orange:#c06000;--orange-light:#fff3e0;--red:#b02020;--red-light:#fdecea;--gray:#555;--gray-light:#f5f5f5;--gray-border:#ddd;--text:#222;--text2:#555;--white:#fff;--radius:10px;--shadow:0 2px 8px rgba(0,0,0,.10);}
 body{font-family:'Noto Sans KR',Arial,sans-serif;background:#f0f4f8;color:var(--text);line-height:1.75;font-size:16px}
-.page-header{background:var(--teal);color:#fff;padding:1.2rem 2rem;display:flex;align-items:center;gap:1rem;border-bottom:3px solid #0a5a5a}
-.page-header .back-btn{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);color:#fff;padding:5px 14px;border-radius:20px;cursor:pointer;font-size:.82rem;font-family:inherit;text-decoration:none}
-.page-header h1{font-size:1.1rem;font-weight:700;flex:1}
-.layout{display:flex;max-width:1100px;margin:0 auto;padding:2rem 1.5rem;gap:1.5rem}
-.sidebar{width:210px;flex-shrink:0}
-.sidebar-box{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:1.2rem;position:sticky;top:1.5rem}
-.sidebar-box h3{font-size:.82rem;font-weight:700;color:var(--gray);margin-bottom:.8rem;text-transform:uppercase;letter-spacing:.05em}
-.nav-item{display:block;width:100%;text-align:left;background:none;border:none;padding:.45rem .7rem;border-radius:6px;font-size:.82rem;cursor:pointer;color:var(--text2);font-family:inherit;transition:all .12s;margin-bottom:2px}
-.nav-item:hover{background:var(--teal-light);color:var(--teal)}
-.nav-item.active{background:var(--teal-light);color:var(--teal);font-weight:700}
+a{color:var(--accent);text-decoration:none}
+.mod-header{background:var(--accent);color:#fff;padding:1.5rem 2rem}
+.mod-header .breadcrumb{font-size:.8rem;opacity:.7;margin-bottom:.4rem}
+.mod-header h1{font-size:1.4rem;font-weight:700}
+.mod-header .sub{font-size:.9rem;opacity:.8;margin-top:.3rem}
+.prog-strip{background:rgba(255,255,255,.15);height:6px;margin-top:1rem;border-radius:99px;overflow:hidden}
+.prog-strip-inner{height:100%;background:#fff;border-radius:99px;transition:width .4s}
+.layout{display:flex;max-width:1100px;margin:0 auto;padding:2rem 1.5rem 4rem;gap:1.5rem}
+.sidebar{width:220px;flex-shrink:0}
 .content{flex:1;min-width:0}
-.section{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:1.8rem 2rem;margin-bottom:1.2rem;display:none}
-.section.active{display:block}
-.section h2{font-size:1.15rem;font-weight:700;color:var(--teal);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:2px solid var(--teal-light)}
-.section h3{font-size:1rem;font-weight:700;color:var(--text);margin:1.2rem 0 .6rem}
-.section h4{font-size:.92rem;font-weight:700;color:var(--teal);margin:.9rem 0 .4rem}
-.section p{font-size:.95rem;color:var(--text2);margin-bottom:.8rem}
-.section ul,.section ol{padding-left:1.4rem;margin-bottom:.8rem}
-.section li{font-size:.95rem;color:var(--text2);margin-bottom:.35rem}
-.para-badge{display:inline-block;background:var(--teal-light);color:var(--teal);font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:20px;margin-right:.4rem;vertical-align:middle}
-.commentary{background:#f0fafa;border:1px solid #a0d8d8;border-left:4px solid var(--teal);border-radius:8px;padding:1rem 1.2rem;margin:1rem 0;font-size:.88rem;color:#0a4040}
-.commentary .comm-label{font-size:.75rem;font-weight:700;color:var(--teal);margin-bottom:.4rem;text-transform:uppercase;letter-spacing:.03em}
-.key-point{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:8px;padding:.9rem 1.2rem;margin:.8rem 0;font-size:.9rem;color:#1a3a6a}
-.key-point.orange{background:var(--orange-light);border-color:var(--orange);color:#6b3800}
-.key-point.green{background:var(--green-light);border-color:var(--green);color:#1a4a2a}
-.key-point.red{background:var(--red-light);border-color:var(--red);color:#6b1010}
-.key-point.teal{background:var(--teal-light);border-color:var(--teal);color:#0a4040}
-.case-table{width:100%;border-collapse:collapse;font-size:.88rem;margin:1rem 0}
-.case-table th{background:var(--teal);color:#fff;padding:.65rem 1rem;text-align:left;font-weight:600}
-.case-table td{padding:.6rem 1rem;border-bottom:1px solid var(--gray-border);vertical-align:top}
-.case-table tr:last-child td{border:none}
-.case-table tr:nth-child(even) td{background:#fafafa}
-.example-box{background:#f0fafa;border:1.5px solid #a0d8d8;border-radius:10px;padding:1.2rem 1.5rem;margin:1rem 0}
-.example-box .ex-title{font-size:.8rem;font-weight:700;color:var(--teal);margin-bottom:.8rem;text-transform:uppercase;letter-spacing:.04em;border-bottom:1px solid #a0d8d8;padding-bottom:.4rem}
-.example-table{width:100%;border-collapse:collapse;font-size:.86rem;margin:.5rem 0}
-.example-table th{background:#c8f0f0;color:#0a3a3a;padding:.5rem .8rem;text-align:left;font-weight:600;border-bottom:2px solid #a0d8d8}
-.example-table td{padding:.5rem .8rem;border-bottom:1px solid #d8f0f0;vertical-align:top}
-.example-table tr:last-child td{border:none}
-.formula-box{background:#f5fff5;border:2px solid var(--green);border-radius:10px;padding:1.2rem 1.5rem;margin:1rem 0;text-align:center}
-.formula-box .formula{font-size:1.05rem;font-weight:700;color:var(--green);margin:.4rem 0}
-.formula-box .formula-note{font-size:.82rem;color:var(--gray);margin-top:.4rem}
-.footnote-box{background:#fafafa;border:1px solid #e0e0e0;border-radius:8px;padding:1rem 1.2rem;margin:1rem 0;font-size:.82rem;color:#555}
-.footnote-box .fn-title{font-weight:700;color:var(--gray);margin-bottom:.5rem;font-size:.78rem;text-transform:uppercase}
-.footnote-item{margin-bottom:.4rem;padding-left:.8rem;border-left:2px solid #ddd}
+.nav-card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:1.2rem;margin-bottom:1rem;position:sticky;top:1rem}
+.nav-card h4{font-size:.85rem;color:var(--gray);margin-bottom:.8rem}
+.nav-item{display:block;padding:.45rem .75rem;border-radius:6px;font-size:.85rem;color:var(--text2);margin-bottom:3px;cursor:pointer;border:none;width:100%;text-align:left;background:none;transition:background .12s}
+.nav-item:hover{background:var(--accent-light);color:var(--accent)}
+.nav-item.active{background:var(--accent);color:#fff;font-weight:600}
+.card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:1.8rem 2rem;margin-bottom:1.5rem}
+.card h2{font-size:1.15rem;font-weight:700;color:var(--accent);margin-bottom:1rem;padding-bottom:.6rem;border-bottom:2px solid var(--accent-light)}
+.card p{font-size:.95rem;color:var(--text2);margin-bottom:.7rem}
+.obj-list{list-style:none;padding:0}
+.obj-list li{display:flex;gap:.7rem;align-items:flex-start;padding:.5rem 0;border-bottom:1px solid var(--gray-border);font-size:.93rem}
+.obj-list li:last-child{border:none}
+.obj-num{background:var(--accent);color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;flex-shrink:0;margin-top:2px}
+.accordion{border:1px solid var(--gray-border);border-radius:var(--radius);overflow:hidden;margin-bottom:1rem}
+.acc-header{display:flex;justify-content:space-between;align-items:center;padding:.9rem 1.2rem;cursor:pointer;background:var(--gray-light);font-weight:600;font-size:.95rem;border:none;width:100%;text-align:left;transition:background .12s}
+.acc-header:hover{background:#ebebeb}
+.acc-header .para{font-size:.78rem;color:var(--accent);background:var(--accent-light);padding:2px 8px;border-radius:20px;margin-right:.6rem}
+.acc-header .arrow{font-size:1rem;color:var(--gray);transition:transform .2s}
+.acc-body{display:none;padding:1.1rem 1.3rem;background:#fff;font-size:.93rem;color:var(--text2);line-height:1.8;border-top:1px solid var(--gray-border)}
+.acc-body.open{display:block}
+.acc-header.open .arrow{transform:rotate(180deg)}
+.key-point{background:var(--accent-light);border-left:4px solid var(--accent);padding:.7rem 1rem;border-radius:0 6px 6px 0;margin:.8rem 0;font-size:.9rem;color:#1a3a6a}
+.warn-point{background:var(--orange-light);border-left:4px solid var(--orange);padding:.7rem 1rem;border-radius:0 6px 6px 0;margin:.8rem 0;font-size:.9rem;color:#6b3a00}
+.compare-table{width:100%;border-collapse:collapse;font-size:.9rem;margin:.8rem 0}
+.compare-table th{background:var(--accent);color:#fff;padding:.7rem 1rem;text-align:left;font-weight:600}
+.compare-table td{padding:.65rem 1rem;border-bottom:1px solid var(--gray-border);vertical-align:top}
+.compare-table tr:last-child td{border:none}
+.compare-table tr:nth-child(even) td{background:#fafafa}
+.case-box{background:#fff;border:1.5px solid var(--accent-mid);border-radius:var(--radius);padding:1.3rem 1.5rem;margin:1rem 0}
+.case-box .case-label{font-size:.78rem;font-weight:700;color:var(--accent);letter-spacing:.05em;margin-bottom:.5rem}
+.case-box h4{font-size:.95rem;font-weight:700;color:var(--text);margin-bottom:.6rem}
+.quiz-section{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:1.8rem 2rem;margin-bottom:1.5rem}
+.quiz-section h2{font-size:1.15rem;font-weight:700;color:var(--accent);margin-bottom:.4rem}
+.quiz-section .q-count{font-size:.85rem;color:var(--gray);margin-bottom:1.5rem}
+.quiz-item{margin-bottom:1.8rem;padding-bottom:1.5rem;border-bottom:1px solid var(--gray-border)}
+.quiz-item:last-of-type{border:none}
+.quiz-item .q-text{font-size:.97rem;font-weight:600;color:var(--text);margin-bottom:.9rem}
+.quiz-item .q-num{font-size:.78rem;background:var(--accent-light);color:var(--accent);padding:2px 9px;border-radius:20px;margin-right:.5rem;font-weight:700}
+.opt-list{list-style:none;padding:0;display:flex;flex-direction:column;gap:.5rem}
+.opt-list li button{width:100%;text-align:left;padding:.7rem 1rem;border-radius:8px;border:1.5px solid var(--gray-border);background:#fff;font-size:.9rem;cursor:pointer;color:var(--text);transition:all .15s}
+.opt-list li button:hover{border-color:var(--accent-mid);background:var(--accent-light)}
+.opt-list li button.correct{background:var(--green-light);border-color:var(--green);color:var(--green);font-weight:600}
+.opt-list li button.wrong{background:var(--red-light);border-color:var(--red);color:var(--red)}
+.opt-list li button:disabled{cursor:default}
+.q-feedback{margin-top:.7rem;padding:.6rem 1rem;border-radius:8px;font-size:.88rem;display:none}
+.q-feedback.show{display:block}
+.q-feedback.ok{background:var(--green-light);color:var(--green);border:1px solid #a0d8b8}
+.q-feedback.no{background:var(--red-light);color:var(--red);border:1px solid #f5b8b8}
+.checklist{list-style:none;padding:0}
+.checklist li{display:flex;gap:.8rem;align-items:flex-start;padding:.55rem 0;border-bottom:1px solid var(--gray-border);font-size:.92rem}
+.checklist li:last-child{border:none}
+.checklist input[type=checkbox]{width:18px;height:18px;margin-top:2px;cursor:pointer;flex-shrink:0;accent-color:var(--green)}
+.checklist label{cursor:pointer;color:var(--text2)}
+.checklist input:checked+label{color:var(--green);text-decoration:line-through;opacity:.7}
 .nav-btns{display:flex;justify-content:space-between;margin-top:1.5rem}
-.btn-nav{background:var(--teal);color:#fff;border:none;padding:.7rem 1.5rem;border-radius:8px;cursor:pointer;font-size:.9rem;font-family:inherit;font-weight:600;transition:background .15s;text-decoration:none;display:inline-block}
-.btn-nav:hover{background:#0a5050}
-.btn-nav.secondary{background:#fff;color:var(--teal);border:1.5px solid var(--teal)}
-.btn-nav.secondary:hover{background:var(--teal-light)}
+.btn{display:inline-flex;align-items:center;gap:.4rem;padding:.7rem 1.5rem;border-radius:8px;font-size:.9rem;font-weight:600;cursor:pointer;border:none;transition:all .15s;text-decoration:none}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{background:#164d8a}
+.btn-outline{background:#fff;color:var(--accent);border:1.5px solid var(--accent)}
+.btn-outline:hover{background:var(--accent-light)}
+.btn-success{background:var(--green);color:#fff}
+.complete-banner{background:var(--green-light);border:2px solid var(--green);border-radius:var(--radius);padding:1.3rem 1.8rem;text-align:center;display:none;margin-bottom:1.5rem}
+.complete-banner.show{display:block}
+.complete-banner h3{color:var(--green);font-size:1.1rem;margin-bottom:.4rem}
+.complete-banner p{font-size:.9rem;color:#2a6040}
+@media(max-width:720px){.layout{flex-direction:column}.sidebar{width:100%;position:static}.nav-card{position:static}}
 </style>
 </head>
 <body>
-<header class="page-header">
-  <a href="index_ch2.html" class="back-btn">&#8592; 목차</a>
-  <h1>M2-3: 재판매가격방법(RPM) (&#167;2.27&#8211;&#167;2.44)</h1>
-</header>
+
+<div class="mod-header">
+  <div class="breadcrumb">OECD 이전가격 지침서 기초과정 &gt; Chapter I &gt; M2-3</div>
+  <h1>M2-3 재판매가격법(RPM: Resale Price Method)</h1>
+  <div class="sub">거래가격에서 적정 이윤을 차감하여 정상가격을 산출하는 방법을 학습합니다.</div>
+  <div class="prog-strip"><div class="prog-strip-inner" id="mod-prog" style="width:0%"></div></div>
+  <div style="font-size:.8rem;opacity:.7;margin-top:.4rem">진도율: <span id="pct-display">0%</span></div>
+</div>
 
 <div class="layout">
-  <nav class="sidebar">
-    <div class="sidebar-box">
-      <h3>목차</h3>
-      <button class="nav-item active" onclick="showSec('sec-1',this)">1. RPM 원칙 &amp; 공식 (&#167;2.27)</button>
-      <button class="nav-item" onclick="showSec('sec-2',this)">2. 비교가능거래 &amp; 적용 요건 (&#167;2.28&#8211;2.30)</button>
-      <button class="nav-item" onclick="showSec('sec-3',this)">3. 기능비교가능성 &amp; 적용 범위 (&#167;2.33&#8211;2.41)</button>
-      <button class="nav-item" onclick="showSec('sec-4',this)">4. RPM 적용 사례 (&#167;2.42&#8211;2.44)</button>
+  <!-- 사이드바 -->
+  <div class="sidebar">
+    <div class="nav-card">
+      <h4>목차</h4>
+      <button class="nav-item active" onclick="showSec('sec-obj',this)">학습목표</button>
+      <button class="nav-item" onclick="showSec('sec-2-2-14',this)">§ 2.14 RPM 개요</button>
+      <button class="nav-item" onclick="showSec('sec-2-2-15',this)">§ 2.15 재판매가격이윤</button>
+      <button class="nav-item" onclick="showSec('sec-2-2-16',this)">§ 2.16 비교가능성 요건</button>
+      <button class="nav-item" onclick="showSec('sec-2-2-17',this)">§ 2.17 기능·위험 차이</button>
+      <button class="nav-item" onclick="showSec('sec-2-2-18',this)">§ 2.18 적용 한계</button>
+      <button class="nav-item" onclick="showSec('sec-case',this)">사례탐구</button>
+      <button class="nav-item" onclick="showSec('sec-quiz',this)">확인퀴즈</button>
+      <button class="nav-item" onclick="showSec('sec-check',this)">학습체크리스트</button>
     </div>
-  </nav>
+    <div class="nav-card" style="text-align:center">
+      <div style="font-size:.8rem;color:var(--gray);margin-bottom:.3rem">현재 진도</div>
+      <div style="font-size:1.6rem;font-weight:700;color:var(--accent)" id="pct-display2">0%</div>
+    </div>
+  </div>
 
-  <main class="content">
+  <!-- 본문 -->
+  <div class="content">
 
-    <!-- 섹션 1: RPM 원칙 & 공식 -->
-    <div class="section active" id="sec-1">
-      <h2>1. 재판매가격방법 적용 원칙 (&#167;2.27)</h2>
+    <!-- 완료배너 -->
+    <div class="complete-banner" id="complete-banner">
+      <h3>🎉 학습 완료!</h3>
+      <p>M2-3 재판매가격법(RPM) 학습을 80% 이상 완료하셨습니다. 수고하셨습니다!</p>
+    </div>
 
-      <p><span class="para-badge">&#167;2.27</span>재판매가격방법(Resale Price Method, RPM)은 다음 원칙에 따라 정상가격을 산출합니다:</p>
-
-      <ul>
-        <li><strong>재판매가격(resale price)</strong>은 관계회사로부터 상품을 구입한 회사가 이를 독립회사에게 판매한 가격이며,</li>
-        <li>여기에 <strong>재판매마진(resale price margin)</strong>&#8212;판매비, 일반관리비, 기타 영업비용을 충당하고 기능 수행에 상응하는 이윤을 포함한 마진&#8212;을 차감합니다.</li>
-        <li>관세 등 기타 구매 관련 비용을 조정한 후, 관계회사로부터 구매한 특수관계 거래에 대한 <strong>정상가격</strong>을 산출합니다.</li>
-        <li>이 방법은 일반적으로 <strong>마케팅 활동이 중심인 유통 및 도매거래</strong>에 가장 유용하게 적용됩니다.</li>
+    <!-- 학습목표 -->
+    <div class="card" id="sec-obj">
+      <h2>학습목표</h2>
+      <p>본 모듈을 학습하신 후 다음 사항을 이해하고 적용하실 수 있습니다.</p>
+      <ul class="obj-list">
+        <li><span class="obj-num">1</span><span>재판매가격법(RPM)의 기본 구조와 산출 공식을 설명하실 수 있습니다.</span></li>
+        <li><span class="obj-num">2</span><span>재판매가격이윤(Resale Price Margin)의 의미와 결정 방식을 이해하실 수 있습니다.</span></li>
+        <li><span class="obj-num">3</span><span>RPM 적용 시 요구되는 비교가능성 기준을 파악하실 수 있습니다.</span></li>
+        <li><span class="obj-num">4</span><span>기능·위험 차이가 RPM 분석에 미치는 영향을 설명하실 수 있습니다.</span></li>
+        <li><span class="obj-num">5</span><span>RPM의 적용 한계와 CUP, CPM 등 다른 방법과의 관계를 비교하실 수 있습니다.</span></li>
       </ul>
+    </div>
 
-      <div class="formula-box">
-        <div class="formula">정상가격 = 재판매가격 &#8722; 재판매마진 &#8722; 기타 비용 조정</div>
-        <div class="formula-note">재판매마진 = 판매비 + 일반관리비 + 기타 영업비용 + 기능 수행에 상응하는 이윤</div>
+    <!-- §2.14 RPM 개요 -->
+    <div class="card" id="sec-2-2-14">
+      <h2>§ 2.14 재판매가격법(RPM) 개요</h2>
+      <div class="accordion">
+        <button class="acc-header" onclick="toggleAcc(this)">
+          <span><span class="para">¶ 2.14</span>RPM의 정의와 기본 구조</span>
+          <span class="arrow">▼</span>
+        </button>
+        <div class="acc-body">
+          <p>재판매가격법(Resale Price Method, RPM)은 특수관계 거래에서 구입한 재화를 독립된 구매자에게 재판매할 때의 가격(재판매가격)에서 <strong>재판매가격이윤(Resale Price Margin)</strong>을 차감하여 정상가격을 산출하는 방법입니다.</p>
+          <div class="key-point">
+            <strong>RPM 산출 공식</strong><br>
+            정상가격 = 재판매가격 × (1 − 재판매가격이윤율)
+          </div>
+          <p>예를 들어, 재판매가격이 100이고 재판매가격이윤율이 25%라면, 정상가격은 75가 됩니다. 즉, 관계회사 간 거래가격은 75를 초과해서는 안 됩니다.</p>
+          <p>RPM은 주로 <strong>유통·판매 기능</strong>을 수행하는 재판매업자가 독립적 구매자에게 재화를 공급하는 상황에서 적용됩니다. 제조업자로부터 완제품을 구입하여 유통망을 통해 최종소비자 또는 도매상에게 판매하는 경우가 대표적입니다.</p>
+          <div class="warn-point">
+            RPM은 재판매자가 부가가치 창출 활동(예: 재가공, 심층 마케팅, 핵심 무형자산 사용 등)을 거의 수행하지 않는 경우에 가장 적합합니다.
+          </div>
+        </div>
       </div>
-
-      <h3>RPM이 가장 적합한 거래 유형</h3>
-      <table class="case-table">
-        <thead>
-          <tr><th>적합한 경우</th><th>부적합한 경우</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <ul style="padding-left:1rem;margin:0">
-                <li>구매한 제품을 중요한 가치창출 없이 그대로 고객에게 판매하는 도매업</li>
-                <li>마케팅 활동이 중심인 유통 및 도매거래</li>
-                <li>내부 비교가능거래(Internal CUP)가 있는 경우</li>
-              </ul>
-            </td>
-            <td>
-              <ul style="padding-left:1rem;margin:0">
-                <li>구매한 제품을 추가 가공하여 더 가치 있는 제품 제작</li>
-                <li>재판매업자의 상표가 판매에 중요한 경우 (무형자산 문제)</li>
-                <li>재판매업자가 마케팅 무형자산을 창출한 경우</li>
-              </ul>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <div class="nav-btns">
-        <a href="M2-2_CUP.html" class="btn-nav secondary">&#8592; M2-2 CUP</a>
-        <button class="btn-nav" onclick="showSec('sec-2',document.querySelectorAll('.nav-item')[1])">다음: 비교가능거래 &amp; 적용 요건 &#8594;</button>
+      <div class="accordion">
+        <button class="acc-header" onclick="toggleAcc(this)">
+          <span><span class="para">¶ 2.14</span>CUP와의 비교</span>
+          <span class="arrow">▼</span>
+        </button>
+        <div class="acc-body">
+          <p>CUP(비교 비통제 가격법)가 거래가격 자체를 비교하는 방식이라면, RPM은 재판매가격이윤이라는 <strong>총이익률(Gross Margin)</strong>을 비교합니다. 따라서 재화의 물리적 특성 차이가 있더라도 기능·위험·계약조건 등이 유사하다면 RPM은 여전히 적용 가능합니다.</p>
+          <table class="compare-table">
+            <tr><th>구분</th><th>CUP</th><th>RPM</th></tr>
+            <tr><td>비교 지표</td><td>거래 단가(가격)</td><td>재판매가격이윤율(총이익률)</td></tr>
+            <tr><td>제품 동질성</td><td>높게 요구됨</td><td>상대적으로 낮게 요구됨</td></tr>
+            <tr><td>주요 적용 대상</td><td>원자재, 표준화 제품</td><td>유통·판매 기능 수행 기업</td></tr>
+            <tr><td>분석 기준</td><td>재화의 가격</td><td>재판매자의 기능·이윤</td></tr>
+          </table>
+        </div>
       </div>
     </div>
 
-    <!-- 섹션 2: 비교가능거래 & 적용 요건 -->
-    <div class="section" id="sec-2">
-      <h2>2. 비교가능거래 &amp; RPM 적용 요건 (&#167;2.28&#8211;&#167;2.30)</h2>
-
-      <h3>&#167;2.28 내부 vs. 외부 비교가능거래</h3>
-      <p><span class="para-badge">&#167;2.28</span>RPM 적용 시 비교가능거래는 다음 두 가지로 나뉩니다:</p>
-
-      <table class="case-table">
-        <thead>
-          <tr><th>구분</th><th>정의</th><th>신뢰성</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>내부 비교가능거래<br>(Internal Comparable)</strong></td>
-            <td>분석대상 납세자 자신이 제3자에게 동일/유사 제품을 재판매하는 경우</td>
-            <td>더 높음 &#8212; 동일 조건에서의 실제 거래</td>
-          </tr>
-          <tr>
-            <td><strong>외부 비교가능거래<br>(External Comparable)</strong></td>
-            <td>제3자 도매업자가 유사 제품을 재판매하는 경우</td>
-            <td>상대적으로 낮음 &#8212; 다양한 차이 존재</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <div class="commentary">
-        <div class="comm-label">(주) &#167;2.28 &#8212; 내부 비교가능거래 참고</div>
-        UN (2021, pp. 91-92): Internal Comparable에 대한 자세한 설명이 있습니다.
+    <!-- §2.15 재판매가격이윤 -->
+    <div class="card" id="sec-2-2-15">
+      <h2>§ 2.15 재판매가격이윤의 결정</h2>
+      <div class="accordion">
+        <button class="acc-header" onclick="toggleAcc(this)">
+          <span><span class="para">¶ 2.15</span>재판매가격이윤의 의미</span>
+          <span class="arrow">▼</span>
+        </button>
+        <div class="acc-body">
+          <p>재판매가격이윤(Resale Price Margin)은 재판매업자가 수행한 판매 기능, 부담한 비용, 그리고 인수한 자산·위험에 대한 보상을 포함합니다. 독립 기업이 유사한 조건에서 동일한 기능을 수행했다면 요구했을 이윤과 비교하여 결정됩니다.</p>
+          <div class="key-point">
+            재판매가격이윤 = (재판매가격 − 구입원가) / 재판매가격<br>
+            즉, <strong>매출총이익률(Gross Profit Margin)</strong>에 해당합니다.
+          </div>
+          <p>재판매가격이윤은 다음 두 가지 방법으로 도출됩니다.</p>
+          <ul style="margin:.5rem 0 .5rem 1.2rem;font-size:.93rem;color:var(--text2)">
+            <li style="margin-bottom:.4rem"><strong>내부비교가격이윤:</strong> 동일 재판매업자가 비관련 당사자와의 거래에서 벌어들인 이윤</li>
+            <li><strong>외부비교가격이윤:</strong> 독립 기업이 유사 재판매 기능을 수행하여 벌어들인 이윤</li>
+          </ul>
+          <p>내부 비교가능 거래가 있을 경우 외부 비교보다 신뢰성이 높습니다.</p>
+        </div>
       </div>
-
-      <h3>&#167;2.29 재판매가격방법 적용 요건</h3>
-      <p><span class="para-badge">&#167;2.29</span>재판매가격방법의 적용 요건은 비교가능 제3자 가격방법(&#167;2.15-17)과 기본적으로 동일하나, <strong>비교가능 제3자 가격방법에 비해 보다 많은 조정(비교가능성 조정)을 허용</strong>합니다.</p>
-
-      <h3>&#167;2.30 제품의 비교가능성과 기능의 비교가능성</h3>
-      <p><span class="para-badge">&#167;2.30</span>시장에서는 유사한 기능에 대하여 비록 제품이 다른 경우에도 유사한 대가를 지급합니다. 그러나 제품 종류에 따른 가격 측면에서는 제품이 <strong>대체제인 경우에 한해서</strong> 유사성을 보입니다.</p>
-
-      <div class="commentary">
-        <div class="comm-label">(주) &#167;2.30 &#8212; RPM 기능 비교가능성의 핵심</div>
-        재판매가격방법 적용 시 기능 및 제품의 비교가능성을 제시하고 있습니다. 대체재로 사용될 수는 없지만 (예시: 토스터와 믹서기 정도의 제품비교가능성이 있는 경우) 수행하는 기능에 비교가능성(예: 일반 도매활동)이 존재하는 경우 비교가능거래로 사용될 수 있다는 것을 제시하고 있습니다.<br><br>
-        그러나 재판매가격방법을 적용할 수 있는 기능 및 제품의 유사성에 대한 정확한 구분이 없기 때문에 적용대상 거래 구분이 항상 불분명합니다. 따라서 재판매가격방법의 경우 경쟁관계에 있는 회사가 제3자와 거래를 하는 경우 또는 회사 내부에 비교가능거래(Internal comparable)이 있는 경우에 적용하는 것이 경험상 일반적인 사례입니다.
-      </div>
-
-      <h3>비교가능성 기준 비교 (CUP vs. RPM)</h3>
-      <table class="case-table">
-        <thead>
-          <tr><th>비교 기준</th><th>CUP</th><th>RPM</th></tr>
-        </thead>
-        <tbody>
-          <tr><td><strong>제품 비교가능성</strong></td><td>매우 엄격 (동일 또는 유사 제품)</td><td>완화 (대체재 수준; 기능 유사성 중시)</td></tr>
-          <tr><td><strong>기능 비교가능성</strong></td><td>엄격</td><td>엄격 (핵심 기준)</td></tr>
-          <tr><td><strong>비교가능성 조정</strong></td><td>제한적</td><td>상대적으로 많은 조정 허용</td></tr>
-          <tr><td><strong>회계 기준 일치</strong></td><td>중간</td><td>중요 (재판매마진 계산에 직결)</td></tr>
-        </tbody>
-      </table>
-
-      <div class="nav-btns">
-        <button class="btn-nav secondary" onclick="showSec('sec-1',document.querySelectorAll('.nav-item')[0])">&#8592; RPM 원칙 &amp; 공식</button>
-        <button class="btn-nav" onclick="showSec('sec-3',document.querySelectorAll('.nav-item')[2])">다음: 기능비교가능성 &amp; 적용 범위 &#8594;</button>
+      <div class="accordion">
+        <button class="acc-header" onclick="toggleAcc(this)">
+          <span><span class="para">¶ 2.15</span>재판매가격이윤에 영향을 주는 요소</span>
+          <span class="arrow">▼</span>
+        </button>
+        <div class="acc-body">
+          <p>동일한 재판매업자라도 다음과 같은 요소에 따라 이윤율이 달라질 수 있습니다.</p>
+          <table class="compare-table">
+            <tr><th>요소</th><th>설명</th></tr>
+            <tr><td>수행 기능</td><td>마케팅, 재고관리, 배송, 애프터서비스 등의 범위</td></tr>
+            <tr><td>부담 위험</td><td>재고위험, 신용위험, 환위험 등의 인수 여부</td></tr>
+            <tr><td>사용 자산</td><td>창고, 차량, 브랜드·영업권 등 사용 여부</td></tr>
+            <tr><td>시장 조건</td><td>경쟁 강도, 시장 성장률, 진입 장벽</td></tr>
+            <tr><td>제품 특성</td><td>브랜드 가치, 기술 수준, 특허 여부</td></tr>
+          </table>
+          <div class="warn-point">
+            재판매업자가 독자적인 무형자산(자체 브랜드, 독점 고객 관계 등)을 보유하고 있다면 이윤율이 높아지므로, 비교 가능한 기업을 선별할 때 주의가 필요합니다.
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- 섹션 3: 기능비교가능성 & 적용 범위 -->
-    <div class="section" id="sec-3">
-      <h2>3. 기능비교가능성 &amp; 세부 적용 원칙 (&#167;2.33&#8211;&#167;2.41)</h2>
+    <!-- §2.16 비교가능성 요건 -->
+    <div class="card" id="sec-2-2-16">
+      <h2>§ 2.16 RPM의 비교가능성 요건</h2>
+      <div class="accordion">
+        <button class="acc-header" onclick="toggleAcc(this)">
+          <span><span class="para">¶ 2.16</span>기능 유사성 중심의 비교가능성</span>
+          <span class="arrow">▼</span>
+        </button>
+        <div class="acc-body">
+          <p>RPM에서는 제품의 동질성보다 <strong>수행 기능과 위험 부담의 유사성</strong>이 더 중요한 비교가능성 기준입니다. 재판매업자가 수행하는 기능(예: 단순 유통 vs. 풀 서비스 유통)이 다르면 재판매가격이윤도 달라지기 때문입니다.</p>
+          <div class="key-point">
+            RPM에서 비교가능성의 핵심: <strong>재판매업자의 기능·위험·계약 조건</strong>이 독립기업과 유사한가?
+          </div>
+          <p>OECD 지침서는 다음 다섯 가지 비교가능성 요소를 제시합니다.</p>
+          <ul style="margin:.5rem 0 .5rem 1.2rem;font-size:.93rem;color:var(--text2)">
+            <li style="margin-bottom:.4rem">① 재화·용역의 특성</li>
+            <li style="margin-bottom:.4rem">② 기능분석 (수행 기능, 사용 자산, 부담 위험)</li>
+            <li style="margin-bottom:.4rem">③ 계약 조건</li>
+            <li style="margin-bottom:.4rem">④ 경제적 상황</li>
+            <li>⑤ 사업 전략</li>
+          </ul>
+          <p>RPM의 경우 ② 기능분석이 가장 중요한 요소로 작용합니다.</p>
+        </div>
+      </div>
+      <div class="accordion">
+        <button class="acc-header" onclick="toggleAcc(this)">
+          <span><span class="para">¶ 2.16</span>제품 차이와 조정</span>
+          <span class="arrow">▼</span>
+        </button>
+        <div class="acc-body">
+          <p>CUP와 달리 RPM은 제품 간 일부 차이가 있어도 적용 가능합니다. 다만, 제품의 차이가 재판매업자의 기능·비용에 영향을 미치는 경우(예: 기술 지원 비용 차이)에는 적절한 조정이 필요합니다.</p>
+          <p>반면, 제품의 차이가 이윤율에 영향을 주지 않는 경우(예: 동일 유통 채널에서 단순 색상만 다른 제품)에는 별도의 조정 없이 비교가 가능합니다.</p>
+          <div class="warn-point">
+            브랜드 차이는 소비자의 지불 의사에 영향을 미치므로, 고급 브랜드 제품과 일반 브랜드 제품 간 재판매가격이윤 비교는 신중해야 합니다.
+          </div>
+        </div>
+      </div>
+    </div>
 
-      <h3>&#167;2.33 사업활동 차이와 신뢰도</h3>
-      <p><span class="para-badge">&#167;2.33</span>분석대상거래와 비교가능거래 간 사업활동에 중요한 차이가 있는 경우 재판매가격방법의 신뢰도에 문제가 발생합니다. 이러한 차이에는 비용효율 측면을 예로 들 수 있습니다.</p>
+    <!-- §2.17 기능·위험 차이 -->
+    <div class="card" id="sec-2-2-17">
+      <h2>§ 2.17 기능·위험 차이가 RPM에 미치는 영향</h2>
+      <div class="accordion">
+        <button class="acc-header" onclick="toggleAcc(this)">
+          <span><span class="para">¶ 2.17</span>기능 차이에 따른 이윤율 조정</span>
+          <span class="arrow">▼</span>
+        </button>
+        <div class="acc-body">
+          <p>재판매업자가 수행하는 기능의 범위와 복잡성이 다를 경우, 재판매가격이윤도 다를 수밖에 없습니다. 예를 들어, 단순 창고 보관과 배송만 담당하는 재판매업자는 판촉, 마케팅, 브랜드 관리, A/S까지 담당하는 재판매업자보다 낮은 이윤율을 가질 것입니다.</p>
+          <table class="compare-table">
+            <tr><th>기능 수준</th><th>일반적 이윤율 수준</th><th>예시</th></tr>
+            <tr><td>단순 유통(Limited Risk Distributor)</td><td>낮음</td><td>창고 보관, 단순 배송</td></tr>
+            <tr><td>일반 유통(Full-fledged Distributor)</td><td>중간</td><td>판촉, 재고위험 부담</td></tr>
+            <tr><td>부가가치 유통</td><td>높음</td><td>브랜드 관리, 자체 마케팅</td></tr>
+          </table>
+          <div class="key-point">
+            기능 차이가 클수록 비교 가능한 독립 기업을 찾기 어려워지며, 이 경우 TNMM 등 다른 방법의 적용을 고려해야 합니다.
+          </div>
+        </div>
+      </div>
+      <div class="accordion">
+        <button class="acc-header" onclick="toggleAcc(this)">
+          <span><span class="para">¶ 2.17</span>위험 부담과 이윤의 관계</span>
+          <span class="arrow">▼</span>
+        </button>
+        <div class="acc-body">
+          <p>독립 기업 원칙에 따르면, 더 많은 위험을 부담하는 당사자는 그에 상응하는 높은 기대수익을 요구합니다. RPM 분석에서도 재판매업자가 부담하는 위험의 유형과 크기를 고려해야 합니다.</p>
+          <ul style="margin:.5rem 0 .5rem 1.2rem;font-size:.93rem;color:var(--text2)">
+            <li style="margin-bottom:.4rem"><strong>재고위험:</strong> 재고 부담 여부 및 규모</li>
+            <li style="margin-bottom:.4rem"><strong>신용위험:</strong> 채권 회수 불능 위험 부담</li>
+            <li style="margin-bottom:.4rem"><strong>환위험:</strong> 외화 거래에 따른 환율 변동 노출</li>
+            <li><strong>시장위험:</strong> 수요 변동, 가격 하락 위험</li>
+          </ul>
+          <p>한편, OECD BEPS Action 8-10(2015) 이후에는 계약상 위험 배분보다 <strong>실제 위험 통제 역량과 재무적 수용 능력</strong>이 중시됩니다.</p>
+          <div class="warn-point">
+            계약서에 위험을 배분해 놓더라도 실제로 위험을 통제하는 기능이 없는 당사자에게 높은 이윤을 귀속시키는 것은 OECD 지침서에 부합하지 않습니다.
+          </div>
+        </div>
+      </div>
+    </div>
 
-      <div class="commentary">
-        <div class="comm-label">(주) &#167;2.33 &#8212; 경영효율성 차이 사례</div>
-        예를 들어, 재고자산 운영과 관련하여 경영효율성(management efficiency)에 차이가 있는 경우, 이러한 차이는 고객에게 제공되는 서비스 또는 제품가격에는 차이가 발생하지 않을 수 있으나 이익률 측면에서 두 거래 간에 차이가 발생합니다.<br><br>
-        참고: Annex to Chapter III &#8220;Example of a working capital adjustment&#8221;, UN (2021, p. 108; 3.5.3.11 &#8220;Example of working capital adjustment&#8221;): 매출채권/매입채무/재고자산 비교가능성 조정에 대한 상세한 설명이 있습니다.
+    <!-- §2.18 적용 한계 -->
+    <div class="card" id="sec-2-2-18">
+      <h2>§ 2.18 RPM의 적용 한계와 주의사항</h2>
+      <div class="accordion">
+        <button class="acc-header" onclick="toggleAcc(this)">
+          <span><span class="para">¶ 2.18</span>무형자산 관련 한계</span>
+          <span class="arrow">▼</span>
+        </button>
+        <div class="acc-body">
+          <p>재판매업자가 독자적인 무형자산(브랜드, 특허 영업비밀, 독점 고객 관계 등)을 보유하거나 중요한 연구개발 활동을 수행한다면, RPM에 의한 간단한 이윤율 비교는 부적절할 수 있습니다. 이 경우 이익분할법이나 거래순이익률법(TNMM)이 더 적합할 수 있습니다.</p>
+          <div class="warn-point">
+            재판매업자가 자체 브랜드를 구축하는 데 상당한 비용을 지출하였다면, 해당 브랜드 가치는 재판매업자에게 귀속되어야 하며, RPM으로 이를 무시해서는 안 됩니다.
+          </div>
+        </div>
+      </div>
+      <div class="accordion">
+        <button class="acc-header" onclick="toggleAcc(this)">
+          <span><span class="para">¶ 2.18</span>회계 처리 차이와 일관성</span>
+          <span class="arrow">▼</span>
+        </button>
+        <div class="acc-body">
+          <p>RPM에서는 재판매가격이윤을 계산하기 위해 매출원가를 사용합니다. 그런데 기업마다 재고 평가 방법(FIFO, 평균법 등), 판매비용의 원가 포함 여부 등 회계 처리가 다를 수 있습니다. 따라서 비교 가능한 기업 간 회계 처리의 일관성이 보장되어야 하며, 필요시 조정이 수반되어야 합니다.</p>
+          <div class="key-point">
+            회계 기준이 다른 기업을 단순 비교하면 이윤율 차이가 과대·과소 평가될 수 있습니다. 특히 다국적 기업 그룹 내 거래에서는 이 점에 주의해야 합니다.
+          </div>
+          <p>또한, 재판매 주기가 길어질수록(즉, 재고 보유 기간이 길어질수록) 매입 시점과 재판매 시점 사이에 시장가격이 변동하여 이윤율이 왜곡될 수 있습니다.</p>
+        </div>
+      </div>
+      <div class="accordion">
+        <button class="acc-header" onclick="toggleAcc(this)">
+          <span><span class="para">¶ 2.18</span>RPM이 적합하지 않은 상황</span>
+          <span class="arrow">▼</span>
+        </button>
+        <div class="acc-body">
+          <p>다음과 같은 상황에서는 RPM보다 다른 방법이 더 적합할 수 있습니다.</p>
+          <table class="compare-table">
+            <tr><th>상황</th><th>권장 대체 방법</th></tr>
+            <tr><td>재판매업자가 상당한 무형자산 보유</td><td>이익분할법</td></tr>
+            <tr><td>재화를 상당히 가공한 후 판매</td><td>원가가산법(CPM)</td></tr>
+            <tr><td>복잡한 거래 구조 (용역+재화 혼합)</td><td>TNMM</td></tr>
+            <tr><td>비교 가능한 독립 기업 없음</td><td>TNMM 또는 이익분할법</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- 사례탐구 -->
+    <div class="card" id="sec-case">
+      <h2>사례탐구</h2>
+      <div class="case-box">
+        <div class="case-label">사례 1</div>
+        <h4>단순 유통업자 A사의 RPM 적용</h4>
+        <p>한국 소재 A사는 미국 모회사로부터 가전제품을 구입하여 국내 도·소매상에게 재판매합니다. A사는 창고 관리와 배송만을 담당하며, 마케팅과 브랜드 관리는 모회사가 수행합니다.</p>
+        <p>A사의 재판매가격이 100원이고, 비교 가능한 독립 유통업자의 재판매가격이윤율이 평균 20%라면, 정상 구입가격은 80원(= 100 × (1−0.20))입니다. 만약 실제 구입가격이 85원이라면 이전가격 문제가 발생할 수 있습니다.</p>
+        <div class="key-point">A사처럼 기능이 단순하고 위험이 제한적인 재판매업자의 경우, RPM이 가장 적합한 방법입니다.</div>
+      </div>
+      <div class="case-box">
+        <div class="case-label">사례 2</div>
+        <h4>복합 기능 수행 재판매업자 B사의 RPM 한계</h4>
+        <p>독일 소재 B사는 일본 모회사로부터 정밀기계를 구입하여 유럽 전역에 판매합니다. B사는 독자적인 판매 네트워크와 브랜드, 전담 기술지원팀을 보유하고 있으며, 재고위험도 전부 부담합니다.</p>
+        <p>이 경우 단순 재판매 기능만을 수행하는 독립 기업과 비교하기 어렵습니다. B사가 보유한 무형자산(브랜드, 고객 관계)과 기능(기술지원)을 반영하지 않으면 RPM 분석 결과가 왜곡됩니다. 따라서 이 상황에서는 TNMM이나 이익분할법을 고려해야 합니다.</p>
+        <div class="warn-point">복합적 기능과 독자적 무형자산이 있는 경우에는 RPM보다 기능 특성에 맞는 다른 방법 적용을 검토해야 합니다.</div>
+      </div>
+    </div>
+
+    <!-- 확인퀴즈 -->
+    <div class="quiz-section" id="sec-quiz">
+      <h2>확인퀴즈</h2>
+      <div class="q-count">총 5문항 | 퀴즈를 완료하면 진도율이 업데이트됩니다.</div>
+
+      <div class="quiz-item">
+        <div class="q-text"><span class="q-num">Q1</span>재판매가격법(RPM)에서 정상가격을 산출하는 공식으로 올바른 것은 무엇입니까?</div>
+        <ul class="opt-list">
+          <li><button onclick="answer(1,this,false)">① 정상가격 = 구입원가 × (1 + 원가가산율)</button></li>
+          <li><button onclick="answer(1,this,true)">② 정상가격 = 재판매가격 × (1 − 재판매가격이윤율)</button></li>
+          <li><button onclick="answer(1,this,false)">③ 정상가격 = 재판매가격 + 재판매가격이윤</button></li>
+          <li><button onclick="answer(1,this,false)">④ 정상가격 = 영업이익 / 매출액</button></li>
+        </ul>
+        <div class="q-feedback" id="fb1"></div>
       </div>
 
-      <h3>&#167;2.34 재판매가격방법과 기능의 비교가능성</h3>
-      <p><span class="para-badge">&#167;2.34</span>재판매가격방법은 <strong>수행한 기능의 비교가능성을 중요한 기준</strong>으로 분석합니다.</p>
-
-      <h3>&#167;2.35 재판매가격방법의 적용</h3>
-      <p><span class="para-badge">&#167;2.35</span>재판매가격방법은 구매한 제품을 중요한 가치창출 없이 그대로 고객에게 판매하는 <strong>도매업자의 경우에 적용이 용이</strong>한 방법입니다. 구매한 제품을 추가 가공하여 더 가치 있는 제품을 제작하거나 제품을 판매하는 업자의 상표가 판매에 있어 중요하여 무형자산이 문제가 발생하는 경우에는 적용하는 것이 바람직하지 않습니다.</p>
-
-      <div class="commentary">
-        <div class="comm-label">(주) &#167;2.35 &#8212; 마케팅 무형자산 문제</div>
-        판매를 담당하는 재판매 관계회사가 그 지역에서 마케팅 무형자산을 창출하였다면 그 무형자산에 대한 평가문제가 일어납니다. 이 경우 RPM 적용이 어려워질 수 있으므로, 마케팅 무형자산 여부 검토가 선행되어야 합니다.<br><br>
-        참고: &#167;1.482-3(c)에도 동일한 문구가 있습니다.
+      <div class="quiz-item">
+        <div class="q-text"><span class="q-num">Q2</span>RPM에서 재판매가격이윤(Resale Price Margin)은 회계상 어떤 이익률에 해당합니까?</div>
+        <ul class="opt-list">
+          <li><button onclick="answer(2,this,false)">① 영업이익률</button></li>
+          <li><button onclick="answer(2,this,false)">② 순이익률</button></li>
+          <li><button onclick="answer(2,this,true)">③ 매출총이익률(Gross Profit Margin)</button></li>
+          <li><button onclick="answer(2,this,false)">④ EBITDA 마진율</button></li>
+        </ul>
+        <div class="q-feedback" id="fb2"></div>
       </div>
 
-      <h3>&#167;2.37 수행하는 기능의 정도와 실현수익</h3>
-      <p><span class="para-badge">&#167;2.37</span>도매활동을 수행하는 기능 정도에 따라 다음과 같이 구분할 수 있습니다:</p>
-      <ul>
-        <li><strong>단순 서비스 도매업자:</strong> 제한적 기능만 수행</li>
-        <li><strong>완전한 도매업자(Full-function Distributor):</strong> 재고소유에 대한 책임을 지고 광고, 마케팅, 재판매 및 제품의 보증, 자산에 대한 자금조달 및 그 외 관련 서비스를 제공</li>
+      <div class="quiz-item">
+        <div class="q-text"><span class="q-num">Q3</span>OECD 이전가격 지침서에 따르면, RPM 적용 시 가장 중요한 비교가능성 요소는 무엇입니까?</div>
+        <ul class="opt-list">
+          <li><button onclick="answer(3,this,false)">① 제품의 물리적 특성과 브랜드 동질성</button></li>
+          <li><button onclick="answer(3,this,true)">② 재판매업자의 기능, 위험 부담, 계약 조건의 유사성</button></li>
+          <li><button onclick="answer(3,this,false)">③ 거래 규모와 물량의 일치 여부</button></li>
+          <li><button onclick="answer(3,this,false)">④ 특수관계 여부와 지분율</button></li>
+        </ul>
+        <div class="q-feedback" id="fb3"></div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="q-text"><span class="q-num">Q4</span>다음 중 RPM 적용이 가장 적합한 재판매업자는 어느 것입니까?</div>
+        <ul class="opt-list">
+          <li><button onclick="answer(4,this,false)">① 독자적 브랜드와 특허를 보유하고 R&D를 수행하는 판매업자</button></li>
+          <li><button onclick="answer(4,this,true)">② 창고 보관·배송만 담당하고 마케팅은 모회사가 수행하는 단순 유통업자</button></li>
+          <li><button onclick="answer(4,this,false)">③ 제품을 상당히 가공한 후 자체 브랜드로 판매하는 업자</button></li>
+          <li><button onclick="answer(4,this,false)">④ 복잡한 기술지원과 독점 고객 관계를 보유한 판매업자</button></li>
+        </ul>
+        <div class="q-feedback" id="fb4"></div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="q-text"><span class="q-num">Q5</span>OECD BEPS Action 8-10 이후, RPM 분석에서 위험 귀속 판단의 핵심 기준은 무엇입니까?</div>
+        <ul class="opt-list">
+          <li><button onclick="answer(5,this,false)">① 계약서에 기재된 위험 배분 조항</button></li>
+          <li><button onclick="answer(5,this,false)">② 그룹 내 지분율에 따른 위험 배분</button></li>
+          <li><button onclick="answer(5,this,true)">③ 실제 위험 통제 역량과 재무적 수용 능력</button></li>
+          <li><button onclick="answer(5,this,false)">④ 과거 3년 평균 이익률 수준</button></li>
+        </ul>
+        <div class="q-feedback" id="fb5"></div>
+      </div>
+
+    </div>
+
+    <!-- 학습 체크리스트 -->
+    <div class="card" id="sec-check">
+      <h2>학습 체크리스트</h2>
+      <p>학습한 내용을 스스로 점검해 보세요. 각 항목을 이해하셨다면 체크하세요.</p>
+      <ul class="checklist">
+        <li>
+          <input type="checkbox" id="c1" onchange="saveCheck()">
+          <label for="c1">RPM의 정의와 기본 공식(정상가격 = 재판매가격 × (1 − 이윤율))을 설명할 수 있습니다.</label>
+        </li>
+        <li>
+          <input type="checkbox" id="c2" onchange="saveCheck()">
+          <label for="c2">재판매가격이윤이 매출총이익률에 해당함을 이해하였습니다.</label>
+        </li>
+        <li>
+          <input type="checkbox" id="c3" onchange="saveCheck()">
+          <label for="c3">RPM에서 기능·위험 유사성이 가장 중요한 비교가능성 요소임을 이해하였습니다.</label>
+        </li>
+        <li>
+          <input type="checkbox" id="c4" onchange="saveCheck()">
+          <label for="c4">기능 수준(단순 유통 vs. 복합 기능)에 따라 이윤율이 달라짐을 파악하였습니다.</label>
+        </li>
+        <li>
+          <input type="checkbox" id="c5" onchange="saveCheck()">
+          <label for="c5">무형자산 보유·가공 활동 수행 시 RPM보다 다른 방법이 적합함을 이해하였습니다.</label>
+        </li>
+        <li>
+          <input type="checkbox" id="c6" onchange="saveCheck()">
+          <label for="c6">BEPS Action 8-10 이후 실질적 위험 통제 역량이 위험 귀속의 핵심 기준임을 이해하였습니다.</label>
+        </li>
       </ul>
-
-      <div class="commentary">
-        <div class="comm-label">(주) &#167;2.37 &#8212; 기능에 따른 예상 실현수익 분포</div>
-        UN (2021, pp. 16-20): 기능에 따른 예상 실현수익의 분포가 도형으로 잘 설명되어 있습니다. 수행하는 기능이 많을수록 더 높은 이익률을 실현할 수 있으며, 이는 비교가능회사 선정 시 기능의 정도를 맞추는 것이 중요함을 의미합니다.
-      </div>
-
-      <h3>&#167;2.38 중요한 상업적 활동 및 마케팅 무형자산과 실현 수익</h3>
-      <p><span class="para-badge">&#167;2.38</span>재판매업자가 중요한 상업적 활동을 수행하거나 마케팅 무형자산을 보유하는 경우, 해당 자산 및 활동에 대한 적절한 보상이 이루어졌는지 분석이 필요합니다.</p>
-
-      <h3>&#167;2.39 중재회사(Intermediate Company)</h3>
-      <p><span class="para-badge">&#167;2.39</span>제품의 공급(판매) 사슬에 중재회사가 존재하는 경우, 과세관청은 중재회사에게 지급하는 제품가격과 원 공급원자에게 지급하는 제품가격을 <strong>중재회사가 수행하는 기능을 감안하여 비교</strong>할 필요가 있습니다.</p>
-      <p>중재회사가 중요한 가치 있는 서비스를 제공하지 않는 경우, 이러한 이익은 합리적인 방법으로 다국적기업에 귀속시킵니다. 이러한 이유는 제3자는 이러한 거래를 하지 않을 것이기 때문입니다.</p>
-
-      <div class="commentary">
-        <div class="comm-label">(주) &#167;2.39 &#8212; 중재회사 실무</div>
-        실무에서는 특히 원유, 철광석 및 원재료 거래인 경우 중재회사가 존재하는 경우가 있습니다. 중재회사란 판매자와 고객사이에서 거래를 중계하는 업자입니다. 중재회사가 전체 거래에 미치는 영향을 파악하여 그 역할이 거래에서 미미한 경우 해외관계회사가 중재회사에게 제공한 가격을 무시하고, 중요한 경우 거래의 미친 영향을 파악하여 이를 거래가격에 조정합니다.
-      </div>
-
-      <h3>&#167;2.40 제품의 판권(독점권/비독점 판매권)</h3>
-      <p><span class="para-badge">&#167;2.40</span>제품 판매에 독점권 또는 비독점적 판매권이 있는 경우 관련 요소를 분석하여 가격에 적용합니다. 독점권은 그 권리가 미치는 지역, 대체품의 존재 및 경쟁정도에 따라 가격에 미치는 영향이 다릅니다.</p>
-
-      <div class="commentary">
-        <div class="comm-label">(주) &#167;2.40 &#8212; 독점적 위치와 이전가격 분석의 어려움</div>
-        판권과 관련하여 분석에 어려움이 있는 경우는 제품이 시장수요의 대부분을 독점하는 경우입니다. 이전가격 분석 대상인 다국적기업이 시장에서 독점적인 또는 우월한 위치를 차지하고 있는 경우에 비교가능회사를 검색할 때 어떤 방법을 쓸 것인가 어떤 조정을 할 것인가가 문제가 됩니다.<br><br>
-        The White Paper(1988)에 따르면 어떤 다국적기업이 이미 시장에서 독점적인 위치에 있는 경우, 비교가능거래를 찾는 것이 매우 어렵기 때문에 이익분할방법을 적용하여 합리적인 기준으로 거래 양 당사자의 이익을 배분하는 방법을 제시하고 있습니다.<br><br>
-        참고: &#167;6.118-20; The White Paper (1988, p. 85)
-      </div>
-
-      <h3>&#167;2.41 재무자료의 회계기준 불일치 문제</h3>
-      <p><span class="para-badge">&#167;2.41</span>재무자료에 적용된 회계기준이 분석대상회사와 비교가능회사 간에 일치하지 않는 경우, 이러한 사실이 확인되면 비교가능회사와 비교하여 반드시 조정을 해야 합니다.</p>
-
-      <div class="nav-btns">
-        <button class="btn-nav secondary" onclick="showSec('sec-2',document.querySelectorAll('.nav-item')[1])">&#8592; 비교가능거래 &amp; 적용 요건</button>
-        <button class="btn-nav" onclick="showSec('sec-4',document.querySelectorAll('.nav-item')[3])">다음: RPM 적용 사례 &#8594;</button>
-      </div>
     </div>
 
-    <!-- 섹션 4: RPM 적용 사례 -->
-    <div class="section" id="sec-4">
-      <h2>4. RPM 적용 사례 (&#167;2.42&#8211;&#167;2.44)</h2>
-
-      <h3>&#167;2.42/2.43 도매업자 간 비교 사례 &#8212; 제품보증 서비스</h3>
-      <p><span class="para-badge">&#167;2.42/2.43</span>다음과 같은 도매업자들이 동일한 시장에서 제품을 판매하고 있는 경우입니다.</p>
-
-      <div class="example-box">
-        <div class="ex-title">사례 2.42/2.43 &#8212; 제품보증 서비스 유무에 따른 비교</div>
-
-        <p style="font-size:.88rem;font-weight:700;color:var(--teal);margin-bottom:.6rem">&#9654; Case A: 도매업자 A vs. 도매업자 B</p>
-        <table class="example-table">
-          <thead>
-            <tr><th>구분</th><th>도매업자 A</th><th>도매업자 B</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>제품보증 서비스</td>
-              <td><strong>제공</strong></td>
-              <td>없음</td>
-            </tr>
-            <tr>
-              <td>판매가격</td>
-              <td>도매업자 B보다 <strong>높은 가격</strong>에 판매 (제품보증 서비스에 따른 비용 감안)</td>
-              <td>상대적으로 낮은 가격</td>
-            </tr>
-          </tbody>
-        </table>
-
-        <p style="font-size:.88rem;font-weight:700;color:var(--teal);margin:.8rem 0 .6rem">&#9654; Case B: 도매업자 C vs. 도매업자 D</p>
-        <table class="example-table">
-          <thead>
-            <tr><th>구분</th><th>도매업자 C</th><th>도매업자 D</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>제품보증 서비스</td>
-              <td><strong>도매업자 C가 직접 제공</strong></td>
-              <td>없음 (대신 <strong>제품 공급업자가 제품보증 서비스 제공</strong>)</td>
-            </tr>
-            <tr>
-              <td>공급업자의 공급가격</td>
-              <td>제품보증 서비스를 감안하여 도매업자 C에게 <strong>더 낮은 가격</strong>으로 공급</td>
-              <td>도매업자 C보다 <strong>높은 가격</strong>으로 공급</td>
-            </tr>
-            <tr>
-              <td>자동 조정 여부</td>
-              <td colspan="2">만약 도매업자 C가 제품보증 서비스 비용을 <strong>제품판매 원가(COGs)로 기록</strong>하고 있는 경우, 도매업자 C와 도매업자 D간에 있는 제품보증 서비스 비용으로 인한 제품공급가격의 차이는 <strong>자동적으로 조정</strong>이 됩니다.</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="key-point teal">
-        <strong>&#167;2.42/2.43 핵심:</strong> 재판매가격방법 적용 시 제품보증 서비스와 같은 기능 차이는 매출총이익률에 영향을 줍니다. 비용이 COGs에 포함되어 있는지 SG&amp;A에 포함되어 있는지에 따라 조정 방법이 달라집니다.
-      </div>
-
-      <h3>&#167;2.44 다국적기업 도매업자 비교 사례</h3>
-      <p><span class="para-badge">&#167;2.44</span>다국적기업이 5개 국가에서 독립된 제3자 도매업자를 통하여 제품을 판매하고 1개 국가에서는 특수관계 도매업자를 통하여 제품을 판매하는 경우의 RPM 적용 예시입니다.</p>
-
-      <div class="example-box">
-        <div class="ex-title">사례 2.44 &#8212; 다국적기업 도매업자 비교</div>
-        <table class="example-table">
-          <thead>
-            <tr><th>국가</th><th>도매업자 유형</th><th>비교가능거래 활용</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>국가 1&#8211;5 (5개국)</td>
-              <td><strong>독립된 제3자</strong> 도매업자를 통해 제품 판매</td>
-              <td>외부 비교가능거래로 활용 가능 &#8594; External CUP</td>
-            </tr>
-            <tr>
-              <td>국가 6 (1개국)</td>
-              <td><strong>특수관계</strong> 도매업자를 통해 제품 판매</td>
-              <td>분석 대상 &#8212; RPM 적용</td>
-            </tr>
-          </tbody>
-        </table>
-        <p style="margin-top:.8rem;font-size:.9rem;color:var(--text2);padding:.7rem;background:#f0fafa;border-radius:6px">
-          <strong>분석 방법:</strong> 5개국의 제3자 도매업자들이 실현한 재판매마진을 기준으로 특수관계 도매업자(국가 6)의 정상 재판매마진을 산정하고, 이를 기준으로 정상가격을 결정합니다.
-        </p>
-      </div>
-
-      <h3>RPM 방법 요약</h3>
-      <table class="case-table">
-        <thead>
-          <tr><th>항목</th><th>내용</th></tr>
-        </thead>
-        <tbody>
-          <tr><td><strong>적용 공식</strong></td><td>정상가격 = 재판매가격 &#8722; 재판매마진 &#8722; 기타 조정</td></tr>
-          <tr><td><strong>핵심 비교 기준</strong></td><td>기능의 비교가능성 (제품보다 기능이 더 중요)</td></tr>
-          <tr><td><strong>제품 비교가능성</strong></td><td>대체재 수준 허용 (CUP보다 완화)</td></tr>
-          <tr><td><strong>주요 적용 대상</strong></td><td>부가가치 창출 없는 도매&#183;유통업</td></tr>
-          <tr><td><strong>주의 사항</strong></td><td>무형자산(마케팅 등), 회계기준 차이, 기능 차이 조정 필요</td></tr>
-          <tr><td><strong>내부 비교가능거래</strong></td><td>있으면 우선 적용 (신뢰성 높음)</td></tr>
-        </tbody>
-      </table>
-
-      <div class="footnote-box">
-        <div class="fn-title">각주 참고문헌</div>
-        <div class="footnote-item">[4] UN (2021, pp. 91-92): Internal Comparable에 대한 자세한 설명이 있습니다.</div>
-        <div class="footnote-item">[5] Annex to Chapter III &#8220;Example of a working capital adjustment&#8221;, UN (2021, p. 108): 매출채권/매입채무/재고자산 비교가능성 조정 설명.</div>
-        <div class="footnote-item">[6] &#167;1.482-3(c): RPM 관련 미국 내국세입법 조항.</div>
-        <div class="footnote-item">[7] UN (2021, pp. 16-20): 기능에 따른 예상 실현수익의 분포 도형 설명.</div>
-        <div class="footnote-item">[8] The White Paper (1988, p. 85): 독점적 위치의 기업에 대한 이익분할방법 적용 제안.</div>
-      </div>
-
-      <div class="nav-btns">
-        <button class="btn-nav secondary" onclick="showSec('sec-3',document.querySelectorAll('.nav-item')[2])">&#8592; 기능비교가능성 &amp; 적용 범위</button>
-        <a href="M2-4_CPM.html" class="btn-nav">다음 모듈: M2-4 원가가산방법 &#8594;</a>
-      </div>
+    <!-- 네비게이션 버튼 -->
+    <div class="nav-btns">
+      <a href="M2-2_CUP.html" class="btn btn-outline">← 이전: M2-2 CUP</a>
+      <a href="M2-4_CPM.html" class="btn btn-primary">다음: M2-4 CPM →</a>
     </div>
 
-  </main>
+  </div>
 </div>
 
 <script>
-function showSec(id, el) {
-  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  if (el) el.classList.add('active');
+var MODKEY='m2_3';
+var totalQ=5,correctCount=0;
+function lsGet(k){return localStorage.getItem(k);}
+function lsSet(k,v){localStorage.setItem(k,v);}
+function updateProgress(pct){
+  document.getElementById('mod-prog').style.width=pct+'%';
+  document.getElementById('pct-display').textContent=pct+'%';
+  var d2=document.getElementById('pct-display2');
+  if(d2)d2.textContent=pct+'%';
 }
+function getFeedback(qnum,isCorrect){
+  var fb={
+    1:{ok:'재판매가격에서 재판매가격이윤율을 차감하여 정상가격을 산출합니다.',no:'RPM에서는 재판매가격 × (1 − 이윤율)로 정상가격을 계산합니다. 원가가산법(CPM)과 혼동하지 않도록 주의하세요.'},
+    2:{ok:'재판매가격이윤 = (재판매가격 − 구입원가) / 재판매가격으로, 매출총이익률에 해당합니다.',no:'재판매가격이윤은 (재판매가격 − 구입원가) / 재판매가격으로 계산하며, 이는 매출총이익률입니다.'},
+    3:{ok:'RPM에서는 제품 동질성보다 재판매업자의 기능·위험·계약 조건의 유사성이 가장 중요한 비교가능성 기준입니다.',no:'RPM에서는 제품 특성보다 기능, 위험 부담, 계약 조건의 유사성이 핵심 비교가능성 요소입니다.'},
+    4:{ok:'창고 보관·배송만 담당하는 단순 유통업자는 기능이 제한적이고 무형자산이 없어 RPM 적용에 가장 적합합니다.',no:'RPM은 기능이 단순하고 무형자산이 없는 재판매업자에게 가장 적합합니다. 복합 기능이나 무형자산이 있으면 다른 방법을 고려해야 합니다.'},
+    5:{ok:'BEPS Action 8-10 이후 계약상 위험 배분보다 실제 위험 통제 역량과 재무적 수용 능력이 위험 귀속의 핵심 기준입니다.',no:'BEPS 이후에는 계약서 내용보다 실제로 위험을 통제할 역량과 재무적으로 위험을 수용할 수 있는지가 핵심입니다.'}
+  };
+  return isCorrect?fb[qnum].ok:fb[qnum].no;
+}
+function answer(qnum,btn,isCorrect){
+  var container=btn.parentElement.parentElement;
+  var btns=container.querySelectorAll('button');
+  btns.forEach(function(b){b.disabled=true;});
+  var fb=document.getElementById('fb'+qnum);
+  if(isCorrect){btn.classList.add('correct');fb.className='q-feedback ok show';fb.textContent='✔ 정답입니다! '+getFeedback(qnum,true);correctCount++;}
+  else{btn.classList.add('wrong');fb.className='q-feedback no show';fb.textContent='✗ 오답입니다. '+getFeedback(qnum,false);btns.forEach(function(b){if(b.getAttribute('onclick').indexOf('true')>-1)b.classList.add('correct');});}
+  checkQuizDone();
+}
+function checkQuizDone(){
+  var answered=document.querySelectorAll('.q-feedback.show').length;
+  if(answered>=totalQ){var score=Math.round(correctCount/totalQ*100);var pct=30+Math.round(score*0.3);var existing=parseInt(lsGet(MODKEY+'_pct')||'0');var newPct=Math.max(existing,pct);lsSet(MODKEY+'_pct',newPct);lsSet(MODKEY+'_quiz',score);updateProgress(newPct);if(newPct>=80)showComplete();}
+}
+function showComplete(){document.getElementById('complete-banner').classList.add('show');window.scrollTo({top:0,behavior:'smooth'});}
+function saveCheck(){
+  var checks=[];
+  for(var i=1;i<=6;i++)checks.push(document.getElementById('c'+i).checked?'1':'0');
+  lsSet(MODKEY+'_checks',checks.join(''));
+  var done=checks.filter(function(c){return c==='1';}).length;
+  var checkPct=Math.round(done/6*20);
+  var quizPct=parseInt(lsGet(MODKEY+'_quiz')||'0');
+  var quizContrib=30+Math.round(quizPct*0.3);
+  var existing=parseInt(lsGet(MODKEY+'_pct')||'0');
+  var newPct=Math.min(100,Math.max(existing,checkPct+quizContrib));
+  lsSet(MODKEY+'_pct',newPct);
+  updateProgress(newPct);
+  if(newPct>=80)showComplete();
+}
+function showSec(id,btn){
+  document.querySelectorAll('.nav-item').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');
+  document.getElementById(id).scrollIntoView({behavior:'smooth',block:'start'});
+}
+function toggleAcc(btn){
+  var body=btn.nextElementSibling;
+  var isOpen=body.classList.contains('open');
+  body.classList.toggle('open');
+  btn.classList.toggle('open');
+  if(!isOpen){
+    var opened=parseInt(lsGet(MODKEY+'_opened')||'0')+1;
+    lsSet(MODKEY+'_opened',opened);
+    var pct=Math.min(50,opened*8);
+    var existing=parseInt(lsGet(MODKEY+'_pct')||'0');
+    if(pct>existing){lsSet(MODKEY+'_pct',pct);updateProgress(pct);}
+  }
+}
+(function(){
+  var pct=parseInt(lsGet(MODKEY+'_pct')||'0');
+  updateProgress(pct);
+  var checks=lsGet(MODKEY+'_checks')||'';
+  for(var i=0;i<checks.length;i++){var el=document.getElementById('c'+(i+1));if(el&&checks[i]==='1')el.checked=true;}
+  if(pct>=80)document.getElementById('complete-banner').classList.add('show');
+})();
 </script>
 </body>
 </html>

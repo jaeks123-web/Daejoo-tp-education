@@ -1,521 +1,1109 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>M2-8: 이익분할방법(PSM) 심화 &amp; 결론 &#8212; OECD 이전가격 지침서</title>
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --blue:#1a5fa8;--blue-light:#e8f0fa;--blue-mid:#3b7dd8;
-  --purple:#6a1fa8;--purple-light:#f3e8fa;--purple-mid:#8b3dd8;
-  --green:#1a7a4a;--green-light:#e6f5ee;--green-mid:#2a9a5a;
-  --orange:#c06000;--orange-light:#fff3e0;
-  --red:#b02020;--red-light:#fdecea;
-  --teal:#0f7a7a;--teal-light:#e0f5f5;
-  --gray:#555;--gray-light:#f5f5f5;--gray-border:#ddd;
-  --text:#222;--text2:#555;--white:#fff;
-  --radius:10px;--shadow:0 2px 8px rgba(0,0,0,.10);
-  --psm:#5a2d8a;--psm-light:#f0e8fa;--psm-mid:#7a4daa;
-}
-body{font-family:'Noto Sans KR',Arial,sans-serif;background:#f0f4f8;color:var(--text);line-height:1.75;font-size:16px}
-.page-header{background:var(--psm);color:#fff;padding:1.2rem 2rem;display:flex;align-items:center;gap:1rem;border-bottom:3px solid #3a1d6a}
-.page-header .back-btn{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);color:#fff;padding:5px 14px;border-radius:20px;cursor:pointer;font-size:.82rem;font-family:inherit;text-decoration:none}
-.page-header h1{font-size:1.1rem;font-weight:700;flex:1}
-.layout{display:flex;max-width:1100px;margin:0 auto;padding:2rem 1.5rem;gap:1.5rem}
-.sidebar{width:210px;flex-shrink:0}
-.sidebar-box{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:1.2rem;position:sticky;top:1.5rem}
-.sidebar-box h3{font-size:.82rem;font-weight:700;color:var(--gray);margin-bottom:.8rem;text-transform:uppercase;letter-spacing:.05em}
-.nav-item{display:block;width:100%;text-align:left;background:none;border:none;padding:.45rem .7rem;border-radius:6px;font-size:.82rem;cursor:pointer;color:var(--text2);font-family:inherit;transition:all .12s;margin-bottom:2px}
-.nav-item:hover{background:var(--psm-light);color:var(--psm)}
-.nav-item.active{background:var(--psm-light);color:var(--psm);font-weight:700}
-.content{flex:1;min-width:0}
-.section{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:1.8rem 2rem;margin-bottom:1.2rem;display:none}
-.section.active{display:block}
-.section h2{font-size:1.15rem;font-weight:700;color:var(--psm);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:2px solid var(--psm-light)}
-.section h3{font-size:1rem;font-weight:700;color:var(--text);margin:1.2rem 0 .6rem}
-.section h4{font-size:.92rem;font-weight:700;color:var(--psm);margin:.9rem 0 .4rem}
-.section p{font-size:.95rem;color:var(--text2);margin-bottom:.8rem}
-.section ul,.section ol{padding-left:1.4rem;margin-bottom:.8rem}
-.section li{font-size:.95rem;color:var(--text2);margin-bottom:.35rem}
-.para-badge{display:inline-block;background:var(--psm-light);color:var(--psm);font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:20px;margin-right:.4rem;vertical-align:middle}
-.commentary{background:#f5f0ff;border:1px solid #c0a0e0;border-left:4px solid var(--psm);border-radius:8px;padding:1rem 1.2rem;margin:1rem 0;font-size:.88rem;color:#3a1a5a}
-.commentary .comm-label{font-size:.75rem;font-weight:700;color:var(--psm);margin-bottom:.4rem;text-transform:uppercase;letter-spacing:.03em}
-.key-point{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:8px;padding:.9rem 1.2rem;margin:.8rem 0;font-size:.9rem;color:#1a3a6a}
-.key-point.purple{background:var(--psm-light);border-color:var(--psm);color:#3a1a5a}
-.key-point.green{background:var(--green-light);border-color:var(--green);color:#1a4a2a}
-.key-point.orange{background:var(--orange-light);border-color:var(--orange);color:#6b3800}
-.key-point.red{background:var(--red-light);border-color:var(--red);color:#6b1010}
-.case-table{width:100%;border-collapse:collapse;font-size:.88rem;margin:1rem 0}
-.case-table th{background:var(--psm);color:#fff;padding:.65rem 1rem;text-align:left;font-weight:600}
-.case-table td{padding:.6rem 1rem;border-bottom:1px solid var(--gray-border);vertical-align:top}
-.case-table tr:last-child td{border:none}
-.case-table tr:nth-child(even) td{background:#fafafa}
-.example-box{background:#f5f0ff;border:1.5px solid #c0a0e0;border-radius:10px;padding:1.2rem 1.5rem;margin:1rem 0}
-.example-box .ex-title{font-size:.8rem;font-weight:700;color:var(--psm);margin-bottom:.8rem;text-transform:uppercase;letter-spacing:.04em;border-bottom:1px solid #c0a0e0;padding-bottom:.4rem}
-.split-factor-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin:1rem 0}
-.factor-card{background:#fafafa;border:1.5px solid var(--gray-border);border-radius:8px;padding:.9rem 1rem}
-.factor-card.active{border-color:var(--psm);background:var(--psm-light)}
-.factor-card h4{font-size:.88rem;font-weight:700;color:var(--psm);margin-bottom:.4rem}
-.factor-card ul{padding-left:1rem}
-.factor-card li{font-size:.82rem;color:var(--text2);margin-bottom:.2rem}
-.profit-flow{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1rem 0}
-.profit-box{background:#fafafa;border:1.5px solid var(--gray-border);border-radius:8px;padding:1rem 1.2rem}
-.profit-box.highlight{border-color:var(--psm);background:var(--psm-light)}
-.profit-box h4{font-size:.88rem;font-weight:700;color:var(--psm);margin-bottom:.5rem}
-.conclusion-box{background:linear-gradient(135deg,#f5f0ff,#ffeeff);border:2px solid var(--psm);border-radius:12px;padding:1.5rem 2rem;margin:1rem 0}
-.conclusion-box h3{color:var(--psm);font-size:1rem;margin-bottom:.8rem}
-.footnote-box{background:#fafafa;border:1px solid #e0e0e0;border-radius:8px;padding:1rem 1.2rem;margin:1rem 0;font-size:.82rem;color:#555}
-.footnote-box .fn-title{font-weight:700;color:var(--gray);margin-bottom:.5rem;font-size:.78rem;text-transform:uppercase}
-.footnote-item{margin-bottom:.4rem;padding-left:.8rem;border-left:2px solid #ddd}
-.nav-btns{display:flex;justify-content:space-between;margin-top:1.5rem}
-.btn-nav{background:var(--psm);color:#fff;border:none;padding:.7rem 1.5rem;border-radius:8px;cursor:pointer;font-size:.9rem;font-family:inherit;font-weight:600;transition:background .15s;text-decoration:none;display:inline-block}
-.btn-nav:hover{background:#3a1d6a}
-.btn-nav.secondary{background:#fff;color:var(--psm);border:1.5px solid var(--psm)}
-.btn-nav.secondary:hover{background:var(--psm-light)}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>M2-8: 이익분할방법 심화(PSM) | Chapter II 기초과정</title>
+  <style>
+    /* ===== CSS 변수 (Purple 테마) ===== */
+    :root {
+      --accent:       #5a2d8a;
+      --accent-light: #f0e8f8;
+      --accent-mid:   #7a4daa;
+      --accent-dark:  #3d1a6e;
+      --success:      #2e7d32;
+      --warning:      #e65100;
+      --warn-bg:      #fff3e0;
+      --warn-border:  #ff9800;
+      --key-bg:       #e8f5e9;
+      --key-border:   #43a047;
+      --bg:           #f5f5f5;
+      --card-bg:      #ffffff;
+      --text:         #212121;
+      --text-sub:     #555555;
+      --border:       #e0e0e0;
+      --radius:       10px;
+      --shadow:       0 2px 8px rgba(0,0,0,0.10);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    /* ===== 헤더 ===== */
+    .mod-header {
+      background: linear-gradient(135deg, var(--accent-dark) 0%, var(--accent) 60%, var(--accent-mid) 100%);
+      color: #fff;
+      padding: 28px 32px 22px;
+    }
+    .mod-header .breadcrumb {
+      font-size: 13px;
+      opacity: .80;
+      margin-bottom: 10px;
+    }
+    .mod-header .breadcrumb a {
+      color: #e0d0f5;
+      text-decoration: none;
+    }
+    .mod-header .breadcrumb a:hover { text-decoration: underline; }
+    .mod-header h1 {
+      font-size: 1.55rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .mod-header .scope {
+      font-size: 13px;
+      opacity: .85;
+    }
+
+    /* ===== 레이아웃 ===== */
+    .layout {
+      display: flex;
+      gap: 22px;
+      max-width: 1100px;
+      margin: 28px auto;
+      padding: 0 16px;
+      align-items: flex-start;
+    }
+
+    /* ===== 사이드바 ===== */
+    .sidebar {
+      width: 230px;
+      flex-shrink: 0;
+      position: sticky;
+      top: 18px;
+    }
+    .sidebar .sidebar-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 18px 16px;
+      margin-bottom: 14px;
+    }
+    .sidebar .sidebar-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+    }
+    .sidebar ul {
+      list-style: none;
+    }
+    .sidebar ul li {
+      margin-bottom: 4px;
+    }
+    .sidebar ul li a {
+      font-size: 13px;
+      color: var(--text-sub);
+      text-decoration: none;
+      display: block;
+      padding: 3px 6px;
+      border-radius: 5px;
+      transition: background .15s, color .15s;
+    }
+    .sidebar ul li a:hover,
+    .sidebar ul li a.active {
+      background: var(--accent-light);
+      color: var(--accent);
+    }
+
+    /* 진도 바 */
+    .progress-wrap { margin-top: 4px; }
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--text-sub);
+      margin-bottom: 6px;
+    }
+    .progress-bar-bg {
+      background: #e0e0e0;
+      border-radius: 99px;
+      height: 10px;
+      overflow: hidden;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent-mid));
+      border-radius: 99px;
+      transition: width .4s ease;
+      width: 0%;
+    }
+
+    /* ===== 메인 ===== */
+    .main { flex: 1; min-width: 0; }
+
+    /* ===== 카드 ===== */
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 24px 28px;
+      margin-bottom: 22px;
+    }
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .card-title .icon { font-size: 1.2rem; }
+
+    /* ===== 학습목표 ===== */
+    .obj-list {
+      list-style: none;
+      counter-reset: obj;
+    }
+    .obj-list li {
+      counter-increment: obj;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 11px;
+      font-size: 14.5px;
+    }
+    .obj-list li::before {
+      content: counter(obj);
+      background: var(--accent);
+      color: #fff;
+      border-radius: 50%;
+      min-width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* ===== 섹션 카드 (아코디언 포함) ===== */
+    .section-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      margin-bottom: 22px;
+      overflow: hidden;
+    }
+    .section-header {
+      background: linear-gradient(90deg, var(--accent) 0%, var(--accent-mid) 100%);
+      color: #fff;
+      padding: 14px 22px;
+    }
+    .section-header h2 {
+      font-size: 1rem;
+      font-weight: 700;
+    }
+    .section-header .section-range {
+      font-size: 12px;
+      opacity: .85;
+      margin-top: 2px;
+    }
+    .section-body { padding: 10px 0; }
+
+    /* ===== 아코디언 ===== */
+    .accordion { border-bottom: 1px solid var(--border); }
+    .accordion:last-child { border-bottom: none; }
+    .accordion-btn {
+      width: 100%;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 13px 22px;
+      text-align: left;
+      font-size: 14.5px;
+      font-weight: 600;
+      color: var(--accent);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background .15s;
+    }
+    .accordion-btn:hover { background: var(--accent-light); }
+    .accordion-btn .arrow {
+      font-size: 11px;
+      transition: transform .25s;
+      color: var(--accent-mid);
+    }
+    .accordion-btn.open .arrow { transform: rotate(180deg); }
+    .accordion-content {
+      display: none;
+      padding: 6px 22px 18px 22px;
+      animation: fadeIn .2s;
+    }
+    .accordion-content.open { display: block; }
+    @keyframes fadeIn { from { opacity:0; transform:translateY(-4px); } to { opacity:1; transform:translateY(0); } }
+
+    /* 아코디언 내 목록 */
+    .acc-list {
+      list-style: none;
+      margin-top: 6px;
+    }
+    .acc-list li {
+      position: relative;
+      padding-left: 16px;
+      margin-bottom: 7px;
+      font-size: 14px;
+      color: var(--text);
+    }
+    .acc-list li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--accent-mid);
+      font-weight: 700;
+    }
+
+    /* ===== 경고/키포인트 박스 ===== */
+    .warn-point, .key-point {
+      border-radius: 7px;
+      padding: 10px 14px;
+      margin-top: 12px;
+      font-size: 13.5px;
+    }
+    .warn-point {
+      background: var(--warn-bg);
+      border-left: 4px solid var(--warn-border);
+      color: #7a3e00;
+    }
+    .warn-point strong { color: var(--warning); }
+    .key-point {
+      background: var(--key-bg);
+      border-left: 4px solid var(--key-border);
+      color: #1b5e20;
+    }
+    .key-point strong { color: var(--success); }
+
+    /* ===== 사례 탐구 ===== */
+    .case-boxes {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+      margin-top: 6px;
+    }
+    .case-box {
+      background: var(--accent-light);
+      border: 1.5px solid #c9a8e8;
+      border-radius: 8px;
+      padding: 16px 18px;
+    }
+    .case-box h4 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+    .case-box ul {
+      list-style: none;
+    }
+    .case-box ul li {
+      position: relative;
+      padding-left: 15px;
+      margin-bottom: 6px;
+      font-size: 13.5px;
+      color: var(--text);
+    }
+    .case-box ul li::before {
+      content: "▸";
+      position: absolute;
+      left: 0;
+      color: var(--accent-mid);
+    }
+
+    /* ===== 퀴즈 ===== */
+    .quiz-section { margin-bottom: 22px; }
+    .quiz-section .card-title { margin-bottom: 6px; }
+    .quiz-desc {
+      font-size: 13.5px;
+      color: var(--text-sub);
+      margin-bottom: 18px;
+    }
+    .quiz-item {
+      background: var(--card-bg);
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin-bottom: 14px;
+      transition: border-color .2s;
+    }
+    .quiz-item.correct-state { border-color: var(--success); }
+    .quiz-item.wrong-state   { border-color: #c62828; }
+    .quiz-q {
+      font-size: 14.5px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: var(--text);
+    }
+    .quiz-q .qnum {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      border-radius: 50%;
+      width: 22px; height: 22px;
+      text-align: center;
+      line-height: 22px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-right: 8px;
+    }
+    .quiz-options { list-style: none; }
+    .quiz-options li {
+      margin-bottom: 6px;
+    }
+    .quiz-options label {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      cursor: pointer;
+      font-size: 14px;
+      padding: 6px 10px;
+      border-radius: 6px;
+      border: 1.5px solid transparent;
+      transition: background .12s, border-color .12s;
+    }
+    .quiz-options label:hover { background: var(--accent-light); }
+    .quiz-options input[type=radio] { margin-top: 3px; accent-color: var(--accent); flex-shrink: 0; }
+    .quiz-feedback {
+      margin-top: 10px;
+      padding: 9px 12px;
+      border-radius: 6px;
+      font-size: 13.5px;
+      display: none;
+    }
+    .quiz-feedback.correct {
+      background: #e8f5e9;
+      border: 1px solid #a5d6a7;
+      color: #1b5e20;
+      display: block;
+    }
+    .quiz-feedback.wrong {
+      background: #ffebee;
+      border: 1px solid #ef9a9a;
+      color: #b71c1c;
+      display: block;
+    }
+    .quiz-submit-btn {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 8px 18px;
+      font-size: 13.5px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background .15s;
+    }
+    .quiz-submit-btn:hover { background: var(--accent-dark); }
+    .quiz-submit-btn:disabled { background: #bbb; cursor: default; }
+
+    /* 퀴즈 결과 */
+    .quiz-result-bar {
+      background: var(--accent-light);
+      border: 1.5px solid #c9a8e8;
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-top: 10px;
+      display: none;
+      align-items: center;
+      gap: 16px;
+    }
+    .quiz-result-bar.show { display: flex; }
+    .quiz-result-bar .score {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .quiz-result-bar .msg { font-size: 14px; color: var(--text-sub); }
+
+    /* ===== 체크리스트 ===== */
+    .checklist { list-style: none; }
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 10px;
+      font-size: 14.5px;
+    }
+    .checklist li input[type=checkbox] {
+      margin-top: 3px;
+      accent-color: var(--accent);
+      width: 16px; height: 16px;
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+    .checklist li label { cursor: pointer; }
+    .checklist li.checked label { text-decoration: line-through; color: var(--text-sub); }
+
+    /* ===== 완료 배너 ===== */
+    .completion-banner {
+      display: none;
+      background: linear-gradient(90deg, var(--accent) 0%, var(--accent-mid) 100%);
+      color: #fff;
+      border-radius: var(--radius);
+      padding: 18px 24px;
+      margin-bottom: 22px;
+      font-size: 15px;
+      font-weight: 700;
+      text-align: center;
+      box-shadow: var(--shadow);
+      animation: popIn .4s;
+    }
+    .completion-banner.show { display: block; }
+    @keyframes popIn { from { transform: scale(.92); opacity:0; } to { transform: scale(1); opacity:1; } }
+
+    /* ===== 네비 버튼 ===== */
+    .nav-btns {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 40px;
+    }
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: 7px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background .15s, color .15s;
+    }
+    .nav-btn.prev {
+      background: var(--card-bg);
+      border: 1.5px solid var(--accent);
+      color: var(--accent);
+    }
+    .nav-btn.prev:hover { background: var(--accent-light); }
+    .nav-btn.next {
+      background: var(--accent);
+      color: #fff;
+      border: 1.5px solid var(--accent);
+    }
+    .nav-btn.next:hover { background: var(--accent-dark); border-color: var(--accent-dark); }
+
+    /* ===== 반응형 ===== */
+    @media (max-width: 768px) {
+      .layout { flex-direction: column; }
+      .sidebar { width: 100%; position: static; }
+      .case-boxes { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
-<header class="page-header">
-  <a href="index_ch2.html" class="back-btn">&#8592; 목차</a>
-  <h1>M2-8: 이익분할방법(PSM) 심화 &amp; 결론 (&#167;2.154&#8211;&#167;2.187)</h1>
+
+<!-- ===== 헤더 ===== -->
+<header class="mod-header">
+  <div class="breadcrumb">
+    <a href="index_ch2.html">← Chapter II 목록으로</a>
+  </div>
+  <h1>Module 8 — 이익분할방법 심화 (PSM)</h1>
+  <div class="scope">§2.154 ~ §2.187 &nbsp;·&nbsp; OECD Transfer Pricing Guidelines Chapter II &nbsp;·&nbsp; C.2-C.3</div>
 </header>
 
+<!-- ===== 레이아웃 ===== -->
 <div class="layout">
-  <!-- Sidebar -->
-  <nav class="sidebar">
-    <div class="sidebar-box">
-      <h3>목차</h3>
-      <button class="nav-item active" onclick="showSection(0,this)">1. 배분 이익의 결정</button>
-      <button class="nav-item" onclick="showSection(1,this)">2. 실제 vs 기대이익 분할</button>
-      <button class="nav-item" onclick="showSection(2,this)">3. 이익 분할 요소</button>
-      <button class="nav-item" onclick="showSection(3,this)">4. 자산·비용 기준 배분</button>
-      <button class="nav-item" onclick="showSection(4,this)">5. 결론 — 거래이익방법</button>
-    </div>
-  </nav>
 
-  <!-- Content -->
-  <div class="content">
-
-    <!-- Section 1: 배분 이익의 결정 -->
-    <div class="section active" id="sec0">
-      <h2>1. 배분 이익의 결정 (§2.154&#8211;§2.165)</h2>
-
-      <h3>C.4 Guidance for Application – Determining the Profits to be Split</h3>
-
-      <h3><span class="para-badge">§2.154</span> 관련이익 배분</h3>
-      <p>관련이익("relevant profit")의 배분은 거래의 사실관계와 상황에 따라 결정한다. (참조: Example 12, Chapter II Annex II)</p>
-
-      <h3><span class="para-badge">§2.155</span> 동일한 회계원칙과 기준통화 적용</h3>
-      <p>관련이익을 배분할 경우 <strong>동일한 회계원칙</strong>과 <strong>기준통화</strong>를 적용해야 한다.</p>
-
-      <h3><span class="para-badge">§2.156</span> 세무회계자료 불일치 시 처리</h3>
-      <p>세무회계자료의 일치가 이루어지지 않는 경우에는 <strong>재무자료를 사용</strong>한다.</p>
-
-      <h3><span class="para-badge">§2.157</span> 구분 재무자료의 사용</h3>
-      <p>분석대상거래와 관련 없는 활동 및 거래는 제거하고 <strong>구분(segmented) 재무자료</strong>를 사용한다.</p>
-
-      <div class="profit-flow">
-        <div class="profit-box highlight">
-          <h4>&#9312; 관련이익 (Relevant Profits)</h4>
-          <ul>
-            <li>분석대상 특수관계거래에서 발생한 이익만 포함</li>
-            <li>무관련 활동 제거</li>
-            <li>동일한 회계원칙 적용</li>
-            <li>동일한 기준통화 사용</li>
-          </ul>
-        </div>
-        <div class="profit-box">
-          <h4>&#9313; 분할 대상 이익의 측정</h4>
-          <ul>
-            <li>실제이익 (actual profits) — §2.159</li>
-            <li>기대이익 (anticipated profits) — §2.160</li>
-            <li>영업이익 또는 매출총이익 — §2.162</li>
-          </ul>
-        </div>
-      </div>
-
-      <h3><span class="para-badge">§2.162</span> 이익배분 기준</h3>
-      <p>통상적으로 <strong>영업이익</strong>을 사용한다. 그러나 경우에 따라서는 매출총이익에 비용을 차감하는 방식을 사용하기도 한다.</p>
-
-      <table class="case-table">
-        <thead>
-          <tr><th>이익 측정 기준</th><th>적용 상황</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>영업이익 (Operating profit)</strong></td>
-            <td>통상적인 경우 — 영업활동 전체를 반영</td>
-          </tr>
-          <tr>
-            <td><strong>매출총이익 (Gross profit) 변형</strong></td>
-            <td>§2.163 특정 사례 (§2.163, §2.164, Example 14 참조)</td>
-          </tr>
-          <tr>
-            <td><strong>시장위험 부담 시 매출총이익</strong></td>
-            <td>§2.164: 시장위험을 부담하는 경우 매출총이익 적용 여부 고려</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <div class="key-point green">
-        참조: Example 14, Chapter II Annex II
-      </div>
-
-      <div class="nav-btns">
-        <span></span>
-        <button class="btn-nav" onclick="showSection(1,document.querySelectorAll('.nav-item')[1])">다음: 실제 vs 기대이익 &#8594;</button>
-      </div>
-    </div>
-
-    <!-- Section 2: 실제 vs 기대이익 분할 -->
-    <div class="section" id="sec1">
-      <h2>2. 실제이익 vs 기대이익 분할 (§2.158&#8211;§2.161)</h2>
-
-      <h3>C.4.1 Transactional Profit Splits of Actual or Anticipated Profits</h3>
-
-      <h3><span class="para-badge">§2.158</span> 기본 원칙</h3>
-      <p>실제 또는 기대이익으로 이익분할방법을 적용한다는 원칙을 확인한다.</p>
-
-      <div class="profit-flow">
-        <div class="profit-box highlight">
-          <h4>&#9312; 실제이익 기준 (§2.159)</h4>
-          <ul>
-            <li>이익 또는 결손이 모두 발생할 수 있음</li>
-            <li>거래 이후 실제 발생한 이익을 기준으로 배분</li>
-            <li>사후 결과를 반영하므로 정확도 높음</li>
-          </ul>
-        </div>
-        <div class="profit-box">
-          <h4>&#9313; 기대이익 기준 (§2.160)</h4>
-          <ul>
-            <li>경제적으로 중요한 위험이 사후에 발생하고 거래 일방이 이러한 위험을 부담하지 않는 경우 적용</li>
-            <li>계약 체결 당시의 예상 이익을 기준으로 배분</li>
-          </ul>
-        </div>
-      </div>
-
-      <h3><span class="para-badge">§2.160</span> 기대이익 적용 요건</h3>
-      <p>경제적으로 중요한 위험이 사후에 발생하고 거래 일방이 이러한 위험을 부담하지 않는 경우, <strong>기대이익을 기준</strong>으로 한다.</p>
-
-      <div class="commentary">
-        <div class="comm-label">&#9654; 배경 (주)</div>
-        <p>The White Paper (1988, p. 63): 실제이익과 기대이익의 적용 근거. IRS(2007): the commensurate with income(CWI), Past or Projected or Actual Profit에 자세한 논의가 있다.</p>
-      </div>
-
-      <h3><span class="para-badge">§2.161</span> 계약 이후 발생한 위험 또는 요소</h3>
-      <p>계약이후에 발생한 위험 또는 요소를 이익분할방법에 다시 계산하는 오류를 범하지 말아야 한다. 이것은 실제 또는 기대이익을 기준으로 하였을 때 모두 적용된다.</p>
-
-      <div class="key-point purple">
-        <strong>핵심 원칙:</strong> 이익분할방법의 요소(배분기준 이익 포함)는 <strong>계약을 체결할 당시의 요소</strong>를 고려한다. 사후에 발생한 요소를 소급 적용해서는 안 된다.
-      </div>
-
-      <table class="case-table">
-        <thead>
-          <tr><th>구분</th><th>실제이익 기준</th><th>기대이익 기준</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>측정 시점</td>
-            <td>사후 (실현 후)</td>
-            <td>사전 (계약 체결 시)</td>
-          </tr>
-          <tr>
-            <td>이익 결손 가능성</td>
-            <td>이익 또는 결손 모두 가능</td>
-            <td>예상 이익 기준</td>
-          </tr>
-          <tr>
-            <td>적용 상황</td>
-            <td>일반적인 경우</td>
-            <td>중요 위험을 일방이 부담하지 않는 경우</td>
-          </tr>
-          <tr>
-            <td>사후 위험 요소</td>
-            <td>소급 적용 불가</td>
-            <td>소급 적용 불가</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <div class="nav-btns">
-        <button class="btn-nav secondary" onclick="showSection(0,document.querySelectorAll('.nav-item')[0])">&#8592; 이전</button>
-        <button class="btn-nav" onclick="showSection(2,document.querySelectorAll('.nav-item')[2])">다음: 이익 분할 요소 &#8594;</button>
-      </div>
-    </div>
-
-    <!-- Section 3: 이익 분할 요소 -->
-    <div class="section" id="sec2">
-      <h2>3. 이익 분할 요소 (§2.166&#8211;§2.178)</h2>
-
-      <h3>C.5 Splitting the Profits</h3>
-
-      <h3><span class="para-badge">§2.166</span> 사용 가능한 자료의 요건</h3>
-      <p>기존에 이미 사용하는 배분방식에 의존하지 말고 아래 요건을 충족하는 방법을 사용한다:</p>
-      <ol>
-        <li><strong>객관적인 자료</strong> — 주관적 판단이 아닌 객관적 증거에 기반</li>
-        <li><strong>검증 가능한 자료</strong> — 독립적으로 검증 가능한 정보</li>
-        <li><strong>제3자 또는 사내 자료로 확인 가능한 자료</strong> — 외부 또는 내부 자료로 확인 가능</li>
-      </ol>
-
-      <h3><span class="para-badge">§2.167</span> 제3자 자료 검색이 가능한 사업</h3>
-      <table class="case-table">
-        <thead>
-          <tr><th>산업/거래 유형</th><th>제3자 자료 예시</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>석유 및 가스 산업의 합작투자 및 개발 프로젝트</td><td>JV 계약, 프로젝트 이익분할 조건</td></tr>
-          <tr><td>제약 사업의 협력, 공동 마케팅 또는 공동 홍보 계약</td><td>라이선스 계약, 공동 마케팅 협약</td></tr>
-          <tr><td>독립 음악 레코드 레이블과 음악 아티스트 간의 협약</td><td>로열티 분배 조건</td></tr>
-          <tr><td>금융 서비스 부문에서의 제3자 독립 계약</td><td>금융상품 수익 배분 조건</td></tr>
-        </tbody>
-      </table>
-
-      <h3><span class="para-badge">§2.168</span> 비교가능거래 없는 경우</h3>
-      <p>외부 시장자료 등을 사용하여 거래 당사자가 제공한 기여도의 <strong>상대적 가치 금액</strong>을 적용할 수 있다.</p>
-
-      <h3>C.5.1 이익배분 요소 (§2.169&#8211;§2.173)</h3>
-
-      <h3><span class="para-badge">§2.169</span> 이익배분에 적용되는 중요 요소</h3>
-      <p>1가지 이외에 <strong>다중의 중요요소</strong>가 적용될 수 있다.</p>
-
-      <h3><span class="para-badge">§2.170</span> 이익배분 기준 유형</h3>
-
-      <div class="split-factor-grid">
-        <div class="factor-card active">
-          <h4>산술적 기준</h4>
-          <ul>
-            <li>고정 비율 (예: 30%-70%)</li>
-            <li>사전에 합의된 비율</li>
-          </ul>
-        </div>
-        <div class="factor-card active">
-          <h4>상대적 기준</h4>
-          <ul>
-            <li>마케팅활동 기여정도</li>
-            <li>R&amp;D 기여도</li>
-            <li>경영관리 기여도</li>
-          </ul>
-        </div>
-        <div class="factor-card active">
-          <h4>자산 또는 비용 기준 (§2.171)</h4>
-          <ul>
-            <li>유형·무형자산</li>
-            <li>관련 비용</li>
-          </ul>
-        </div>
-      </div>
-
-      <h3><span class="para-badge">§2.172</span> 기타 이익배분 기준</h3>
+  <!-- ===== 사이드바 ===== -->
+  <aside class="sidebar">
+    <div class="sidebar-card">
+      <div class="sidebar-title">목차</div>
       <ul>
-        <li>매출 (Sales)</li>
-        <li>직원의 기여도</li>
-        <li>직원 수 (Number of employees)</li>
-        <li>투입시간 (Time spent)</li>
+        <li><a href="#objectives">학습 목표</a></li>
+        <li><a href="#sec1">§2.154-2.165 관련 이익 배분·이익 측정</a></li>
+        <li><a href="#sec2">§2.166-2.177 이익분할 기준·자료 요건</a></li>
+        <li><a href="#sec3">§2.178-2.183 이익분할 요소</a></li>
+        <li><a href="#sec4">§2.184-2.187 결론·가장 합리적인 방법</a></li>
+        <li><a href="#case">사례 탐구</a></li>
+        <li><a href="#quiz">확인 퀴즈</a></li>
+        <li><a href="#checklist">실무 체크리스트</a></li>
       </ul>
-
-      <h3><span class="para-badge">§2.173</span> Local File &amp; Master File 활용</h3>
-      <p>이익분할방법 적용 시 개별기업보고서(Local File)과 통합기업보고서(Master File)가 유용한 정보를 제공한다.</p>
-
-      <h3>C.5.2 납세자 내부 자료 활용 (§2.174&#8211;§2.178)</h3>
-
-      <h3><span class="para-badge">§2.174</span> 비교가능 제3자거래 없는 경우 내부자료 사용</h3>
-      <p>분석대상 기업의 내부자료를 사용할 수 있다. 회사의 내부거래 중 사용가능한 자료는 일반적으로:</p>
-      <ul>
-        <li>회사가 <strong>제3자와 거래한 내용</strong></li>
-        <li>오랜 경험상 산업상 일반적으로 널리 이용되는 <strong>가격 결정 방법</strong></li>
-      </ul>
-      <p>(참조 ¶2.147-2.148, 2.166)</p>
-
-      <h3><span class="para-badge">§2.175</span> 자산 기준 이익분할방법 적용 시</h3>
-      <p>¶2.174의 사례와 같이 자산을 기준으로 이익분할방법을 적용할 경우 다음 방법들을 사용할 수 있다:</p>
-      <table class="case-table">
-        <thead>
-          <tr><th>방법</th><th>내용</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>재무상태표 재작성</td>
-            <td>분석대상 거래에 대한 재무상태표를 다시 작성하는 방법</td>
-          </tr>
-          <tr>
-            <td>자체 개발 무형자산 제외</td>
-            <td>자체적으로 개발한 무형자산을 분석에서 제외하는 방법</td>
-          </tr>
-          <tr>
-            <td>미래소득할인법 (DCF)</td>
-            <td>미래소득할인법 (discounted value of projected future income streams)</td>
-          </tr>
-          <tr>
-            <td>현금흐름할인법</td>
-            <td>무형자산에 대한 현금흐름할인법 (discounted value of cash flows derived from the exploitation of the intangible)</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <div class="commentary">
-        <div class="comm-label">&#9654; 실무 해설 (주) — 2022년 OECD 지침서 개정</div>
-        <p>2022년 OECD 이전가격지침서 개정 이전(2017 OECD 이전가격지침서), OECD는 무형자산의 정상가격 산출방법으로 현금흐름할인법(discounted cash flow - DCF)을 사용할 수 있다고 보았으나, <strong>2022년 개정 이후에는 그 범위를 넓혀 자산가치평가방법, 미래소득할인법, 두 방법을 추가적으로 제안</strong>하고 있다.</p>
-        <p>자산가치 평가방법은 1) 비교가능거래와 2) 기능 및 위험분석에 의존하는 기존의 정상가격산출방법과 다르고, 미래소득 및 현금흐름을 일정한 공식에 의해 평가하는 방법이기 때문에, 2022년 개정 이후 자산평가방법에 대해 <strong>비교가능거래가 없는 경우 한정적으로</strong> 정상가격을 결정하기 위하여 적용할 수 있다고 제시하고 있다.</p>
-      </div>
-
-      <h3><span class="para-badge">§2.177</span> 회사 내부자료의 예시</h3>
-      <ul>
-        <li>특정거래와 관련된 <strong>직원비용</strong></li>
-        <li>특정 업무에 사용된 <strong>특정 직원의 시간</strong></li>
-      </ul>
-
-      <h3><span class="para-badge">§2.178</span> 내부자료의 활용</h3>
-      <p>회사내부자료는 분석대상 기업들이 거래에 기여한 기여도를 측정하는데 유용하다.</p>
-
-      <div class="nav-btns">
-        <button class="btn-nav secondary" onclick="showSection(1,document.querySelectorAll('.nav-item')[1])">&#8592; 이전</button>
-        <button class="btn-nav" onclick="showSection(3,document.querySelectorAll('.nav-item')[3])">다음: 자산·비용 기준 배분 &#8594;</button>
-      </div>
     </div>
-
-    <!-- Section 4: 자산·비용 기준 배분 -->
-    <div class="section" id="sec3">
-      <h2>4. 자산·비용 기준 이익 배분 사례 (§2.179&#8211;§2.183)</h2>
-
-      <h3>C.5.3 Examples of Profit Splitting Factors</h3>
-
-      <h3>C.5.3.1 자산 기준 이익 배분 (§2.179&#8211;§2.180)</h3>
-
-      <h3><span class="para-badge">§2.179</span> 자산 또는 자본 기준 이익분할</h3>
-      <p>자산 또는 자본을 기준하는 이익분할방법이 적용된 경우, 다음 요소가 중요하다:</p>
-      <ul>
-        <li>유형자산과 무형자산의 관계도</li>
-        <li>투자자본과 기업가치의 창출 관계도</li>
-      </ul>
-      <div class="key-point green">
-        참조: ¶2.104, Example 15 in Annex II
-      </div>
-
-      <h3><span class="para-badge">§2.180</span> 거래 당사자 중 무형자산 형성에 기여가 있는 경우</h3>
-      <p>거래 당사자 중에 무형자산 형성에 있어 기여도가 있는 경우 이익분할방법을 적용하기 더 어렵다.</p>
-      <div class="key-point orange">
-        참조: Annex I to Chapter VI "Examples to illustrate the guidance on intangibles"
-      </div>
-
-      <h3>C.5.3.2 비용 기준 이익 배분 (§2.181&#8211;§2.183)</h3>
-
-      <h3><span class="para-badge">§2.181</span> 비용 기준 이익분할 분석</h3>
-      <p>비용기준으로 이익분할방법을 적용하는 경우, 비용과 가치기여도 관계를 분석한다:</p>
-
-      <table class="case-table">
-        <thead>
-          <tr><th>적용 상황</th><th>분석 중점</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>마케팅 무형자산이 중요한 경우</td>
-            <td>마케팅 관련 비용의 기여도 분석</td>
-          </tr>
-          <tr>
-            <td>제조업자에서 특허권이 중요한 경우</td>
-            <td>R&amp;D 비용의 기여도 분석</td>
-          </tr>
-          <tr>
-            <td colspan="2">각 단계별 위험 중요도의 가중치를 반드시 평가</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <h3><span class="para-badge">§2.182</span> 시간적 요소</h3>
-      <p>비용기준일 경우 <strong>비용 발생의 시간적 요소</strong>도 고려해야 한다.</p>
-
-      <div class="example-box">
-        <div class="ex-title">&#128337; 시간적 요소 고려 사례</div>
-        <p>마케팅 무형자산이나 지역 혜택(location savings)의 경우, 초기에 투자된 마케팅 비용이 미래에 발생하는 이익에 기여하는 구조다. 따라서 비용 발생 시점과 가치 창출 시점의 차이를 고려해야 한다.</p>
-      </div>
-
-      <h3><span class="para-badge">§2.183</span> 비용발생 시점과 가치창출 시점의 차이</h3>
-      <p>비용발생 시점과 가치창출 시점의 차이가 있는 경우 적절한 조정이 필요하다.</p>
-      <div class="key-point green">
-        참조: Example 16, Chapter II Annex II
-      </div>
-
-      <div class="nav-btns">
-        <button class="btn-nav secondary" onclick="showSection(2,document.querySelectorAll('.nav-item')[2])">&#8592; 이전</button>
-        <button class="btn-nav" onclick="showSection(4,document.querySelectorAll('.nav-item')[4])">다음: 거래이익방법 결론 &#8594;</button>
-      </div>
-    </div>
-
-    <!-- Section 5: 결론 -->
-    <div class="section" id="sec4">
-      <h2>5. 결론 — 거래이익방법 (§2.184&#8211;§2.187)</h2>
-
-      <h3>D. Conclusions on Transactional Profit Methods</h3>
-
-      <h3><span class="para-badge">§2.184</span> 가장 합리적인 정상가격산출방법 적용요건</h3>
-      <p>거래이익방법(TNMM, PSM)을 포함한 모든 정상가격산출방법은 해당 거래의 사실관계와 경제적 실질에 가장 적합한 방법("the most appropriate method")을 선택해야 한다는 원칙이 재확인된다.</p>
-
-      <h3><span class="para-badge">§2.185</span> 회계기준 비교가능성</h3>
-      <p>거래이익방법 적용 시에도 회계기준 비교가능성이 요구된다. (참조 ¶2.74-2.81)</p>
-
-      <h3><span class="para-badge">§2.186</span> 동일한 가격결정 방법</h3>
-      <p>비교가능거래로 선정된 독립된 기업이 <strong>동일한 가격결정 방법을 사용한다고 단정하면 안 된다</strong>. (참조 ¶3.9-3.12)</p>
-
-      <div class="key-point orange">
-        비교가능기업이 TNMM을 사용한다고 해서 분석대상거래도 반드시 TNMM을 사용해야 하는 것은 아니다. 가격결정 방법의 일관성보다 경제적 실질의 비교가능성이 더 중요하다.
-      </div>
-
-      <h3><span class="para-badge">§2.187</span> 사례별, 개별적 판단</h3>
-      <p>이익방법(TNMM, PSM)의 적용은 사례별, 개별적 판단에 의한다. 어떤 고정된 규칙이나 공식이 있는 것이 아니라 거래의 사실관계와 경제적 실질에 기반한 분석적 판단이 필요하다.</p>
-
-      <div class="conclusion-box">
-        <h3>&#127937; Chapter II 거래이익방법 최종 결론</h3>
-        <table class="case-table">
-          <thead>
-            <tr><th>방법</th><th>적용 대상</th><th>핵심 지표</th><th>주요 조건</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>TNMM</strong> (§2.62-§2.113)</td>
-              <td>제조·유통·서비스</td>
-              <td>순이익 지표 (ROS, OM on cost, ROA)</td>
-              <td>One-sided; 양측 모두 고유 무형자산 없어야</td>
-            </tr>
-            <tr>
-              <td><strong>PSM</strong> (§2.114-§2.187)</td>
-              <td>고도 통합 사업; 양측 고유 무형자산</td>
-              <td>관련이익 (영업이익 또는 매출총이익)</td>
-              <td>Two-sided; 기여도 측정 방법 신뢰성 확보 필요</td>
-            </tr>
-          </tbody>
-        </table>
-        <div class="key-point purple" style="margin-top:.8rem">
-          <strong>방법 선택 우선순위:</strong> 전통적 방법(CUP → RPM → CPM) 우선, 이후 거래이익방법(TNMM → PSM) 순으로 검토. 단, 가장 합리적인 방법(most appropriate method)이 최우선 기준이다.
+    <div class="sidebar-card">
+      <div class="sidebar-title">학습 진도</div>
+      <div class="progress-wrap">
+        <div class="progress-label">
+          <span>진행률</span>
+          <span id="progress-pct">0%</span>
+        </div>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="progress-fill"></div>
         </div>
       </div>
+    </div>
+  </aside>
 
-      <div class="footnote-box">
-        <div class="fn-title">&#128196; Chapter II 주석 총람</div>
-        <div class="footnote-item">[16] The White Paper (1988, p. 63): 실제이익과 기대이익 적용 기준 — 계약 체결 당시 요소를 기준으로 함</div>
-        <div class="footnote-item">[17] IRS(2007): commensurate with income(CWI), Past or Projected or Actual Profit에 자세한 논의</div>
-        <div class="footnote-item">[18] Gottfried (2023): 2022년 OECD 이전가격지침서 개정 — 자산가치평가방법, 미래소득할인법 추가</div>
-        <div class="footnote-item">[19] Finan and Lauiau (2011): 미래소득 및 현금흐름 할인 평가방법의 적용</div>
-        <div class="footnote-item">Example 12-16, Chapter II Annex II: 이익분할방법 적용 구체적 사례</div>
-        <div class="footnote-item">2020 국세청 APA 연차보고서: 누적건수 560건 중 504건(전체 90%)이 TNMM으로 체결</div>
-      </div>
+  <!-- ===== 메인 콘텐츠 ===== -->
+  <main class="main">
 
-      <div class="nav-btns">
-        <button class="btn-nav secondary" onclick="showSection(3,document.querySelectorAll('.nav-item')[3])">&#8592; 이전</button>
-        <a href="index_ch2.html" class="btn-nav">Chapter II 목차로 &#8594;</a>
-      </div>
+    <!-- 완료 배너 -->
+    <div class="completion-banner" id="completion-banner">
+      🎉 Module 8 학습 완료! Chapter II 전체 학습을 완료하셨습니다!
     </div>
 
-  </div><!-- end .content -->
-</div><!-- end .layout -->
+    <!-- ===== 학습 목표 ===== -->
+    <section id="objectives" class="card">
+      <div class="card-title"><span class="icon">🎯</span> 학습 목표</div>
+      <ul class="obj-list">
+        <li>PSM에서 관련 이익(combined profits)의 결정 원칙과 실제이익 vs 기대이익 구분을 설명하실 수 있습니다.</li>
+        <li>이익 배분 기준 3가지(자산기준, 비용기준, 기타)의 특성과 시간적 요소를 이해하십니다.</li>
+        <li>이익분할에 사용 가능한 자료의 3가지 요건(객관적/검증가능/제3자 확인)을 설명하실 수 있습니다.</li>
+        <li>2022년 개정에서 추가된 무형자산 가치 평가 방법(DCF, 미래소득할인법)의 의의를 이해하십니다.</li>
+        <li>PSM에서 가장 합리적인 방법 적용 원칙과 회계기준 비교가능성 문제를 설명하실 수 있습니다.</li>
+      </ul>
+    </section>
 
+    <!-- ===== 섹션 1 ===== -->
+    <section id="sec1" class="section-card">
+      <div class="section-header">
+        <h2>섹션 1. 관련 이익 배분 &amp; 이익 측정</h2>
+        <div class="section-range">§2.154 ~ §2.165</div>
+      </div>
+      <div class="section-body">
+
+        <!-- 아코디언 1 -->
+        <div class="accordion">
+          <button class="accordion-btn" data-acc="acc1">
+            §2.154-2.157 관련 이익의 결정
+            <span class="arrow">▼</span>
+          </button>
+          <div class="accordion-content" id="acc1">
+            <ul class="acc-list">
+              <li>동일 회계 원칙 및 기준 통화 적용 원칙: 관련 이익 산정 시 모든 당사자에게 일관된 회계기준과 통화 기준을 적용해야 합니다.</li>
+              <li>세무회계 자료 우선 사용: 과세 당국이 검증 가능하도록 세무회계 자료를 우선적으로 활용합니다.</li>
+              <li>구분 재무자료(segmented financials) 사용 원칙: 특정 거래 또는 제품군에 귀속되는 이익을 별도로 구분하여 산출합니다.</li>
+            </ul>
+            <div class="warn-point">
+              <strong>주의:</strong> IFRS와 US GAAP 등 서로 다른 회계기준을 적용하는 기업 간 비교 시 반드시 회계기준 차이에 따른 조정이 필요합니다.
+            </div>
+          </div>
+        </div>
+
+        <!-- 아코디언 2 -->
+        <div class="accordion">
+          <button class="accordion-btn" data-acc="acc2">
+            §2.158-2.161 실제이익(Actual Profit) vs 기대이익(Anticipated Profit)
+            <span class="arrow">▼</span>
+          </button>
+          <div class="accordion-content" id="acc2">
+            <ul class="acc-list">
+              <li><strong>실제이익(Actual Profit):</strong> 거래가 완료된 후 실제로 발생한 이익 → 위험을 실질적으로 부담하는 기업에 귀속됩니다.</li>
+              <li><strong>기대이익(Anticipated Profit):</strong> 거래 시점에 기대했던 이익 → 위험을 부담하지 않는 기업에 귀속됩니다.</li>
+              <li>핵심: 계약에서 위험을 부담하기로 한 기업이 실제이익의 변동성도 함께 부담합니다.</li>
+            </ul>
+            <div class="key-point">
+              <strong>핵심 포인트:</strong> 위험 부담 여부가 실제이익 vs 기대이익 배분의 핵심 결정 요소입니다.
+            </div>
+          </div>
+        </div>
+
+        <!-- 아코디언 3 -->
+        <div class="accordion">
+          <button class="accordion-btn" data-acc="acc3">
+            §2.162-2.165 매출총이익 vs 영업이익 선택
+            <span class="arrow">▼</span>
+          </button>
+          <div class="accordion-content" id="acc3">
+            <ul class="acc-list">
+              <li><strong>매출총이익 기준:</strong> 영업비용이 비교가능성을 방해할 때, 즉 영업비용의 성격이 기업 간에 다를 때 매출총이익을 기준으로 사용합니다.</li>
+              <li><strong>영업이익 기준:</strong> 영업비용까지 포함하는 것이 더 합리적인 비교가능성을 제공할 때 영업이익을 기준으로 사용합니다.</li>
+              <li><strong>계약 이후 사후 요소 재계산 금지:</strong> 계약 당시 합의한 배분 방식을 사후에 실제 결과에 따라 변경하는 것은 허용되지 않습니다.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== 섹션 2 ===== -->
+    <section id="sec2" class="section-card">
+      <div class="section-header">
+        <h2>섹션 2. 이익분할 기준 &amp; 자료 요건</h2>
+        <div class="section-range">§2.166 ~ §2.177</div>
+      </div>
+      <div class="section-body">
+
+        <!-- 아코디언 4 -->
+        <div class="accordion">
+          <button class="accordion-btn" data-acc="acc4">
+            §2.166-2.170 사용 가능한 자료의 3가지 요건
+            <span class="arrow">▼</span>
+          </button>
+          <div class="accordion-content" id="acc4">
+            <ul class="acc-list">
+              <li><strong>요건 1 — 객관적(Objective):</strong> 배분 방식이 임의적이지 않고 경제적 논리에 기반해야 합니다.</li>
+              <li><strong>요건 2 — 검증가능(Verifiable):</strong> 제3자가 검증할 수 있는 방식으로 측정 가능해야 합니다.</li>
+              <li><strong>요건 3 — 제3자 거래에서 확인가능(Third-party Confirmable):</strong> 독립기업 간 유사한 배분 방식이 존재하는지 확인할 수 있어야 합니다.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 아코디언 5 -->
+        <div class="accordion">
+          <button class="accordion-btn" data-acc="acc5">
+            §2.171-2.177 이익분할 기준의 유형과 내부 자료
+            <span class="arrow">▼</span>
+          </button>
+          <div class="accordion-content" id="acc5">
+            <ul class="acc-list">
+              <li><strong>제3자 자료 검색 가능 산업 예시:</strong> 석유·가스 합작투자, 제약회사 협력개발, 음악 레이블, 금융서비스 등</li>
+              <li>비교가능거래가 없을 때: 시장 성장률, 가중치 등 외부 시장 자료를 활용합니다.</li>
+              <li><strong>내부 자료 활용 예시:</strong> 직원 비용, 업무 시간, 인원수 등</li>
+              <li><strong>2022년 개정 추가:</strong> DCF(현금흐름할인법), 자산평가방법, 미래소득할인법이 새로운 평가 도구로 추가되었습니다.</li>
+            </ul>
+            <div class="key-point">
+              <strong>핵심 포인트:</strong> 2022년 개정은 Gottfried(2023) 등 학술적 발전을 반영하여, 이전에 비해 더 다양한 평가 도구 사용을 허용합니다.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== 섹션 3 ===== -->
+    <section id="sec3" class="section-card">
+      <div class="section-header">
+        <h2>섹션 3. 이익분할 요소</h2>
+        <div class="section-range">§2.178 ~ §2.183</div>
+      </div>
+      <div class="section-body">
+
+        <!-- 아코디언 6 -->
+        <div class="accordion">
+          <button class="accordion-btn" data-acc="acc6">
+            §2.178-2.180 자산 기준 이익분할
+            <span class="arrow">▼</span>
+          </button>
+          <div class="accordion-content" id="acc6">
+            <ul class="acc-list">
+              <li>유형자산 + 무형자산 모두 포함하여 자산 기준으로 이익을 배분합니다.</li>
+              <li>투자자본(Invested Capital) 기준을 활용합니다.</li>
+              <li><strong>무형자산 장부가액 vs 시장가액 선택:</strong> 장부가액은 객관성이 높고, 시장가액은 실제 경제적 가치를 반영합니다.</li>
+              <li>인플레이션 환경에서는 장부가액이 실제 가치를 왜곡할 수 있으므로 주의가 필요합니다.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 아코디언 7 -->
+        <div class="accordion">
+          <button class="accordion-btn" data-acc="acc7">
+            §2.181-2.183 비용 기준 &amp; 시간적 요소
+            <span class="arrow">▼</span>
+          </button>
+          <div class="accordion-content" id="acc7">
+            <ul class="acc-list">
+              <li><strong>비용 기준 적용:</strong> 마케팅 무형자산 개발 비용, 특허권 개발 R&amp;D 비용 등이 주요 배분 기준으로 활용됩니다.</li>
+              <li><strong>비용 가중치:</strong> 모든 비용을 동일하게 취급하지 않고 가치 창출 기여도에 따라 차등 가중치를 부여합니다.</li>
+              <li><strong>시간적 요소:</strong> 비용 발생 시점과 가치 창출 시점이 다를 수 있습니다. 예: 수년 전 R&amp;D 비용이 현재 매출에 기여하는 경우 적절한 가중치 조정이 필요합니다.</li>
+              <li><strong>기타 기준:</strong> 매출 기준, 직원수, 투입 시간, 공헌 이익 등도 상황에 따라 활용할 수 있습니다.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== 섹션 4 ===== -->
+    <section id="sec4" class="section-card">
+      <div class="section-header">
+        <h2>섹션 4. 결론 &amp; 가장 합리적인 방법</h2>
+        <div class="section-range">§2.184 ~ §2.187</div>
+      </div>
+      <div class="section-body">
+
+        <!-- 아코디언 8 -->
+        <div class="accordion">
+          <button class="accordion-btn" data-acc="acc8">
+            §2.184-2.187 PSM 적용의 결론과 주의사항
+            <span class="arrow">▼</span>
+          </button>
+          <div class="accordion-content" id="acc8">
+            <ul class="acc-list">
+              <li><strong>가장 합리적인 방법 적용 원칙 재확인:</strong> 개별 거래의 상황에 따라 판단하며, PSM이 항상 최선의 방법은 아닙니다.</li>
+              <li><strong>회계기준 비교가능성:</strong> 비교가능기업이 동일한 방법을 사용한다고 단정해서는 안 됩니다.</li>
+              <li><strong>사례별 개별 판단 원칙:</strong> 같은 산업에 속하더라도 거래 구조에 따라 다른 방법이 더 적합할 수 있습니다.</li>
+            </ul>
+            <div class="warn-point">
+              <strong>주의:</strong> PSM 남용에 주의해야 합니다. One-sided 방법(CUT, CPM, TNMM 등)으로 충분히 분석 가능한 경우에 PSM을 선택하는 것은 부적절합니다.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== 사례 탐구 ===== -->
+    <section id="case" class="card">
+      <div class="card-title"><span class="icon">🔍</span> 사례 탐구: 2022년 개정 — 새로운 무형자산 평가방법</div>
+      <div class="case-boxes">
+
+        <div class="case-box">
+          <h4>1. 개정 배경</h4>
+          <ul>
+            <li>BEPS 이전 PSM에서 무형자산 가치를 평가하는 도구는 주로 비용 기준(R&amp;D 비용)이었습니다.</li>
+            <li>고가치 무형자산(특허, 브랜드)의 경제적 가치를 비용 기준으로 측정하는 데 한계가 있었습니다.</li>
+            <li>2022년 개정에서 DCF 및 미래소득할인법이 추가되어 보다 정교한 평가가 가능해졌습니다.</li>
+          </ul>
+        </div>
+
+        <div class="case-box">
+          <h4>2. DCF 방법 적용</h4>
+          <ul>
+            <li>무형자산이 창출할 미래 현금흐름을 현재가치로 할인하여 자산 가치를 산정합니다.</li>
+            <li>각 무형자산의 기여도 비율을 계산하고 이를 이익 배분 비율 결정에 활용합니다.</li>
+            <li>예시: A사 특허(미래 가치 현재가치 $100M) vs B사 특허(미래 가치 현재가치 $60M) → 배분 비율 5:3</li>
+          </ul>
+        </div>
+
+        <div class="case-box">
+          <h4>3. 실무 시사점</h4>
+          <ul>
+            <li>복잡한 무형자산 거래에서 더 정교한 평가 도구를 사용할 수 있게 되었습니다.</li>
+            <li>단, 가정과 할인율 선택에 대한 충분한 문서화가 반드시 필요합니다.</li>
+            <li>납세자와 과세당국 간 가정의 차이로 분쟁이 발생할 수 있어 사전가격합의(APA) 활용을 권장합니다.</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== 퀴즈 ===== -->
+    <section id="quiz" class="card quiz-section">
+      <div class="card-title"><span class="icon">📝</span> 확인 퀴즈</div>
+      <p class="quiz-desc">각 문항을 읽고 가장 적절한 답을 선택한 후 [확인] 버튼을 누르세요.</p>
+
+      <!-- Q1 -->
+      <div class="quiz-item" id="qi1">
+        <div class="quiz-q"><span class="qnum">1</span>PSM에서 '위험을 부담하지 않는 기업'에 귀속해야 하는 이익 유형은 무엇입니까?</div>
+        <ul class="quiz-options">
+          <li><label><input type="radio" name="q1" value="1"> 실제이익(actual profit) — 사업 결과에 따라 변동하는 이익</label></li>
+          <li><label><input type="radio" name="q1" value="2"> 기대이익(anticipated profit) — 거래 시점에 기대했던 안정적인 이익</label></li>
+          <li><label><input type="radio" name="q1" value="3"> 잔여이익(residual profit) — 모든 비용 공제 후 남은 이익</label></li>
+          <li><label><input type="radio" name="q1" value="4"> 결합이익(combined profit) — 양쪽 이익의 합계</label></li>
+        </ul>
+        <button class="quiz-submit-btn" onclick="checkQuiz(1,2)">확인</button>
+        <div class="quiz-feedback" id="qf1"></div>
+      </div>
+
+      <!-- Q2 -->
+      <div class="quiz-item" id="qi2">
+        <div class="quiz-q"><span class="qnum">2</span>PSM에서 사용 가능한 자료의 3가지 요건에 해당하지 않는 것은 무엇입니까?</div>
+        <ul class="quiz-options">
+          <li><label><input type="radio" name="q2" value="1"> 객관적(objective)일 것</label></li>
+          <li><label><input type="radio" name="q2" value="2"> 검증가능(verifiable)할 것</label></li>
+          <li><label><input type="radio" name="q2" value="3"> 납세자에게 유리한(favorable to taxpayer) 결과를 낼 것</label></li>
+          <li><label><input type="radio" name="q2" value="4"> 제3자 거래에서 확인가능(third-party confirmable)할 것</label></li>
+        </ul>
+        <button class="quiz-submit-btn" onclick="checkQuiz(2,3)">확인</button>
+        <div class="quiz-feedback" id="qf2"></div>
+      </div>
+
+      <!-- Q3 -->
+      <div class="quiz-item" id="qi3">
+        <div class="quiz-q"><span class="qnum">3</span>PSM 이익 배분에서 비용 기준을 사용할 때 '시간적 요소'가 중요한 이유는 무엇입니까?</div>
+        <ul class="quiz-options">
+          <li><label><input type="radio" name="q3" value="1"> 세무 신고 기한이 다르기 때문</label></li>
+          <li><label><input type="radio" name="q3" value="2"> 비용 발생 시점과 가치 창출 시점이 다를 수 있어, 수년 전 R&amp;D 비용이 현재 매출에 기여하는 경우 적절한 가중치 조정이 필요하기 때문</label></li>
+          <li><label><input type="radio" name="q3" value="3"> 회계연도가 다른 기업들을 비교하기 때문</label></li>
+          <li><label><input type="radio" name="q3" value="4"> 인플레이션으로 인한 화폐 가치 변동 때문</label></li>
+        </ul>
+        <button class="quiz-submit-btn" onclick="checkQuiz(3,2)">확인</button>
+        <div class="quiz-feedback" id="qf3"></div>
+      </div>
+
+      <!-- Q4 -->
+      <div class="quiz-item" id="qi4">
+        <div class="quiz-q"><span class="qnum">4</span>2022년 OECD 이전가격지침서 개정에서 PSM과 관련하여 추가된 내용은 무엇입니까?</div>
+        <ul class="quiz-options">
+          <li><label><input type="radio" name="q4" value="1"> PSM을 더 이상 적용하지 않도록 규정</label></li>
+          <li><label><input type="radio" name="q4" value="2"> PSM은 오직 잔여이익분할방법만 허용</label></li>
+          <li><label><input type="radio" name="q4" value="3"> DCF(현금흐름할인법) 및 미래소득할인법 등 무형자산 가치 평가 도구 추가</label></li>
+          <li><label><input type="radio" name="q4" value="4"> 모든 PSM 분석에서 반드시 내부 비교가능거래를 사용해야 함</label></li>
+        </ul>
+        <button class="quiz-submit-btn" onclick="checkQuiz(4,3)">확인</button>
+        <div class="quiz-feedback" id="qf4"></div>
+      </div>
+
+      <!-- Q5 -->
+      <div class="quiz-item" id="qi5">
+        <div class="quiz-q"><span class="qnum">5</span>PSM에서 계약 이후 사후 요소 재계산 금지 원칙의 의미는 무엇입니까?</div>
+        <ul class="quiz-options">
+          <li><label><input type="radio" name="q5" value="1"> 매 회계연도마다 이익 배분 방식을 새로 결정해야 한다.</label></li>
+          <li><label><input type="radio" name="q5" value="2"> 계약 당시 합의한 이익 배분 방식을 사후에 실제 결과(이익 또는 손실)에 따라 유리하게 변경할 수 없다.</label></li>
+          <li><label><input type="radio" name="q5" value="3"> 사전에 합의한 가격은 어떤 상황에서도 변경 불가하다.</label></li>
+          <li><label><input type="radio" name="q5" value="4"> 세무조사 후에는 이익 배분 방식을 다시 결정할 수 없다.</label></li>
+        </ul>
+        <button class="quiz-submit-btn" onclick="checkQuiz(5,2)">확인</button>
+        <div class="quiz-feedback" id="qf5"></div>
+      </div>
+
+      <!-- 퀴즈 결과 -->
+      <div class="quiz-result-bar" id="quiz-result">
+        <div class="score" id="quiz-score">0/5</div>
+        <div class="msg" id="quiz-msg"></div>
+      </div>
+    </section>
+
+    <!-- ===== 체크리스트 ===== -->
+    <section id="checklist" class="card">
+      <div class="card-title"><span class="icon">✅</span> 실무 체크리스트</div>
+      <ul class="checklist" id="checklist-list">
+        <li id="chk1">
+          <input type="checkbox" id="c1" onchange="onCheck(1)">
+          <label for="c1">관련 이익(combined profits) 산정 시 동일한 회계원칙과 기준통화를 적용하였습니까?</label>
+        </li>
+        <li id="chk2">
+          <input type="checkbox" id="c2" onchange="onCheck(2)">
+          <label for="c2">위험 부담 여부에 따라 실제이익과 기대이익의 귀속을 결정하였습니까?</label>
+        </li>
+        <li id="chk3">
+          <input type="checkbox" id="c3" onchange="onCheck(3)">
+          <label for="c3">이익 배분 기준(자산/비용/기타)의 객관성, 검증가능성, 제3자 확인가능성을 검토하였습니까?</label>
+        </li>
+        <li id="chk4">
+          <input type="checkbox" id="c4" onchange="onCheck(4)">
+          <label for="c4">비용 기준 사용 시 비용 발생 시점과 가치 창출 시점의 시간적 차이를 분석하였습니까?</label>
+        </li>
+        <li id="chk5">
+          <input type="checkbox" id="c5" onchange="onCheck(5)">
+          <label for="c5">2022년 개정에 따라 DCF 또는 미래소득할인법 등 최신 평가 도구 사용 가능성을 검토하였습니까?</label>
+        </li>
+        <li id="chk6">
+          <input type="checkbox" id="c6" onchange="onCheck(6)">
+          <label for="c6">계약 당시 합의한 이익 배분 방식을 사후 결과에 따라 변경하지 않았음을 확인하였습니까?</label>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ===== 네비 버튼 ===== -->
+    <div class="nav-btns">
+      <a href="M2-7_PSM개요.html" class="nav-btn prev">← M2-7 PSM 개요</a>
+      <a href="../index_ch2.html" class="nav-btn next">Chapter II 완료 →</a>
+    </div>
+
+  </main>
+</div>
+
+<!-- ===== JavaScript ===== -->
 <script>
-function showSection(idx, btn) {
-  document.querySelectorAll('.section').forEach((s,i) => s.classList.toggle('active', i===idx));
-  document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
-  if(btn) btn.classList.add('active');
-  window.scrollTo({top:0, behavior:'smooth'});
-}
+  const MODKEY = 'm2_8';
+  const TOTAL_ACCS = 8;
+  const ACC_EACH  = 8;   // 아코디언 1개당 8%
+  const ACC_MAX   = 50;  // 아코디언 최대 50%
+  const QUIZ_MAX  = 30;  // 퀴즈 최대 30%
+  const CHK_MAX   = 20;  // 체크리스트 최대 20%
+
+  // --- 저장 유틸 ---
+  function save(key, val) {
+    try { localStorage.setItem(MODKEY + '_' + key, JSON.stringify(val)); } catch(e) {}
+  }
+  function load(key, def) {
+    try {
+      const v = localStorage.getItem(MODKEY + '_' + key);
+      return v !== null ? JSON.parse(v) : def;
+    } catch(e) { return def; }
+  }
+
+  // --- 상태 ---
+  let openedAccs  = load('openedAccs', []);   // 열린 아코디언 번호 배열
+  let quizResults = load('quizResults', {});   // { qNum: true/false }
+  let checkedList = load('checkedList', []);   // 체크된 번호 배열
+
+  // --- 진도 계산 ---
+  function calcProgress() {
+    const accCount = Math.min(openedAccs.length, Math.floor(ACC_MAX / ACC_EACH));
+    const accPct = accCount * ACC_EACH;
+
+    const quizCount = Object.values(quizResults).filter(v => v).length;
+    const quizPct = Math.round((quizCount / 5) * QUIZ_MAX);
+
+    const chkCount = checkedList.length;
+    const chkPct = Math.round((chkCount / 6) * CHK_MAX);
+
+    return Math.min(100, accPct + quizPct + chkPct);
+  }
+
+  function updateProgress() {
+    const pct = calcProgress();
+    document.getElementById('progress-pct').textContent = pct + '%';
+    document.getElementById('progress-fill').style.width = pct + '%';
+    if (pct >= 80) {
+      document.getElementById('completion-banner').classList.add('show');
+    } else {
+      document.getElementById('completion-banner').classList.remove('show');
+    }
+    save('progress', pct);
+  }
+
+  // --- 아코디언 ---
+  document.querySelectorAll('.accordion-btn').forEach(btn => {
+    const accId = btn.dataset.acc;
+    const content = document.getElementById(accId);
+
+    // 복원
+    const num = parseInt(accId.replace('acc', ''));
+    if (openedAccs.includes(num)) {
+      content.classList.add('open');
+      btn.classList.add('open');
+    }
+
+    btn.addEventListener('click', function() {
+      const isOpen = content.classList.contains('open');
+      if (!isOpen) {
+        content.classList.add('open');
+        btn.classList.add('open');
+        if (!openedAccs.includes(num)) {
+          openedAccs.push(num);
+          save('openedAccs', openedAccs);
+          updateProgress();
+        }
+      } else {
+        content.classList.remove('open');
+        btn.classList.remove('open');
+      }
+    });
+  });
+
+  // --- 퀴즈 ---
+  let quizAnswered = load('quizAnswered', {});
+
+  function checkQuiz(qNum, correct) {
+    const radios = document.querySelectorAll('input[name="q' + qNum + '"]');
+    let selected = null;
+    radios.forEach(r => { if (r.checked) selected = parseInt(r.value); });
+    if (selected === null) { alert('답을 선택해 주세요.'); return; }
+
+    const fb = document.getElementById('qf' + qNum);
+    const qi = document.getElementById('qi' + qNum);
+    const btn = qi.querySelector('.quiz-submit-btn');
+
+    const isCorrect = (selected === correct);
+    quizResults[qNum] = isCorrect;
+    quizAnswered[qNum] = selected;
+    save('quizResults', quizResults);
+    save('quizAnswered', quizAnswered);
+
+    if (isCorrect) {
+      fb.textContent = '✔ 정답입니다! 잘 이해하고 계십니다.';
+      fb.className = 'quiz-feedback correct';
+      qi.classList.add('correct-state');
+      qi.classList.remove('wrong-state');
+    } else {
+      const msgs = {
+        1: '정답은 ②번 기대이익(anticipated profit)입니다. 위험을 부담하지 않는 기업은 거래 시점에 약속된 안정적인 이익을 받습니다.',
+        2: '정답은 ③번입니다. 납세자에게 유리한 결과를 낼 것은 3가지 요건에 포함되지 않습니다.',
+        3: '정답은 ②번입니다. 비용 발생 시점과 가치 창출 시점의 차이를 반영한 시간적 가중치 조정이 필요합니다.',
+        4: '정답은 ③번입니다. 2022년 개정에서 DCF 및 미래소득할인법 등 새로운 평가 도구가 추가되었습니다.',
+        5: '정답은 ②번입니다. 계약 당시 합의한 방식을 사후 결과에 따라 유리하게 변경하는 것은 허용되지 않습니다.'
+      };
+      fb.textContent = '✘ 오답입니다. ' + msgs[qNum];
+      fb.className = 'quiz-feedback wrong';
+      qi.classList.add('wrong-state');
+      qi.classList.remove('correct-state');
+    }
+
+    btn.disabled = true;
+    radios.forEach(r => r.disabled = true);
+
+    // 결과 집계
+    const answered = Object.keys(quizResults).length;
+    if (answered >= 1) {
+      const correctCount = Object.values(quizResults).filter(v => v).length;
+      const scoreEl = document.getElementById('quiz-score');
+      const msgEl   = document.getElementById('quiz-msg');
+      scoreEl.textContent = correctCount + '/5';
+      const msgs2 = ['더 복습이 필요합니다.', '조금 더 노력해 보세요.', '절반을 넘었습니다.', '잘 하고 계십니다!', '훌륭합니다!', '만점입니다! 완벽합니다!'];
+      msgEl.textContent = msgs2[correctCount] || '';
+      document.getElementById('quiz-result').classList.add('show');
+    }
+
+    updateProgress();
+  }
+
+  // --- 체크리스트 ---
+  function onCheck(num) {
+    const cb = document.getElementById('c' + num);
+    const li = document.getElementById('chk' + num);
+    if (cb.checked) {
+      li.classList.add('checked');
+      if (!checkedList.includes(num)) { checkedList.push(num); }
+    } else {
+      li.classList.remove('checked');
+      checkedList = checkedList.filter(n => n !== num);
+    }
+    save('checkedList', checkedList);
+    updateProgress();
+  }
+
+  // --- 복원: 퀴즈 ---
+  function restoreQuiz() {
+    Object.entries(quizAnswered).forEach(([qNum, sel]) => {
+      const radios = document.querySelectorAll('input[name="q' + qNum + '"]');
+      radios.forEach(r => {
+        if (parseInt(r.value) === sel) r.checked = true;
+        r.disabled = true;
+      });
+      const correct = { 1:2, 2:3, 3:2, 4:3, 5:2 }[parseInt(qNum)];
+      const isCorrect = quizResults[qNum];
+      const fb = document.getElementById('qf' + qNum);
+      const qi = document.getElementById('qi' + qNum);
+      const btn = qi.querySelector('.quiz-submit-btn');
+      if (isCorrect) {
+        fb.textContent = '✔ 정답입니다! 잘 이해하고 계십니다.';
+        fb.className = 'quiz-feedback correct';
+        qi.classList.add('correct-state');
+      } else {
+        const msgs = {
+          1: '정답은 ②번 기대이익(anticipated profit)입니다.',
+          2: '정답은 ③번입니다. 납세자 유리 결과는 3가지 요건에 포함되지 않습니다.',
+          3: '정답은 ②번입니다. 비용 발생 시점과 가치 창출 시점의 차이를 반영해야 합니다.',
+          4: '정답은 ③번입니다. DCF 및 미래소득할인법이 2022년 개정에서 추가되었습니다.',
+          5: '정답은 ②번입니다. 사후 결과에 따른 변경은 허용되지 않습니다.'
+        };
+        fb.textContent = '✘ 오답입니다. ' + msgs[qNum];
+        fb.className = 'quiz-feedback wrong';
+        qi.classList.add('wrong-state');
+      }
+      btn.disabled = true;
+    });
+
+    const answered = Object.keys(quizResults).length;
+    if (answered >= 1) {
+      const correctCount = Object.values(quizResults).filter(v => v).length;
+      document.getElementById('quiz-score').textContent = correctCount + '/5';
+      const msgs2 = ['더 복습이 필요합니다.', '조금 더 노력해 보세요.', '절반을 넘었습니다.', '잘 하고 계십니다!', '훌륭합니다!', '만점입니다! 완벽합니다!'];
+      document.getElementById('quiz-msg').textContent = msgs2[correctCount] || '';
+      document.getElementById('quiz-result').classList.add('show');
+    }
+  }
+
+  // --- 복원: 체크리스트 ---
+  function restoreChecklist() {
+    checkedList.forEach(num => {
+      const cb = document.getElementById('c' + num);
+      const li = document.getElementById('chk' + num);
+      if (cb) { cb.checked = true; li.classList.add('checked'); }
+    });
+  }
+
+  // --- 초기화 ---
+  restoreQuiz();
+  restoreChecklist();
+  updateProgress();
 </script>
+
 </body>
 </html>

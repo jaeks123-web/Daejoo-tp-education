@@ -3,598 +3,745 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>M2-6: 거래순이익률방법(TNMM) 적용 &#8212; OECD 이전가격 지침서</title>
+<title>M2-6: 거래순이익률방법 적용(TNMM) | Chapter II 기초과정</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
   --blue:#1a5fa8;--blue-light:#e8f0fa;--blue-mid:#3b7dd8;
   --purple:#6a1fa8;--purple-light:#f3e8fa;--purple-mid:#8b3dd8;
-  --green:#1a7a4a;--green-light:#e6f5ee;--green-mid:#2a9a5a;
+  --green:#1a7a4a;--green-light:#e6f5ee;--green-mid:#2a9a6a;
   --orange:#c06000;--orange-light:#fff3e0;
   --red:#b02020;--red-light:#fdecea;
   --teal:#0f7a7a;--teal-light:#e0f5f5;
   --gray:#555;--gray-light:#f5f5f5;--gray-border:#ddd;
   --text:#222;--text2:#555;--white:#fff;
   --radius:10px;--shadow:0 2px 8px rgba(0,0,0,.10);
+  --accent:#1a7a4a;--accent-light:#e6f5ee;--accent-mid:#2a9a6a;
 }
 body{font-family:'Noto Sans KR',Arial,sans-serif;background:#f0f4f8;color:var(--text);line-height:1.75;font-size:16px}
-.page-header{background:var(--green);color:#fff;padding:1.2rem 2rem;display:flex;align-items:center;gap:1rem;border-bottom:3px solid #0f5a30}
-.page-header .back-btn{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);color:#fff;padding:5px 14px;border-radius:20px;cursor:pointer;font-size:.82rem;font-family:inherit;text-decoration:none}
-.page-header h1{font-size:1.1rem;font-weight:700;flex:1}
+
+/* Header */
+.page-header{background:var(--accent);color:#fff;padding:1.2rem 2rem;border-bottom:3px solid #0f5a30}
+.page-header .breadcrumb{font-size:.8rem;opacity:.82;margin-bottom:.35rem}
+.page-header .breadcrumb a{color:#fff;text-decoration:none;opacity:.9}
+.page-header .breadcrumb a:hover{opacity:1;text-decoration:underline}
+.page-header h1{font-size:1.15rem;font-weight:700;margin-bottom:.2rem}
+.page-header .header-meta{font-size:.8rem;opacity:.82}
+
+/* Layout */
 .layout{display:flex;max-width:1100px;margin:0 auto;padding:2rem 1.5rem;gap:1.5rem}
-.sidebar{width:210px;flex-shrink:0}
+.sidebar{width:220px;flex-shrink:0}
 .sidebar-box{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:1.2rem;position:sticky;top:1.5rem}
-.sidebar-box h3{font-size:.82rem;font-weight:700;color:var(--gray);margin-bottom:.8rem;text-transform:uppercase;letter-spacing:.05em}
-.nav-item{display:block;width:100%;text-align:left;background:none;border:none;padding:.45rem .7rem;border-radius:6px;font-size:.82rem;cursor:pointer;color:var(--text2);font-family:inherit;transition:all .12s;margin-bottom:2px}
-.nav-item:hover{background:var(--green-light);color:var(--green)}
-.nav-item.active{background:var(--green-light);color:var(--green);font-weight:700}
+.sidebar-box h3{font-size:.8rem;font-weight:700;color:var(--gray);margin-bottom:.8rem;text-transform:uppercase;letter-spacing:.05em}
+.nav-item{display:block;width:100%;text-align:left;background:none;border:none;padding:.42rem .7rem;border-radius:6px;font-size:.8rem;cursor:pointer;color:var(--text2);font-family:inherit;transition:all .12s;margin-bottom:2px;line-height:1.4}
+.nav-item:hover{background:var(--accent-light);color:var(--accent)}
+.nav-item.active{background:var(--accent-light);color:var(--accent);font-weight:700}
+.progress-bar-wrap{margin-top:1rem;padding-top:.8rem;border-top:1px solid var(--gray-border)}
+.progress-bar-wrap .prog-label{font-size:.75rem;color:var(--gray);margin-bottom:.35rem}
+.progress-bar{height:6px;background:#e0e0e0;border-radius:3px;overflow:hidden}
+.progress-bar-fill{height:100%;background:var(--accent);border-radius:3px;transition:width .3s}
+.prog-pct{font-size:.75rem;color:var(--accent);font-weight:700;margin-top:.3rem;text-align:right}
+
+/* Content */
 .content{flex:1;min-width:0}
 .section{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:1.8rem 2rem;margin-bottom:1.2rem;display:none}
 .section.active{display:block}
-.section h2{font-size:1.15rem;font-weight:700;color:var(--green);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:2px solid var(--green-light)}
+.section h2{font-size:1.15rem;font-weight:700;color:var(--accent);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:2px solid var(--accent-light)}
 .section h3{font-size:1rem;font-weight:700;color:var(--text);margin:1.2rem 0 .6rem}
-.section h4{font-size:.92rem;font-weight:700;color:var(--green);margin:.9rem 0 .4rem}
+.section h4{font-size:.92rem;font-weight:700;color:var(--accent);margin:.9rem 0 .4rem}
 .section p{font-size:.95rem;color:var(--text2);margin-bottom:.8rem}
 .section ul,.section ol{padding-left:1.4rem;margin-bottom:.8rem}
 .section li{font-size:.95rem;color:var(--text2);margin-bottom:.35rem}
-.para-badge{display:inline-block;background:var(--green-light);color:var(--green);font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:20px;margin-right:.4rem;vertical-align:middle}
-.commentary{background:#f0fbf5;border:1px solid #80d0a0;border-left:4px solid var(--green);border-radius:8px;padding:1rem 1.2rem;margin:1rem 0;font-size:.88rem;color:#1a4a2a}
-.commentary .comm-label{font-size:.75rem;font-weight:700;color:var(--green);margin-bottom:.4rem;text-transform:uppercase;letter-spacing:.03em}
+
+/* Badges & callouts */
+.para-badge{display:inline-block;background:var(--accent-light);color:var(--accent);font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:20px;margin-right:.4rem;vertical-align:middle}
 .key-point{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:8px;padding:.9rem 1.2rem;margin:.8rem 0;font-size:.9rem;color:#1a3a6a}
-.key-point.green{background:var(--green-light);border-color:var(--green);color:#1a4a2a}
+.key-point.green{background:var(--accent-light);border-color:var(--accent);color:#1a4a2a}
 .key-point.orange{background:var(--orange-light);border-color:var(--orange);color:#6b3800}
 .key-point.red{background:var(--red-light);border-color:var(--red);color:#6b1010}
 .key-point.purple{background:var(--purple-light);border-color:var(--purple);color:#3a1060}
+.warn-point{background:#fff8e1;border-left:4px solid #f0a000;border-radius:8px;padding:.9rem 1.2rem;margin:.8rem 0;font-size:.9rem;color:#5a3800}
+
+/* Accordion */
+.accordion{border:1.5px solid var(--gray-border);border-radius:8px;margin:.7rem 0;overflow:hidden}
+.accordion-header{background:var(--gray-light);padding:.85rem 1.2rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-size:.93rem;font-weight:600;color:var(--text);transition:background .12s;user-select:none}
+.accordion-header:hover{background:var(--accent-light);color:var(--accent)}
+.accordion-header.open{background:var(--accent-light);color:var(--accent)}
+.accordion-header .acc-arrow{font-size:.75rem;transition:transform .2s;display:inline-block}
+.accordion-header.open .acc-arrow{transform:rotate(90deg)}
+.accordion-body{display:none;padding:1.1rem 1.3rem;border-top:1px solid var(--gray-border);font-size:.92rem;color:var(--text2)}
+.accordion-body.open{display:block}
+.accordion-body ul{padding-left:1.3rem;margin:.4rem 0}
+.accordion-body li{margin-bottom:.3rem}
+.accordion-body p{margin-bottom:.6rem}
+
+/* Formula box */
+.formula-box{background:#f0fbf5;border:2px solid var(--accent);border-radius:10px;padding:1.2rem 1.5rem;margin:1rem 0;text-align:center}
+.formula-box .formula{font-size:1.05rem;font-weight:700;color:var(--accent);margin:.4rem 0}
+.formula-box .formula-note{font-size:.82rem;color:var(--gray);margin-top:.4rem}
+
+/* Tables */
 .case-table{width:100%;border-collapse:collapse;font-size:.88rem;margin:1rem 0}
-.case-table th{background:var(--green);color:#fff;padding:.65rem 1rem;text-align:left;font-weight:600}
+.case-table th{background:var(--accent);color:#fff;padding:.65rem 1rem;text-align:left;font-weight:600}
 .case-table td{padding:.6rem 1rem;border-bottom:1px solid var(--gray-border);vertical-align:top}
 .case-table tr:last-child td{border:none}
 .case-table tr:nth-child(even) td{background:#fafafa}
+
+/* Indicator grid */
+.indicator-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin:1rem 0}
+.indicator-card{background:#fafafa;border:1.5px solid var(--gray-border);border-radius:8px;padding:.9rem 1rem;text-align:center}
+.indicator-card.highlight{border-color:var(--accent);background:var(--accent-light)}
+.indicator-card .ind-name{font-size:.9rem;font-weight:700;color:var(--accent);margin-bottom:.3rem}
+.indicator-card .ind-formula{font-size:.8rem;color:var(--text2);font-style:italic}
+.indicator-card .ind-use{font-size:.78rem;color:#888;margin-top:.3rem}
+
+/* Example / case boxes */
 .example-box{background:#f0fbf5;border:1.5px solid #80d0a0;border-radius:10px;padding:1.2rem 1.5rem;margin:1rem 0}
-.example-box .ex-title{font-size:.8rem;font-weight:700;color:var(--green);margin-bottom:.8rem;text-transform:uppercase;letter-spacing:.04em;border-bottom:1px solid #80d0a0;padding-bottom:.4rem}
-.formula-box{background:#f0fbf5;border:2px solid var(--green);border-radius:10px;padding:1.2rem 1.5rem;margin:1rem 0;text-align:center}
-.formula-box .formula{font-size:1.05rem;font-weight:700;color:var(--green);margin:.4rem 0}
-.formula-box .formula-note{font-size:.82rem;color:var(--gray);margin-top:.4rem}
-.indicator-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin:1rem 0}
-.indicator-card{background:#fafafa;border:1.5px solid var(--gray-border);border-radius:8px;padding:1rem 1.2rem}
-.indicator-card.active{border-color:var(--green);background:var(--green-light)}
-.indicator-card h4{font-size:.9rem;font-weight:700;color:var(--green);margin-bottom:.5rem}
-.indicator-card .formula{font-size:.88rem;font-weight:700;color:var(--text);margin:.3rem 0;background:#fff;padding:.3rem .6rem;border-radius:4px;display:inline-block}
-.indicator-card p{font-size:.82rem;color:var(--text2);margin-top:.4rem}
-.berry-highlight{background:#fff8e0;border:2px solid #e0a000;border-radius:10px;padding:1.2rem 1.5rem;margin:1rem 0}
-.berry-highlight .berry-label{font-size:.78rem;font-weight:700;color:#8a6000;margin-bottom:.5rem;text-transform:uppercase}
-.footnote-box{background:#fafafa;border:1px solid #e0e0e0;border-radius:8px;padding:1rem 1.2rem;margin:1rem 0;font-size:.82rem;color:#555}
-.footnote-box .fn-title{font-weight:700;color:var(--gray);margin-bottom:.5rem;font-size:.78rem;text-transform:uppercase}
-.footnote-item{margin-bottom:.4rem;padding-left:.8rem;border-left:2px solid #ddd}
-.nav-btns{display:flex;justify-content:space-between;margin-top:1.5rem}
-.btn-nav{background:var(--green);color:#fff;border:none;padding:.7rem 1.5rem;border-radius:8px;cursor:pointer;font-size:.9rem;font-family:inherit;font-weight:600;transition:background .15s;text-decoration:none;display:inline-block}
+.example-box .ex-title{font-size:.8rem;font-weight:700;color:var(--accent);margin-bottom:.8rem;text-transform:uppercase;letter-spacing:.04em;border-bottom:1px solid #80d0a0;padding-bottom:.4rem}
+
+/* Case study */
+.case-study{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:1.8rem 2rem;margin-bottom:1.2rem}
+.case-study h2{font-size:1.1rem;font-weight:700;color:var(--accent);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:2px solid var(--accent-light)}
+.case-box{background:#f0fbf5;border:1.5px solid #80d0a0;border-radius:10px;padding:1.2rem 1.5rem;margin:.9rem 0}
+.case-box .case-title{font-size:.85rem;font-weight:700;color:var(--accent);margin-bottom:.7rem;display:flex;align-items:center;gap:.5rem}
+.case-box .case-title .case-num{background:var(--accent);color:#fff;width:22px;height:22px;border-radius:50%;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.case-box p{font-size:.9rem;color:var(--text2);margin-bottom:.5rem}
+.case-box ul{padding-left:1.3rem}
+.case-box li{font-size:.9rem;color:var(--text2);margin-bottom:.3rem}
+
+/* Quiz */
+.quiz-section{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:1.8rem 2rem;margin-bottom:1.2rem}
+.quiz-section h2{font-size:1.1rem;font-weight:700;color:var(--accent);margin-bottom:1.2rem;padding-bottom:.5rem;border-bottom:2px solid var(--accent-light)}
+.quiz-item{border:1.5px solid var(--gray-border);border-radius:8px;padding:1.2rem 1.4rem;margin-bottom:1rem}
+.quiz-item .q-num{font-size:.75rem;font-weight:700;color:var(--accent);margin-bottom:.4rem;text-transform:uppercase;letter-spacing:.04em}
+.quiz-item .q-text{font-size:.95rem;font-weight:600;color:var(--text);margin-bottom:.9rem}
+.quiz-item label{display:flex;align-items:flex-start;gap:.6rem;padding:.5rem .7rem;border-radius:6px;cursor:pointer;font-size:.9rem;color:var(--text2);transition:background .1s;margin-bottom:.3rem}
+.quiz-item label:hover{background:var(--accent-light)}
+.quiz-item input[type=radio]{margin-top:.22rem;flex-shrink:0;accent-color:var(--accent)}
+.quiz-feedback{display:none;margin-top:.8rem;padding:.8rem 1rem;border-radius:7px;font-size:.88rem;font-weight:600}
+.quiz-feedback.correct{background:#e6f5ee;color:#1a4a2a;border-left:4px solid var(--accent)}
+.quiz-feedback.wrong{background:var(--red-light);color:#6b1010;border-left:4px solid var(--red)}
+.btn-check{background:var(--accent);color:#fff;border:none;padding:.5rem 1.2rem;border-radius:6px;cursor:pointer;font-size:.87rem;font-family:inherit;font-weight:600;margin-top:.5rem;transition:background .15s}
+.btn-check:hover{background:#0f5a30}
+.quiz-score{display:none;background:var(--accent-light);border:1.5px solid var(--accent);border-radius:8px;padding:1rem 1.4rem;margin-top:1rem;font-size:.95rem;color:#1a4a2a;font-weight:600;text-align:center}
+.btn-quiz-submit{background:var(--accent);color:#fff;border:none;padding:.7rem 2rem;border-radius:8px;cursor:pointer;font-size:.95rem;font-family:inherit;font-weight:700;margin-top:.5rem;display:block;transition:background .15s}
+.btn-quiz-submit:hover{background:#0f5a30}
+
+/* Checklist */
+.checklist-card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:1.8rem 2rem;margin-bottom:1.2rem}
+.checklist-card h2{font-size:1.1rem;font-weight:700;color:var(--accent);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:2px solid var(--accent-light)}
+.checklist-item{display:flex;align-items:flex-start;gap:.8rem;padding:.7rem .5rem;border-bottom:1px solid #f0f0f0;cursor:pointer;border-radius:6px;transition:background .1s}
+.checklist-item:last-child{border-bottom:none}
+.checklist-item:hover{background:var(--accent-light)}
+.checklist-item input[type=checkbox]{margin-top:.22rem;flex-shrink:0;width:17px;height:17px;accent-color:var(--accent);cursor:pointer}
+.checklist-item label{font-size:.93rem;color:var(--text2);cursor:pointer;line-height:1.55}
+.checklist-item.checked label{color:#888;text-decoration:line-through}
+
+/* Nav buttons */
+.nav-btns{display:flex;justify-content:space-between;margin-top:1.5rem;gap:.8rem}
+.btn-nav{background:var(--accent);color:#fff;border:none;padding:.7rem 1.5rem;border-radius:8px;cursor:pointer;font-size:.9rem;font-family:inherit;font-weight:600;transition:background .15s;text-decoration:none;display:inline-block}
 .btn-nav:hover{background:#0f5a30}
-.btn-nav.secondary{background:#fff;color:var(--green);border:1.5px solid var(--green)}
-.btn-nav.secondary:hover{background:var(--green-light)}
+.btn-nav.secondary{background:#fff;color:var(--accent);border:1.5px solid var(--accent)}
+.btn-nav.secondary:hover{background:var(--accent-light)}
+.btn-nav:disabled{background:#ccc;cursor:default}
+
+/* Objective card */
+.objective-card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:1.6rem 2rem;margin-bottom:1.2rem}
+.objective-card h2{font-size:1.1rem;font-weight:700;color:var(--accent);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:2px solid var(--accent-light)}
+.obj-list{list-style:none;padding:0;margin:0}
+.obj-list li{display:flex;align-items:flex-start;gap:.7rem;padding:.55rem 0;border-bottom:1px solid #f0f0f0;font-size:.93rem;color:var(--text2)}
+.obj-list li:last-child{border-bottom:none}
+.obj-num{background:var(--accent);color:#fff;width:24px;height:24px;border-radius:50%;font-size:.75rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.08rem}
+
+/* Berry ratio highlight */
+.berry-box{background:#f8f0ff;border:2px solid var(--purple);border-radius:10px;padding:1.2rem 1.5rem;margin:1rem 0}
+.berry-box .berry-title{font-size:.82rem;font-weight:700;color:var(--purple);margin-bottom:.7rem;text-transform:uppercase;letter-spacing:.04em}
+.berry-box .formula{font-size:1.05rem;font-weight:700;color:var(--purple);text-align:center;margin:.5rem 0}
+
+@media(max-width:768px){
+  .layout{flex-direction:column;padding:1rem}
+  .sidebar{width:100%}
+  .sidebar-box{position:static}
+  .indicator-grid{grid-template-columns:1fr}
+  .nav-btns{flex-direction:column}
+}
 </style>
 </head>
 <body>
+
 <header class="page-header">
-  <a href="index_ch2.html" class="back-btn">&#8592; 목차</a>
-  <h1>M2-6: 거래순이익률방법(TNMM) 적용 (&#167;2.82&#8211;&#167;2.113)</h1>
+  <div class="breadcrumb"><a href="index_ch2.html">&#8592; Chapter II 목록으로</a></div>
+  <h1>Module 6 &#8212; 거래순이익률방법 적용 (TNMM)</h1>
+  <div class="header-meta">&#167;2.82 ~ &#167;2.113 &nbsp;&#183;&nbsp; OECD Transfer Pricing Guidelines Chapter II &nbsp;&#183;&nbsp; B.2</div>
 </header>
 
 <div class="layout">
+
   <!-- Sidebar -->
   <nav class="sidebar">
     <div class="sidebar-box">
       <h3>목차</h3>
-      <button class="nav-item active" onclick="showSection(0,this)">1. 순이익 지표 선정 기준</button>
-      <button class="nav-item" onclick="showSection(1,this)">2. 순이익 산정 방법</button>
-      <button class="nav-item" onclick="showSection(2,this)">3. 순이익 지표 유형별 적용</button>
-      <button class="nav-item" onclick="showSection(3,this)">4. Berry Ratio</button>
-      <button class="nav-item" onclick="showSection(4,this)">5. TNMM 적용 사례</button>
+      <button class="nav-item active" onclick="showSection('objectives',this)">&#127919; 학습 목표</button>
+      <button class="nav-item" onclick="showSection('sec1',this)">1. 순이익지표 선정·결정 원칙</button>
+      <button class="nav-item" onclick="showSection('sec2',this)">2. 사업초기비용·경제적 지표</button>
+      <button class="nav-item" onclick="showSection('sec3',this)">3. 세부 지표별 안내·Berry Ratio</button>
+      <button class="nav-item" onclick="showSection('sec4',this)">4. TNMM 적용 3가지 사례</button>
+      <button class="nav-item" onclick="showSection('case',this)">&#128269; 사례 탐구</button>
+      <button class="nav-item" onclick="showSection('quiz',this)">&#128221; 퀴즈</button>
+      <button class="nav-item" onclick="showSection('checklist',this)">&#9989; 체크리스트</button>
+      <div class="progress-bar-wrap">
+        <div class="prog-label">진도율</div>
+        <div class="progress-bar"><div class="progress-bar-fill" id="progressFill" style="width:12%"></div></div>
+        <div class="prog-pct" id="progressPct">12%</div>
+      </div>
     </div>
   </nav>
 
   <!-- Content -->
   <div class="content">
 
-    <!-- Section 1: 순이익 지표 선정 기준 -->
-    <div class="section active" id="sec0">
-      <h2>1. 순이익 지표 선정 기준 (§2.82)</h2>
-
-      <h3><span class="para-badge">§2.82</span> 순이익 지표 선정 시 고려사항</h3>
-      <p>거래순이익률법(TNMM)을 적용할 때, 가장 적절한 순이익 지표(net profit indicator)를 선택하는 기준은 <strong>정상가격 방법 선정에 대한 일반 원칙과 동일</strong>하며, 다음의 요소들을 종합적으로 고려해야 한다:</p>
-
-      <table class="case-table">
-        <thead>
-          <tr>
-            <th>고려 요소</th>
-            <th>내용</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>① 각 지표의 강점과 약점</strong></td>
-            <td>각 순이익 지표가 갖는 고유한 장단점을 평가</td>
-          </tr>
-          <tr>
-            <td><strong>② 거래의 성격과 지표의 적합성</strong></td>
-            <td>분석대상 특수관계 거래의 성격과 순이익 지표 간의 적합성</td>
-          </tr>
-          <tr>
-            <td><strong>③ 신뢰 가능한 정보의 입수 가능성</strong></td>
-            <td>특히 비교가능한 독립거래에 대한 정보 확보 가능성</td>
-          </tr>
-          <tr>
-            <td><strong>④ 비교가능성 수준 및 조정의 신뢰도</strong></td>
-            <td>특수관계거래와 독립거래 간 비교가능성, 필요 시 수행하는 조정의 신뢰도</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <h3><span class="para-badge">§2.92</span> 경제적 지표와 비교가능성</h3>
-      <p>경제적지표의 분모는 <strong>비교가능성과 일치</strong>해야 한다. 즉, 분석대상거래의 기능 및 위험을 가장 잘 반영하는 경제적지표를 선택한다.</p>
-      <p>예를 들어, 자본투자에 대한 위험이 사업에 있어 중요한 요소인 경우 <strong>자산수익률(영업이익/자산)</strong>을 선정한다. 또한 필요한 경우 ¶3.47-3.54와 같이 비교가능성 조정을 한다.</p>
-
-      <h3><span class="para-badge">§2.93</span> 기능별 경제적 지표 선택</h3>
-      <p>분석대상자의 기능요소에 따라 경제적지표의 분모를 선택한다:</p>
-
-      <div class="indicator-grid">
-        <div class="indicator-card active">
-          <h4>&#9312; 도매 활동</h4>
-          <div class="formula">ROS = 영업이익 / 매출</div>
-          <p>또는 영업비용(operating expenses) 사용</p>
-        </div>
-        <div class="indicator-card active">
-          <h4>&#9313; 서비스 및 제조 활동</h4>
-          <div class="formula">OM on Cost = 영업이익 / 총비용</div>
-          <p>총비용 또는 영업비용(operating expenses) 사용</p>
-        </div>
-        <div class="indicator-card active">
-          <h4>&#9314; 자본중심 제조 활동</h4>
-          <div class="formula">ROA = 영업이익 / 운영자산</div>
-          <p>자산집약적 사업에 적합</p>
-        </div>
-        <div class="indicator-card">
-          <h4>&#9315; 기타 특수 활동</h4>
-          <div class="formula">Berry Ratio = 매출총이익 / 영업비용</div>
-          <p>중계 기능 수행 기업 등 (§2.106-§2.108)</p>
-        </div>
-      </div>
-
-      <h3><span class="para-badge">§2.94</span> 분석대상거래의 구분</h3>
-      <p>분석의 대상인 분모는 <strong>특수관계거래와 독립적</strong>이어야 한다.</p>
-      <div class="commentary">
-        <div class="comm-label">&#9654; 실무 해설</div>
-        <p>예를 들어 모회사로부터 자산을 구매하여 단순히 도매활동을 하는 특수관계인 간에도 로열티를 지급하거나 기타 모회사로 제공받는 서비스료를 지급하는 등 분석대상거래 이외에도 특수관계거래를 할 경우가 있다. 이러한 경우 그러한 거래는 <strong>분리하여 분석</strong>하는 것이 원칙이다. 그러나 이러한 비용이 매출원가 또는 영업비용에 포함되어 있으나 그 거래가 전체거래에 미치는 영향이 낮은 경우 그 거래만을 별도로 분리하지 않고 기업전체 이익을 적용하여 정상가격을 측정한다.</p>
-      </div>
-
+    <!-- 학습 목표 -->
+    <div class="section objective-card active" id="objectives">
+      <h2>&#127919; 학습 목표</h2>
+      <ul class="obj-list">
+        <li><span class="obj-num">1</span>순이익 지표(Net Profit Indicator) 선정 기준 4가지를 설명하실 수 있습니다.</li>
+        <li><span class="obj-num">2</span>Berry Ratio의 정의, 역사적 배경(코카콜라·DuPont 사례), 적용 조건을 설명하실 수 있습니다.</li>
+        <li><span class="obj-num">3</span>매출기준·비용기준·자산기준 순이익 지표의 특성과 적합한 상황을 구분하실 수 있습니다.</li>
+        <li><span class="obj-num">4</span>Pass-through 비용 처리 원칙을 이해하고 실무에 적용하실 수 있습니다.</li>
+        <li><span class="obj-num">5</span>TNMM 적용 시 3가지 사례(원가분류차이, 기능차이, 제품보증)의 핵심 교훈을 설명하실 수 있습니다.</li>
+      </ul>
       <div class="nav-btns">
         <span></span>
-        <button class="btn-nav" onclick="showSection(1,document.querySelectorAll('.nav-item')[1])">다음: 순이익 산정 방법 &#8594;</button>
+        <button class="btn-nav" onclick="showSection('sec1', document.querySelectorAll('.nav-item')[1])">다음: 순이익지표 선정·결정 원칙 &#8594;</button>
       </div>
     </div>
 
-    <!-- Section 2: 순이익 산정 방법 -->
+    <!-- 섹션 1 -->
     <div class="section" id="sec1">
-      <h2>2. 순이익 산정 방법 (§2.83&#8211;§2.91)</h2>
+      <h2>1. &#167;2.82&#8211;2.90 순이익지표 선정·결정 원칙</h2>
 
-      <h3>B.3.3 Determination of the Net Profit</h3>
-
-      <h3><span class="para-badge">§2.83</span> 순이익에 포함 요소</h3>
-      <p>순이익에 포함되는 요소는 다음과 같다:</p>
-      <ul>
-        <li>(a) 직간접적으로 현재 특수관계거래와 <strong>관련된 것</strong></li>
-        <li>(b) <strong>영업활동을 반영</strong>하는 것</li>
-      </ul>
-
-      <h3><span class="para-badge">§2.84</span> 분석에서 제외되는 비용 및 구분 재무제표 사용</h3>
-      <p>분석대상 특수관계거래와 관련이 없는 비용 및 매출은 분석에서 제외한다. 따라서, 특수관계거래와 관련된 <strong>구분 재무제표(segmented financials)</strong>를 사용하는 것이 원칙이다.</p>
-
-      <div class="commentary">
-        <div class="comm-label">&#9654; 실무 해설 (주)</div>
-        <p>일반적으로 다국적기업의 관계회사들은 사전에 모회사와 약정된 기능(도매, 제조 또는 서비스)만을 수행하고 대부분의 거래를 특수관계거래에 의존한다. 또한 구분재무제표는 이전가격 분석만을 위해서 작성되기 때문에 회계감사를 통해 신뢰성을 확보한 기업 전체 재무제표와는 비용 및 이익의 구분이 임의적으로 될 가능성을 배제할 수 없다.</p>
+      <!-- 아코디언 1 -->
+      <div class="accordion">
+        <div class="accordion-header open" onclick="toggleAcc(this)">
+          <span><span class="para-badge">§2.82&#8211;2.84</span> 순이익지표 선정 4가지 기준</span>
+          <span class="acc-arrow">&#9654;</span>
+        </div>
+        <div class="accordion-body open">
+          <p>순이익 지표를 선정할 때는 다음 4가지 기준을 종합적으로 고려해야 합니다.</p>
+          <table class="case-table">
+            <thead><tr><th>#</th><th>기준</th><th>내용</th></tr></thead>
+            <tbody>
+              <tr>
+                <td style="font-weight:700;color:var(--accent)">기준 1</td>
+                <td>각 지표의 강점과 약점</td>
+                <td>ROS, ROCOS, ROA, Berry Ratio 각각의 장단점을 파악하고 상황에 맞게 선택</td>
+              </tr>
+              <tr>
+                <td style="font-weight:700;color:var(--accent)">기준 2</td>
+                <td>분석대상 거래의 성격에 대한 적합성</td>
+                <td>도매·유통 &#8594; 매출기준(ROS) / 서비스·제조 &#8594; 총비용기준(ROCOS) / 자본집약 &#8594; 자산기준(ROA)</td>
+              </tr>
+              <tr>
+                <td style="font-weight:700;color:var(--accent)">기준 3</td>
+                <td>신뢰할 수 있는 정보의 이용가능성</td>
+                <td>공개된 비교가능기업 데이터베이스에서 관련 지표를 실제로 추출할 수 있는지 여부</td>
+              </tr>
+              <tr>
+                <td style="font-weight:700;color:var(--accent)">기준 4</td>
+                <td>비교가능성의 수준</td>
+                <td>분석대상회사와 비교가능기업 간 선정된 지표 기준의 비교가능성이 충분한지 여부</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="key-point green">
+            <strong>핵심 포인트:</strong> 지표 선정은 비교가능성과 직결됩니다. 잘못된 지표를 선정하면 왜곡된 결과를 초래할 수 있으므로, 거래의 성격·정보가용성·비교가능성을 모두 고려해야 합니다.
+          </div>
+        </div>
       </div>
 
-      <h3><span class="para-badge">§2.86</span> 영업 외 비용</h3>
-      <p>일반적으로 <strong>영업 외 비용인 이자 및 법인세는 분석에서 제외</strong>한다. 또한 특별비용도 분석에서 제외된다.</p>
-
-      <h3><span class="para-badge">§2.87</span> 자산의 차이조정</h3>
-      <p>자산의 차이에 의한 매출 및 비용의 차이는 <strong>자산조정</strong>(자산의 차이에 기업대출금리 정도를 조정하는 방법)을 통하여 실시한다.</p>
-      <div class="key-point green">
-        Chapter III Annex "Example of a working capital adjustment"에 자세한 설명이 있다.
+      <!-- 아코디언 2 -->
+      <div class="accordion">
+        <div class="accordion-header" onclick="toggleAcc(this)">
+          <span><span class="para-badge">§2.85&#8211;2.87</span> 순이익 포함 범위·구분재무제표</span>
+          <span class="acc-arrow">&#9654;</span>
+        </div>
+        <div class="accordion-body">
+          <p>순이익에 포함되는 항목은 분석대상 특수관계거래에 <strong>직·간접적으로 관련된 모든 영업활동 비용</strong>이어야 합니다.</p>
+          <h4>구분재무제표(Segmented Financials) 원칙</h4>
+          <ul>
+            <li>분석대상 거래에 직접 관련된 수익과 비용만 포함해야 합니다.</li>
+            <li>영업외비용(이자비용/수익, 법인세, 특별비용)은 순이익 산정에서 제외합니다.</li>
+            <li>거래별로 구분할 수 없는 공통비용은 합리적인 배분 기준에 따라 배분합니다.</li>
+          </ul>
+          <div class="warn-point">
+            <strong>&#9888; 주의:</strong> 연결재무제표나 기업 전체 재무자료를 사용하면 분석 결과가 왜곡될 수 있습니다. 가능한 한 거래별로 구분된 재무자료(segmented financials)를 사용해야 합니다.
+          </div>
+        </div>
       </div>
 
-      <h3><span class="para-badge">§2.88</span> 외환차손익</h3>
-      <p>외환차손익이 발생하는 경우에는 일반적으로 영업 외 비용 또는 이익으로 보아 분석에 반영하지 않는다.</p>
-      <p>그러나 사업연도 중에 예상치 못한 급격한 환율변동이 있는 경우, 분석대상기업은 특수관계거래를 <strong>외화로 결제</strong>하고 비교가능기업은 <strong>자국통화로 결제</strong>하는 경우가 문제가 된다.</p>
-
-      <table class="case-table">
-        <thead>
-          <tr>
-            <th>구분</th>
-            <th>분석대상기업</th>
-            <th>비교가능기업</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>결제 통화</td>
-            <td>외화 (특수관계거래)</td>
-            <td>자국통화 (원화 등)</td>
-          </tr>
-          <tr>
-            <td>환율변동 영향</td>
-            <td>이익에 상당한 변화 발생</td>
-            <td>이익에 거의 영향 없음</td>
-          </tr>
-          <tr>
-            <td>처리방법</td>
-            <td colspan="2">환율변동이 특수관계거래 이익에 미친 영향을 제거 또는 조정하여 분석</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <div class="commentary">
-        <div class="comm-label">&#9654; 실무 해설 (주)</div>
-        <p>국내법 또는 OECD 이전가격지침서가 정확한 환율변동 분석방법에 대하여 언급하지 않고 있기 때문에 실무상 적용에 있어 각별한 주의가 필요하다. 특히, 환율변동이 급격했던 회계연도에 분석대상회사 외환손익을 제거하거나 조정하게 되면 영업이익에 상당한 변동이 있을 수 있다. 또한 비교가능회사의 재무제표만으로 환율영향 정도를 구분하기 힘든 경우에는 더욱 그러하다.</p>
-      </div>
-
-      <h3><span class="para-badge">§2.89</span> 영업활동과 금융활동의 구분</h3>
-      <p>금융활동으로 대금의 지급 및 수령을 하는 것이 기본적인 사업활동인 경우, 이익 및 이자의 성격을 구분하고 이러한 금액의 영향을 고려하여 순이익 지표를 결정한다.</p>
-      <div class="key-point">
-        금융상품에 대한 이전가격은 <strong>Chapter X "Transfer Pricing Aspect of Financial Transactions"</strong>에서 자세히 설명한다.
-      </div>
-
-      <h3><span class="para-badge">§2.90</span> 감가상각비, 상각비, 주식 옵션 및 연금 비용</h3>
-      <p>잠재적 제3자 비교가능거래의 일부 항목의 회계 처리가 불명확하거나 신뢰할 수 있는 측정이 불가능한 경우, 비교가능성 문제가 발생할 수 있다. 특히 다음이 해당될 수 있다:</p>
-      <ul>
-        <li>감가상각비 및 상각비</li>
-        <li>주식 옵션 비용</li>
-        <li>연금 비용</li>
-      </ul>
-      <p>거래순이익률방법 상 순이익 지표에 이러한 항목을 포함할지 여부는 거래의 환경 등을 고려하여 결정한다 (참조 ¶3.50).</p>
-
-      <h3><span class="para-badge">§2.91</span> 사업초기비용과 사업종료비용</h3>
-      <p>사업초기비용(start-up cost)과 종료비용(termination cost)이 순이익 지표에 포함될 것인지는 사례의 사실과 상황, 그리고 유사한 상황에서 독립적인 당사자들이 어떠한 방법을 적용하고 있는지 고려하여 결정한다.</p>
-
-      <table class="case-table">
-        <thead>
-          <tr>
-            <th>구분</th>
-            <th>내용</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>기능 수행 당사자가 비용 부담</td>
-            <td>사업초기비용 및 종료비용을 해당 당사자가 직접 부담하는 경우</td>
-          </tr>
-          <tr>
-            <td>비용 전가 (추가비용 없이)</td>
-            <td>이러한 비용의 일부 또는 전부를 추가비용 없이 고객 또는 주요 당사자에게 전가하는 경우</td>
-          </tr>
-          <tr>
-            <td>비용과 관련 이익 고려</td>
-            <td>이러한 비용의 일부 또는 전부와 관련된 이익을 고려하여 대가를 청구하는 경우</td>
-          </tr>
-        </tbody>
-      </table>
-      <div class="key-point green">
-        참조: Chapter IX Part I F
+      <!-- 아코디언 3 -->
+      <div class="accordion">
+        <div class="accordion-header" onclick="toggleAcc(this)">
+          <span><span class="para-badge">§2.88&#8211;2.90</span> 외환손익·감가상각 처리</span>
+          <span class="acc-arrow">&#9654;</span>
+        </div>
+        <div class="accordion-body">
+          <h4>외환손익 처리 (§2.88&#8211;2.89)</h4>
+          <ul>
+            <li>환율 변동으로 발생하는 외환이익/손실은 처리 방법이 비교가능기업과 일관되어야 합니다.</li>
+            <li>환율이 급변하는 경우, 분석대상회사와 비교가능기업에 동일한 기준을 적용하지 않으면 비교가능성이 훼손됩니다.</li>
+            <li>실무적으로: 외환차손익을 포함하는 경우와 제외하는 경우 모두 비교가능기업과 동일하게 처리해야 합니다.</li>
+          </ul>
+          <h4>감가상각비 처리 (§2.90)</h4>
+          <ul>
+            <li><strong>역사적 원가 기준</strong> vs <strong>현재가치(대체원가) 기준</strong>의 차이 &#8594; 비교가능성 조정 필요</li>
+            <li>고물가(고인플레이션) 국가에서는 역사적 원가 기준 감가상각비가 과소 계상되는 문제 발생</li>
+            <li>비교가능기업과 회계처리 방법이 다를 경우 조정이 필요합니다.</li>
+          </ul>
+          <div class="key-point orange">
+            <strong>실무 포인트:</strong> 외환손익 및 감가상각비 처리는 비교가능기업과 동일한 기준 적용이 핵심입니다. 차이가 있을 경우 반드시 비교가능성 조정을 수행해야 합니다.
+          </div>
+        </div>
       </div>
 
       <div class="nav-btns">
-        <button class="btn-nav secondary" onclick="showSection(0,document.querySelectorAll('.nav-item')[0])">&#8592; 이전</button>
-        <button class="btn-nav" onclick="showSection(2,document.querySelectorAll('.nav-item')[2])">다음: 순이익 지표 유형별 적용 &#8594;</button>
+        <button class="btn-nav secondary" onclick="showSection('objectives', document.querySelectorAll('.nav-item')[0])">&#8592; 학습 목표</button>
+        <button class="btn-nav" onclick="showSection('sec2', document.querySelectorAll('.nav-item')[2])">다음: 사업초기비용·경제적 지표 &#8594;</button>
       </div>
     </div>
 
-    <!-- Section 3: 순이익 지표 유형별 적용 -->
+    <!-- 섹션 2 -->
     <div class="section" id="sec2">
-      <h2>3. 순이익 지표 유형별 적용 (§2.92&#8211;§2.105)</h2>
+      <h2>2. &#167;2.91&#8211;2.95 사업초기비용·경제적 지표</h2>
 
-      <h3>B.3.4 Weighting the Net Profit</h3>
-
-      <h3><span class="para-badge">§2.96</span> B.3.4.1 매출 대비 순이익 (ROS)</h3>
-      <p>매출 대비 영업이익 지표(영업이익률, ROS)를 사용하는 경우, 분석대상거래에 이전가격분석에 영향을 주거나 관련 없는 거래가 포함되어 있는 경우에 대처방법을 고려해야 한다.</p>
-
-      <h3><span class="para-badge">§2.97</span> 리베이트 또는 매출할인</h3>
-      <p>리베이트 또는 매출할인 또는 할증 등 매출금액에 이러한 요소가 포함되어 있는 경우의 처리방법 및 외환손실 또는 이익이 포함되어 있는 경우 처리방법을 고려한다.</p>
-
-      <hr style="border:none;border-top:1px solid #eee;margin:1.2rem 0">
-
-      <h3><span class="para-badge">§2.99</span> B.3.4.2 비용 대비 순이익</h3>
-      <p>비용은 일반적으로 직간접비용을 포함하는 <strong>총비용</strong>을 사용한다.</p>
-
-      <h3>Pass-through 비용 처리</h3>
-      <p>고객에게 전가되는 비용("Pass through")이 있는 경우 일반적으로 이를 제외하고 분석한다. 그러나 이러한 비용이 총비용의 대부분을 차지할 경우 문제가 발생한다.</p>
-
-      <div class="commentary">
-        <div class="comm-label">&#9654; 실무 해설 (주) — Pass-through 비용 핵심</div>
-        <p>이러한 경우 내부비용(internal) 또는 외부비용(external)의 구별문제가 아니라, <strong>제3자 거래에서 이러한 비용에 대해 이익(mark-up)을 청구하지 않고 계약을 하는지가 핵심 사안</strong>이 된다. (참조 ¶7.34)</p>
+      <!-- 아코디언 4 -->
+      <div class="accordion">
+        <div class="accordion-header open" onclick="toggleAcc(this)">
+          <span><span class="para-badge">§2.91</span> 사업초기비용(Start-up Cost)·종료비용</span>
+          <span class="acc-arrow">&#9654;</span>
+        </div>
+        <div class="accordion-body open">
+          <p>사업초기비용을 순이익 산정에 포함할지 여부는 <strong>독립기업 간 유사 상황에서도 해당 비용이 발생하는지</strong>를 기준으로 판단합니다.</p>
+          <ul>
+            <li>사업 종료 비용(termination cost)도 동일한 원칙을 적용합니다.</li>
+            <li>독립기업도 신규 시장 진입 시 초기 손실을 허용하는 경우 &#8594; 사업초기비용 포함 가능</li>
+            <li>독립기업이라면 부담하지 않을 비용 &#8594; 포함에 신중해야 합니다.</li>
+          </ul>
+          <div class="example-box">
+            <div class="ex-title">&#128196; 예시</div>
+            <p>신규 시장 진입 시 독립기업도 시장 조사, 마케팅 비용, 초기 설비 비용 등 사업초기비용을 부담합니다. 이런 경우 해당 비용을 분석 시 포함하는 것이 정상가격 원칙에 부합합니다.</p>
+          </div>
+          <div class="key-point green">
+            <strong>핵심 포인트:</strong> 사업초기비용의 포함 여부는 사실관계(facts &amp; circumstances)에 기반하여 판단해야 합니다. 일률적 기준을 적용하는 것은 적절하지 않습니다.
+          </div>
+        </div>
       </div>
 
-      <table class="case-table">
-        <thead>
-          <tr>
-            <th>Pass-through 비용 처리</th>
-            <th>기준</th>
-            <th>결과</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>비용 비중이 낮은 경우</td>
-            <td>총비용에서 제외 가능</td>
-            <td>비교가능성 확보 용이</td>
-          </tr>
-          <tr>
-            <td>비용 비중이 높은 경우</td>
-            <td>독립거래에서 mark-up 청구 여부 확인 필요</td>
-            <td>전략적 판단 필요</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <h3><span class="para-badge">§2.101</span> 원가계산</h3>
-      <p>분석대상 비용은 <strong>실제원가</strong>를 일반적으로 사용한다. 표준원가 또는 예산원가도 환경에 따라 사용 가능하다.</p>
-
-      <hr style="border:none;border-top:1px solid #eee;margin:1.2rem 0">
-
-      <h3><span class="para-badge">§2.103</span> B.3.4.3 자산 대비 순이익 (ROA)</h3>
-      <p>자산수익률(영업이익/영업자산 비율)은 다음에 적용한다:</p>
-      <ul>
-        <li>제조기업, 자산집약적 기업</li>
-        <li>금융회사와 같이 자본집약적 기업</li>
-      </ul>
-      <p>지표가 자산 대비 영업이익 비율을 적용하기 때문에 <strong>자산은 영업자산만을 기준</strong>으로 평가한다.</p>
-
-      <div class="commentary">
-        <div class="comm-label">&#9654; 실무 해설 (주) — ROA 실무 현황</div>
-        <p>현재는 자산수익률을 경제적 지표로 많이 사용하지 않는다. 이유는:</p>
-        <p><strong>1)</strong> 개별기업 및 국가가 정의하는 자산, 특히 영업자산의 분류 및 범위가 모두 다르기 때문에 통일된 영업자산을 산출하기 힘들고,</p>
-        <p><strong>2)</strong> 정상가격을 벗어나는 경우 이전가격 조정액을 산출하기 위한 기준이 매출액 또는 총비용 등을 사용한 경우보다 복잡하기 때문이다.</p>
-        <p>그러나 The White Paper (1988, pp. 94-102)에서는 자산수익률을 기능 및 위험에 대한 기본이익을 산출하기 기준으로 제시하고 있다.</p>
-      </div>
-
-      <h3><span class="para-badge">§2.105</span> B.3.4.4 기타 순이익 지표</h3>
-      <p>표준적인 재무 지표 외에도, 거래 성격과 업종 특성에 따라 다양한 순이익 지표를 활용할 수 있다. 비교가능한 독립거래 데이터가 존재하고 신뢰할 수 있는 경우에 한하여 정당화될 수 있다.</p>
-
-      <table class="case-table">
-        <thead>
-          <tr>
-            <th>대체 지표 예시</th>
-            <th>적용 상황</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>소매점 면적 (floor area of retail points)</td><td>소매업 기능 평가</td></tr>
-          <tr><td>운송 제품의 중량 (weight of products transported)</td><td>물류·운송 서비스</td></tr>
-          <tr><td>직원 수 (number of employees)</td><td>인력 기반 서비스</td></tr>
-          <tr><td>시간 (time)</td><td>시간제 서비스</td></tr>
-          <tr><td>거리 (distance)</td><td>거리 기반 서비스</td></tr>
-        </tbody>
-      </table>
-
-      <div class="commentary">
-        <div class="comm-label">&#9654; 실무 해설 (주)</div>
-        <p>매출 대비 영업이익 비율, 총비용 대비 영업이익 비율, Berry Ratio(매출총이익/영업비용), 자산 대비 영업이익 비율 이외에 OECD에서 언급한 기타 방법은 사용된 사례를 찾아보기 힘들다.</p>
+      <!-- 아코디언 5 -->
+      <div class="accordion">
+        <div class="accordion-header" onclick="toggleAcc(this)">
+          <span><span class="para-badge">§2.92&#8211;2.95</span> 경제적 지표별 적용 기준</span>
+          <span class="acc-arrow">&#9654;</span>
+        </div>
+        <div class="accordion-body">
+          <div class="indicator-grid">
+            <div class="indicator-card highlight">
+              <div class="ind-name">ROS</div>
+              <div class="ind-formula">영업이익 / 매출액</div>
+              <div class="ind-use">도매·유통업 적합</div>
+            </div>
+            <div class="indicator-card highlight">
+              <div class="ind-name">ROCOS</div>
+              <div class="ind-formula">영업이익 / 총원가</div>
+              <div class="ind-use">서비스·제조업 적합</div>
+            </div>
+            <div class="indicator-card highlight">
+              <div class="ind-name">ROA</div>
+              <div class="ind-formula">영업이익 / 영업자산</div>
+              <div class="ind-use">자본집약산업 적합</div>
+            </div>
+          </div>
+          <table class="case-table">
+            <thead>
+              <tr><th>지표</th><th>적합 업종</th><th>핵심 이유</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>ROS (매출기준)</strong></td>
+                <td>도매·유통</td>
+                <td>매출 규모가 비교가능성의 핵심 지표</td>
+              </tr>
+              <tr>
+                <td><strong>ROCOS (원가기준)</strong></td>
+                <td>서비스·계약제조</td>
+                <td>원가 발생이 가치 창출의 핵심, Pass-through 처리 필요</td>
+              </tr>
+              <tr>
+                <td><strong>ROA (자산기준)</strong></td>
+                <td>자본집약 제조</td>
+                <td>자산 투자 규모가 이익 창출의 핵심 동인</td>
+              </tr>
+            </tbody>
+          </table>
+          <h4>Pass-through 비용 처리 원칙</h4>
+          <p>납세자가 <strong>제3자를 위해 대신 지출하고 나중에 청구하는 비용</strong>(pass-through 비용)은 납세자가 실질적으로 부담하는 비용이 아닙니다.</p>
+          <div class="key-point orange">
+            <strong>Pass-through 처리:</strong> Pass-through 비용은 분모(원가)에서 제외합니다. 이를 포함하면 원가기준 영업이익률(ROCOS)이 인위적으로 낮아져 분석 결과가 왜곡됩니다.
+          </div>
+        </div>
       </div>
 
       <div class="nav-btns">
-        <button class="btn-nav secondary" onclick="showSection(1,document.querySelectorAll('.nav-item')[1])">&#8592; 이전</button>
-        <button class="btn-nav" onclick="showSection(3,document.querySelectorAll('.nav-item')[3])">다음: Berry Ratio &#8594;</button>
+        <button class="btn-nav secondary" onclick="showSection('sec1', document.querySelectorAll('.nav-item')[1])">&#8592; 이전</button>
+        <button class="btn-nav" onclick="showSection('sec3', document.querySelectorAll('.nav-item')[3])">다음: 세부 지표별 안내·Berry Ratio &#8594;</button>
       </div>
     </div>
 
-    <!-- Section 4: Berry Ratio -->
+    <!-- 섹션 3 -->
     <div class="section" id="sec3">
-      <h2>4. Berry Ratio (§2.106&#8211;§2.108)</h2>
+      <h2>3. &#167;2.96&#8211;2.108 세부 지표별 안내·Berry Ratio</h2>
 
-      <h3>B.3.5 Berry Ratio</h3>
-
-      <div class="berry-highlight">
-        <div class="berry-label">&#11088; Berry Ratio 정의</div>
-        <div style="text-align:center;font-size:1.1rem;font-weight:700;color:#8a6000;margin:.5rem 0">
-          Berry Ratio = 매출총이익(Gross Profit) ÷ 영업비용(Operating Expenses)
+      <!-- 아코디언 6 -->
+      <div class="accordion">
+        <div class="accordion-header open" onclick="toggleAcc(this)">
+          <span><span class="para-badge">§2.96&#8211;2.105</span> 각 지표 상세 안내</span>
+          <span class="acc-arrow">&#9654;</span>
         </div>
-        <p style="font-size:.88rem;color:#6a4400;text-align:center;margin-top:.5rem">판매 및 마케팅 서비스를 집중적으로 수행하는 총판업자에 적합</p>
+        <div class="accordion-body open">
+          <h4>&#9312; 매출기준 (ROS): Return on Sales</h4>
+          <ul>
+            <li>유통·판매 기능에 가장 적합합니다.</li>
+            <li>매출 규모가 비교가능성의 핵심이 됩니다.</li>
+            <li>제품 원가 수준의 차이가 있더라도 순이익률 비교가 유의미합니다.</li>
+          </ul>
+
+          <h4>&#9313; 비용기준 (원가기준 영업이익률)</h4>
+          <ul>
+            <li>서비스업·계약제조업에 가장 적합합니다.</li>
+            <li><strong>Pass-through 처리 원칙:</strong> 고객이 부담하는 비용(납세자가 대납 후 청구하는 비용)은 분모(원가)에서 제외합니다.</li>
+            <li>예: 광고대행사가 고객을 위해 집행한 광고비는 원가에서 제외 후 에이전시 서비스 비용만 분모로 사용합니다.</li>
+          </ul>
+
+          <h4>&#9314; 자산수익률 (ROA)</h4>
+          <ul>
+            <li>영업자산만 포함합니다(비영업자산 제외).</li>
+            <li>장부가액 기준 vs 시장가액 기준 차이에 따른 조정 고려가 필요합니다.</li>
+            <li>인플레이션 환경에서는 역사적 원가 기준 자산가액이 과소평가되어 ROA가 왜곡될 수 있습니다.</li>
+          </ul>
+
+          <h4>&#9315; 기타 지표</h4>
+          <ul>
+            <li>점포면적 당 이익 (소매업 등)</li>
+            <li>운송 중량 당 이익 (물류업)</li>
+            <li>직원수 당 이익 (인력파견·서비스업)</li>
+            <li>투입 시간 당 이익 (전문 서비스업)</li>
+          </ul>
+        </div>
       </div>
 
-      <h3><span class="para-badge">§2.106</span> Berry Ratio 개발 배경</h3>
+      <!-- 아코디언 7: Berry Ratio -->
+      <div class="accordion">
+        <div class="accordion-header" onclick="toggleAcc(this)">
+          <span><span class="para-badge">§2.106&#8211;2.108</span> Berry Ratio &#8212; 정의·역사·적용 조건</span>
+          <span class="acc-arrow">&#9654;</span>
+        </div>
+        <div class="accordion-body">
+          <div class="berry-box">
+            <div class="berry-title">&#9733; Berry Ratio 공식</div>
+            <div class="formula">Berry Ratio = 매출총이익 ÷ 영업비용(판매관리비)</div>
+            <p style="font-size:.85rem;color:#5a3a8a;margin-top:.5rem;text-align:center">= Gross Profit / Operating Expenses (SG&amp;A)</p>
+          </div>
 
-      <div class="commentary">
-        <div class="comm-label">&#9654; 역사적 배경 (주) — The White Paper (1988)</div>
-        <p><strong>Berry Ratio는 Dr. Berry가 코카콜라 사례에서 법원에 전문가 증언을 제출하기 위하여 개발</strong>한 것으로, 후에 미국 과세당국이 <strong>DuPont의 스위스 자회사(DuPont International S.A.)를 과세하기 위하여 사용</strong>한 방법이다.</p>
-        <p>DuPont 사례 배경:</p>
-        <ul style="margin-top:.5rem">
-          <li>당시 스위스는 저세율 국가로 분류되어 있었으며 스위스 역외에서 판매되는 제품에 대해서는 과세를 하지 않았다</li>
-          <li>따라서 유럽에 판매를 하는 많은 미국 기업이 <strong>스위스에 판매총판을 두어 세금을 회피</strong>하고 있었다</li>
-          <li>Berry Ratio는 당초 사례에서 판매 및 마케팅 서비스를 집중적으로 수행하는 총판업자에 사용되었으나, 그 이후 <strong>다양한 서비스기능을 수행하는 기업</strong>에 적용되어 수행한 서비스 기능 대비 실현한 이익의 적정성을 판단하는데 사용되었다</li>
-        </ul>
-      </div>
+          <h4>역사적 배경</h4>
+          <ul>
+            <li>Dr. Charles Berry(프린스턴대 교수)가 이전가격 분야에서 처음 제안</li>
+            <li>1980년대 코카콜라 vs IRS 사건에서 처음 적용</li>
+            <li>이후 <strong>DuPont 사건</strong>에서 스위스 자회사 분석에 활용되면서 국제적으로 확산</li>
+          </ul>
 
-      <h3><span class="para-badge">§2.107</span> Berry Ratio 사용을 위한 조건</h3>
-      <p>Berry Ratio를 사용하기 위해서는 다음 조건이 필요하다:</p>
-      <ul>
-        <li>분석대상기업의 비용이 주로 <strong>영업비용(operating expenses)</strong>으로 구성</li>
-        <li>매출원가(COGS)가 분석대상기업의 고유 기여가 아닌 경우</li>
-        <li>비교가능한 독립기업의 Berry Ratio 정보 확보 가능한 경우</li>
-      </ul>
-
-      <h3><span class="para-badge">§2.108</span> 중계 기능에서의 Berry Ratio</h3>
-      <p>¶2.106에서 언급한 것과 같이, <strong>특수관계자 사이에서 중간 중계역할을 하는 기업</strong>이 있는 경우 Berry Ratio가 유용하다.</p>
-
-      <table class="case-table">
-        <thead>
-          <tr>
-            <th>방법</th>
-            <th>요건</th>
-            <th>Berry Ratio와 비교</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>재판매가격방법 (RPM)</td>
-            <td>한쪽 거래당사자가 반드시 제3자이어야 함 (구매 또는 판매)</td>
-            <td rowspan="2" style="background:#fff8e0;color:#6a4400;font-weight:600">Berry Ratio는 이러한 제한요건 없음 → 중계기능 기업에 더 유용</td>
-          </tr>
-          <tr>
-            <td>원가가산방법 (CPM)</td>
-            <td>한쪽 거래당사자가 반드시 제3자이어야 함 (구매 또는 판매)</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <h3>Berry Ratio 적용 시 비교</h3>
-      <div class="formula-box">
-        <div class="formula">Berry Ratio = GP (매출총이익) / OPEX (영업비용)</div>
-        <div class="formula-note">
-          예: 비교가능 독립기업 Berry Ratio = 1.2 ~ 1.5<br>
-          분석대상 특수관계기업 Berry Ratio = 1.1 → 정상가격범위 하회 → 조정 필요
+          <h4>적용 조건 (3가지 모두 충족 필요)</h4>
+          <table class="case-table">
+            <thead><tr><th>#</th><th>조건</th><th>설명</th></tr></thead>
+            <tbody>
+              <tr>
+                <td style="font-weight:700;color:var(--purple)">(1)</td>
+                <td>중계·중개 기능 기업</td>
+                <td>본사 지시에 따라 주문 접수·청구서 발행 등 중계 기능만 수행</td>
+              </tr>
+              <tr>
+                <td style="font-weight:700;color:var(--purple)">(2)</td>
+                <td>Pass-through 매출원가</td>
+                <td>제품 원가가 분모(영업비용)에 포함되지 않고 순수 pass-through로 처리</td>
+              </tr>
+              <tr>
+                <td style="font-weight:700;color:var(--purple)">(3)</td>
+                <td>영업비용이 가치 창출의 핵심</td>
+                <td>판관비(SG&amp;A) 지출이 해당 기업의 가치 창출을 대표하는 경우</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="key-point purple">
+            <strong>핵심 포인트:</strong> Berry Ratio는 매출원가가 비교가능성에 방해될 때 이를 제외하고 영업비용(판관비)만으로 비교함으로써 비교가능성을 높이는 지표입니다. 매출원가가 순수 pass-through가 아닌 경우에는 적용이 부적절합니다.
+          </div>
         </div>
       </div>
 
       <div class="nav-btns">
-        <button class="btn-nav secondary" onclick="showSection(2,document.querySelectorAll('.nav-item')[2])">&#8592; 이전</button>
-        <button class="btn-nav" onclick="showSection(4,document.querySelectorAll('.nav-item')[4])">다음: TNMM 적용 사례 &#8594;</button>
+        <button class="btn-nav secondary" onclick="showSection('sec2', document.querySelectorAll('.nav-item')[2])">&#8592; 이전</button>
+        <button class="btn-nav" onclick="showSection('sec4', document.querySelectorAll('.nav-item')[4])">다음: TNMM 적용 3가지 사례 &#8594;</button>
       </div>
     </div>
 
-    <!-- Section 5: TNMM 적용 사례 -->
+    <!-- 섹션 4 -->
     <div class="section" id="sec4">
-      <h2>5. TNMM 적용 사례 (§2.111&#8211;§2.113)</h2>
+      <h2>4. &#167;2.111&#8211;2.113 TNMM 적용 3가지 사례</h2>
 
-      <h3>B.4 Examples of the Application of the TNMM</h3>
-
-      <h3><span class="para-badge">§2.111</span> 사례 1: 원가분류 방법에 차이가 있고 상세비용이 확인되지 않는 경우</h3>
-
-      <div class="example-box">
-        <div class="ex-title">&#128218; 사례: 원가항목 분류 불명확 → TNMM 적용</div>
-        <p>¶2.59의 원가가산방법 사례에서와 같이 거래비교분석에 일관성과 신뢰성을 확보하기 위하여 <strong>매출총이익에 비교가능성 조정이 필요한 경우</strong>가 있다.</p>
-        <p style="margin-top:.6rem">이러한 조정은 신뢰할만한 비용정보가 있는 경우에는 별다른 어려움 없이 가능하다. 그러나 비교가능성 조정이 필요하나 <strong>신뢰할만한 비용정보가 없는 경우</strong>에는 분석에 일관성을 유지하기 위하여 <strong>비용처리방법에 영향을 덜 받는 순이익</strong>을 사용할 수 있다.</p>
-
-        <table class="case-table" style="margin-top:.8rem">
-          <thead>
-            <tr>
-              <th>상황</th>
-              <th>원가가산방법 (CPM)</th>
-              <th>거래순이익률방법 (TNMM)</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>원가항목 상세 정보 확보</td>
-              <td>&#9989; 비교가능성 조정 가능</td>
-              <td>&#9989; 적용 가능</td>
-            </tr>
-            <tr>
-              <td>비교가능기업 X, Y, Z의 상세비용 불확인</td>
-              <td>&#10060; 신뢰성 확보 어려움</td>
-              <td>&#9989; <strong>TNMM 적용이 바람직</strong></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="commentary">
-        <div class="comm-label">&#9654; 실무 해설 (주)</div>
-        <p>많은 실무사례에서 비교가능회사의 매출총이익을 산출하기 위한 원가항목에 어떤 상세 비용(예: 운반비, 포장비, 또는 디자인비용 등)이 포함되어 있는지 확인하기 어려운 경우가 많이 있다.</p>
-        <p style="margin-top:.5rem">따라서, 원가항목 비용 중 매출총이익을 산출하는데 <strong>중요한 영향을 주는 특정비용이 분석대상기업과 비교가능기업간에 어떠한 차이가 있는지를 정확히 밝힐 수 없는 경우</strong>, 원가가산방법보다 원가항목분류 방법에 영향을 덜 받는 순이익을 기준으로 하는 거래순이익률방법을 사용한다.</p>
-      </div>
-
-      <h3><span class="para-badge">§2.112</span> 사례 2: 기능에 차이가 있는 경우</h3>
-
-      <div class="example-box">
-        <div class="ex-title">&#9881;&#65039; 사례: 비교가능기업이 추가 기능(기술지원) 수행 시</div>
-        <p>¶2.44 사례와 동일하나, <strong>특수관계기업이 아닌 비교가능 독립기업이 추가기능인 기술지원 기능을 수행</strong>하며 이러한 기능과 관련된 비용이 원가항목에 포함되어 있고 이러한 비용을 독립적으로 분류할 수 있는 방법이 없는 상황이다.</p>
-        <ul style="margin-top:.6rem">
-          <li>제품과 시장이 상이하여 CUP 적용 불가</li>
-          <li>비교가능기업의 매출총이익이 추가 기능과 비용을 보상하기 위하여 높아야 하므로 RPM 신뢰성 확보 불가</li>
-          <li>→ <strong>기능의 차이를 반영하는 순이익을 기준으로 TNMM 적용</strong>이 더 신뢰성 확보</li>
-        </ul>
-        <div class="key-point red" style="margin-top:.8rem">
-          <strong>주의:</strong> 기능의 차이로 인해 순이익에 영향을 주는 중요한 요인이 있거나 시장의 차이가 있는 경우에는 순이익을 기준으로 하는 TNMM을 적용할 수 없다.
+      <!-- 아코디언 8 -->
+      <div class="accordion">
+        <div class="accordion-header open" onclick="toggleAcc(this)">
+          <span><span class="para-badge">§2.111</span> 사례 1: 원가 분류 차이</span>
+          <span class="acc-arrow">&#9654;</span>
+        </div>
+        <div class="accordion-body open">
+          <table class="case-table">
+            <thead><tr><th>구분</th><th>분석대상회사</th><th>비교가능기업</th></tr></thead>
+            <tbody>
+              <tr>
+                <td>특정 비용 처리</td>
+                <td>판매관리비(SG&amp;A)로 기록</td>
+                <td>제조원가(COGS)로 기록</td>
+              </tr>
+              <tr>
+                <td>결과</td>
+                <td colspan="2" style="color:#b02020;font-weight:600">원가 분류 차이로 인해 영업이익률이 달라짐 → 비교가능성 훼손</td>
+              </tr>
+            </tbody>
+          </table>
+          <h4>TNMM이 유리한 이유</h4>
+          <p>비교가능회사의 세부 비용 항목(COGS vs SG&amp;A 구분)을 확인할 수 없는 경우, TNMM이 오히려 더 적합할 수 있습니다.</p>
+          <div class="key-point green">
+            <strong>핵심 교훈:</strong> TNMM은 전체 원가(COGS + SG&amp;A)에 대한 영업이익률이므로, 원가 분류 방식의 차이가 상쇄되어 총원가 기준 비교가능성이 높아집니다. 반면 총이익률 기준의 RPM·CPM은 이 차이의 영향을 직접적으로 받습니다.
+          </div>
         </div>
       </div>
 
-      <div class="commentary">
-        <div class="comm-label">&#9654; 실무 해설 (주)</div>
-        <p>잠재적으로 비교가능한 기업의 상세한 기능 및 비용에 대한 자료가 없기 때문에 (예: 제품 및 기능의 비교가능성에 대한 자료, 경쟁회사 또는 대체품 판매회사의 거래자료) <strong>대부분의 사례에서 거래순이익률방법을 적용</strong>하고 있다.</p>
+      <!-- 아코디언 9 -->
+      <div class="accordion">
+        <div class="accordion-header" onclick="toggleAcc(this)">
+          <span><span class="para-badge">§2.112</span> 사례 2: 기능 차이</span>
+          <span class="acc-arrow">&#9654;</span>
+        </div>
+        <div class="accordion-body">
+          <ul>
+            <li>비교가능기업이 기술지원 기능을 포함하고 있으나, 분석대상회사는 해당 기능이 없는 경우</li>
+            <li>또는 분석대상회사에 비해 비교가능기업이 더 많은 위험을 부담하는 경우</li>
+          </ul>
+          <h4>처리 방법</h4>
+          <ul>
+            <li>비교가능성 조정: 기술지원 비용 등을 비교가능기업 데이터에서 분리·제거하여 조정</li>
+            <li>더 적합한 비교가능기업 선별: 기능 프로파일이 유사한 기업을 다시 탐색</li>
+          </ul>
+          <div class="key-point orange">
+            <strong>핵심 교훈:</strong> FAR 분석(기능·자산·위험)에서 파악된 기능 차이는 비교가능기업 선정 또는 조정 과정에서 반드시 반영해야 합니다.
+          </div>
+        </div>
       </div>
 
-      <h3><span class="para-badge">§2.113</span> 사례 3: 제품보증(Warranty) 비용이 있는 경우</h3>
-
-      <div class="example-box">
-        <div class="ex-title">&#128587; 사례: 도매기업 A의 Warranty 비용 부담</div>
-        <p>¶2.42 사례와 동일하나 <strong>도매기업 A가 제품보증 비용을 부담</strong>한다.</p>
-        <table class="case-table" style="margin-top:.6rem">
-          <thead>
-            <tr>
-              <th>구분</th>
-              <th>도매기업 A (분석대상)</th>
-              <th>도매기업 B (비교가능)</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>제품보증(Warranty) 비용</td>
-              <td>부담함 (비용 발생)</td>
-              <td>부담하지 않음</td>
-            </tr>
-            <tr>
-              <td>상세비용 분류</td>
-              <td colspan="2">확인할 수 없음</td>
-            </tr>
-            <tr>
-              <td>RPM/CPM 적용</td>
-              <td colspan="2">&#10060; 보증비용에 대한 상세자료 필요 (비교가능성 요건) → 상세비용 분류 불가</td>
-            </tr>
-            <tr>
-              <td>TNMM 적용</td>
-              <td colspan="2">&#9989; A와 B간에 기능측면에서 중요한 차이가 없는 경우 순이익을 기준으로 적용 가능</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <h3><span class="para-badge">§2.109&#8211;§2.110</span> B.3.6 기타 지침</h3>
-      <table class="case-table">
-        <thead>
-          <tr>
-            <th>항목</th>
-            <th>내용</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>제3자 거래에 의하지 않는 정보 (§2.109)</td>
-            <td>기능 및 위험분석에 의하지 않은 산업평균자료 등은 이전가격분석의 거래별 접근 원칙에 따라 특수한 상황이 아닌 경우 권장하지 않음</td>
-          </tr>
-          <tr>
-            <td>분석대상회사 선정 (§2.110)</td>
-            <td>¶3.55-65 참조</td>
-          </tr>
-          <tr>
-            <td>정상가격범위의 결정 (§2.110)</td>
-            <td>¶3.55-66 참조</td>
-          </tr>
-          <tr>
-            <td>다년간 자료의 사용 (§2.110)</td>
-            <td>¶3.75-79 참조</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <div class="footnote-box">
-        <div class="fn-title">&#128196; 주석</div>
-        <div class="footnote-item">[15] §2.112 실무 해설: 잠재적으로 비교가능한 기업의 상세한 기능 및 비용에 대한 자료 부족이 대부분의 사례에서 TNMM을 적용하는 이유</div>
-        <div class="footnote-item">The White Paper (1988, p. 31, 39): Berry Ratio 개발 배경 — Dr. Berry가 코카콜라 사례에서 개발, DuPont International S.A. 과세에 활용</div>
-        <div class="footnote-item">¶2.96-§2.97: 매출 대비 순이익 지표 적용 — 리베이트, 매출할인, 외환손익 처리 포함</div>
-        <div class="footnote-item">¶3.47-3.54: 비교가능성 조정 방법 (working capital adjustment 등)</div>
+      <!-- 아코디언 10 -->
+      <div class="accordion">
+        <div class="accordion-header" onclick="toggleAcc(this)">
+          <span><span class="para-badge">§2.113</span> 사례 3: 제품보증비용(Product Warranty)</span>
+          <span class="acc-arrow">&#9654;</span>
+        </div>
+        <div class="accordion-body">
+          <ul>
+            <li>분석대상회사는 제품보증(warranty)을 제공하지만, 비교가능기업은 제공하지 않는 경우</li>
+            <li>제품보증비용을 별도로 분리하여 분석할 수 없는 상황</li>
+          </ul>
+          <h4>TNMM 적용이 적합한 이유</h4>
+          <ul>
+            <li>TNMM은 제품보증비용이 영업비용(SG&amp;A)에 이미 포함되어 있습니다.</li>
+            <li>비용을 별도로 분리하지 않고도 총영업이익률 기준으로 비교 가능합니다.</li>
+            <li>반면 총이익률(GPM) 기준 방법은 보증비용이 원가에 어떻게 반영되는지에 따라 왜곡이 발생할 수 있습니다.</li>
+          </ul>
+          <div class="key-point green">
+            <strong>핵심 교훈:</strong> TNMM은 영업비용 전체를 고려하므로, 분리 불가능한 특수 비용 항목이 있는 경우에도 총영업이익률 기준으로 비교함으로써 비교가능성을 유지할 수 있습니다.
+          </div>
+        </div>
       </div>
 
       <div class="nav-btns">
-        <button class="btn-nav secondary" onclick="showSection(3,document.querySelectorAll('.nav-item')[3])">&#8592; 이전</button>
-        <a href="M2-7_PSM개요.html" class="btn-nav">다음 모듈: M2-7 이익분할방법(PSM) 개요 &#8594;</a>
+        <button class="btn-nav secondary" onclick="showSection('sec3', document.querySelectorAll('.nav-item')[3])">&#8592; 이전</button>
+        <button class="btn-nav" onclick="showSection('case', document.querySelectorAll('.nav-item')[5])">다음: 사례 탐구 &#8594;</button>
+      </div>
+    </div>
+
+    <!-- 사례 탐구 -->
+    <div class="section case-study" id="case">
+      <h2>&#128269; 사례 탐구: Berry Ratio 탄생 스토리 &#8212; DuPont vs IRS</h2>
+
+      <div class="case-box">
+        <div class="case-title">
+          <span class="case-num">1</span>
+          <span>역사적 배경: 1980년대 IRS의 조사</span>
+        </div>
+        <p>1980년대 미국 국세청(IRS)은 다국적기업들이 스위스 등 저세율 국가 자회사를 활용해 이익을 이전한다고 의심하였습니다.</p>
+        <ul>
+          <li>DuPont은 스위스 자회사(당시 CONOCO의 유럽 판매회사)를 통해 유럽에서 제품을 판매하였습니다.</li>
+          <li>스위스 자회사는 실질적인 제조나 R&amp;D 기능 없이 <strong>주문 접수·청구서 발행만 수행</strong>하는 중계 역할에 그쳤습니다.</li>
+          <li>IRS는 DuPont이 스위스 자회사에 과도한 이익을 배분함으로써 미국 세수를 침해했다고 주장하였습니다.</li>
+        </ul>
+      </div>
+
+      <div class="case-box">
+        <div class="case-title">
+          <span class="case-num">2</span>
+          <span>Berry Ratio의 등장: Dr. Charles Berry의 증언</span>
+        </div>
+        <p>DuPont의 전문가(expert witness)로 출석한 <strong>Dr. Charles Berry(프린스턴대 교수)</strong>는 다음과 같이 주장하였습니다.</p>
+        <ul>
+          <li>"스위스 자회사는 중계 기능(intermediary function)만 수행하므로, 제품 원가(COGS)를 제외하고 영업비용(판관비) 대비 매출총이익으로 보상해야 한다."</li>
+          <li>이 비율이 유사한 기능을 수행하는 독립기업 간 비율과 비슷하다면, 이전가격은 정상(arm's length)이라 할 수 있다.</li>
+        </ul>
+        <div class="berry-box">
+          <div class="berry-title">Berry Ratio 공식 (재확인)</div>
+          <div class="formula">Berry Ratio = 매출총이익 ÷ 영업비용(판관비)</div>
+        </div>
+      </div>
+
+      <div class="case-box">
+        <div class="case-title">
+          <span class="case-num">3</span>
+          <span>현재 활용 및 주의사항</span>
+        </div>
+        <p>Berry Ratio는 현재 국제조세 실무에서 중계·도매 기능 기업의 정상가격 검증 도구로 널리 활용됩니다.</p>
+        <ul>
+          <li>주요 국제 데이터베이스(Bureau van Dijk Orbis, Compustat 등)에서 비교가능기업의 Berry Ratio를 추출·비교합니다.</li>
+          <li>다수의 이전가격 사전합의(APA) 및 세무조사 사례에서 실제 사용됩니다.</li>
+        </ul>
+        <h4>적용 주의사항</h4>
+        <ul>
+          <li>매출원가가 순수한 pass-through인 경우에만 유효합니다.</li>
+          <li>기업이 실질적인 제조·R&amp;D 기능을 보유한 경우에는 부적절합니다.</li>
+          <li>영업비용(SG&amp;A)의 범위 정의가 비교가능기업과 일치해야 합니다.</li>
+        </ul>
+        <div class="key-point green">
+          <strong>결론:</strong> Berry Ratio는 중계 기능 기업에 특화된 지표로, 올바른 조건에서 사용될 때 강력한 정상가격 검증 도구가 됩니다. 그러나 전제 조건(매출원가의 순수 pass-through 여부)을 반드시 확인해야 합니다.
+        </div>
+      </div>
+
+      <div class="nav-btns">
+        <button class="btn-nav secondary" onclick="showSection('sec4', document.querySelectorAll('.nav-item')[4])">&#8592; 이전</button>
+        <button class="btn-nav" onclick="showSection('quiz', document.querySelectorAll('.nav-item')[6])">다음: 퀴즈 &#8594;</button>
+      </div>
+    </div>
+
+    <!-- 퀴즈 -->
+    <div class="section quiz-section" id="quiz">
+      <h2>&#128221; 확인 퀴즈 (5문항)</h2>
+
+      <!-- Q1 -->
+      <div class="quiz-item" id="q1">
+        <div class="q-num">문제 1 / 5</div>
+        <div class="q-text">순이익 지표(Net Profit Indicator) 선정 시 일반적으로 도매·유통업에 가장 적합한 지표는 무엇입니까?</div>
+        <label><input type="radio" name="q1" value="1"> 자산수익률(ROA) &#8212; 영업이익 / 영업자산</label>
+        <label><input type="radio" name="q1" value="2"> 영업이익률(ROS) &#8212; 영업이익 / 매출액</label>
+        <label><input type="radio" name="q1" value="3"> Berry Ratio &#8212; 매출총이익 / 영업비용</label>
+        <label><input type="radio" name="q1" value="4"> 원가기준 영업이익률 &#8212; 영업이익 / 총원가</label>
+        <button class="btn-check" onclick="checkQ('q1','2','도매·유통업은 매출 규모가 가치 창출의 핵심이므로 영업이익률(ROS = 영업이익/매출액)이 가장 적합합니다.')">확인</button>
+        <div class="quiz-feedback" id="q1-fb"></div>
+      </div>
+
+      <!-- Q2 -->
+      <div class="quiz-item" id="q2">
+        <div class="q-num">문제 2 / 5</div>
+        <div class="q-text">Pass-through 비용에 대한 처리 원칙으로 옳은 것은 무엇입니까?</div>
+        <label><input type="radio" name="q2" value="1"> 납세자가 제3자를 위해 대신 지출하고 나중에 청구하는 비용이므로 분모(원가)에 포함시켜야 한다.</label>
+        <label><input type="radio" name="q2" value="2"> Pass-through 비용은 납세자가 실질적으로 부담하는 비용이 아니므로 분모(원가)에서 제외한다.</label>
+        <label><input type="radio" name="q2" value="3"> Pass-through 비용은 항상 영업이익에 포함시킨다.</label>
+        <label><input type="radio" name="q2" value="4"> Pass-through 비용이 있는 경우 TNMM 대신 CPM을 사용해야 한다.</label>
+        <button class="btn-check" onclick="checkQ('q2','2','Pass-through 비용은 납세자가 실질적으로 부담하는 비용이 아니므로 분모(원가)에서 제외해야 합니다. 포함 시 원가기준 영업이익률이 인위적으로 낮아져 결과가 왜곡됩니다.')">확인</button>
+        <div class="quiz-feedback" id="q2-fb"></div>
+      </div>
+
+      <!-- Q3 -->
+      <div class="quiz-item" id="q3">
+        <div class="q-num">문제 3 / 5</div>
+        <div class="q-text">Berry Ratio가 적용 가능한 가장 적합한 기업 유형은 무엇입니까?</div>
+        <label><input type="radio" name="q3" value="1"> 자체 R&amp;D를 수행하고 특허를 보유한 제조업체</label>
+        <label><input type="radio" name="q3" value="2"> 독자적인 브랜드를 보유한 소비재 유통업체</label>
+        <label><input type="radio" name="q3" value="3"> 본사 지시에 따라 주문을 처리하고 청구서를 발행하는 순수 중계·중개 기업</label>
+        <label><input type="radio" name="q3" value="4"> 원자재를 직접 조달하여 완제품을 생산하는 기업</label>
+        <button class="btn-check" onclick="checkQ('q3','3','Berry Ratio는 매출원가가 순수 pass-through이고 영업비용(판관비)이 가치 창출의 핵심인 중계·중개 기업에 적합합니다. R&D·특허 보유 기업이나 독자 브랜드 기업에는 부적절합니다.')">확인</button>
+        <div class="quiz-feedback" id="q3-fb"></div>
+      </div>
+
+      <!-- Q4 -->
+      <div class="quiz-item" id="q4">
+        <div class="q-num">문제 4 / 5</div>
+        <div class="q-text">TNMM에서 외환손익 처리에 대한 올바른 설명은 무엇입니까?</div>
+        <label><input type="radio" name="q4" value="1"> 외환손익은 항상 순이익에 포함시켜야 한다.</label>
+        <label><input type="radio" name="q4" value="2"> 외환손익은 항상 제외해야 한다.</label>
+        <label><input type="radio" name="q4" value="3"> 외환손익 처리는 비교가능기업과 동일한 기준을 적용하되, 환율 변동이 급격한 경우 비교가능성 조정을 고려해야 한다.</label>
+        <label><input type="radio" name="q4" value="4"> 외환손익은 분모에서만 제외한다.</label>
+        <button class="btn-check" onclick="checkQ('q4','3','외환손익은 포함 또는 제외 어느 방식도 가능하지만, 비교가능기업과 동일한 기준을 일관되게 적용하는 것이 핵심입니다. 환율 급변 시에는 비교가능성 조정도 추가로 고려해야 합니다.')">확인</button>
+        <div class="quiz-feedback" id="q4-fb"></div>
+      </div>
+
+      <!-- Q5 -->
+      <div class="quiz-item" id="q5">
+        <div class="q-num">문제 5 / 5</div>
+        <div class="q-text">원가 분류 차이(판매관리비 vs 제조원가 분류) 문제가 발생할 때 TNMM이 유리한 이유는 무엇입니까?</div>
+        <label><input type="radio" name="q5" value="1"> TNMM은 원가를 전혀 사용하지 않기 때문</label>
+        <label><input type="radio" name="q5" value="2"> TNMM은 전체 원가에 대한 영업이익률이므로 분류 방식의 차이가 상쇄되어 비교가능성이 높아지기 때문</label>
+        <label><input type="radio" name="q5" value="3"> TNMM은 원가 분류를 표준화하는 기능이 있기 때문</label>
+        <label><input type="radio" name="q5" value="4"> TNMM은 비교가능기업의 세부 재무자료가 필요 없기 때문</label>
+        <button class="btn-check" onclick="checkQ('q5','2','TNMM은 전체 영업원가(COGS + SG&A) 대비 영업이익률을 비교하므로, 특정 비용이 COGS 또는 SG&A 중 어디에 분류되는지에 관계없이 총원가 기준으로 비교됩니다. 따라서 원가 분류 차이의 영향이 상쇄됩니다.')">확인</button>
+        <div class="quiz-feedback" id="q5-fb"></div>
+      </div>
+
+      <button class="btn-quiz-submit" onclick="calcScore()">전체 점수 확인</button>
+      <div class="quiz-score" id="quizScore"></div>
+
+      <div class="nav-btns">
+        <button class="btn-nav secondary" onclick="showSection('case', document.querySelectorAll('.nav-item')[5])">&#8592; 이전</button>
+        <button class="btn-nav" onclick="showSection('checklist', document.querySelectorAll('.nav-item')[7])">다음: 체크리스트 &#8594;</button>
+      </div>
+    </div>
+
+    <!-- 체크리스트 -->
+    <div class="section checklist-card" id="checklist">
+      <h2>&#9989; 실무 체크리스트</h2>
+      <p style="font-size:.88rem;color:var(--gray);margin-bottom:1rem">TNMM 적용 시 아래 항목을 점검하십시오. 완료한 항목을 클릭하여 체크할 수 있습니다.</p>
+
+      <div class="checklist-item" onclick="toggleCheck(this)">
+        <input type="checkbox">
+        <label>분석대상 거래의 성격에 맞는 순이익 지표(ROS / ROCOS / ROA 등)를 선정하였습니까?</label>
+      </div>
+      <div class="checklist-item" onclick="toggleCheck(this)">
+        <input type="checkbox">
+        <label>구분재무제표(segmented financials)를 사용하여 분석대상 거래 관련 수익·비용만 반영하였습니까?</label>
+      </div>
+      <div class="checklist-item" onclick="toggleCheck(this)">
+        <input type="checkbox">
+        <label>영업외손익(이자수익/비용, 법인세, 특별손익)을 순이익에서 제외하였습니까?</label>
+      </div>
+      <div class="checklist-item" onclick="toggleCheck(this)">
+        <input type="checkbox">
+        <label>Pass-through 비용을 분모(원가)에서 제외하는 처리를 하였습니까?</label>
+      </div>
+      <div class="checklist-item" onclick="toggleCheck(this)">
+        <input type="checkbox">
+        <label>Berry Ratio 사용 시 매출원가가 순수 pass-through인지 확인하였습니까?</label>
+      </div>
+      <div class="checklist-item" onclick="toggleCheck(this)">
+        <input type="checkbox">
+        <label>비교가능기업과의 원가 분류 방식(판매관리비 vs 제조원가) 차이를 분석하고 조정하였습니까?</label>
+      </div>
+
+      <div class="nav-btns" style="margin-top:1.5rem">
+        <a href="M2-5_TNMM기초.html" class="btn-nav secondary">&#8592; 이전: M2-5 TNMM 기초</a>
+        <a href="M2-7_PSM개요.html" class="btn-nav">다음: M2-7 PSM 개요 &#8594;</a>
       </div>
     </div>
 
@@ -602,11 +749,67 @@ body{font-family:'Noto Sans KR',Arial,sans-serif;background:#f0f4f8;color:var(--
 </div><!-- end .layout -->
 
 <script>
-function showSection(idx, btn) {
-  document.querySelectorAll('.section').forEach((s,i) => s.classList.toggle('active', i===idx));
+const SECTIONS = ['objectives','sec1','sec2','sec3','sec4','case','quiz','checklist'];
+const TOTAL = SECTIONS.length;
+
+function showSection(id, btn) {
+  SECTIONS.forEach(s => {
+    const el = document.getElementById(s);
+    if (el) el.classList.toggle('active', s === id);
+  });
   document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
-  if(btn) btn.classList.add('active');
-  window.scrollTo({top:0, behavior:'smooth'});
+  if (btn) btn.classList.add('active');
+  const idx = SECTIONS.indexOf(id);
+  const pct = Math.round(((idx + 1) / TOTAL) * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressPct').textContent = pct + '%';
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function toggleAcc(header) {
+  const body = header.nextElementSibling;
+  const isOpen = header.classList.contains('open');
+  header.classList.toggle('open', !isOpen);
+  body.classList.toggle('open', !isOpen);
+}
+
+function checkQ(qid, correct, explanation) {
+  const selected = document.querySelector(`input[name="${qid}"]:checked`);
+  const fb = document.getElementById(qid + '-fb');
+  if (!selected) { fb.style.display = 'block'; fb.className = 'quiz-feedback wrong'; fb.textContent = '답을 선택해 주십시오.'; return; }
+  if (selected.value === correct) {
+    fb.className = 'quiz-feedback correct';
+    fb.innerHTML = '&#9989; 정답입니다! ' + explanation;
+  } else {
+    fb.className = 'quiz-feedback wrong';
+    fb.innerHTML = '&#10060; 오답입니다. ' + explanation;
+  }
+  fb.style.display = 'block';
+}
+
+function calcScore() {
+  const answers = {q1:'2', q2:'2', q3:'3', q4:'3', q5:'2'};
+  let score = 0;
+  Object.entries(answers).forEach(([q, ans]) => {
+    const sel = document.querySelector(`input[name="${q}"]:checked`);
+    if (sel && sel.value === ans) score++;
+  });
+  const box = document.getElementById('quizScore');
+  box.style.display = 'block';
+  const pct = Math.round((score / 5) * 100);
+  if (score === 5) {
+    box.innerHTML = `&#127881; 만점! ${score}/5문항 정답 (${pct}%) &#8212; 모든 내용을 완벽하게 이해하셨습니다!`;
+  } else if (score >= 3) {
+    box.innerHTML = `&#128077; ${score}/5문항 정답 (${pct}%) &#8212; 좋습니다! 틀린 문항을 다시 한 번 확인해 보십시오.`;
+  } else {
+    box.innerHTML = `&#128218; ${score}/5문항 정답 (${pct}%) &#8212; 본문을 다시 읽고 복습해 보십시오.`;
+  }
+}
+
+function toggleCheck(item) {
+  const cb = item.querySelector('input[type=checkbox]');
+  cb.checked = !cb.checked;
+  item.classList.toggle('checked', cb.checked);
 }
 </script>
 </body>

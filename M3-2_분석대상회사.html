@@ -2,295 +2,500 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>M3-2: 분석대상회사 선정 &amp; 통제거래 정보 &#8212; OECD 이전가격 지침서</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 2 — 분석대상회사 선정과 정보 범위</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --teal:#0f7a7a;--teal-light:#e0f5f5;--teal-mid:#1a9a9a;
-  --blue:#1a5fa8;--blue-light:#e8f0fa;
-  --green:#1a7a4a;--green-light:#e6f5ee;
-  --orange:#c06000;--orange-light:#fff3e0;
-  --red:#b02020;--red-light:#fdecea;
-  --purple:#6a1fa8;--purple-light:#f3e8fa;
-  --gray:#555;--gray-light:#f5f5f5;--gray-border:#ddd;
-  --text:#222;--text2:#555;--white:#fff;
-  --radius:10px;--shadow:0 2px 8px rgba(0,0,0,.10);
-}
+:root{--accent:#0f7a7a;--accent-light:#e0f5f5;--accent-mid:#1a9a9a;--green:#1a7a4a;--green-light:#e6f5ee;--orange:#c06000;--orange-light:#fff3e0;--red:#b02020;--red-light:#fdecea;--gray:#555;--gray-light:#f5f5f5;--gray-border:#ddd;--text:#222;--text2:#555;--white:#fff;--radius:10px;--shadow:0 2px 8px rgba(0,0,0,.10);}
 body{font-family:'Noto Sans KR',Arial,sans-serif;background:#f0f4f8;color:var(--text);line-height:1.75;font-size:16px}
-.page-header{background:var(--teal);color:#fff;padding:1.2rem 2rem;display:flex;align-items:center;gap:1rem;border-bottom:3px solid #0a5a5a}
-.page-header .back-btn{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);color:#fff;padding:5px 14px;border-radius:20px;cursor:pointer;font-size:.82rem;font-family:inherit;text-decoration:none}
-.page-header h1{font-size:1.1rem;font-weight:700;flex:1}
-.layout{display:flex;max-width:1100px;margin:0 auto;padding:2rem 1.5rem;gap:1.5rem}
-.sidebar{width:210px;flex-shrink:0}
-.sidebar-box{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:1.2rem;position:sticky;top:1.5rem}
-.sidebar-box h3{font-size:.82rem;font-weight:700;color:var(--gray);margin-bottom:.8rem;text-transform:uppercase;letter-spacing:.05em}
-.nav-item{display:block;width:100%;text-align:left;background:none;border:none;padding:.45rem .7rem;border-radius:6px;font-size:.82rem;cursor:pointer;color:var(--text2);font-family:inherit;transition:all .12s;margin-bottom:2px}
-.nav-item:hover{background:var(--teal-light);color:var(--teal)}
-.nav-item.active{background:var(--teal-light);color:var(--teal);font-weight:700}
+a{color:var(--accent);text-decoration:none}
+.mod-header{background:var(--accent);color:#fff;padding:1.5rem 2rem}
+.mod-header .breadcrumb{font-size:.8rem;opacity:.7;margin-bottom:.4rem}
+.mod-header h1{font-size:1.4rem;font-weight:700}
+.mod-header .sub{font-size:.9rem;opacity:.8;margin-top:.3rem}
+.prog-strip{background:rgba(255,255,255,.15);height:6px;margin-top:1rem;border-radius:99px;overflow:hidden}
+.prog-strip-inner{height:100%;background:#fff;border-radius:99px;transition:width .4s}
+.layout{display:flex;max-width:1100px;margin:0 auto;padding:2rem 1.5rem 4rem;gap:1.5rem}
+.sidebar{width:220px;flex-shrink:0}
 .content{flex:1;min-width:0}
-.section{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:1.8rem 2rem;margin-bottom:1.2rem;display:none}
-.section.active{display:block}
-.section h2{font-size:1.15rem;font-weight:700;color:var(--teal);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:2px solid var(--teal-light)}
-.section h3{font-size:1rem;font-weight:700;color:var(--text);margin:1.2rem 0 .6rem}
-.section h4{font-size:.92rem;font-weight:700;color:var(--teal);margin:.9rem 0 .4rem}
-.section p{font-size:.95rem;color:var(--text2);margin-bottom:.8rem}
-.section ul,.section ol{padding-left:1.4rem;margin-bottom:.8rem}
-.section li{font-size:.95rem;color:var(--text2);margin-bottom:.35rem}
-.para-badge{display:inline-block;background:var(--teal-light);color:var(--teal);font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:20px;margin-right:.4rem;vertical-align:middle}
-.commentary{background:#e8f8f8;border:1px solid #80cccc;border-left:4px solid var(--teal);border-radius:8px;padding:1rem 1.2rem;margin:1rem 0;font-size:.88rem;color:#0a4a4a}
-.commentary .comm-label{font-size:.75rem;font-weight:700;color:var(--teal);margin-bottom:.4rem;text-transform:uppercase;letter-spacing:.03em}
-.key-point{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:8px;padding:.9rem 1.2rem;margin:.8rem 0;font-size:.9rem;color:#1a3a6a}
-.key-point.teal{background:var(--teal-light);border-color:var(--teal);color:#0a4a4a}
-.key-point.orange{background:var(--orange-light);border-color:var(--orange);color:#6b3800}
-.key-point.green{background:var(--green-light);border-color:var(--green);color:#1a4a2a}
-.key-point.red{background:var(--red-light);border-color:var(--red);color:#6b1010}
-.case-table{width:100%;border-collapse:collapse;font-size:.88rem;margin:1rem 0}
-.case-table th{background:var(--teal);color:#fff;padding:.65rem 1rem;text-align:left;font-weight:600}
-.case-table td{padding:.6rem 1rem;border-bottom:1px solid var(--gray-border);vertical-align:top}
-.case-table tr:last-child td{border:none}
-.case-table tr:nth-child(even) td{background:#fafafa}
-.example-box{background:var(--teal-light);border:1.5px solid #80cccc;border-radius:10px;padding:1.2rem 1.5rem;margin:1rem 0}
-.example-box .ex-title{font-size:.8rem;font-weight:700;color:var(--teal);margin-bottom:.8rem;text-transform:uppercase;letter-spacing:.04em;border-bottom:1px solid #80cccc;padding-bottom:.4rem}
-.tested-party-box{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1rem 0}
-.party-card{background:#fafafa;border:1.5px solid var(--gray-border);border-radius:8px;padding:1rem 1.2rem}
-.party-card.tested{border-color:var(--teal);background:var(--teal-light)}
-.party-card h4{font-size:.88rem;font-weight:700;margin-bottom:.5rem}
-.party-card.tested h4{color:var(--teal)}
-.party-card ul{padding-left:1.1rem}
-.party-card li{font-size:.84rem;color:var(--text2);margin-bottom:.3rem}
-.footnote-box{background:#fafafa;border:1px solid #e0e0e0;border-radius:8px;padding:1rem 1.2rem;margin:1rem 0;font-size:.82rem;color:#555}
-.footnote-box .fn-title{font-weight:700;color:var(--gray);margin-bottom:.5rem;font-size:.78rem;text-transform:uppercase}
-.footnote-item{margin-bottom:.4rem;padding-left:.8rem;border-left:2px solid #ddd}
+.nav-card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:1.2rem;margin-bottom:1rem;position:sticky;top:1rem}
+.nav-card h4{font-size:.85rem;color:var(--gray);margin-bottom:.8rem}
+.nav-item{display:block;padding:.45rem .75rem;border-radius:6px;font-size:.85rem;color:var(--text2);margin-bottom:3px;cursor:pointer;border:none;width:100%;text-align:left;background:none;transition:background .12s}
+.nav-item:hover{background:var(--accent-light);color:var(--accent)}
+.nav-item.active{background:var(--accent);color:#fff;font-weight:600}
+.card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:1.8rem 2rem;margin-bottom:1.5rem}
+.card h2{font-size:1.15rem;font-weight:700;color:var(--accent);margin-bottom:1rem;padding-bottom:.6rem;border-bottom:2px solid var(--accent-light)}
+.card p{font-size:.95rem;color:var(--text2);margin-bottom:.7rem}
+.obj-list{list-style:none;padding:0}
+.obj-list li{display:flex;gap:.7rem;align-items:flex-start;padding:.5rem 0;border-bottom:1px solid var(--gray-border);font-size:.93rem}
+.obj-list li:last-child{border:none}
+.obj-num{background:var(--accent);color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;flex-shrink:0;margin-top:2px}
+.accordion{border:1px solid var(--gray-border);border-radius:var(--radius);overflow:hidden;margin-bottom:1rem}
+.acc-header{display:flex;justify-content:space-between;align-items:center;padding:.9rem 1.2rem;cursor:pointer;background:var(--gray-light);font-weight:600;font-size:.95rem;border:none;width:100%;text-align:left;transition:background .12s}
+.acc-header:hover{background:#ebebeb}
+.acc-header .para{font-size:.78rem;color:var(--accent);background:var(--accent-light);padding:2px 8px;border-radius:20px;margin-right:.6rem}
+.acc-header .arrow{font-size:1rem;color:var(--gray);transition:transform .2s}
+.acc-body{display:none;padding:1.1rem 1.3rem;background:#fff;font-size:.93rem;color:var(--text2);line-height:1.8;border-top:1px solid var(--gray-border)}
+.acc-body.open{display:block}
+.acc-header.open .arrow{transform:rotate(180deg)}
+.key-point{background:var(--accent-light);border-left:4px solid var(--accent);padding:.7rem 1rem;border-radius:0 6px 6px 0;margin:.8rem 0;font-size:.9rem;color:#0a4a4a}
+.warn-point{background:var(--orange-light);border-left:4px solid var(--orange);padding:.7rem 1rem;border-radius:0 6px 6px 0;margin:.8rem 0;font-size:.9rem;color:#6b3a00}
+.compare-table{width:100%;border-collapse:collapse;font-size:.9rem;margin:.8rem 0}
+.compare-table th{background:var(--accent);color:#fff;padding:.7rem 1rem;text-align:left;font-weight:600}
+.compare-table td{padding:.65rem 1rem;border-bottom:1px solid var(--gray-border);vertical-align:top}
+.compare-table tr:last-child td{border:none}
+.compare-table tr:nth-child(even) td{background:#fafafa}
+.case-box{background:#fff;border:1.5px solid var(--accent-mid);border-radius:var(--radius);padding:1.3rem 1.5rem;margin:1rem 0}
+.case-box .case-label{font-size:.78rem;font-weight:700;color:var(--accent);letter-spacing:.05em;margin-bottom:.5rem}
+.case-box h4{font-size:.95rem;font-weight:700;color:var(--text);margin-bottom:.6rem}
+.quiz-section{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:1.8rem 2rem;margin-bottom:1.5rem}
+.quiz-section h2{font-size:1.15rem;font-weight:700;color:var(--accent);margin-bottom:.4rem}
+.quiz-section .q-count{font-size:.85rem;color:var(--gray);margin-bottom:1.5rem}
+.quiz-item{margin-bottom:1.8rem;padding-bottom:1.5rem;border-bottom:1px solid var(--gray-border)}
+.quiz-item:last-of-type{border:none}
+.quiz-item .q-text{font-size:.97rem;font-weight:600;color:var(--text);margin-bottom:.9rem}
+.quiz-item .q-num{font-size:.78rem;background:var(--accent-light);color:var(--accent);padding:2px 9px;border-radius:20px;margin-right:.5rem;font-weight:700}
+.opt-list{list-style:none;padding:0;display:flex;flex-direction:column;gap:.5rem}
+.opt-list li button{width:100%;text-align:left;padding:.7rem 1rem;border-radius:8px;border:1.5px solid var(--gray-border);background:#fff;font-size:.9rem;cursor:pointer;color:var(--text);transition:all .15s}
+.opt-list li button:hover{border-color:var(--accent-mid);background:var(--accent-light)}
+.opt-list li button.correct{background:var(--green-light);border-color:var(--green);color:var(--green);font-weight:600}
+.opt-list li button.wrong{background:var(--red-light);border-color:var(--red);color:var(--red)}
+.opt-list li button:disabled{cursor:default}
+.q-feedback{margin-top:.7rem;padding:.6rem 1rem;border-radius:8px;font-size:.88rem;display:none}
+.q-feedback.show{display:block}
+.q-feedback.ok{background:var(--green-light);color:var(--green);border:1px solid #a0d8b8}
+.q-feedback.no{background:var(--red-light);color:var(--red);border:1px solid #f5b8b8}
+.checklist{list-style:none;padding:0}
+.checklist li{display:flex;gap:.8rem;align-items:flex-start;padding:.55rem 0;border-bottom:1px solid var(--gray-border);font-size:.92rem}
+.checklist li:last-child{border:none}
+.checklist input[type=checkbox]{width:18px;height:18px;margin-top:2px;cursor:pointer;flex-shrink:0;accent-color:var(--green)}
+.checklist label{cursor:pointer;color:var(--text2)}
+.checklist input:checked+label{color:var(--green);text-decoration:line-through;opacity:.7}
 .nav-btns{display:flex;justify-content:space-between;margin-top:1.5rem}
-.btn-nav{background:var(--teal);color:#fff;border:none;padding:.7rem 1.5rem;border-radius:8px;cursor:pointer;font-size:.9rem;font-family:inherit;font-weight:600;transition:background .15s;text-decoration:none;display:inline-block}
-.btn-nav:hover{background:#0a5a5a}
-.btn-nav.secondary{background:#fff;color:var(--teal);border:1.5px solid var(--teal)}
-.btn-nav.secondary:hover{background:var(--teal-light)}
+.btn{display:inline-flex;align-items:center;gap:.4rem;padding:.7rem 1.5rem;border-radius:8px;font-size:.9rem;font-weight:600;cursor:pointer;border:none;transition:all .15s;text-decoration:none}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{background:#0a5a5a}
+.btn-outline{background:#fff;color:var(--accent);border:1.5px solid var(--accent)}
+.btn-outline:hover{background:var(--accent-light)}
+.btn-success{background:var(--green);color:#fff}
+.complete-banner{background:var(--green-light);border:2px solid var(--green);border-radius:var(--radius);padding:1.3rem 1.8rem;text-align:center;display:none;margin-bottom:1.5rem}
+.complete-banner.show{display:block}
+.complete-banner h3{color:var(--green);font-size:1.1rem;margin-bottom:.4rem}
+.complete-banner p{font-size:.9rem;color:#2a6040}
+@media(max-width:720px){.layout{flex-direction:column}.sidebar{width:100%;position:static}.nav-card{position:static}}
 </style>
 </head>
 <body>
-<header class="page-header">
-  <a href="index_ch3.html" class="back-btn">&#8592; 목차</a>
-  <h1>M3-2: 분석대상회사 선정 &amp; 통제거래 정보 (&#167;3.13&#8211;&#167;3.23)</h1>
-</header>
+
+<div class="mod-header">
+  <div class="breadcrumb"><a href="index_ch3.html" style="color:rgba(255,255,255,.8)">← Chapter III 목록으로</a></div>
+  <h1>Module 2 — 분석대상회사 선정과 정보 범위</h1>
+  <div class="sub">§3.13 ~ §3.23 · OECD Transfer Pricing Guidelines Chapter III · A.3</div>
+  <div class="prog-strip"><div class="prog-strip-inner" id="progBar" style="width:0%"></div></div>
+</div>
 
 <div class="layout">
-  <nav class="sidebar">
-    <div class="sidebar-box">
-      <h3>목차</h3>
-      <button class="nav-item active" onclick="showSection(0,this)">1. 의도적 상계거래</button>
-      <button class="nav-item" onclick="showSection(1,this)">2. 분석대상회사 선정</button>
-      <button class="nav-item" onclick="showSection(2,this)">3. 통제거래 정보</button>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="nav-card">
+      <h4>목차</h4>
+      <button class="nav-item" onclick="scrollTo('sec-obj')">학습 목표</button>
+      <button class="nav-item" onclick="scrollTo('sec1')">§3.13-3.17 의도적 상계거래</button>
+      <button class="nav-item" onclick="scrollTo('sec2')">§3.18-3.19 분석대상회사 선정</button>
+      <button class="nav-item" onclick="scrollTo('sec3')">§3.20-3.22 정보 범위</button>
+      <button class="nav-item" onclick="scrollTo('sec4')">§3.23 해외 정보 한계</button>
+      <button class="nav-item" onclick="scrollTo('sec-case')">사례 탐구</button>
+      <button class="nav-item" onclick="scrollTo('sec-quiz')">퀴즈</button>
+      <button class="nav-item" onclick="scrollTo('sec-check')">체크리스트</button>
+      <div style="margin-top:1rem;padding-top:.8rem;border-top:1px solid var(--gray-border);font-size:.8rem;color:var(--gray)">
+        진도율: <strong id="progText">0%</strong>
+      </div>
     </div>
-  </nav>
+  </div>
 
+  <!-- Content -->
   <div class="content">
 
-    <!-- Section 1: 의도적 상계거래 -->
-    <div class="section active" id="sec0">
-      <h2>1. 의도적 상계거래 (§3.13&#8211;§3.17)</h2>
-
-      <h3>A.3.2 Intentional Set-offs</h3>
-
-      <h3><span class="para-badge">§3.13/3.15</span> 의도적 상계거래 (Intentional Set-offs)</h3>
-      <p>의도된 상계(Intentional set-off)는 관계회사 간 거래에 명시적으로 포함된 조건으로, <strong>서로 제공한 이익을 상계처리하여 실질적인 과세 대상 이익을 조정</strong>하는 방식이다.</p>
-
-      <div class="example-box">
-        <div class="ex-title">&#9855; 의도적 상계거래 사례</div>
-        <table class="case-table" style="margin:.5rem 0 0">
-          <thead><tr><th>계열사 A</th><th>계열사 B</th><th>처리방법</th></tr></thead>
-          <tbody>
-            <tr>
-              <td>특허 제공</td>
-              <td>노하우 제공</td>
-              <td>두 이익을 상호보완적 거래로 간주 → 별도 이익 없이 정산</td>
-            </tr>
-            <tr>
-              <td>로열티 지급</td>
-              <td>기술노하우 제공</td>
-              <td>서비스, 무형자산, 유리한 제품의 판매가격을 구매가격으로 대체</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <p>그러나 이러한 상계는 독립기업 간에도 관찰될 수 있지만, 납세자는 <strong>정상가격 원칙에 따라 각 이익의 가치를 정확히 평가하고 상계의 타당성을 입증</strong>해야 한다.</p>
-
-      <div class="commentary">
-        <div class="comm-label">&#9654; 실무 해설 (주)</div>
-        <p>그룹 내 기업 간에 사전에 계약에 의해 특수관계 상계거래를 수행하는 경우, 이를 의도적 상계거래라고 한다. 이러한 의도적 상계거래는 각 거래에서 거래당사자가 실현한 이익과 손실을 서로 상계(통합)하여 정상가격을 산출한다. 특히, OECD 이전가격지침서는 로열티거래와 기술노하우 거래 등 서비스, 무형자산 또는 유리한 제품의 판매가격을 구매가격으로 대체하는 사례를 제시하고 있다.</p>
-      </div>
-
-      <h3><span class="para-badge">§3.16</span> 국제조세 규정과 내국세법 간의 차이</h3>
-      <p>국제거래에서의 상계조건은 국내 독립기업 간의 거래와는 세무상 처리 방식의 차이로 인해 상이할 수 있다.</p>
-
-      <table class="case-table">
-        <thead><tr><th>차이 유형</th><th>사례</th></tr></thead>
-        <tbody>
-          <tr><td>원천징수세 적용</td><td>로열티를 매출과 상계하는 경우 원천징수세가 적용되어 세무상 복잡성 발생</td></tr>
-          <tr><td>조세조약 적용</td><td>국제거래에서는 조세조약에 따른 처리 방식이 내국 거래와 다를 수 있음</td></tr>
-        </tbody>
-      </table>
-
-      <h3><span class="para-badge">§3.17</span> 실수 또는 착오에 의한 과오납부 금액</h3>
-      <div class="commentary">
-        <div class="comm-label">&#9654; 한국 세법 해설 (주)</div>
-        <p>한국세법은 상호합의가 있는 경우에는 세액을 조정할 수 있다고 본다. (국조법 제12조 — 체약상대국의 과세조정에 대한 대응조정)</p>
-      </div>
-
-      <div class="footnote-box">
-        <div class="fn-title">&#128196; 주석</div>
-        <div class="footnote-item">[2] 국조법 제11조 (상계거래의 인정 등)</div>
-        <div class="footnote-item">[3] 국조법 제12조 (체약상대국의 과세조정에 대한 대응조정)</div>
-      </div>
-
-      <div class="nav-btns">
-        <span></span>
-        <button class="btn-nav" onclick="showSection(1,document.querySelectorAll('.nav-item')[1])">다음: 분석대상회사 선정 &#8594;</button>
-      </div>
+    <!-- 완료 배너 -->
+    <div class="complete-banner" id="completeBanner">
+      <h3>모듈 학습 완료!</h3>
+      <p>분석대상회사 선정과 정보 범위 학습을 완료하셨습니다. 수고하셨습니다.</p>
     </div>
 
-    <!-- Section 2: 분석대상회사 선정 -->
-    <div class="section" id="sec1">
-      <h2>2. 분석대상회사 선정 (§3.18&#8211;§3.19)</h2>
+    <!-- 학습 목표 -->
+    <div class="card" id="sec-obj">
+      <h2>학습 목표</h2>
+      <ul class="obj-list">
+        <li><span class="obj-num">1</span>의도적 상계거래(Intentional Set-off)의 개념과 조세 처리 원칙을 설명하실 수 있습니다.</li>
+        <li><span class="obj-num">2</span>One-sided 접근법에서 분석대상회사(Tested Party) 선정 기준을 이해하십니다.</li>
+        <li><span class="obj-num">3</span>One-sided 방법에서도 비검증 당사자(Non-tested Party)의 기능분석이 필요한 이유를 설명하실 수 있습니다.</li>
+        <li><span class="obj-num">4</span>해외 관계회사 정보 수집의 현실적 한계와 납세자의 의무 범위를 이해하십니다.</li>
+        <li><span class="obj-num">5</span>국조법 제11조(상계거래)와 제12조(대응조정)의 내용을 설명하실 수 있습니다.</li>
+      </ul>
+    </div>
 
-      <h3>A.3.3 Choice of the Tested Party</h3>
+    <!-- 섹션 1 -->
+    <div class="card" id="sec1">
+      <h2>§3.13–3.17 의도적 상계거래</h2>
 
-      <h3><span class="para-badge">§3.18</span> 분석대상회사 선정 (One-sided Approach)</h3>
-      <p>원가가산방법, 재판매가격방법 및 거래순이익률방법을 적용하는 경우, 거래당사자의 한쪽만을 분석하기 때문에(one-sided approach) <strong>분석대상회사(tested party)</strong>를 선정한다.</p>
-
-      <div class="key-point teal">
-        <strong>원칙:</strong> 무형자산을 소유하지 않고 거래가 복잡하지 않은 다른 한쪽을 분석대상회사로 선정한다.
-      </div>
-
-      <div class="tested-party-box">
-        <div class="party-card tested">
-          <h4>&#9989; 분석대상회사 (Tested Party) 특징</h4>
-          <ul>
-            <li>기능이 단순한 측</li>
-            <li>고유 무형자산을 소유하지 않은 측</li>
-            <li>거래가 복잡하지 않은 측</li>
-            <li>신뢰할 수 있는 비교가능 자료 확보 가능한 측</li>
-          </ul>
-        </div>
-        <div class="party-card">
-          <h4>&#10060; 분석대상회사가 되지 않는 측</h4>
-          <ul>
-            <li>고유·가치있는 무형자산 보유</li>
-            <li>복잡한 기능 수행</li>
-            <li>중요한 위험 부담</li>
-            <li>사업상 핵심 역할 수행</li>
-          </ul>
+      <div class="accordion" id="acc1">
+        <button class="acc-header" onclick="toggleAcc('acc1')">
+          <span><span class="para">§3.13-3.15</span>의도적 상계거래(Intentional Set-off) 개요</span>
+          <span class="arrow">▼</span>
+        </button>
+        <div class="acc-body">
+          <p>의도된 상계(Intentional Set-off)란 관계회사 간 거래에 명시적으로 포함된 조건으로, 서로 제공한 이익을 상계처리하여 실질적인 과세대상 이익을 조정하는 방식입니다.</p>
+          <p>예를 들어, 특허 제공 + 노하우 제공 → 서로 상계 → 추가 이익 없이 정산하는 형태로 이루어집니다.</p>
+          <p>국내법과 국제조세 간 차이와 관련하여, 로열티를 매출과 상계 시 원천징수세가 발생할 수 있으며 이는 국조법 제11조(상계거래의 인정 등)에서 규율하고 있습니다.</p>
+          <div class="key-point">
+            독립기업 간에도 상계거래가 관찰될 수 있으나, 납세자는 정상가격 원칙에 따라 각 이익의 가치를 정확히 평가하고 상계의 타당성을 입증해야 합니다.
+          </div>
         </div>
       </div>
 
-      <h3><span class="para-badge">§3.19</span> 사례</h3>
-      <div class="example-box">
-        <div class="ex-title">&#128221; 분석대상회사 선정 사례</div>
-        <table class="case-table" style="margin:.5rem 0 0">
-          <thead><tr><th>방법</th><th>분석대상회사 (Tested Party)</th><th>이유</th></tr></thead>
-          <tbody>
-            <tr><td>재판매가격방법 (RPM)</td><td>유통·판매 자회사</td><td>단순 유통 기능, 고유 무형자산 없음</td></tr>
-            <tr><td>원가가산방법 (CPM)</td><td>제조 자회사</td><td>단순 제조 기능 (Contract Manufacturer)</td></tr>
-            <tr><td>거래순이익률방법 (TNMM)</td><td>단순 기능 수행 측</td><td>비교가능기업 검색 용이</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="nav-btns">
-        <button class="btn-nav secondary" onclick="showSection(0,document.querySelectorAll('.nav-item')[0])">&#8592; 이전</button>
-        <button class="btn-nav" onclick="showSection(2,document.querySelectorAll('.nav-item')[2])">다음: 통제거래 정보 &#8594;</button>
+      <div class="accordion" id="acc2">
+        <button class="acc-header" onclick="toggleAcc('acc2')">
+          <span><span class="para">§3.16-3.17</span>원천징수세 문제·과오납부 조정</span>
+          <span class="arrow">▼</span>
+        </button>
+        <div class="acc-body">
+          <p>§3.16에 따르면, 국제거래에서 상계조건은 국내 독립기업 간 거래와 세무상 처리 방식에서 차이가 있습니다. 원천징수세 및 조세조약의 적용 여부가 달라질 수 있으므로 주의가 필요합니다.</p>
+          <p>§3.17에 따르면, 실수 또는 착오에 의한 과오납부가 있는 경우 국조법 제12조에 따른 대응조정(Corresponding Adjustment)이 가능합니다.</p>
+        </div>
       </div>
     </div>
 
-    <!-- Section 3: 통제거래 정보 -->
-    <div class="section" id="sec2">
-      <h2>3. 통제거래 정보 (§3.20&#8211;§3.23)</h2>
+    <!-- 섹션 2 -->
+    <div class="card" id="sec2">
+      <h2>§3.18–3.19 분석대상회사 선정</h2>
 
-      <h3>A.3.4 Information on the Controlled Transaction</h3>
+      <div class="accordion" id="acc3">
+        <button class="acc-header" onclick="toggleAcc('acc3')">
+          <span><span class="para">§3.18-3.19</span>분석대상회사(Tested Party) 선정 원칙</span>
+          <span class="arrow">▼</span>
+        </button>
+        <div class="acc-body">
+          <p>One-sided approach는 CPM, RPM, TNMM 적용 시 거래당사자 한쪽만을 분석하는 방식입니다.</p>
+          <p>분석대상회사 선정 기준으로는 무형자산을 소유하지 않고 거래가 복잡하지 않은 쪽을 선정합니다. 기능이 단순한 쪽이 더 신뢰할 수 있는 비교가능거래를 찾기 용이하기 때문입니다.</p>
+          <p>대표적인 예시는 다음과 같습니다.</p>
+          <ul style="margin:.5rem 0 .8rem 1.2rem;line-height:2">
+            <li>계약제조업자 선정 (vs 핵심 기술 보유 모회사)</li>
+            <li>단순 판매 자회사 선정 (vs 브랜드·무형자산 보유 모회사)</li>
+          </ul>
+          <div class="key-point">
+            분석대상회사는 가장 신뢰할 수 있는 분석 결과를 도출할 수 있는 기업이어야 합니다.
+          </div>
+        </div>
+      </div>
+    </div>
 
-      <h3><span class="para-badge">§3.20</span> 가장 합리적인 정상가격산출방법 결정을 위한 자료의 범위</h3>
-      <p>일방적 방법(one-sided methods)에서는 한쪽 당사자('tested party')만을 중심으로 분석하지만, <strong>비교가능성 평가를 위해 비검증 당사자(non-tested party)에 대한 기능 분석 정보도 필수적</strong>이다.</p>
+    <!-- 섹션 3 -->
+    <div class="card" id="sec3">
+      <h2>§3.20–3.22 정보 범위</h2>
 
-      <div class="key-point red">
-        이전가격 분석에서 부분적 정보만으로는 신뢰할 수 있는 분석이 어려우며, 반드시 전체 당사자의 역할과 기여도를 종합적으로 평가해야 한다.
+      <div class="accordion" id="acc4">
+        <button class="acc-header" onclick="toggleAcc('acc4')">
+          <span><span class="para">§3.20-3.21</span>분석대상회사 vs 거래상대방 정보</span>
+          <span class="arrow">▼</span>
+        </button>
+        <div class="acc-body">
+          <p>One-sided 방법에서도 비검증당사자(non-tested party)의 기능분석 정보가 필수적입니다.</p>
+          <p>그 이유는 비교가능성 평가를 위해 거래의 전체 상황을 이해해야 하기 때문입니다. 이익분할법(PSM)에서는 양쪽 모두의 재무자료가 필요합니다.</p>
+          <div class="warn-point">
+            비검증당사자 정보 없이 분석하면 편향된 결과 도출이 가능합니다.
+          </div>
+        </div>
       </div>
 
-      <h3><span class="para-badge">§3.21</span> 이익분할방법 적용 시 자료의 범위</h3>
-      <p>이익분할방법을 적용할 경우 분석을 위한 <strong>다섯 가지 비교가능성 조건</strong>을 갖춘 자료가 필요하다.</p>
-      <div class="key-point teal">
-        참조: ¶1.36 (비교가능성의 5가지 요소 — 자산 및 서비스의 특성, 기능분석, 계약조건, 경제적 상황, 사업전략)
+      <div class="accordion" id="acc5">
+        <button class="acc-header" onclick="toggleAcc('acc5')">
+          <span><span class="para">§3.22</span>내국법인 vs 외국법인 정보 범위</span>
+          <span class="arrow">▼</span>
+        </button>
+        <div class="acc-body">
+          <p>One-sided 방법 적용 시 검증대상(tested party)이 내국법인이든 외국법인이든 동일하게 재무정보 확보가 필요합니다.</p>
+          <table class="compare-table">
+            <tr><th>구분</th><th>정보 접근성</th></tr>
+            <tr><td>내국법인</td><td>과세당국이 비교적 쉽게 정보에 접근 가능합니다.</td></tr>
+            <tr><td>외국법인</td><td>정보 수집에 현실적 제약이 존재합니다.</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- 섹션 4 -->
+    <div class="card" id="sec4">
+      <h2>§3.23 해외 관계회사 정보 한계</h2>
+
+      <div class="accordion" id="acc6">
+        <button class="acc-header" onclick="toggleAcc('acc6')">
+          <span><span class="para">§3.23</span>해외 관계회사 정보 수집의 한계</span>
+          <span class="arrow">▼</span>
+        </button>
+        <div class="acc-body">
+          <p>납세자에게는 해외 관계회사 정보 수집에 어려움이 존재합니다. 세무 당국은 이러한 현실적 제약을 문서화 요건 설계에 반영해야 합니다.</p>
+          <p>과도한 문서요건은 납세자에게 불합리한 부담을 초래하므로 금지됩니다.</p>
+          <p>실무 시사점으로는, 이전가격 방법에 따라 요구되는 해외 관계회사 정보 범위가 달라진다는 점을 유의하시기 바랍니다.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 사례 탐구 -->
+    <div class="card" id="sec-case">
+      <h2>사례 탐구: 해외 비검증당사자 정보 수집</h2>
+
+      <div class="case-box">
+        <div class="case-label">CASE 1 · 상황</div>
+        <h4>한국 자회사(제조업자)와 미국 모회사 간 거래</h4>
+        <p>한국 자회사(제조업자)가 미국 모회사에게 제품을 판매하는 구조입니다. TNMM 적용 시 한국 자회사가 분석대상회사(Tested Party)로 선정됩니다.</p>
       </div>
 
-      <h3><span class="para-badge">§3.22</span> 제출자료의 범위 (해외 vs 국내 특수관계기업)</h3>
-      <p>일방적 방법(one-sided method)을 사용할 경우, <strong>검증대상 당사자(tested party)의 재무 정보는 반드시 확보</strong>되어야 하며, 이 당사자가 내국법인이든 외국법인이든 상관없이 동일하게 적용된다.</p>
-
-      <table class="case-table">
-        <thead>
-          <tr><th>구분</th><th>분석대상회사 정보</th><th>상대방(비검증) 정보</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>분석대상회사가 국내 법인인 경우</td>
-            <td>&#9989; 반드시 확보</td>
-            <td>해외 관계회사 정보 필요 → 확보 어려울 수 있음</td>
-          </tr>
-          <tr>
-            <td>분석대상회사가 해외 법인인 경우</td>
-            <td>&#9989; 반드시 확보</td>
-            <td>국내 관계회사 정보 필요 → 상대적으로 확보 용이</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <div class="commentary">
-        <div class="comm-label">&#9654; 실무 해설 (주)</div>
-        <p>실무상 일방적 방법을 적용할 때 정보 수집의 방향성과 범위를 구체적으로 규정하고 있으며, 이전가격 분석의 신뢰성과 투명성을 위해 외국 당사자의 정보 확보가 필수적일 수 있다는 점을 강조하고 있다.</p>
-        <p style="margin-top:.5rem">일방적 방법을 적용하고 분석대상회사가 해외특수관계인인 경우와 국내특수관계인인 경우에 <strong>통합기업보고서(Master File) 또는 국가별보고서(CbCR)에 요구하는 기업(재무자료 포함)자료 이외의 자료를 과세당국이 요구할 수 있는지</strong>에 대한 문제를 제시하고 있다.</p>
+      <div class="case-box">
+        <div class="case-label">CASE 2 · 정보 수집 필요성</div>
+        <h4>비검증당사자(미국 모회사) 정보의 중요성</h4>
+        <p>TNMM에서 한국 자회사의 재무자료가 필수이지만, 미국 모회사의 기능(브랜드 소유, 전략 결정, 시장 개발)에 대한 이해 없이는 비교가능성 평가가 불가능합니다.</p>
       </div>
 
-      <h3><span class="para-badge">§3.23</span> 해외관계회사 정보의 한계</h3>
-      <p>이전가격 분석에서 해외관계회사에 대한 정보 확보는 필수적이나, 납세자에게는 그 수집에 어려움이 있을 수 있다.</p>
+      <div class="case-box">
+        <div class="case-label">CASE 3 · 실무 해결방안</div>
+        <h4>간접적 정보 확보 방법과 현실적 한계</h4>
+        <p>연결재무제표, Master File, 국가별보고서(CbCR)를 통해 미국 모회사 정보를 간접적으로 확보할 수 있습니다. 다만 세부 원가 등 민감 정보 수집에는 현실적 한계가 존재합니다.</p>
+      </div>
+    </div>
 
-      <table class="case-table">
-        <thead>
-          <tr><th>상황</th><th>납세자 입장</th><th>세무당국 대응</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>내국법인 정보 수집</td>
-            <td>쉽게 수집 가능</td>
-            <td>표준적인 문서화 요건 적용</td>
-          </tr>
-          <tr>
-            <td>외국 법인 정보 수집</td>
-            <td>현실적 제약 존재</td>
-            <td>납세자의 어려움을 고려한 문서화 규정 설계 필요</td>
-          </tr>
-        </tbody>
-      </table>
+    <!-- 퀴즈 -->
+    <div class="quiz-section" id="sec-quiz">
+      <h2>확인 퀴즈</h2>
+      <div class="q-count">총 5문항 · 각 문항을 클릭하여 답변을 선택하세요.</div>
 
-      <div class="key-point orange">
-        세무 당국은 납세자의 입장에서 이러한 어려움을 고려하여 문서화 규정을 설계해야 하며, 이는 <strong>과도한 문서요건이 납세자에게 불합리한 부담이 되지 않도록</strong> 해야 한다.
+      <!-- Q1 -->
+      <div class="quiz-item" id="q1">
+        <div class="q-text"><span class="q-num">Q1</span>의도적 상계거래(Intentional Set-off)에 대한 설명으로 옳은 것은 무엇입니까?</div>
+        <ul class="opt-list">
+          <li><button onclick="checkAnswer('q1',this,false)">① 세무 당국이 사후에 인정하는 비공식적 상계 방식이다.</button></li>
+          <li><button onclick="checkAnswer('q1',this,true)">② 관계회사 간 거래에 명시적으로 포함된 조건으로, 서로 제공한 이익을 상계처리하는 방식이다.</button></li>
+          <li><button onclick="checkAnswer('q1',this,false)">③ 세금을 최소화하기 위해 이전가격을 조작하는 행위이다.</button></li>
+          <li><button onclick="checkAnswer('q1',this,false)">④ 세무 당국 간의 합의에 의한 이중과세 방지 조치이다.</button></li>
+        </ul>
+        <div class="q-feedback" id="q1-fb"></div>
       </div>
 
-      <div class="nav-btns">
-        <button class="btn-nav secondary" onclick="showSection(1,document.querySelectorAll('.nav-item')[1])">&#8592; 이전</button>
-        <a href="M3-3_비교가능거래탐색.html" class="btn-nav">다음 모듈: M3-3 비교가능거래 탐색 &#8594;</a>
+      <!-- Q2 -->
+      <div class="quiz-item" id="q2">
+        <div class="q-text"><span class="q-num">Q2</span>분석대상회사(Tested Party) 선정 기준으로 올바른 것은 어느 것입니까?</div>
+        <ul class="opt-list">
+          <li><button onclick="checkAnswer('q2',this,false)">① 그룹 내 매출이 가장 큰 기업을 선정한다.</button></li>
+          <li><button onclick="checkAnswer('q2',this,false)">② 무형자산을 가장 많이 보유한 기업을 선정한다.</button></li>
+          <li><button onclick="checkAnswer('q2',this,true)">③ 무형자산을 소유하지 않고 거래가 복잡하지 않은 기업을 선정한다.</button></li>
+          <li><button onclick="checkAnswer('q2',this,false)">④ 납세자가 가장 편리한 기업을 자유롭게 선정한다.</button></li>
+        </ul>
+        <div class="q-feedback" id="q2-fb"></div>
       </div>
+
+      <!-- Q3 -->
+      <div class="quiz-item" id="q3">
+        <div class="q-text"><span class="q-num">Q3</span>One-sided 방법 적용 시 비검증당사자(Non-tested Party)의 기능분석이 필요한 이유로 옳은 것은 무엇입니까?</div>
+        <ul class="opt-list">
+          <li><button onclick="checkAnswer('q3',this,false)">① 비검증당사자도 세무조사 대상이 되기 때문이다.</button></li>
+          <li><button onclick="checkAnswer('q3',this,true)">② 비교가능성 평가를 위해서는 거래의 전체 상황(비검증당사자의 기능·자산·위험)을 이해해야 하기 때문이다.</button></li>
+          <li><button onclick="checkAnswer('q3',this,false)">③ OECD 지침서에서 양쪽 모두의 재무자료를 항상 요구하기 때문이다.</button></li>
+          <li><button onclick="checkAnswer('q3',this,false)">④ 비검증당사자의 세금 부담을 계산해야 하기 때문이다.</button></li>
+        </ul>
+        <div class="q-feedback" id="q3-fb"></div>
+      </div>
+
+      <!-- Q4 -->
+      <div class="quiz-item" id="q4">
+        <div class="q-text"><span class="q-num">Q4</span>해외 관계회사 정보 수집의 한계와 관련하여 OECD가 세무당국에 요구하는 것은 무엇입니까?</div>
+        <ul class="opt-list">
+          <li><button onclick="checkAnswer('q4',this,false)">① 납세자가 해외 관계회사의 모든 정보를 제출하도록 강제해야 한다.</button></li>
+          <li><button onclick="checkAnswer('q4',this,true)">② 해외 관계회사 정보 수집의 현실적 제약을 문서화 요건 설계에 반영하여 과도한 부담을 주지 않아야 한다.</button></li>
+          <li><button onclick="checkAnswer('q4',this,false)">③ 해외 관계회사 정보가 없으면 자동으로 이전가격 조정을 실시해야 한다.</button></li>
+          <li><button onclick="checkAnswer('q4',this,false)">④ 납세자가 해외 관계회사 정보를 제출하지 못하면 분석을 포기해야 한다.</button></li>
+        </ul>
+        <div class="q-feedback" id="q4-fb"></div>
+      </div>
+
+      <!-- Q5 -->
+      <div class="quiz-item" id="q5">
+        <div class="q-text"><span class="q-num">Q5</span>국조법 제12조(대응조정)가 적용되는 상황은 어느 것입니까?</div>
+        <ul class="opt-list">
+          <li><button onclick="checkAnswer('q5',this,false)">① 납세자가 이전가격 문서를 제출하지 않은 경우</button></li>
+          <li><button onclick="checkAnswer('q5',this,true)">② 실수 또는 착오에 의한 과오납부가 있는 경우 이를 세액 조정하는 상호합의 상황</button></li>
+          <li><button onclick="checkAnswer('q5',this,false)">③ 비교가능거래가 없어 이전가격 산출이 불가능한 경우</button></li>
+          <li><button onclick="checkAnswer('q5',this,false)">④ 특수관계기업이 세무조사를 거부하는 경우</button></li>
+        </ul>
+        <div class="q-feedback" id="q5-fb"></div>
+      </div>
+    </div>
+
+    <!-- 체크리스트 -->
+    <div class="card" id="sec-check">
+      <h2>학습 체크리스트</h2>
+      <ul class="checklist">
+        <li>
+          <input type="checkbox" id="chk1" onchange="saveCheck()">
+          <label for="chk1">상계거래가 존재하는 경우 거래별 가치를 정확히 평가하고 상계의 타당성을 문서화하였습니까?</label>
+        </li>
+        <li>
+          <input type="checkbox" id="chk2" onchange="saveCheck()">
+          <label for="chk2">국제 상계거래에서 원천징수세 등 세무 처리 차이를 확인하였습니까?</label>
+        </li>
+        <li>
+          <input type="checkbox" id="chk3" onchange="saveCheck()">
+          <label for="chk3">분석대상회사를 무형자산이 없고 기능이 단순한 기업으로 선정하고 그 근거를 문서화하였습니까?</label>
+        </li>
+        <li>
+          <input type="checkbox" id="chk4" onchange="saveCheck()">
+          <label for="chk4">One-sided 방법 적용 시에도 비검증당사자의 기능·자산·위험 분석을 실시하였습니까?</label>
+        </li>
+        <li>
+          <input type="checkbox" id="chk5" onchange="saveCheck()">
+          <label for="chk5">해외 관계회사 정보를 가능한 범위에서 최대한 수집하고, 수집 한계를 문서화하였습니까?</label>
+        </li>
+        <li>
+          <input type="checkbox" id="chk6" onchange="saveCheck()">
+          <label for="chk6">Master File, CbCR 등 그룹 정보를 활용하여 해외 관계회사에 대한 이해를 제고하였습니까?</label>
+        </li>
+      </ul>
+    </div>
+
+    <!-- 네비게이션 -->
+    <div class="nav-btns">
+      <a href="M3-1_비교가능성개관.html" class="btn btn-outline">← 이전: Module 1</a>
+      <a href="M3-3_비교가능거래탐색.html" class="btn btn-primary">다음: Module 3 →</a>
     </div>
 
   </div>
 </div>
 
 <script>
-function showSection(idx, btn) {
-  document.querySelectorAll('.section').forEach((s,i) => s.classList.toggle('active', i===idx));
-  document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
-  if(btn) btn.classList.add('active');
-  window.scrollTo({top:0, behavior:'smooth'});
+const MODKEY = 'm3_2';
+
+// 아코디언
+function toggleAcc(id) {
+  const acc = document.getElementById(id);
+  const header = acc.querySelector('.acc-header');
+  const body = acc.querySelector('.acc-body');
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  header.classList.toggle('open', !isOpen);
+  if (!isOpen) {
+    const accIdx = ['acc1','acc2','acc3','acc4','acc5','acc6'].indexOf(id);
+    if (accIdx >= 0) markAccOpened(accIdx);
+  }
+  updateProgress();
 }
+
+// 퀴즈
+let quizResults = {};
+function checkAnswer(qid, btn, correct) {
+  const item = document.getElementById(qid);
+  if (item.querySelector('.correct') || item.querySelector('.wrong')) return;
+  const buttons = item.querySelectorAll('button');
+  buttons.forEach(b => b.disabled = true);
+  const fb = document.getElementById(qid + '-fb');
+  if (correct) {
+    btn.classList.add('correct');
+    fb.textContent = '정답입니다! 올바르게 이해하고 계십니다.';
+    fb.className = 'q-feedback show ok';
+    quizResults[qid] = true;
+  } else {
+    btn.classList.add('wrong');
+    fb.textContent = '오답입니다. 본문 내용을 다시 확인해 보시기 바랍니다.';
+    fb.className = 'q-feedback show no';
+    quizResults[qid] = false;
+  }
+  saveQuiz();
+  updateProgress();
+}
+
+// 체크리스트
+function saveCheck() {
+  const checks = {};
+  for (let i=1;i<=6;i++) {
+    checks['chk'+i] = document.getElementById('chk'+i).checked;
+  }
+  localStorage.setItem(MODKEY+'_checks', JSON.stringify(checks));
+  updateProgress();
+}
+
+function loadChecks() {
+  const saved = localStorage.getItem(MODKEY+'_checks');
+  if (saved) {
+    const checks = JSON.parse(saved);
+    for (let i=1;i<=6;i++) {
+      if (checks['chk'+i]) document.getElementById('chk'+i).checked = true;
+    }
+  }
+}
+
+// 아코디언 열림 추적
+let openedAccs = new Set();
+function markAccOpened(idx) {
+  openedAccs.add(idx);
+  localStorage.setItem(MODKEY+'_accs', JSON.stringify([...openedAccs]));
+}
+function loadAccs() {
+  const saved = localStorage.getItem(MODKEY+'_accs');
+  if (saved) {
+    openedAccs = new Set(JSON.parse(saved));
+  }
+}
+
+// 퀴즈 저장/로드
+function saveQuiz() {
+  localStorage.setItem(MODKEY+'_quiz', JSON.stringify(quizResults));
+}
+function loadQuiz() {
+  const saved = localStorage.getItem(MODKEY+'_quiz');
+  if (saved) {
+    quizResults = JSON.parse(saved);
+  }
+}
+
+// 진도율 계산 (아코디언 6개 기준)
+function updateProgress() {
+  let prog = 0;
+  // 아코디언: 각 8%, 최대 50% (6개 아코디언 → 6*8=48% 최대)
+  const accScore = Math.min(openedAccs.size * 8, 50);
+  prog += accScore;
+  // 퀴즈: 정답 수 * 6%, 최대 30%
+  const correctCount = Object.values(quizResults).filter(v=>v).length;
+  const quizScore = Math.min(correctCount * 6, 30);
+  prog += quizScore;
+  // 체크리스트: 각 3.33%, 최대 20%
+  let checkCount = 0;
+  for (let i=1;i<=6;i++) {
+    if (document.getElementById('chk'+i).checked) checkCount++;
+  }
+  const checkScore = Math.min(Math.round(checkCount * (20/6)), 20);
+  prog += checkScore;
+  prog = Math.min(prog, 100);
+
+  document.getElementById('progBar').style.width = prog + '%';
+  document.getElementById('progText').textContent = prog + '%';
+  localStorage.setItem(MODKEY+'_prog', prog);
+
+  if (prog >= 100) {
+    document.getElementById('completeBanner').classList.add('show');
+  }
+}
+
+// 사이드바 스크롤
+function scrollTo(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+// 초기화
+window.onload = function() {
+  loadAccs();
+  loadChecks();
+  loadQuiz();
+  updateProgress();
+};
 </script>
 </body>
 </html>

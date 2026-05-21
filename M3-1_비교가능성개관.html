@@ -2,327 +2,558 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>M3-1: 비교가능성 분석 개관 &#8212; OECD 이전가격 지침서</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 1 — 비교가능성 분석 개관</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --teal:#0f7a7a;--teal-light:#e0f5f5;--teal-mid:#1a9a9a;
-  --blue:#1a5fa8;--blue-light:#e8f0fa;
-  --green:#1a7a4a;--green-light:#e6f5ee;
-  --orange:#c06000;--orange-light:#fff3e0;
-  --red:#b02020;--red-light:#fdecea;
-  --purple:#6a1fa8;--purple-light:#f3e8fa;
-  --gray:#555;--gray-light:#f5f5f5;--gray-border:#ddd;
-  --text:#222;--text2:#555;--white:#fff;
-  --radius:10px;--shadow:0 2px 8px rgba(0,0,0,.10);
-}
+:root{--accent:#0f7a7a;--accent-light:#e0f5f5;--accent-mid:#1a9a9a;--green:#1a7a4a;--green-light:#e6f5ee;--orange:#c06000;--orange-light:#fff3e0;--red:#b02020;--red-light:#fdecea;--gray:#555;--gray-light:#f5f5f5;--gray-border:#ddd;--text:#222;--text2:#555;--white:#fff;--radius:10px;--shadow:0 2px 8px rgba(0,0,0,.10);}
 body{font-family:'Noto Sans KR',Arial,sans-serif;background:#f0f4f8;color:var(--text);line-height:1.75;font-size:16px}
-.page-header{background:var(--teal);color:#fff;padding:1.2rem 2rem;display:flex;align-items:center;gap:1rem;border-bottom:3px solid #0a5a5a}
-.page-header .back-btn{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);color:#fff;padding:5px 14px;border-radius:20px;cursor:pointer;font-size:.82rem;font-family:inherit;text-decoration:none}
-.page-header h1{font-size:1.1rem;font-weight:700;flex:1}
-.layout{display:flex;max-width:1100px;margin:0 auto;padding:2rem 1.5rem;gap:1.5rem}
-.sidebar{width:210px;flex-shrink:0}
-.sidebar-box{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:1.2rem;position:sticky;top:1.5rem}
-.sidebar-box h3{font-size:.82rem;font-weight:700;color:var(--gray);margin-bottom:.8rem;text-transform:uppercase;letter-spacing:.05em}
-.nav-item{display:block;width:100%;text-align:left;background:none;border:none;padding:.45rem .7rem;border-radius:6px;font-size:.82rem;cursor:pointer;color:var(--text2);font-family:inherit;transition:all .12s;margin-bottom:2px}
-.nav-item:hover{background:var(--teal-light);color:var(--teal)}
-.nav-item.active{background:var(--teal-light);color:var(--teal);font-weight:700}
+a{color:var(--accent);text-decoration:none}
+.mod-header{background:var(--accent);color:#fff;padding:1.5rem 2rem}
+.mod-header .breadcrumb{font-size:.8rem;opacity:.7;margin-bottom:.4rem}
+.mod-header h1{font-size:1.4rem;font-weight:700}
+.mod-header .sub{font-size:.9rem;opacity:.8;margin-top:.3rem}
+.prog-strip{background:rgba(255,255,255,.15);height:6px;margin-top:1rem;border-radius:99px;overflow:hidden}
+.prog-strip-inner{height:100%;background:#fff;border-radius:99px;transition:width .4s}
+.layout{display:flex;max-width:1100px;margin:0 auto;padding:2rem 1.5rem 4rem;gap:1.5rem}
+.sidebar{width:220px;flex-shrink:0}
 .content{flex:1;min-width:0}
-.section{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:1.8rem 2rem;margin-bottom:1.2rem;display:none}
-.section.active{display:block}
-.section h2{font-size:1.15rem;font-weight:700;color:var(--teal);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:2px solid var(--teal-light)}
-.section h3{font-size:1rem;font-weight:700;color:var(--text);margin:1.2rem 0 .6rem}
-.section h4{font-size:.92rem;font-weight:700;color:var(--teal);margin:.9rem 0 .4rem}
-.section p{font-size:.95rem;color:var(--text2);margin-bottom:.8rem}
-.section ul,.section ol{padding-left:1.4rem;margin-bottom:.8rem}
-.section li{font-size:.95rem;color:var(--text2);margin-bottom:.35rem}
-.para-badge{display:inline-block;background:var(--teal-light);color:var(--teal);font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:20px;margin-right:.4rem;vertical-align:middle}
-.commentary{background:#e8f8f8;border:1px solid #80cccc;border-left:4px solid var(--teal);border-radius:8px;padding:1rem 1.2rem;margin:1rem 0;font-size:.88rem;color:#0a4a4a}
-.commentary .comm-label{font-size:.75rem;font-weight:700;color:var(--teal);margin-bottom:.4rem;text-transform:uppercase;letter-spacing:.03em}
-.key-point{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:8px;padding:.9rem 1.2rem;margin:.8rem 0;font-size:.9rem;color:#1a3a6a}
-.key-point.teal{background:var(--teal-light);border-color:var(--teal);color:#0a4a4a}
-.key-point.orange{background:var(--orange-light);border-color:var(--orange);color:#6b3800}
-.key-point.green{background:var(--green-light);border-color:var(--green);color:#1a4a2a}
-.key-point.red{background:var(--red-light);border-color:var(--red);color:#6b1010}
-.case-table{width:100%;border-collapse:collapse;font-size:.88rem;margin:1rem 0}
-.case-table th{background:var(--teal);color:#fff;padding:.65rem 1rem;text-align:left;font-weight:600}
-.case-table td{padding:.6rem 1rem;border-bottom:1px solid var(--gray-border);vertical-align:top}
-.case-table tr:last-child td{border:none}
-.case-table tr:nth-child(even) td{background:#fafafa}
-.step-grid{display:flex;flex-direction:column;gap:.5rem;margin:1rem 0}
-.step-item{display:flex;gap:.8rem;align-items:flex-start;padding:.8rem 1rem;background:var(--gray-light);border-radius:8px;border-left:3px solid var(--teal)}
-.step-num{background:var(--teal);color:#fff;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:700;flex-shrink:0;margin-top:.1rem}
-.step-text{font-size:.88rem;color:var(--text2);line-height:1.5}
-.step-text strong{color:var(--text)}
-.diff-box{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1rem 0}
-.diff-card{background:#fafafa;border:1.5px solid var(--gray-border);border-radius:8px;padding:1rem 1.2rem}
-.diff-card.left{border-color:var(--teal);background:var(--teal-light)}
-.diff-card.right{border-color:var(--orange);background:var(--orange-light)}
-.diff-card h4{font-size:.88rem;font-weight:700;margin-bottom:.5rem}
-.diff-card.left h4{color:var(--teal)}
-.diff-card.right h4{color:var(--orange)}
-.diff-card ul{padding-left:1.1rem}
-.diff-card li{font-size:.84rem;color:var(--text2);margin-bottom:.3rem}
-.example-box{background:var(--teal-light);border:1.5px solid #80cccc;border-radius:10px;padding:1.2rem 1.5rem;margin:1rem 0}
-.example-box .ex-title{font-size:.8rem;font-weight:700;color:var(--teal);margin-bottom:.8rem;text-transform:uppercase;letter-spacing:.04em;border-bottom:1px solid #80cccc;padding-bottom:.4rem}
-.footnote-box{background:#fafafa;border:1px solid #e0e0e0;border-radius:8px;padding:1rem 1.2rem;margin:1rem 0;font-size:.82rem;color:#555}
-.footnote-box .fn-title{font-weight:700;color:var(--gray);margin-bottom:.5rem;font-size:.78rem;text-transform:uppercase}
-.footnote-item{margin-bottom:.4rem;padding-left:.8rem;border-left:2px solid #ddd}
+.nav-card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:1.2rem;margin-bottom:1rem;position:sticky;top:1rem}
+.nav-card h4{font-size:.85rem;color:var(--gray);margin-bottom:.8rem}
+.nav-item{display:block;padding:.45rem .75rem;border-radius:6px;font-size:.85rem;color:var(--text2);margin-bottom:3px;cursor:pointer;border:none;width:100%;text-align:left;background:none;transition:background .12s}
+.nav-item:hover{background:var(--accent-light);color:var(--accent)}
+.nav-item.active{background:var(--accent);color:#fff;font-weight:600}
+.card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:1.8rem 2rem;margin-bottom:1.5rem}
+.card h2{font-size:1.15rem;font-weight:700;color:var(--accent);margin-bottom:1rem;padding-bottom:.6rem;border-bottom:2px solid var(--accent-light)}
+.card p{font-size:.95rem;color:var(--text2);margin-bottom:.7rem}
+.obj-list{list-style:none;padding:0}
+.obj-list li{display:flex;gap:.7rem;align-items:flex-start;padding:.5rem 0;border-bottom:1px solid var(--gray-border);font-size:.93rem}
+.obj-list li:last-child{border:none}
+.obj-num{background:var(--accent);color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;flex-shrink:0;margin-top:2px}
+.accordion{border:1px solid var(--gray-border);border-radius:var(--radius);overflow:hidden;margin-bottom:1rem}
+.acc-header{display:flex;justify-content:space-between;align-items:center;padding:.9rem 1.2rem;cursor:pointer;background:var(--gray-light);font-weight:600;font-size:.95rem;border:none;width:100%;text-align:left;transition:background .12s}
+.acc-header:hover{background:#ebebeb}
+.acc-header .para{font-size:.78rem;color:var(--accent);background:var(--accent-light);padding:2px 8px;border-radius:20px;margin-right:.6rem}
+.acc-header .arrow{font-size:1rem;color:var(--gray);transition:transform .2s}
+.acc-body{display:none;padding:1.1rem 1.3rem;background:#fff;font-size:.93rem;color:var(--text2);line-height:1.8;border-top:1px solid var(--gray-border)}
+.acc-body.open{display:block}
+.acc-header.open .arrow{transform:rotate(180deg)}
+.key-point{background:var(--accent-light);border-left:4px solid var(--accent);padding:.7rem 1rem;border-radius:0 6px 6px 0;margin:.8rem 0;font-size:.9rem;color:#0a4a4a}
+.warn-point{background:var(--orange-light);border-left:4px solid var(--orange);padding:.7rem 1rem;border-radius:0 6px 6px 0;margin:.8rem 0;font-size:.9rem;color:#6b3a00}
+.compare-table{width:100%;border-collapse:collapse;font-size:.9rem;margin:.8rem 0}
+.compare-table th{background:var(--accent);color:#fff;padding:.7rem 1rem;text-align:left;font-weight:600}
+.compare-table td{padding:.65rem 1rem;border-bottom:1px solid var(--gray-border);vertical-align:top}
+.compare-table tr:last-child td{border:none}
+.compare-table tr:nth-child(even) td{background:#fafafa}
+.case-box{background:#fff;border:1.5px solid var(--accent-mid);border-radius:var(--radius);padding:1.3rem 1.5rem;margin:1rem 0}
+.case-box .case-label{font-size:.78rem;font-weight:700;color:var(--accent);letter-spacing:.05em;margin-bottom:.5rem}
+.case-box h4{font-size:.95rem;font-weight:700;color:var(--text);margin-bottom:.6rem}
+.quiz-section{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:1.8rem 2rem;margin-bottom:1.5rem}
+.quiz-section h2{font-size:1.15rem;font-weight:700;color:var(--accent);margin-bottom:.4rem}
+.quiz-section .q-count{font-size:.85rem;color:var(--gray);margin-bottom:1.5rem}
+.quiz-item{margin-bottom:1.8rem;padding-bottom:1.5rem;border-bottom:1px solid var(--gray-border)}
+.quiz-item:last-of-type{border:none}
+.quiz-item .q-text{font-size:.97rem;font-weight:600;color:var(--text);margin-bottom:.9rem}
+.quiz-item .q-num{font-size:.78rem;background:var(--accent-light);color:var(--accent);padding:2px 9px;border-radius:20px;margin-right:.5rem;font-weight:700}
+.opt-list{list-style:none;padding:0;display:flex;flex-direction:column;gap:.5rem}
+.opt-list li button{width:100%;text-align:left;padding:.7rem 1rem;border-radius:8px;border:1.5px solid var(--gray-border);background:#fff;font-size:.9rem;cursor:pointer;color:var(--text);transition:all .15s}
+.opt-list li button:hover{border-color:var(--accent-mid);background:var(--accent-light)}
+.opt-list li button.correct{background:var(--green-light);border-color:var(--green);color:var(--green);font-weight:600}
+.opt-list li button.wrong{background:var(--red-light);border-color:var(--red);color:var(--red)}
+.opt-list li button:disabled{cursor:default}
+.q-feedback{margin-top:.7rem;padding:.6rem 1rem;border-radius:8px;font-size:.88rem;display:none}
+.q-feedback.show{display:block}
+.q-feedback.ok{background:var(--green-light);color:var(--green);border:1px solid #a0d8b8}
+.q-feedback.no{background:var(--red-light);color:var(--red);border:1px solid #f5b8b8}
+.checklist{list-style:none;padding:0}
+.checklist li{display:flex;gap:.8rem;align-items:flex-start;padding:.55rem 0;border-bottom:1px solid var(--gray-border);font-size:.92rem}
+.checklist li:last-child{border:none}
+.checklist input[type=checkbox]{width:18px;height:18px;margin-top:2px;cursor:pointer;flex-shrink:0;accent-color:var(--green)}
+.checklist label{cursor:pointer;color:var(--text2)}
+.checklist input:checked+label{color:var(--green);text-decoration:line-through;opacity:.7}
 .nav-btns{display:flex;justify-content:space-between;margin-top:1.5rem}
-.btn-nav{background:var(--teal);color:#fff;border:none;padding:.7rem 1.5rem;border-radius:8px;cursor:pointer;font-size:.9rem;font-family:inherit;font-weight:600;transition:background .15s;text-decoration:none;display:inline-block}
-.btn-nav:hover{background:#0a5a5a}
-.btn-nav.secondary{background:#fff;color:var(--teal);border:1.5px solid var(--teal)}
-.btn-nav.secondary:hover{background:var(--teal-light)}
+.btn{display:inline-flex;align-items:center;gap:.4rem;padding:.7rem 1.5rem;border-radius:8px;font-size:.9rem;font-weight:600;cursor:pointer;border:none;transition:all .15s;text-decoration:none}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{background:#0a5a5a}
+.btn-outline{background:#fff;color:var(--accent);border:1.5px solid var(--accent)}
+.btn-outline:hover{background:var(--accent-light)}
+.btn-success{background:var(--green);color:#fff}
+.complete-banner{background:var(--green-light);border:2px solid var(--green);border-radius:var(--radius);padding:1.3rem 1.8rem;text-align:center;display:none;margin-bottom:1.5rem}
+.complete-banner.show{display:block}
+.complete-banner h3{color:var(--green);font-size:1.1rem;margin-bottom:.4rem}
+.complete-banner p{font-size:.9rem;color:#2a6040}
+@media(max-width:720px){.layout{flex-direction:column}.sidebar{width:100%;position:static}.nav-card{position:static}}
 </style>
 </head>
 <body>
-<header class="page-header">
-  <a href="index_ch3.html" class="back-btn">&#8592; 목차</a>
-  <h1>M3-1: 비교가능성 분석 개관 (&#167;3.1&#8211;&#167;3.12)</h1>
-</header>
+
+<div class="mod-header">
+  <div class="breadcrumb"><a href="index_ch3.html" style="color:rgba(255,255,255,.8)">← Chapter III 목록으로</a></div>
+  <h1>Module 1 — 비교가능성 분석 개관</h1>
+  <div class="sub">§3.1 ~ §3.12 · OECD Transfer Pricing Guidelines Chapter III · A.1–A.2</div>
+  <div class="prog-strip"><div class="prog-strip-inner" id="progBar" style="width:0%"></div></div>
+</div>
 
 <div class="layout">
-  <nav class="sidebar">
-    <div class="sidebar-box">
-      <h3>목차</h3>
-      <button class="nav-item active" onclick="showSection(0,this)">1. 비교가능성 분석 개관</button>
-      <button class="nav-item" onclick="showSection(1,this)">2. 비교가능성 분석 9단계</button>
-      <button class="nav-item" onclick="showSection(2,this)">3. 광범위한 분석</button>
-      <button class="nav-item" onclick="showSection(3,this)">4. 개별·통합·패키지거래</button>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="nav-card">
+      <h4>목차</h4>
+      <button class="nav-item" onclick="scrollTo('sec-obj')">학습 목표</button>
+      <button class="nav-item" onclick="scrollTo('sec1')">§3.1-3.3 개요·목적</button>
+      <button class="nav-item" onclick="scrollTo('sec2')">§3.4-3.5 9단계 프로세스</button>
+      <button class="nav-item" onclick="scrollTo('sec3')">§3.7-3.9 광범위한 분석</button>
+      <button class="nav-item" onclick="scrollTo('sec4')">§3.10-3.12 포트폴리오·패키지</button>
+      <button class="nav-item" onclick="scrollTo('sec-case')">사례 탐구</button>
+      <button class="nav-item" onclick="scrollTo('sec-quiz')">퀴즈</button>
+      <button class="nav-item" onclick="scrollTo('sec-check')">체크리스트</button>
+      <div style="margin-top:1rem;padding-top:.8rem;border-top:1px solid var(--gray-border);font-size:.8rem;color:var(--gray)">
+        진도율: <strong id="progText">0%</strong>
+      </div>
     </div>
-  </nav>
+  </div>
 
+  <!-- Content -->
   <div class="content">
 
-    <!-- Section 1: 비교가능성 분석 개관 -->
-    <div class="section active" id="sec0">
-      <h2>1. 비교가능성 분석 개관 (§3.1&#8211;§3.3)</h2>
+    <!-- 완료 배너 -->
+    <div class="complete-banner" id="completeBanner">
+      <h3>모듈 학습 완료!</h3>
+      <p>비교가능성 분석 개관 학습을 완료하셨습니다. 수고하셨습니다.</p>
+    </div>
 
-      <h3><span class="para-badge">§3.1</span> 비교가능성에 대한 기본지침 개요</h3>
-      <p>비교가능성에 대한 기본지침은 Chapter I D. "Guidance for applying the arm's length principle"에 있다.</p>
+    <!-- 학습 목표 -->
+    <div class="card" id="sec-obj">
+      <h2>학습 목표</h2>
+      <ul class="obj-list">
+        <li><span class="obj-num">1</span>비교가능성 분석(Comparability Analysis)과 비교가능거래 검색(Search for Comparables)의 차이를 설명하실 수 있습니다.</li>
+        <li><span class="obj-num">2</span>OECD가 제시하는 비교가능성 분석 9단계 프로세스를 순서대로 설명하실 수 있습니다.</li>
+        <li><span class="obj-num">3</span>실무에서 적용되는 5단계 분석 프로세스(기업가치사슬분석 포함)를 이해하십니다.</li>
+        <li><span class="obj-num">4</span>개별 거래 분석 원칙과 통합 거래 분석이 허용되는 조건을 구분하실 수 있습니다.</li>
+        <li><span class="obj-num">5</span>포트폴리오 접근법과 패키지 거래의 개념 및 정상가격원칙과의 관계를 설명하실 수 있습니다.</li>
+      </ul>
+    </div>
 
-      <div class="diff-box">
-        <div class="diff-card left">
-          <h4>&#9654; 비교가능성 분석 (Comparability Analysis)</h4>
-          <ul>
-            <li>특수관계거래 내역의 확인</li>
-            <li>경제적으로 관련 있는 특성(economically relevant characteristics) 파악</li>
-            <li>비교가능성 요소 파악</li>
-            <li>정상가격산출방법의 선택</li>
-            <li>OECD 모델협약 제9조 제1항에 따른 정상가격원칙 준수</li>
+    <!-- 섹션 1 -->
+    <div class="card" id="sec1">
+      <h2>§3.1–3.3 비교가능성 분석 개요·목적</h2>
+
+      <div class="accordion" id="acc1">
+        <button class="acc-header" onclick="toggleAcc('acc1')">
+          <span><span class="para">§3.1</span>비교가능성 분석과 비교가능거래 검색의 차이</span>
+          <span class="arrow">▼</span>
+        </button>
+        <div class="acc-body">
+          <p>비교가능성 분석(Comparability Analysis)은 비교가능거래 검색(Search for Comparables)보다 더 포괄적인 개념입니다.</p>
+          <p>비교가능성 분석에는 다음의 내용이 포함됩니다.</p>
+          <ul style="margin:.5rem 0 .8rem 1.2rem;line-height:2">
+            <li>① 특수관계거래 내역 확인</li>
+            <li>② 경제적으로 관련 있는 특성 파악</li>
+            <li>③ 비교가능성 요소 분석</li>
+            <li>④ 정상가격산출방법 선택</li>
+            <li>⑤ 결론 도출</li>
+          </ul>
+          <div class="key-point">
+            '비교가능거래를 찾는 것'과 '비교가능성을 분석하는 것'은 다릅니다. 비교가능거래를 찾지 못했다고 해서 비교가능성 분석이 완료되지 않은 것이 아닙니다.
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion" id="acc2">
+        <button class="acc-header" onclick="toggleAcc('acc2')">
+          <span><span class="para">§3.2-3.3</span>비교가능성 분석의 목적·자료 제공 의무</span>
+          <span class="arrow">▼</span>
+        </button>
+        <div class="acc-body">
+          <p>비교가능성 분석의 궁극적 목적은 신뢰할 만한 비교가능거래를 발견하는 것입니다. 단, 완벽한 비교가능거래 요구는 비현실적임을 유의하십시오.</p>
+          <p>자료 제공 원칙과 관련하여, 납세자가 비교가능거래를 사용하거나 과세당국이 조정을 위한 비교가능거래를 사용하는 경우 상대방이 적정성을 평가할 수 있도록 자료를 제공해야 합니다.</p>
+          <div class="warn-point">
+            완벽한 비교가능거래가 없어도 합리적 수준의 비교가능성을 가진 거래를 찾아 분석하는 것이 허용됩니다. 단, 비교가능성 조정을 적절히 실시해야 합니다.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 섹션 2 -->
+    <div class="card" id="sec2">
+      <h2>§3.4–3.5 9단계 비교가능성 분석 프로세스</h2>
+
+      <div class="accordion" id="acc3">
+        <button class="acc-header" onclick="toggleAcc('acc3')">
+          <span><span class="para">§3.4-3.5</span>OECD 9단계 프로세스</span>
+          <span class="arrow">▼</span>
+        </button>
+        <div class="acc-body">
+          <p>OECD는 다음의 9단계 비교가능성 분석 프로세스를 제시하고 있습니다.</p>
+          <table class="compare-table">
+            <tr><th>단계</th><th>내용</th></tr>
+            <tr><td>1단계</td><td>분석 대상 연도 결정</td></tr>
+            <tr><td>2단계</td><td>납세자의 상황에 대한 광범위한 분석</td></tr>
+            <tr><td>3단계</td><td>특수관계거래 이해 + 기능분석 + 방법 예비 선택 + 비교가능성 요소 식별</td></tr>
+            <tr><td>4단계</td><td>내부 비교가능거래 검토</td></tr>
+            <tr><td>5단계</td><td>외부 비교가능거래 정보 출처 결정</td></tr>
+            <tr><td>6단계</td><td>가장 합리적인 방법 선택 및 경제적 지표 결정</td></tr>
+            <tr><td>7단계</td><td>잠재적 비교가능거래 식별</td></tr>
+            <tr><td>8단계</td><td>비교가능성 조정 결정·실시</td></tr>
+            <tr><td>9단계</td><td>데이터 해석 및 정상가격 결정</td></tr>
+          </table>
+          <p style="margin-top:.6rem">중요: 5단계~7단계는 신뢰할 수 있는 비교가능거래가 나올 때까지 반복하여 실시합니다.</p>
+          <div class="key-point">
+            9단계는 순차적이지만 반복적(iterative) 프로세스입니다.
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion" id="acc4">
+        <button class="acc-header" onclick="toggleAcc('acc4')">
+          <span><span class="para">§3.5(주)</span>실무상 5단계 프로세스</span>
+          <span class="arrow">▼</span>
+        </button>
+        <div class="acc-body">
+          <p>실무에서는 다음의 5단계 프로세스가 적용됩니다.</p>
+          <ol style="margin:.5rem 0 .8rem 1.2rem;line-height:2.2">
+            <li><strong>1단계 — 경제환경, 산업, 제품 분석:</strong> 산업보고서, 제품 특징, 경쟁사와의 차이점을 파악합니다.</li>
+            <li><strong>2단계 — 모회사 및 그룹 FAR 분석:</strong> 연구개발과 무형자산 창출 활동에 집중하며, 기업가치사슬분석(Value Chain Analysis)을 적용합니다.</li>
+            <li><strong>3단계 — 분석대상 특수관계기업 FAR 분석:</strong> 부서·기능별 업무를 파악하고, 기능·자산·위험을 각각 분리하여 분석하며, 계약관계를 검토합니다.</li>
+            <li><strong>4단계 — 비교가능 후보기업의 비교가능성 분석:</strong> (i) FAR 분석, (ii) 계약관계 분석, (iii) 회계자료 공개 여부·일치성을 검토합니다.</li>
+            <li><strong>5단계 — 사업전략 및 특수요소 분석:</strong> 지역혜택(Location Savings), 그룹 시너지, 시장수준 요소, 정부정책, 결손, 조직변경을 검토합니다.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <!-- 섹션 3 -->
+    <div class="card" id="sec3">
+      <h2>§3.7–3.9 광범위한 분석·개별 거래 원칙</h2>
+
+      <div class="accordion" id="acc5">
+        <button class="acc-header" onclick="toggleAcc('acc5')">
+          <span><span class="para">§3.7</span>광범위한 분석(Broad-based Analysis)</span>
+          <span class="arrow">▼</span>
+        </button>
+        <div class="acc-body">
+          <p>광범위한 분석(Broad-based Analysis)에서는 다음 요소들을 검토합니다.</p>
+          <ul style="margin:.5rem 0 .8rem 1.2rem;line-height:2">
+            <li>산업 정보 분석</li>
+            <li>경쟁자 현황 파악</li>
+            <li>경제 환경 분석</li>
+            <li>관련 법규 분석</li>
+          </ul>
+          <p>이와 관련하여 OECD 지침서 ¶1.130–1.133을 참조하시기 바랍니다.</p>
+        </div>
+      </div>
+
+      <div class="accordion" id="acc6">
+        <button class="acc-header" onclick="toggleAcc('acc6')">
+          <span><span class="para">§3.9</span>개별 거래 분석 원칙</span>
+          <span class="arrow">▼</span>
+        </button>
+        <div class="acc-body">
+          <p>원칙적으로 거래별로 분리하여 분석하여야 합니다.</p>
+          <p>다만, 예외적으로 통합 분석이 허용되는 4가지 경우가 있습니다.</p>
+          <ul style="margin:.5rem 0 .8rem 1.2rem;line-height:2">
+            <li>(a) 장기 계약 (제품·서비스 제공)</li>
+            <li>(b) 무형자산 사용권</li>
+            <li>(c) 밀접하게 연결된 제품군의 가격 범위</li>
+            <li>(d) 제조 노하우와 핵심 자재 제공의 라이선스 계약</li>
           </ul>
         </div>
-        <div class="diff-card right">
-          <h4>&#9654; 비교가능거래 검색 (Search for Comparables)</h4>
-          <ul>
-            <li>비교가능성 분석의 일부 과정</li>
-            <li>비교가능거래 검색 ≠ 비교가능성 분석</li>
-            <li>검색은 분석 절차 중 하나의 단계</li>
+      </div>
+    </div>
+
+    <!-- 섹션 4 -->
+    <div class="card" id="sec4">
+      <h2>§3.10–3.12 포트폴리오·패키지 거래</h2>
+
+      <div class="accordion" id="acc7">
+        <button class="acc-header" onclick="toggleAcc('acc7')">
+          <span><span class="para">§3.10</span>포트폴리오 접근법</span>
+          <span class="arrow">▼</span>
+        </button>
+        <div class="acc-body">
+          <p>포트폴리오 접근법은 특정 제품의 손익이 아닌 제품군 전체를 기준으로 수익을 창출하는 사업전략입니다.</p>
+          <ul style="margin:.5rem 0 .8rem 1.2rem;line-height:2">
+            <li>예시: 프린터(저가 판매) + 잉크카트리지(고가 판매) — 잉크에서 전체 이익 실현</li>
+            <li>예시: 커피머신(저가) + 캡슐(고가) — 캡슐 판매로 수익 창출</li>
           </ul>
+          <p>허용 범위와 관련하여, 비교가능성 분석 시 고려가 가능하나 기업 전체 수준의 이전가격 분석을 정당화하는 도구로 남용될 수 없습니다.</p>
+          <div class="warn-point">
+            한 계열사가 다른 계열사를 위해 고의적으로 비정상적 이익을 희생하는 형태는 정상가격 원칙에 반합니다.
+          </div>
         </div>
       </div>
 
-      <div class="commentary">
-        <div class="comm-label">&#9654; 실무 해설 (주)</div>
-        <p>이 문단은 <strong>"비교가능 대상 검색(search)"과 "비교가능성 분석(comparability analysis)"은 동일하지 않다</strong>는 중요한 개념적 구분을 설명하고 있으며, 이전가격 분석의 품질과 신뢰성을 확보하기 위한 분석 절차의 일관성과 논리적 연결성을 강조한다.</p>
+      <div class="accordion" id="acc8">
+        <button class="acc-header" onclick="toggleAcc('acc8')">
+          <span><span class="para">§3.11-3.12</span>패키지 거래</span>
+          <span class="arrow">▼</span>
+        </button>
+        <div class="acc-body">
+          <p>패키지 거래란 특허권 + 노하우 + 서비스 + 제조설비 리스를 하나의 거래로 묶어 단일 가격을 설정하는 방식입니다.</p>
+          <p>분석 방법으로는 분리 평가 또는 전체 평가가 모두 가능하며, 사례별로 판단하여야 합니다.</p>
+          <div class="key-point">
+            세무 목적상 별도 거래로 취급하더라도 패키지거래로 통합 분석이 가능합니다. 단, 독립기업 간 거래와 동일한 방식으로 분석하여야 합니다.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 사례 탐구 -->
+    <div class="card" id="sec-case">
+      <h2>사례 탐구: 프린터+잉크 포트폴리오 전략</h2>
+
+      <div class="case-box">
+        <div class="case-label">CASE 1 · 배경</div>
+        <h4>다국적 IT 기업의 프린터+잉크 포트폴리오 전략</h4>
+        <p>다국적 IT 기업 A는 프린터를 저가($50)에 판매하고 독자 규격 잉크 카트리지를 고가($30/개)에 판매합니다. 한국 자회사 B는 프린터를 원가 이하로 공급받습니다.</p>
       </div>
 
-      <h3><span class="para-badge">§3.2</span> 비교가능성 분석의 궁극적인 목적</h3>
-      <p><strong>신뢰할 만한 비교가능거래를 찾기 위한 것</strong>이다. 그러나 정보의 한계로 인해 완벽한 비교가능거래를 찾는 것은 매우 힘들다.</p>
-
-      <div class="commentary">
-        <div class="comm-label">&#9654; 실무 해설 (주)</div>
-        <p>이전가격 분석에서 검색 범위의 실용성과 분석 신뢰성 사이의 균형을 잡는 것이 중요하며, 선택된 비교대상의 질이 결과의 신뢰성을 좌우한다는 원칙을 설명하고 있다.</p>
+      <div class="case-box">
+        <div class="case-label">CASE 2 · 분석</div>
+        <h4>포트폴리오 관점에서의 비교가능성 분석</h4>
+        <p>프린터 단일 거래로 보면 이전가격 문제처럼 보이나, 잉크 카트리지 거래와 함께 포트폴리오로 보면 전체 마진은 정상 수준일 수 있습니다. 독립기업 간에도 동일한 전략(예: 면도기+면도날, 게임기+게임 소프트웨어)이 존재합니다.</p>
       </div>
 
-      <h3><span class="para-badge">§3.3</span> 자료의 제공</h3>
-      <p>납세자가 이전가격 분석에서 비교가능거래를 사용했거나, 과세당국이 조정을 위한 비교가능거래를 사용한 경우, <strong>상대방(과세관청, 납세자, 외국의 권한당국)이 그 비교가능거래의 적정성을 평가할 수 있도록 자료를 제공</strong>해야 한다는 원칙을 제시하고 있다.</p>
-      <ul>
-        <li>문서화 요건: <strong>제5장</strong> 참조</li>
-        <li>APA 관련 정보: <strong>제4장 부록 II</strong> 참조</li>
+      <div class="case-box">
+        <div class="case-label">CASE 3 · 결론 및 한계</div>
+        <h4>포트폴리오 분석의 허용 범위와 한계</h4>
+        <p>포트폴리오 분석으로 정상가격 입증이 가능하지만, 경제적 논리가 다른 거래(예: 전혀 관련 없는 제품)는 반드시 분리 분석이 필요합니다.</p>
+      </div>
+    </div>
+
+    <!-- 퀴즈 -->
+    <div class="quiz-section" id="sec-quiz">
+      <h2>확인 퀴즈</h2>
+      <div class="q-count">총 5문항 · 각 문항을 클릭하여 답변을 선택하세요.</div>
+
+      <!-- Q1 -->
+      <div class="quiz-item" id="q1">
+        <div class="q-text"><span class="q-num">Q1</span>비교가능성 분석(Comparability Analysis)과 비교가능거래 검색(Search for Comparables)의 관계로 올바른 것은 무엇입니까?</div>
+        <ul class="opt-list">
+          <li><button onclick="checkAnswer('q1',this,false)">① 두 개념은 완전히 동일하다.</button></li>
+          <li><button onclick="checkAnswer('q1',this,false)">② 비교가능거래 검색이 비교가능성 분석보다 더 포괄적인 개념이다.</button></li>
+          <li><button onclick="checkAnswer('q1',this,true)">③ 비교가능성 분석이 비교가능거래 검색보다 더 포괄적인 개념이며, 검색은 분석의 일부이다.</button></li>
+          <li><button onclick="checkAnswer('q1',this,false)">④ 비교가능성 분석은 과세당국만 실시하고, 검색은 납세자만 실시한다.</button></li>
+        </ul>
+        <div class="q-feedback" id="q1-fb"></div>
+      </div>
+
+      <!-- Q2 -->
+      <div class="quiz-item" id="q2">
+        <div class="q-text"><span class="q-num">Q2</span>OECD 9단계 비교가능성 분석 프로세스에서 반복 실시를 권장하는 단계는 어느 것입니까?</div>
+        <ul class="opt-list">
+          <li><button onclick="checkAnswer('q2',this,false)">① 1단계-2단계</button></li>
+          <li><button onclick="checkAnswer('q2',this,false)">② 3단계-4단계</button></li>
+          <li><button onclick="checkAnswer('q2',this,true)">③ 5단계-7단계</button></li>
+          <li><button onclick="checkAnswer('q2',this,false)">④ 8단계-9단계</button></li>
+        </ul>
+        <div class="q-feedback" id="q2-fb"></div>
+      </div>
+
+      <!-- Q3 -->
+      <div class="quiz-item" id="q3">
+        <div class="q-text"><span class="q-num">Q3</span>개별 거래 분석 원칙의 예외로서 통합 거래 분석이 허용되는 경우에 해당하지 않는 것은 무엇입니까?</div>
+        <ul class="opt-list">
+          <li><button onclick="checkAnswer('q3',this,false)">① 장기 계약 (제품·서비스 제공)</button></li>
+          <li><button onclick="checkAnswer('q3',this,false)">② 무형자산 사용권</button></li>
+          <li><button onclick="checkAnswer('q3',this,true)">③ 납세자에게 세금이 적게 나오는 경우</button></li>
+          <li><button onclick="checkAnswer('q3',this,false)">④ 제조 노하우와 핵심 자재 제공이 결합된 라이선스 계약</button></li>
+        </ul>
+        <div class="q-feedback" id="q3-fb"></div>
+      </div>
+
+      <!-- Q4 -->
+      <div class="quiz-item" id="q4">
+        <div class="q-text"><span class="q-num">Q4</span>포트폴리오 접근법의 허용 한계로 옳은 것은 어느 것입니까?</div>
+        <ul class="opt-list">
+          <li><button onclick="checkAnswer('q4',this,false)">① 모든 제품군을 하나의 포트폴리오로 묶어 분석하면 항상 정상가격 원칙에 부합한다.</button></li>
+          <li><button onclick="checkAnswer('q4',this,true)">② 경제적 논리가 다른 거래는 반드시 분리 분석해야 하며, 한 계열사가 다른 계열사를 위해 고의적으로 이익을 희생하는 것은 정상가격 원칙에 반한다.</button></li>
+          <li><button onclick="checkAnswer('q4',this,false)">③ 포트폴리오 접근법은 OECD가 허용하지 않는다.</button></li>
+          <li><button onclick="checkAnswer('q4',this,false)">④ 포트폴리오 접근법은 손실이 발생한 거래에만 적용한다.</button></li>
+        </ul>
+        <div class="q-feedback" id="q4-fb"></div>
+      </div>
+
+      <!-- Q5 -->
+      <div class="quiz-item" id="q5">
+        <div class="q-text"><span class="q-num">Q5</span>실무상 5단계 프로세스에서 '기업가치사슬분석(Value Chain Analysis)'은 몇 번째 단계에서 주로 사용됩니까?</div>
+        <ul class="opt-list">
+          <li><button onclick="checkAnswer('q5',this,false)">① 1단계 (경제환경 분석)</button></li>
+          <li><button onclick="checkAnswer('q5',this,true)">② 2단계 (모회사·그룹 FAR 분석)</button></li>
+          <li><button onclick="checkAnswer('q5',this,false)">③ 3단계 (분석대상기업 FAR 분석)</button></li>
+          <li><button onclick="checkAnswer('q5',this,false)">④ 4단계 (비교가능 후보기업 분석)</button></li>
+        </ul>
+        <div class="q-feedback" id="q5-fb"></div>
+      </div>
+    </div>
+
+    <!-- 체크리스트 -->
+    <div class="card" id="sec-check">
+      <h2>학습 체크리스트</h2>
+      <ul class="checklist">
+        <li>
+          <input type="checkbox" id="chk1" onchange="saveCheck()">
+          <label for="chk1">분석 대상 연도를 결정하고 해당 연도의 자료를 확보하였습니까?</label>
+        </li>
+        <li>
+          <input type="checkbox" id="chk2" onchange="saveCheck()">
+          <label for="chk2">비교가능성 분석이 단순한 비교가능거래 검색 이상의 분석임을 이해하고 체계적으로 진행하였습니까?</label>
+        </li>
+        <li>
+          <input type="checkbox" id="chk3" onchange="saveCheck()">
+          <label for="chk3">납세자와 그룹의 FAR 분석(기능·자산·위험)을 완료하였습니까?</label>
+        </li>
+        <li>
+          <input type="checkbox" id="chk4" onchange="saveCheck()">
+          <label for="chk4">개별 거래 분석 원칙에 따라 거래를 분리하였으며, 통합 분석이 필요한 경우 근거를 문서화하였습니까?</label>
+        </li>
+        <li>
+          <input type="checkbox" id="chk5" onchange="saveCheck()">
+          <label for="chk5">포트폴리오 접근법 적용 시 경제적 논리가 다른 거래는 분리 분석하였습니까?</label>
+        </li>
+        <li>
+          <input type="checkbox" id="chk6" onchange="saveCheck()">
+          <label for="chk6">패키지 거래의 경우 분리 평가 또는 전체 평가 여부를 결정하고 근거를 기재하였습니까?</label>
+        </li>
       </ul>
-
-      <div class="footnote-box">
-        <div class="fn-title">&#128196; 주석</div>
-        <div class="footnote-item">[1] The White Paper (1988, pp. 88-90; Chapter 11. B. 2. "Standards for Exact Comparables"): 당초 비교가능성은 내부요건(internal standards)과 외부요건(external standards)으로 나누어 기준을 정했으며 이 요건들은 잠재적으로 비교가능한 거래의 비교가능성을 파악하는데 적용되었다.</div>
-      </div>
-
-      <div class="nav-btns">
-        <span></span>
-        <button class="btn-nav" onclick="showSection(1,document.querySelectorAll('.nav-item')[1])">다음: 비교가능성 분석 9단계 &#8594;</button>
-      </div>
     </div>
 
-    <!-- Section 2: 9단계 프로세스 -->
-    <div class="section" id="sec1">
-      <h2>2. 비교가능성 분석 9단계 프로세스 (§3.4&#8211;§3.5)</h2>
-
-      <h3>A.1 Typical Process</h3>
-      <h3><span class="para-badge">§3.4</span> 비교가능성 분석 순서</h3>
-
-      <div class="step-grid">
-        <div class="step-item">
-          <div class="step-num">1</div>
-          <div class="step-text"><strong>분석대상 연도 결정</strong></div>
-        </div>
-        <div class="step-item">
-          <div class="step-num">2</div>
-          <div class="step-text"><strong>납세자의 상황에 대한 광범위한 분석</strong></div>
-        </div>
-        <div class="step-item">
-          <div class="step-num">3</div>
-          <div class="step-text"><strong>분석 대상 특수관계 거래 이해</strong> — 기능분석, 분석대상 기업의 선택(필요한 경우), 잠재적인 정상가격산출방법 선택, 경제적지표의 선택(TNMM의 경우) 및 중요한 비교 가능성 요소 식별</div>
-        </div>
-        <div class="step-item">
-          <div class="step-num">4</div>
-          <div class="step-text"><strong>사용 가능한 기존 내부 비교가능 자료 검토</strong></div>
-        </div>
-        <div class="step-item">
-          <div class="step-num">5</div>
-          <div class="step-text"><strong>외부 비교가능 자료 출처 결정</strong> — 외부 비교 자료가 필요한 경우, 외부 비교 자료에 대한 정보 출처 및 상대적 신뢰성을 고려한 결정</div>
-        </div>
-        <div class="step-item">
-          <div class="step-num">6</div>
-          <div class="step-text"><strong>가장 합리적인 정상가격산출방법 선택</strong> 및 관련 경제적지표의 결정</div>
-        </div>
-        <div class="step-item">
-          <div class="step-num">7</div>
-          <div class="step-text"><strong>잠재적으로 비교가능한 거래 식별</strong> — 제3자 거래가 비교 가능한 거래로 간주되기 위해 충족해야 할 주요 특성 명시(3단계에서 식별된 요소 및 Chapter I. D.1)</div>
-        </div>
-        <div class="step-item">
-          <div class="step-num">8</div>
-          <div class="step-text"><strong>비교 가능성 조정의 결정 및 시행</strong> (필요에 따라)</div>
-        </div>
-        <div class="step-item">
-          <div class="step-num">9</div>
-          <div class="step-text"><strong>수집된 데이터 해석 및 사용</strong>, 그리고 정상가격 대가의 결정</div>
-        </div>
-      </div>
-
-      <h3><span class="para-badge">§3.5</span> 반복 적용의 필요성</h3>
-      <p><strong>Step 5부터 7까지</strong>는 신뢰성 있는 비교가능거래가 존재하고 가장 합리적인 정상가격산출방법을 결정할 때까지 <strong>반복</strong>한다.</p>
-
-      <div class="commentary">
-        <div class="comm-label">&#9654; 실무 해설 (주) — 실무상 일반적인 방법</div>
-        <p>비교가능성 분석 순서 및 절차는 다양한 방법이 설명되어 있다. 특히 OECD 이전가격지침서와 UN 이전가격 매뉴얼이 다른 방법론을 제시하고 있다. 실무에서는 일반적으로 아래와 같이 수행된다:</p>
-        <ol style="margin-top:.5rem;padding-left:1.2rem">
-          <li style="margin-bottom:.4rem"><strong>경제환경, 산업 및 제품에 대한 분석</strong>: 산업보고서 및 제품의 특징, 특히 경쟁회사와 다른 점 등을 파악</li>
-          <li style="margin-bottom:.4rem"><strong>모회사 및 그룹에 대한 기능, 자산 및 위험분석</strong>: 모회사의 기능 중 연구개발활동 및 무형자산 창출활동에 집중; '기업가치사슬분석' 방법 적용</li>
-          <li style="margin-bottom:.4rem"><strong>분석대상 특수관계기업에 대한 기능, 자산 및 위험분석</strong>: 분석대상기업의 조직도를 참조하여 각 부서 또는 기능별 조직이 수행하는 업무 파악; 기능, 자산 및 위험은 각 분야별로 분리 분석</li>
-          <li style="margin-bottom:.4rem"><strong>비교가능한 회사의 비교가능성 분석</strong>: 표준산업분류표에서 잠재적으로 비교가능한 회사에 대하여 (i) 기능, 자산 및 위험분석, (ii) 계약관계분석, (iii) 회계자료의 공개여부 및 일치성을 분석</li>
-          <li><strong>분석대상기업의 사업전략 및 기타 요소 분석</strong>: 정상가격범위를 산출하고 비교가능성에 영향을 주는 ① 사업전략, ② 결손, ③ 정부정책, ④ 지역혜택(Location Savings), ⑤ 조직변경, ⑥ 그룹 시너지, ⑦ 시장수준 요소 검토</li>
-        </ol>
-      </div>
-
-      <div class="nav-btns">
-        <button class="btn-nav secondary" onclick="showSection(0,document.querySelectorAll('.nav-item')[0])">&#8592; 이전</button>
-        <button class="btn-nav" onclick="showSection(2,document.querySelectorAll('.nav-item')[2])">다음: 광범위한 분석 &#8594;</button>
-      </div>
-    </div>
-
-    <!-- Section 3: 광범위한 분석 -->
-    <div class="section" id="sec2">
-      <h2>3. 광범위한 분석 (§3.7&#8211;§3.8)</h2>
-
-      <h3>A.2 Broad-based Analysis of the Taxpayer's Circumstances</h3>
-
-      <h3><span class="para-badge">§3.7</span> 광범위한 분석의 범위</h3>
-      <p>통상 이 단계에서는 다음을 살핀다:</p>
-      <ul>
-        <li><strong>산업 정보</strong> — 해당 산업의 특성, 동향</li>
-        <li><strong>경쟁자</strong> — 주요 경쟁자 현황, 시장 점유율</li>
-        <li><strong>경제 환경</strong> — 거시경제 요인, 환율, 금리</li>
-        <li><strong>관련 법규 또는 규칙</strong> — 적용 법령, 규제 환경</li>
-      </ul>
-      <div class="key-point teal">
-        참조: ¶1.130-1.133 (납세자 상황의 광범위한 분석 기준)
-      </div>
-
-      <h3>A.3 Review of the Controlled Transaction and Choice of the Tested Party</h3>
-
-      <h3><span class="para-badge">§3.8</span> 분석대상회사의 분석</h3>
-      <p>통제거래의 검토를 통해 분석대상회사를 결정한다. 분석대상회사는 비교가능성 분석의 출발점이 되며, 기능, 자산, 위험의 합리적인 측정이 가능한 회사를 선택한다.</p>
-
-      <div class="nav-btns">
-        <button class="btn-nav secondary" onclick="showSection(1,document.querySelectorAll('.nav-item')[1])">&#8592; 이전</button>
-        <button class="btn-nav" onclick="showSection(3,document.querySelectorAll('.nav-item')[3])">다음: 개별·통합·패키지 거래 &#8594;</button>
-      </div>
-    </div>
-
-    <!-- Section 4: 개별·통합·패키지 거래 -->
-    <div class="section" id="sec3">
-      <h2>4. 개별·통합·포트폴리오·패키지 거래 (§3.9&#8211;§3.12)</h2>
-
-      <h3>A.3.1 Evaluation of a Taxpayer's Separate and Combined Transactions</h3>
-
-      <h3><span class="para-badge">§3.9</span> 개별거래 이전가격 분석</h3>
-      <p>거래별로 분석을 하는 것이 원칙이나, 다음과 같이 거래가 서로 밀접한 관계 또는 연결되어 있어 분리가 가능하지 않거나 분리하는 것이 분석의 신뢰를 담보할 수 없는 경우, <strong>거래를 통합하여 분석</strong>한다:</p>
-
-      <table class="case-table">
-        <thead>
-          <tr><th>통합 분석이 필요한 경우</th><th>사례</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>(a) 장기계약</td><td>제품이나 서비스의 제공에 있어 장기계약</td></tr>
-          <tr><td>(b) 무형자산 사용권리</td><td>무형자산의 사용권리 거래</td></tr>
-          <tr><td>(c) 밀접하게 연결된 제품 가격범위</td><td>서로 밀접하게 연결된 제품의 가격범위</td></tr>
-          <tr><td>(d) 라이선스 계약</td><td>제품의 제조 노하우와 핵심 자재 제공과 관련된 라이선스 계약</td></tr>
-        </tbody>
-      </table>
-
-      <h3><span class="para-badge">§3.10</span> 포트폴리오 사업전략</h3>
-      <p>포트폴리오 접근법(portfolio approach)은 특정 제품의 손익이 아닌, <strong>제품군 전체를 기준으로 수익을 창출하는 사업 전략</strong>이며, 비교가능성 분석 시 이를 고려해야 할 수 있다.</p>
-
-      <div class="example-box">
-        <div class="ex-title">&#128226; 포트폴리오 전략 사례</div>
-        <p>어떤 제품은 손해를 보며 판매되더라도 다른 관련 제품이나 서비스에서 높은 수익을 얻기 위해 전략적으로 설정될 수 있다.</p>
-        <p style="margin-top:.5rem"><strong>예시:</strong> 프린터(손실) ↔ 잉크(이익), 커피머신(손실) ↔ 캡슐(이익)</p>
-      </div>
-
-      <div class="key-point red">
-        <strong>주의:</strong> 포트폴리오 접근법은 전체 기업 수준의 이전가격 분석을 정당화하는 도구로 남용되어서는 안 되며, 경제적 논리가 다른 거래는 반드시 구분되어 분석되어야 한다. 한 계열사가 다른 계열사를 위해 고의적으로 비정상적 이익을 희생하는 형태는 정상가격 원칙에 반한다.
-      </div>
-
-      <div class="key-point teal">
-        참조: ¶1.134-1.138 (사업전략), ¶1.149-1.151, 2.84-2.85 (다국적기업의 계속적인 결손)
-      </div>
-
-      <h3><span class="para-badge">§3.11/3.12</span> 집단(Package) 거래</h3>
-      <p>패키지 거래(package deal)는 여러 요소를 하나의 거래로 묶어 단일 가격을 설정하는 거래 형태이며, 경우에 따라 분리 평가하거나 전체로 평가해야 한다.</p>
-
-      <div class="example-box">
-        <div class="ex-title">&#128230; 패키지 거래 구성 요소 예시</div>
-        <table class="case-table" style="margin:.5rem 0 0">
-          <thead><tr><th>구성 요소</th><th>비고</th></tr></thead>
-          <tbody>
-            <tr><td>특허권 (Patent)</td><td rowspan="5" style="background:#e0f5f5;color:#0a4a4a;font-weight:600">하나의 라이선스 계약으로 통합 → 단일 가격 설정</td></tr>
-            <tr><td>노하우 (Know-how)</td></tr>
-            <tr><td>상표권 (Trademark)</td></tr>
-            <tr><td>기술 및 관리 서비스</td></tr>
-            <tr><td>제조시설 리스</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <p>세무 목적상 다른 거래로 취급하는 경우에도 집단(Package)거래로 보아 하나로 통합하는 것이 가능하다. 이때에도 <strong>독립기업 간 거래와 동일한 방식으로 분석</strong>되어야 하며, 납세자는 이 패키지가 정상가격을 반영하고 있음을 입증할 수 있어야 한다.</p>
-
-      <div class="nav-btns">
-        <button class="btn-nav secondary" onclick="showSection(2,document.querySelectorAll('.nav-item')[2])">&#8592; 이전</button>
-        <a href="M3-2_분석대상회사.html" class="btn-nav">다음 모듈: M3-2 분석대상회사 선정 &#8594;</a>
-      </div>
+    <!-- 네비게이션 -->
+    <div class="nav-btns">
+      <a href="index_ch3.html" class="btn btn-outline">← Chapter III 목록으로</a>
+      <a href="M3-2_분석대상회사.html" class="btn btn-primary">다음: Module 2 →</a>
     </div>
 
   </div>
 </div>
 
 <script>
-function showSection(idx, btn) {
-  document.querySelectorAll('.section').forEach((s,i) => s.classList.toggle('active', i===idx));
-  document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
-  if(btn) btn.classList.add('active');
-  window.scrollTo({top:0, behavior:'smooth'});
+const MODKEY = 'm3_1';
+
+// 아코디언
+function toggleAcc(id) {
+  const acc = document.getElementById(id);
+  const header = acc.querySelector('.acc-header');
+  const body = acc.querySelector('.acc-body');
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  header.classList.toggle('open', !isOpen);
+  if (!isOpen) {
+    const accIdx = ['acc1','acc2','acc3','acc4','acc5','acc6','acc7','acc8'].indexOf(id);
+    if (accIdx >= 0) markAccOpened(accIdx);
+  }
+  updateProgress();
 }
+
+// 퀴즈
+let quizResults = {};
+function checkAnswer(qid, btn, correct) {
+  const item = document.getElementById(qid);
+  if (item.querySelector('.correct') || item.querySelector('.wrong')) return;
+  const buttons = item.querySelectorAll('button');
+  buttons.forEach(b => b.disabled = true);
+  const fb = document.getElementById(qid + '-fb');
+  if (correct) {
+    btn.classList.add('correct');
+    fb.textContent = '정답입니다! 올바르게 이해하고 계십니다.';
+    fb.className = 'q-feedback show ok';
+    quizResults[qid] = true;
+  } else {
+    btn.classList.add('wrong');
+    fb.textContent = '오답입니다. 본문 내용을 다시 확인해 보시기 바랍니다.';
+    fb.className = 'q-feedback show no';
+    quizResults[qid] = false;
+  }
+  saveQuiz();
+  updateProgress();
+}
+
+// 체크리스트
+function saveCheck() {
+  const checks = {};
+  for (let i=1;i<=6;i++) {
+    checks['chk'+i] = document.getElementById('chk'+i).checked;
+  }
+  localStorage.setItem(MODKEY+'_checks', JSON.stringify(checks));
+  updateProgress();
+}
+
+function loadChecks() {
+  const saved = localStorage.getItem(MODKEY+'_checks');
+  if (saved) {
+    const checks = JSON.parse(saved);
+    for (let i=1;i<=6;i++) {
+      if (checks['chk'+i]) document.getElementById('chk'+i).checked = true;
+    }
+  }
+}
+
+// 아코디언 열림 추적
+let openedAccs = new Set();
+function markAccOpened(idx) {
+  openedAccs.add(idx);
+  localStorage.setItem(MODKEY+'_accs', JSON.stringify([...openedAccs]));
+}
+function loadAccs() {
+  const saved = localStorage.getItem(MODKEY+'_accs');
+  if (saved) {
+    openedAccs = new Set(JSON.parse(saved));
+  }
+}
+
+// 퀴즈 저장/로드
+function saveQuiz() {
+  localStorage.setItem(MODKEY+'_quiz', JSON.stringify(quizResults));
+}
+function loadQuiz() {
+  const saved = localStorage.getItem(MODKEY+'_quiz');
+  if (saved) {
+    quizResults = JSON.parse(saved);
+  }
+}
+
+// 진도율 계산
+function updateProgress() {
+  let prog = 0;
+  // 아코디언: 각 8%, 최대 50% (8개 아코디언)
+  const accScore = Math.min(openedAccs.size * 8, 50);
+  prog += accScore;
+  // 퀴즈: 정답 수 * 6%, 최대 30%
+  const correctCount = Object.values(quizResults).filter(v=>v).length;
+  const quizScore = Math.min(correctCount * 6, 30);
+  prog += quizScore;
+  // 체크리스트: 각 3.33%, 최대 20%
+  let checkCount = 0;
+  for (let i=1;i<=6;i++) {
+    if (document.getElementById('chk'+i).checked) checkCount++;
+  }
+  const checkScore = Math.min(Math.round(checkCount * (20/6)), 20);
+  prog += checkScore;
+  prog = Math.min(prog, 100);
+
+  document.getElementById('progBar').style.width = prog + '%';
+  document.getElementById('progText').textContent = prog + '%';
+  localStorage.setItem(MODKEY+'_prog', prog);
+
+  if (prog >= 100) {
+    document.getElementById('completeBanner').classList.add('show');
+  }
+}
+
+// 사이드바 스크롤
+function scrollTo(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+// 초기화
+window.onload = function() {
+  loadAccs();
+  loadChecks();
+  loadQuiz();
+  updateProgress();
+};
 </script>
 </body>
 </html>
