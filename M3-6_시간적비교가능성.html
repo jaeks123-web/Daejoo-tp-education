@@ -2,563 +2,878 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>M3-6 시간적 비교가능성 | OECD 이전가격 지침서 기초과정</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>M3-6: 시간적 비교가능성 및 Compliance</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto Sans KR:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-:root{--accent:#0f7a7a;--accent-light:#e0f5f5;--accent-mid:#1a9a9a;--green:#1a7a4a;--green-light:#e6f5ee;--orange:#c06000;--orange-light:#fff3e0;--red:#b02020;--red-light:#fdecea;--gray:#555;--gray-light:#f5f5f5;--gray-border:#ddd;--text:#222;--text2:#555;--white:#fff;--radius:10px;--shadow:0 2px 8px rgba(0,0,0,.10);}
+:root{
+  --purple:#6b21a8;--purple-light:#f5f3ff;--purple-mid:#9333ea;--purple-dark:#4c1d95;
+  --green:#1a7a4a;--green-light:#e6f5ee;
+  --orange:#c06000;--orange-light:#fff3e0;
+  --red:#b02020;--red-light:#fdecea;
+  --gray:#555;--gray-light:#f5f5f5;--gray-border:#ddd;
+  --text:#222;--text2:#555;--white:#fff;
+  --radius:10px;--shadow:0 2px 8px rgba(0,0,0,.10);
+}
 body{font-family:'Noto Sans KR',Arial,sans-serif;background:#f0f4f8;color:var(--text);line-height:1.75;font-size:16px}
-a{color:var(--accent);text-decoration:none}
-.mod-header{background:var(--accent);color:#fff;padding:1.5rem 2rem}
+a{color:var(--purple);text-decoration:none}
+.mod-header{background:linear-gradient(135deg,var(--purple-dark) 0%,var(--purple) 60%,var(--purple-mid) 100%);color:#fff;padding:1.5rem 2rem}
 .mod-header .breadcrumb{font-size:.8rem;opacity:.7;margin-bottom:.4rem}
 .mod-header h1{font-size:1.4rem;font-weight:700}
-.mod-header .sub{font-size:.9rem;opacity:.8;margin-top:.3rem}
-.prog-strip{background:rgba(255,255,255,.15);height:6px;margin-top:1rem;border-radius:99px;overflow:hidden}
+.mod-header .sub{font-size:.9rem;opacity:.85;margin-top:.3rem}
+.prog-strip{background:rgba(255,255,255,.2);height:6px;margin-top:1rem;border-radius:99px;overflow:hidden}
 .prog-strip-inner{height:100%;background:#fff;border-radius:99px;transition:width .4s}
 .layout{display:flex;max-width:1100px;margin:0 auto;padding:2rem 1.5rem 4rem;gap:1.5rem}
-.sidebar{width:220px;flex-shrink:0}
+.sidebar{width:230px;flex-shrink:0;position:sticky;top:1rem;align-self:flex-start;max-height:calc(100vh - 2rem);overflow-y:auto}
 .content{flex:1;min-width:0}
-.nav-card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:1.2rem;margin-bottom:1rem;position:sticky;top:1rem}
-.nav-card h4{font-size:.85rem;color:var(--gray);margin-bottom:.8rem}
-.nav-item{display:block;padding:.45rem .75rem;border-radius:6px;font-size:.85rem;color:var(--text2);margin-bottom:3px;cursor:pointer;border:none;width:100%;text-align:left;background:none;transition:background .12s}
-.nav-item:hover{background:var(--accent-light);color:var(--accent)}
-.nav-item.active{background:var(--accent);color:#fff;font-weight:600}
+.nav-card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:1.2rem;margin-bottom:1rem}
+.nav-card h4{font-size:.85rem;color:var(--gray);margin-bottom:.8rem;letter-spacing:.04em}
+.nav-item{display:block;padding:.45rem .75rem;border-radius:6px;font-size:.84rem;color:var(--text2);margin-bottom:3px;cursor:pointer;border:none;width:100%;text-align:left;background:none;transition:background .12s;font-family:inherit}
+.nav-item:hover{background:var(--purple-light);color:var(--purple)}
+.nav-item.active{background:var(--purple);color:#fff;font-weight:600}
 .card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:1.8rem 2rem;margin-bottom:1.5rem}
-.card h2{font-size:1.15rem;font-weight:700;color:var(--accent);margin-bottom:1rem;padding-bottom:.6rem;border-bottom:2px solid var(--accent-light)}
+.card h2{font-size:1.15rem;font-weight:700;color:var(--purple);margin-bottom:1rem;padding-bottom:.6rem;border-bottom:2px solid var(--purple-light)}
 .card p{font-size:.95rem;color:var(--text2);margin-bottom:.7rem}
+.card ul,.card ol{padding-left:1.4rem;font-size:.93rem;color:var(--text2);margin-bottom:.7rem}
+.card li{margin-bottom:.35rem;line-height:1.75}
+.tag{display:inline-block;padding:2px 9px;border-radius:20px;font-size:.75rem;font-weight:600;margin-left:.4rem}
+.tag-para{background:var(--purple-light);color:var(--purple)}
 .obj-list{list-style:none;padding:0}
 .obj-list li{display:flex;gap:.7rem;align-items:flex-start;padding:.5rem 0;border-bottom:1px solid var(--gray-border);font-size:.93rem}
 .obj-list li:last-child{border:none}
-.obj-num{background:var(--accent);color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;flex-shrink:0;margin-top:2px}
+.obj-num{background:var(--purple);color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;flex-shrink:0;margin-top:2px}
+.key-point{background:var(--purple-light);border-left:4px solid var(--purple);padding:.75rem 1rem;border-radius:0 6px 6px 0;margin:.8rem 0;font-size:.9rem;color:#3b0764;line-height:1.75}
+.warn-point{background:var(--orange-light);border-left:4px solid var(--orange);padding:.75rem 1rem;border-radius:0 6px 6px 0;margin:.8rem 0;font-size:.9rem;color:#6b3a00;line-height:1.75}
+.note-point{background:var(--green-light);border-left:4px solid var(--green);padding:.75rem 1rem;border-radius:0 6px 6px 0;margin:.8rem 0;font-size:.9rem;color:#0d3d25;line-height:1.75}
+.practice-note{background:#fffbeb;border:1px solid #fcd34d;border-radius:8px;padding:.9rem 1.1rem;margin:.8rem 0}
+.practice-note .pn-label{font-weight:700;font-size:.78rem;color:#92400e;margin-bottom:.35rem}
+.practice-note p{font-size:.88rem;color:#78350f;margin-bottom:.35rem}
+.practice-note p:last-child{margin-bottom:0}
 .accordion{border:1px solid var(--gray-border);border-radius:var(--radius);overflow:hidden;margin-bottom:1rem}
-.acc-header{display:flex;justify-content:space-between;align-items:center;padding:.9rem 1.2rem;cursor:pointer;background:var(--gray-light);font-weight:600;font-size:.95rem;border:none;width:100%;text-align:left;transition:background .12s}
+.acc-header{display:flex;justify-content:space-between;align-items:center;padding:.9rem 1.2rem;cursor:pointer;background:var(--gray-light);font-weight:600;font-size:.95rem;border:none;width:100%;text-align:left;transition:background .12s;font-family:inherit}
 .acc-header:hover{background:#ebebeb}
-.acc-header .para{font-size:.78rem;color:var(--accent);background:var(--accent-light);padding:2px 8px;border-radius:20px;margin-right:.6rem}
-.acc-header .arrow{font-size:1rem;color:var(--gray);transition:transform .2s}
-.acc-body{display:none;padding:1.1rem 1.3rem;background:#fff;font-size:.93rem;color:var(--text2);line-height:1.8;border-top:1px solid var(--gray-border)}
-.acc-body.open{display:block}
+.acc-header .para{font-size:.75rem;color:var(--purple);background:var(--purple-light);padding:2px 8px;border-radius:20px;margin-left:.5rem;font-weight:500;white-space:nowrap}
+.acc-header .arrow{font-size:1rem;color:var(--gray);transition:transform .2s;margin-left:.5rem;flex-shrink:0}
 .acc-header.open .arrow{transform:rotate(180deg)}
-.key-point{background:var(--accent-light);border-left:4px solid var(--accent);padding:.7rem 1rem;border-radius:0 6px 6px 0;margin:.8rem 0;font-size:.9rem;color:#0a4a4a}
-.warn-point{background:var(--orange-light);border-left:4px solid var(--orange);padding:.7rem 1rem;border-radius:0 6px 6px 0;margin:.8rem 0;font-size:.9rem;color:#6b3a00}
-.compare-table{width:100%;border-collapse:collapse;font-size:.9rem;margin:.8rem 0}
-.compare-table th{background:var(--accent);color:#fff;padding:.7rem 1rem;text-align:left;font-weight:600}
-.compare-table td{padding:.65rem 1rem;border-bottom:1px solid var(--gray-border);vertical-align:top}
+.acc-body{display:none;padding:1.1rem 1.3rem;background:#fff;font-size:.93rem;color:var(--text2);line-height:1.85;border-top:1px solid var(--gray-border)}
+.acc-body.open{display:block}
+.acc-body ul,.acc-body ol{padding-left:1.3rem;margin:.5rem 0 .7rem}
+.acc-body li{margin-bottom:.35rem;line-height:1.75}
+.compare-table{width:100%;border-collapse:collapse;font-size:.88rem;margin:.8rem 0}
+.compare-table th{background:var(--purple);color:#fff;padding:.6rem .9rem;text-align:left;font-weight:600}
+.compare-table td{padding:.55rem .9rem;border-bottom:1px solid var(--gray-border);color:var(--text2);vertical-align:top}
 .compare-table tr:last-child td{border:none}
-.compare-table tr:nth-child(even) td{background:#fafafa}
-.case-box{background:#fff;border:1.5px solid var(--accent-mid);border-radius:var(--radius);padding:1.3rem 1.5rem;margin:1rem 0}
-.case-box .case-label{font-size:.78rem;font-weight:700;color:var(--accent);letter-spacing:.05em;margin-bottom:.5rem}
-.case-box h4{font-size:.95rem;font-weight:700;color:var(--text);margin-bottom:.6rem}
-.quiz-section{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:1.8rem 2rem;margin-bottom:1.5rem}
-.quiz-section h2{font-size:1.15rem;font-weight:700;color:var(--accent);margin-bottom:.4rem}
-.quiz-section .q-count{font-size:.85rem;color:var(--gray);margin-bottom:1.5rem}
-.quiz-item{margin-bottom:1.8rem;padding-bottom:1.5rem;border-bottom:1px solid var(--gray-border)}
-.quiz-item:last-of-type{border:none}
-.quiz-item .q-text{font-size:.97rem;font-weight:600;color:var(--text);margin-bottom:.9rem}
-.quiz-item .q-num{font-size:.78rem;background:var(--accent-light);color:var(--accent);padding:2px 9px;border-radius:20px;margin-right:.5rem;font-weight:700}
-.opt-list{list-style:none;padding:0;display:flex;flex-direction:column;gap:.5rem}
-.opt-list li button{width:100%;text-align:left;padding:.7rem 1rem;border-radius:8px;border:1.5px solid var(--gray-border);background:#fff;font-size:.9rem;cursor:pointer;color:var(--text);transition:all .15s}
-.opt-list li button:hover{border-color:var(--accent-mid);background:var(--accent-light)}
-.opt-list li button.correct{background:var(--green-light);border-color:var(--green);color:var(--green);font-weight:600}
-.opt-list li button.wrong{background:var(--red-light);border-color:var(--red);color:var(--red)}
-.opt-list li button:disabled{cursor:default}
-.q-feedback{margin-top:.7rem;padding:.6rem 1rem;border-radius:8px;font-size:.88rem;display:none}
-.q-feedback.show{display:block}
-.q-feedback.ok{background:var(--green-light);color:var(--green);border:1px solid #a0d8b8}
-.q-feedback.no{background:var(--red-light);color:var(--red);border:1px solid #f5b8b8}
+.compare-table tr:nth-child(even) td{background:var(--gray-light)}
+.compare-table td strong{color:var(--text)}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:.8rem 0}
+.col-box{border-radius:8px;padding:1rem 1.1rem;border:1.5px solid #d8b4fe;background:var(--purple-light)}
+.col-box h4{font-size:.88rem;font-weight:700;color:var(--purple);margin-bottom:.4rem}
+.col-box p{font-size:.85rem;margin:0;color:var(--text2);line-height:1.65}
+.col-box ul{font-size:.84rem;color:var(--text2);padding-left:1.2rem;margin:.3rem 0 0}
+.col-box li{margin-bottom:.2rem}
+.col-box.green{border-color:#86efac;background:#f0fdf4}
+.col-box.green h4{color:var(--green)}
+.col-box.orange{border-color:#fdba74;background:#fff7ed}
+.col-box.orange h4{color:var(--orange)}
+.col-box.red{border-color:#fca5a5;background:#fef2f2}
+.col-box.red h4{color:var(--red)}
+/* ── 타임라인 ── */
+.timeline{position:relative;padding-left:2.2rem;margin:.8rem 0}
+.timeline::before{content:'';position:absolute;left:.65rem;top:.3rem;bottom:.3rem;width:2px;background:var(--purple-light)}
+.tl-item{position:relative;margin-bottom:1.1rem}
+.tl-item::before{content:'';position:absolute;left:-1.55rem;top:.4rem;width:12px;height:12px;border-radius:50%;background:var(--purple);border:2px solid #fff;box-shadow:0 0 0 2px var(--purple)}
+.tl-item h4{font-size:.9rem;font-weight:700;color:var(--purple);margin-bottom:.25rem}
+.tl-item p{font-size:.85rem;color:var(--text2);margin:0;line-height:1.65}
+/* ── Timing 유형 카드 ── */
+.timing-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.8rem;margin:.8rem 0}
+.timing-card{border-radius:10px;padding:.9rem 1rem;text-align:center}
+.timing-card.t1{background:#ede9fe;border:1.5px solid var(--purple)}
+.timing-card.t2{background:#f0fdf4;border:1.5px solid #4ade80}
+.timing-card.t3{background:#fff7ed;border:1.5px solid #fdba74}
+.timing-card.t4{background:#fef2f2;border:1.5px solid #fca5a5}
+.timing-card.t5{background:#e0f2fe;border:1.5px solid #38bdf8}
+.timing-card .tc-label{font-size:.7rem;font-weight:800;letter-spacing:.05em;margin-bottom:.3rem}
+.timing-card.t1 .tc-label{color:var(--purple)}
+.timing-card.t2 .tc-label{color:var(--green)}
+.timing-card.t3 .tc-label{color:var(--orange)}
+.timing-card.t4 .tc-label{color:var(--red)}
+.timing-card.t5 .tc-label{color:#0284c7}
+.timing-card h4{font-size:.85rem;font-weight:700;color:var(--text);margin-bottom:.3rem}
+.timing-card p{font-size:.78rem;color:var(--text2);margin:0;line-height:1.5}
+/* ── 다중연도 시각화 ── */
+.yr-flow{display:flex;align-items:center;gap:.4rem;flex-wrap:wrap;margin:.8rem 0}
+.yr-pill{padding:.35rem .8rem;border-radius:20px;font-size:.82rem;font-weight:700;border:1.5px solid}
+.yr-pill.active{background:var(--purple);border-color:var(--purple);color:#fff}
+.yr-pill.passive{background:var(--purple-light);border-color:#d8b4fe;color:var(--purple)}
+.yr-pill.na{background:var(--gray-light);border-color:var(--gray-border);color:var(--gray)}
+.yr-arrow{font-size:.9rem;color:var(--gray)}
+/* ── Compliance 부담 지표 ── */
+.burden-grid{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;margin:.8rem 0}
+.burden-item{border-radius:8px;padding:.9rem 1rem;border:1.5px solid}
+.burden-item.bi-effort{background:#ede9fe;border-color:var(--purple)}
+.burden-item.bi-cost{background:#fff7ed;border-color:#fdba74}
+.burden-item.bi-limit{background:#f0fdf4;border-color:#4ade80}
+.burden-item.bi-prop{background:#fef2f2;border-color:#fca5a5}
+.burden-item h4{font-size:.88rem;font-weight:700;margin-bottom:.35rem}
+.burden-item.bi-effort h4{color:var(--purple)}
+.burden-item.bi-cost h4{color:var(--orange)}
+.burden-item.bi-limit h4{color:var(--green)}
+.burden-item.bi-prop h4{color:var(--red)}
+.burden-item p{font-size:.83rem;color:var(--text2);margin:0;line-height:1.6}
+/* ── 완료 배너 ── */
+.completion-banner{background:linear-gradient(135deg,var(--purple-dark),var(--purple-mid));color:#fff;border-radius:var(--radius);padding:1.5rem 2rem;text-align:center;margin:1.5rem 0}
+.completion-banner h3{font-size:1.3rem;margin-bottom:.5rem}
+.completion-banner p{font-size:.9rem;opacity:.9;margin:0}
+/* ── 퀴즈 ── */
+.q-block{background:var(--gray-light);border-radius:8px;padding:1rem 1.2rem;margin-bottom:1rem}
+.q-block .q-text{font-weight:600;font-size:.93rem;margin-bottom:.7rem;color:var(--text);line-height:1.65}
+.q-options label{display:flex;align-items:flex-start;gap:.5rem;padding:.4rem .5rem;border-radius:6px;cursor:pointer;font-size:.91rem;color:var(--text2);transition:background .1s;margin-bottom:3px;line-height:1.55}
+.q-options label:hover{background:#e8e8e8}
+.q-options input[type=radio]{margin-top:3px;flex-shrink:0;accent-color:var(--purple)}
+.q-feedback{display:none;margin-top:.7rem;padding:.6rem .9rem;border-radius:6px;font-size:.88rem;font-weight:500;line-height:1.6}
+.q-feedback.correct{background:var(--green-light);color:var(--green);border-left:3px solid var(--green)}
+.q-feedback.wrong{background:var(--red-light);color:var(--red);border-left:3px solid var(--red)}
+.quiz-btn{background:var(--purple);color:#fff;border:none;padding:.7rem 2rem;border-radius:8px;font-size:.95rem;font-weight:600;cursor:pointer;margin-top:.5rem;transition:background .15s;font-family:inherit}
+.quiz-btn:hover{background:var(--purple-mid)}
+.quiz-btn:disabled{background:#aaa;cursor:default}
+.score-box{display:none;background:var(--purple-light);border:2px solid var(--purple);border-radius:10px;padding:1.2rem;text-align:center;margin-top:1rem}
+.score-box .big{font-size:2rem;font-weight:800;color:var(--purple)}
+.score-box p{font-size:.92rem;color:var(--text2);margin-top:.3rem}
 .checklist{list-style:none;padding:0}
 .checklist li{display:flex;gap:.8rem;align-items:flex-start;padding:.55rem 0;border-bottom:1px solid var(--gray-border);font-size:.92rem}
 .checklist li:last-child{border:none}
 .checklist input[type=checkbox]{width:18px;height:18px;margin-top:2px;cursor:pointer;flex-shrink:0;accent-color:var(--green)}
-.checklist label{cursor:pointer;color:var(--text2)}
+.checklist label{cursor:pointer;color:var(--text2);line-height:1.65}
 .checklist input:checked+label{color:var(--green);text-decoration:line-through;opacity:.7}
-.nav-btns{display:flex;justify-content:space-between;margin-top:1.5rem}
-.btn{display:inline-flex;align-items:center;gap:.4rem;padding:.7rem 1.5rem;border-radius:8px;font-size:.9rem;font-weight:600;cursor:pointer;border:none;transition:all .15s;text-decoration:none}
-.btn-primary{background:var(--accent);color:#fff}
-.btn-primary:hover{background:#0a5a5a}
-.btn-outline{background:#fff;color:var(--accent);border:1.5px solid var(--accent)}
-.btn-outline:hover{background:var(--accent-light)}
-.complete-banner{background:var(--green-light);border:2px solid var(--green);border-radius:var(--radius);padding:1.3rem 1.8rem;text-align:center;display:none;margin-bottom:1.5rem}
-.complete-banner.show{display:block}
-.complete-banner h3{color:var(--green);font-size:1.1rem;margin-bottom:.4rem}
-.complete-banner p{font-size:.9rem;color:#2a6040}
-.section{display:none}
-ul.body-list{margin:.5rem 0 .8rem 1.2rem;font-size:.93rem;color:var(--text2)}
-ul.body-list li{margin-bottom:.4rem}
-@media(max-width:720px){.layout{flex-direction:column}.sidebar{width:100%;position:static}.nav-card{position:static}}
+.nav-bottom{display:flex;justify-content:space-between;align-items:center;margin-top:2rem;gap:.5rem}
+.btn-nav{background:var(--purple);color:#fff;padding:.65rem 1.4rem;border-radius:8px;font-size:.93rem;font-weight:600;cursor:pointer;border:none;transition:background .15s;text-decoration:none;display:inline-block;font-family:inherit}
+.btn-nav:hover{background:var(--purple-mid)}
+.btn-nav.secondary{background:#fff;color:var(--purple);border:2px solid var(--purple)}
+.btn-nav.secondary:hover{background:var(--purple-light)}
+.btn-nav.success{background:var(--green);border-color:var(--green)}
+.btn-nav.success:hover{background:#15693e}
+@media(max-width:720px){
+  .layout{flex-direction:column}
+  .sidebar{width:100%;position:static}
+  .two-col,.timing-grid,.burden-grid{grid-template-columns:1fr}
+}
 </style>
+  <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore-compat.js"></script>
+  <script src="tp-firebase.js"></script>
 </head>
 <body>
-<div class="mod-header">
-  <div class="breadcrumb">OECD 이전가격 지침서 기초과정 &gt; Chapter III &gt; M3-6</div>
-  <h1>M3-6 시간적 비교가능성(Timing of Comparability)</h1>
-  <div class="sub">비교가능자료의 시간적 요건, 다중연도 자료 활용, 납세자 이행부담을 학습합니다.</div>
-  <div class="prog-strip"><div class="prog-strip-inner" id="mod-prog" style="width:0%"></div></div>
-  <div style="font-size:.8rem;opacity:.7;margin-top:.4rem">진도율: <span id="pct-display">0%</span></div>
+
+<div id="tpLoading" style="position:fixed;top:0;left:0;width:100%;height:100%;background:#0f7a7a;display:flex;align-items:center;justify-content:center;z-index:9999;color:#fff;font-family:'Noto Sans KR',Arial,sans-serif">
+  <div style="text-align:center">
+    <div style="font-size:2.5rem;margin-bottom:.8rem">📙</div>
+    <div style="font-size:1rem;font-weight:600">대주 이전가격 교육</div>
+    <div style="font-size:.82rem;opacity:.75;margin-top:.4rem">로딩 중...</div>
+  </div>
 </div>
+<header class="mod-header">
+  <div class="breadcrumb">기초과정 › Chapter III 비교가능성 분석 › M3-6 (최종 모듈)</div>
+  <h1>M3-6. 시간적 비교가능성 및 Compliance</h1>
+  <div class="sub">B. Timing Issues &amp; C. Compliance — 5가지 시간적 유형, 다중연도, 불확실성, 사후자료, Compliance 부담 &nbsp;|&nbsp; ¶3.67 – ¶3.83 &nbsp;|&nbsp; 예상 학습시간: 50분</div>
+  <div class="prog-strip"><div class="prog-strip-inner" id="topBar" style="width:0%"></div></div>
+  <div style="display:flex;justify-content:flex-end;align-items:center;gap:.7rem;margin-top:.3rem;font-size:.8rem">
+    <span id="topUserName" style="color:rgba(255,255,255,.8)"></span>
+    <button onclick="tpSignOut()" style="background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.35);color:#fff;padding:2px 12px;border-radius:20px;cursor:pointer;font-size:.76rem;font-family:inherit">로그아웃</button>
+  </div>
+</header>
+
 <div class="layout">
+
   <aside class="sidebar">
     <div class="nav-card">
-      <h4>목차</h4>
-      <button class="nav-item active" onclick="showSec('sec-obj',this)">&#128204; 학습 목표</button>
-      <button class="nav-item" onclick="showSec('sec1',this)">§3.68 동시적 자료 원칙</button>
-      <button class="nav-item" onclick="showSec('sec2',this)">§3.71 이중과세와 불확실성</button>
-      <button class="nav-item" onclick="showSec('sec3',this)">§3.74 다중연도 자료</button>
-      <button class="nav-item" onclick="showSec('sec4',this)">§3.80 납세자 이행부담</button>
-      <button class="nav-item" onclick="showSec('sec3',this)">§3.75 다중연도 사례</button>
-      <button class="nav-item" onclick="showSec('sec-quiz',this)">&#9999; 자가 퀴즈</button>
-      <button class="nav-item" onclick="showSec('sec-check',this)">&#9745; 실무 체크리스트</button>
+      <h4>📑 목차</h4>
+      <button class="nav-item" onclick="goTo('obj')">🎯 학습목표</button>
+      <button class="nav-item" onclick="goTo('s1')">1. 시간적 비교가능성 개요</button>
+      <button class="nav-item" onclick="goTo('s2')">2. 자료 기원의 시간성 (B.1)</button>
+      <button class="nav-item" onclick="goTo('s3')">3. 자료 수집의 시간성 (B.2)</button>
+      <button class="nav-item" onclick="goTo('s4')">4. 가치평가 불확실성 (B.3)</button>
+      <button class="nav-item" onclick="goTo('s5')">5. 사후자료 & 다중연도 (B.4·B.5)</button>
+      <button class="nav-item" onclick="goTo('s6')">6. Compliance 이슈 (C)</button>
+      <button class="nav-item" onclick="goTo('quiz')">📝 확인 퀴즈</button>
+      <button class="nav-item" onclick="goTo('check')">☑ 실무 체크리스트</button>
     </div>
-    <div class="nav-card" style="text-align:center">
-      <div style="font-size:.8rem;color:var(--gray);margin-bottom:.3rem">현재 진도</div>
-      <div style="font-size:1.6rem;font-weight:700;color:var(--accent)" id="pct-display2">0%</div>
+    <div class="nav-card">
+      <h4>📊 모듈 진도</h4>
+      <div style="text-align:center;padding:.5rem 0">
+        <div style="font-size:1.6rem;font-weight:800;color:var(--purple)" id="pctDisp">0%</div>
+        <div style="font-size:.8rem;color:var(--gray);margin-top:.2rem">학습 완료율</div>
+      </div>
     </div>
   </aside>
-  <div class="content">
-    <div class="complete-banner" id="complete-banner">
-      <h3>&#127881; Chapter III 학습 완료!</h3>
-      <p>비교가능성 분석의 모든 핵심 개념을 학습하셨습니다. Chapter III 목차로 돌아가 전체 내용을 복습하시기 바랍니다.</p>
-    </div>
-    <div id="sec-obj" class="section">
-      <div class="card">
-        <h2>&#128204; 학습 목표</h2>
-        <p>이 모듈에서는 OECD 이전가격지침서 §3.68~§3.83에 규정된 <strong>시간적 비교가능성(Timing of Comparability)</strong> 원칙을 학습합니다.</p>
-        <ul class="obj-list">
-          <li><span class="obj-num">1</span><span>비교가능자료는 통제거래와 동일한 회계연도의 자료를 사용하는 것이 원칙임을 설명할 수 있습니다.</span></li>
-          <li><span class="obj-num">2</span><span>사후자료(Hindsight) 사용을 제한하는 이유와 예외 조건을 이해하고 설명할 수 있습니다.</span></li>
-          <li><span class="obj-num">3</span><span>다중연도 자료(Multi-Year Data)의 개념과 장점, 그리고 한국 국조법상 3개 사업연도 기준을 적용할 수 있습니다.</span></li>
-          <li><span class="obj-num">4</span><span>이중과세 위험과 무형자산의 가치 불확실성에 대한 시간적 비교가능성 문제를 파악할 수 있습니다.</span></li>
-          <li><span class="obj-num">5</span><span>납세자의 이행부담을 완화하기 위한 실무적 접근 방법을 적용할 수 있습니다.</span></li>
-        </ul>
-        <table class="compare-table" style="margin-top:1rem">
-          <thead><tr><th>관련 조문</th><th>주요 내용</th></tr></thead>
-          <tbody>
-            <tr><td>§3.68~3.70</td><td>동시적 자료 원칙, 가격설정 시기와 자료수집 시기의 차이</td></tr>
-            <tr><td>§3.71~3.73</td><td>사후자료 제한, 이중과세 위험, 무형자산 불확실성</td></tr>
-            <tr><td>§3.74~3.79</td><td>다중연도 자료 개념, 장점, 국가별 규정 비교</td></tr>
-            <tr><td>§3.80~3.83</td><td>납세자 이행부담, 중소기업 특례, 정보 접근성 한계와 실무 대응</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div id="sec1" class="section">
-      <div class="card">
-        <h2>§3.68~3.70 동시적 자료 원칙</h2>
-        <p>비교가능자료를 선정할 때 가장 중요한 기준 중 하나는 <strong>시간적 일치성</strong>입니다. OECD 이전가격지침서는 통제거래와 같은 연도의 자료를 원칙적으로 사용하도록 권고하고 있습니다.</p>
-      </div>
+
+  <main class="content">
+
+    <!-- 학습 목표 -->
+    <section class="card" id="obj">
+      <h2>🎯 학습 목표</h2>
+      <ul class="obj-list">
+        <li><span class="obj-num">1</span><span>시간적 비교가능성(timing comparability)의 개념과 이전가격 분석에서의 중요성을 설명할 수 있다</span></li>
+        <li><span class="obj-num">2</span><span>OECD가 제시하는 5가지 Timing 유형(B.1~B.5)을 구별하고 각각의 실무적 함의를 이해한다</span></li>
+        <li><span class="obj-num">3</span><span>다중연도(multiple year) 자료 사용의 허용 조건, 장점, 국조법과의 비교를 설명할 수 있다</span></li>
+        <li><span class="obj-num">4</span><span>무형자산 가치평가의 불확실성과 예측불가능한 사건이 이전가격에 미치는 영향을 이해한다</span></li>
+        <li><span class="obj-num">5</span><span>Compliance 이슈 — 납세자의 비교가능거래 탐색 노력 부담과 OECD의 비례원칙을 파악한다</span></li>
+      </ul>
+    </section>
+
+    <!-- 섹션 1: 시간적 비교가능성 개요 -->
+    <section class="card" id="s1">
+      <h2>1. 시간적 비교가능성 개요 <span class="tag tag-para">¶3.67</span></h2>
+      <p>비교가능성 분석에서 <strong>데이터의 시간적 차원(temporal dimension)</strong>은 매우 중요하다. 이전가격 설정 시점, 비교가능 데이터 수집 시점, 과세당국의 사후 검토 시점은 각각 다를 수 있으며, 이러한 시간적 괴리가 비교가능성 분석의 신뢰성에 영향을 미친다.</p>
+
       <div class="accordion">
         <button class="acc-header" onclick="toggleAcc(this)">
-          <span><span class="para">§3.68</span>비교가능자료의 시간적 요건</span>
-          <span class="arrow">&#9660;</span>
+          <span>5가지 Timing 유형 한눈에 보기 <span class="para">¶3.67–¶3.79</span></span>
+          <span class="arrow">▼</span>
         </button>
         <div class="acc-body">
-          <p>§3.68은 비교가능자료의 <strong>시간적 요건(Timing Requirements)</strong>에 관한 기본 원칙을 규정하고 있습니다. 비교가능성 분석에서 사용하는 자료는 원칙적으로 <strong>통제거래가 이루어진 연도와 동일한 회계연도의 자료</strong>를 사용하여야 합니다.</p>
-          <div class="key-point"><strong>핵심 원칙:</strong> 비교가능자료는 통제거래와 동일한 회계연도에 해당하는 재무자료를 사용하는 것이 원칙입니다. 이를 <strong>동시적 자료(Contemporaneous Data)</strong>라고 합니다.</div>
-          <p>동시적 자료를 사용하는 이유는 다음과 같습니다.</p>
-          <ul class="body-list">
-            <li><strong>시장 조건의 일치:</strong> 동일 시점의 경제 환경, 산업 조건, 시장 상황을 반영하기 위함입니다.</li>
-            <li><strong>비교가능성 확보:</strong> 다른 연도의 자료는 경기변동, 환율 변화, 규제 환경 변화 등으로 비교가능성이 저하될 수 있습니다.</li>
-            <li><strong>납세자 보호:</strong> 거래 시점 이후 발생한 정보로 소급하여 납세자를 불리하게 처우하는 것을 방지합니다.</li>
-          </ul>
+          <p>OECD Chapter III Section B는 시간적 비교가능성 관련 이슈를 다음 5가지 유형으로 분류한다.</p>
+          <div class="timing-grid">
+            <div class="timing-card t1">
+              <div class="tc-label">B.1 — ¶3.67–3.68</div>
+              <h4>자료 기원의 시간성</h4>
+              <p>분석대상회사와 비교가능회사의 <strong>동일 회계연도 자료</strong> 사용 원칙</p>
+            </div>
+            <div class="timing-card t2">
+              <div class="tc-label">B.2 — ¶3.69–3.71</div>
+              <h4>자료 수집의 시간성</h4>
+              <p>이전가격 설정 시점과 비교가능 자료 수집 시점의 시간적 <strong>차이 문제</strong></p>
+            </div>
+            <div class="timing-card t3">
+              <div class="tc-label">B.3 — ¶3.72–3.73</div>
+              <h4>가치평가 불확실성</h4>
+              <p>무형자산 등 <strong>초기 가치평가가 어려운</strong> 거래의 처리 원칙</p>
+            </div>
+            <div class="timing-card t4">
+              <div class="tc-label">B.4 — ¶3.74</div>
+              <h4>사후(事後) 자료</h4>
+              <p>거래 발생 이후 연도의 자료 사용 <strong>제한 원칙</strong></p>
+            </div>
+            <div class="timing-card t5">
+              <div class="tc-label">B.5 — ¶3.75–3.79</div>
+              <h4>다중연도 자료</h4>
+              <p>복수 연도 데이터 활용의 <strong>허용 조건과 한계</strong></p>
+            </div>
+          </div>
+          <div class="key-point">💡 <strong>왜 시간적 비교가능성이 중요한가?</strong> 시장 조건, 경기 사이클, 산업 구조는 시간에 따라 변한다. 분석대상거래와 비교가능거래가 서로 다른 시기의 경제 환경을 반영하면 비교가능성이 훼손되므로, 시간적 일치성 확보가 필수적이다.</div>
         </div>
       </div>
+    </section>
+
+    <!-- 섹션 2: B.1 자료 기원의 시간성 -->
+    <section class="card" id="s2">
+      <h2>2. 자료 기원의 시간성 (B.1) <span class="tag tag-para">¶3.67–¶3.68</span></h2>
+      <p>B.1은 분석대상 특수관계거래와 비교가능거래에 사용하는 <strong>재무 자료의 회계연도 일치성</strong>에 관한 원칙을 다룬다.</p>
+
       <div class="accordion">
         <button class="acc-header" onclick="toggleAcc(this)">
-          <span><span class="para">§3.69</span>가격설정 시기 vs 자료수집 시기의 차이</span>
-          <span class="arrow">&#9660;</span>
+          <span>동일 회계연도 자료 사용 원칙 <span class="para">¶3.67–¶3.68</span></span>
+          <span class="arrow">▼</span>
         </button>
         <div class="acc-body">
-          <p>§3.69는 <strong>가격설정 시기</strong>와 <strong>자료수집 시기</strong>의 차이에서 발생하는 실무적 문제를 다루고 있습니다.</p>
+          <p>¶3.68은 <strong>분석대상회사의 재무 자료와 비교가능회사의 재무 자료는 원칙적으로 동일한 회계연도를 기준으로 비교</strong>해야 한다고 제시한다.</p>
           <table class="compare-table">
-            <thead><tr><th>구분</th><th>가격설정 시기</th><th>세무조사 시기</th></tr></thead>
+            <thead>
+              <tr><th>원칙</th><th>내용</th><th>이유</th></tr>
+            </thead>
             <tbody>
-              <tr><td>시점</td><td>거래가 이루어지는 당해 연도(또는 사전)</td><td>통상 거래 후 3~5년 이후</td></tr>
-              <tr><td>이용 가능 자료</td><td>당해 연도 자료(또는 직전 연도 자료)</td><td>사후 자료를 포함한 다양한 자료 이용 가능</td></tr>
-              <tr><td>관점</td><td>사전적(Ex Ante) 관점</td><td>사후적(Ex Post) 관점</td></tr>
-              <tr><td>문제점</td><td>당해 연도 자료가 아직 집계되지 않을 수 있습니다.</td><td>사후자료 사용 시 납세자에게 불리할 수 있습니다.</td></tr>
+              <tr>
+                <td><strong>동일 연도 원칙</strong></td>
+                <td>분석대상연도와 같은 회계연도의 비교가능회사 자료를 사용</td>
+                <td>동일한 경기·시장 환경을 반영하여 시간적 비교가능성 확보</td>
+              </tr>
+              <tr>
+                <td><strong>결산일 차이 조정</strong></td>
+                <td>비교가능회사의 결산 기준일이 다른 경우 조정(사업연도 차이 조정, M3-4 참조)</td>
+                <td>계절성이 큰 산업에서 결산일 차이가 이익지표에 영향을 줄 수 있음</td>
+              </tr>
+              <tr>
+                <td><strong>일관성</strong></td>
+                <td>다중연도 분석 시에도 분석대상회사와 비교가능회사의 연도를 동일하게 맞춤</td>
+                <td>시계열 비교의 일관성 유지</td>
+              </tr>
             </tbody>
           </table>
-          <div class="warn-point"><strong>OECD 입장:</strong> 납세자가 거래 시점에 이용 가능한 정보를 합리적으로 사용하였다면, 이후 확인된 정보로 소급 조정하는 것은 적절하지 않습니다.</div>
-        </div>
-      </div>
-      <div class="accordion">
-        <button class="acc-header" onclick="toggleAcc(this)">
-          <span><span class="para">§3.70</span>동시적 자료와 사전가격합의(APA)의 관계</span>
-          <span class="arrow">&#9660;</span>
-        </button>
-        <div class="acc-body">
-          <p>§3.70은 <strong>사전가격합의(APA)</strong>와 동시적 자료의 관계를 설명하고 있습니다.</p>
-          <div class="key-point"><strong>APA와 시간적 비교가능성:</strong> APA를 통해 사전에 합의된 방법론을 사용하면, 거래 시점과 세무조사 시점 간의 자료 차이로 인한 분쟁을 예방할 수 있습니다.</div>
-          <p>APA의 주요 유형은 다음과 같습니다.</p>
-          <ul class="body-list">
-            <li><strong>단독 APA(Unilateral APA):</strong> 납세자와 자국 과세관청만 합의합니다. 상대국의 이중과세 문제는 해결되지 않을 수 있습니다.</li>
-            <li><strong>쌍방 APA(Bilateral APA):</strong> 납세자와 양국 과세관청이 모두 합의합니다. 이중과세 위험을 완전히 제거할 수 있습니다.</li>
-            <li><strong>다자 APA(Multilateral APA):</strong> 3개국 이상의 과세관청이 참여합니다. 복잡한 글로벌 공급망에 적합합니다.</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div id="sec2" class="section">
-      <div class="card">
-        <h2>§3.71~3.73 이중과세와 불확실성</h2>
-        <p>시간적 비교가능성 문제는 <strong>이중과세 위험</strong>과 <strong>무형자산의 가치 불확실성</strong> 문제와 밀접하게 연결되어 있습니다.</p>
-      </div>
-      <div class="accordion">
-        <button class="acc-header" onclick="toggleAcc(this)">
-          <span><span class="para">§3.71</span>사후자료(Hindsight) 사용 제한 원칙</span>
-          <span class="arrow">&#9660;</span>
-        </button>
-        <div class="acc-body">
-          <p>§3.71은 이전가격 분석에서 <strong>사후자료(Hindsight)</strong>의 사용을 제한하는 원칙을 규정하고 있습니다.</p>
-          <div class="key-point"><strong>핵심 원칙:</strong> 이전가격 분석은 거래 당시 독립기업이 활용 가능하였던 정보를 기반으로 수행되어야 합니다. 거래 후에 확인된 정보를 사용하여 납세자의 이전가격이 부적절하다고 판단하는 것은 원칙적으로 허용되지 않습니다.</div>
-          <p>사후자료 사용을 제한하는 이유는 다음과 같습니다.</p>
-          <ul class="body-list">
-            <li><strong>공정성:</strong> 납세자는 거래 당시 미래 결과를 알 수 없었으므로, 이후 밝혀진 사실로 소급 평가하는 것은 공정하지 않습니다.</li>
-            <li><strong>정상가격 원칙:</strong> 독립기업 간 거래에서도 가격은 거래 당시 이용 가능한 정보를 기반으로 결정됩니다.</li>
-            <li><strong>이중과세 방지:</strong> 사후자료 기반의 세무조정은 상대국 대응조정 없이는 이중과세로 이어질 수 있습니다.</li>
-          </ul>
-          <div class="warn-point"><strong>예외:</strong> 무형자산 거래의 경우, 가치 예측이 매우 불확실하면 예외적으로 사후 결과를 참고할 수 있습니다(§6.181-6.185 참조). 그러나 엄격한 요건 하에서만 허용됩니다.</div>
-        </div>
-      </div>
-      <div class="accordion">
-        <button class="acc-header" onclick="toggleAcc(this)">
-          <span><span class="para">§3.72</span>이중과세(Double Taxation) 위험</span>
-          <span class="arrow">&#9660;</span>
-        </button>
-        <div class="acc-body">
-          <p>§3.72는 시간적 비교가능성 문제로 인한 <strong>이중과세 위험</strong>을 설명하고 있습니다.</p>
-          <table class="compare-table">
-            <thead><tr><th>이중과세 해결 수단</th><th>내용</th><th>장단점</th></tr></thead>
-            <tbody>
-              <tr><td><strong>상호합의절차(MAP)</strong></td><td>양국 과세관청 간 협의를 통한 이중과세 해소</td><td>효과적이나 시간이 오래 걸립니다(평균 2~3년).</td></tr>
-              <tr><td><strong>사전가격합의(APA)</strong></td><td>사전에 양국이 이전가격 방법론을 합의</td><td>이중과세를 사전에 예방하는 가장 효과적인 수단입니다.</td></tr>
-              <tr><td><strong>대응조정</strong></td><td>한 국가의 조정에 맞춰 상대국이 자국 세금을 조정</td><td>상대국의 협조 없이는 실현이 어렵습니다.</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="accordion">
-        <button class="acc-header" onclick="toggleAcc(this)">
-          <span><span class="para">§3.73</span>무형자산 불확실성과 HTVI (§6.181-6.185 연계)</span>
-          <span class="arrow">&#9660;</span>
-        </button>
-        <div class="acc-body">
-          <p>§3.73은 <strong>무형자산</strong> 거래에서 특히 심각한 시간적 비교가능성 문제를 다루고 있습니다.</p>
-          <div class="key-point"><strong>HTVI(Hard-to-Value Intangibles):</strong> BEPS Action 8은 가치 예측이 매우 어려운 무형자산을 HTVI로 정의하고, 예외적으로 사후자료를 참고할 수 있도록 허용하고 있습니다. 이는 §6.181-6.185에서 상세히 규정되어 있습니다.</div>
-          <p>무형자산 시간적 비교가능성의 주요 문제점은 다음과 같습니다.</p>
-          <ul class="body-list">
-            <li><strong>가치 예측의 어려움:</strong> 연구개발 단계의 무형자산은 미래 수익화 가능성을 정확히 예측하기 어렵습니다.</li>
-            <li><strong>실현 가치와의 괴리:</strong> 거래 시점의 평가 가치와 수년 후 실현된 가치가 크게 다를 수 있습니다.</li>
-            <li><strong>가격 재협상 문제:</strong> 독립기업 간 거래에서는 가치 예측이 크게 빗나간 경우 가격 조정 조항을 두는 경우가 있습니다.</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div id="sec3" class="section">
-      <div class="card">
-        <h2>§3.74~3.79 다중연도 자료(Multi-Year Data)</h2>
-        <p>OECD 이전가격지침서는 일정한 조건 하에서 단일 연도 자료 대신 <strong>다중연도 자료</strong>를 활용하는 것을 권고하고 있습니다.</p>
-      </div>
-      <div class="accordion">
-        <button class="acc-header" onclick="toggleAcc(this)">
-          <span><span class="para">§3.74</span>다중연도 자료의 개념과 OECD 권고</span>
-          <span class="arrow">&#9660;</span>
-        </button>
-        <div class="acc-body">
-          <p>§3.74는 <strong>다중연도 자료(Multi-Year Data)</strong>의 개념과 활용 원칙을 규정하고 있습니다.</p>
-          <table class="compare-table">
-            <thead><tr><th>구분</th><th>단일연도 자료</th><th>다중연도 자료</th></tr></thead>
-            <tbody>
-              <tr><td>정의</td><td>통제거래 당해 연도 자료만을 사용합니다.</td><td>당해 연도 포함 복수 연도(보통 3~5년)의 자료를 사용합니다.</td></tr>
-              <tr><td>장점</td><td>시간적 비교가능성이 가장 높습니다.</td><td>경기순환 영향을 제거하고 통계적 신뢰도를 높입니다.</td></tr>
-              <tr><td>단점</td><td>경기 이상 연도에 왜곡이 심할 수 있습니다.</td><td>과거 자료가 현재 상황을 충분히 반영하지 못할 수 있습니다.</td></tr>
-              <tr><td>OECD 권고</td><td>원칙적으로 우선 사용합니다.</td><td>단일연도 분석에 한계가 있는 경우에 활용을 권고합니다.</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="accordion">
-        <button class="acc-header" onclick="toggleAcc(this)">
-          <span><span class="para">§3.75</span>다중연도 자료의 장점과 국조법 근거</span>
-          <span class="arrow">&#9660;</span>
-        </button>
-        <div class="acc-body">
-          <p>§3.75는 다중연도 자료 활용의 구체적인 장점을 설명하고 있습니다.</p>
-          <ul class="body-list">
-            <li><strong>경기순환 영향 제거:</strong> 경기 호황기와 불황기의 이익률 차이를 평균화하여 보다 대표성 있는 정상가격범위를 도출합니다.</li>
-            <li><strong>산업 특유 주기성 반영:</strong> 반도체, 조선, 석유화학 등 경기민감 산업의 수년에 걸친 경기 사이클을 포괄하여 분석합니다.</li>
-            <li><strong>일회성 손익의 평활화:</strong> 구조조정 비용, 자산 처분 이익 등 일회성 항목의 영향을 완화합니다.</li>
-            <li><strong>표본 확대:</strong> 특정 연도에 자료가 부족한 경우, 복수 연도 자료 활용으로 통계적 신뢰도를 높입니다.</li>
-          </ul>
-          <div class="key-point"><strong>국조법 근거:</strong> 한국 국조법 및 시행령에 따르면, 정상가격 산출 시 당해 사업연도를 포함한 <strong>3개 사업연도</strong>의 자료를 활용할 수 있습니다.</div>
-          <div class="case-box" style="margin-top:1rem">
-            <div class="case-label">§3.75 적용 사례 — COVID-19 경기침체와 다중연도 자료</div>
-            <h4>단일연도 vs 다중연도 분석의 결론 차이</h4>
-            <p><strong>사실관계:</strong> 한국 제조업체 A사는 미국 관계사 B사에 전자부품을 공급합니다. TNMM 적용, A사가 피검증당사자. 2020년 COVID-19 팬데믹으로 산업 전반 이익률이 급락하였습니다.</p>
-            <table class="compare-table" style="margin:.5rem 0">
-              <tr><th>구분</th><th>2018년</th><th>2019년</th><th>2020년(COVID)</th><th>3개년 평균</th></tr>
-              <tr><td>비교가능사 중앙 OPM</td><td>5.8%</td><td>5.2%</td><td>-1.5%</td><td>3.2%</td></tr>
-              <tr><td>IQR 하한(Q1)</td><td>3.5%</td><td>3.1%</td><td>-3.2%</td><td>2.0%</td></tr>
-              <tr><td>IQR 상한(Q3)</td><td>8.1%</td><td>7.8%</td><td>1.2%</td><td>5.2%</td></tr>
-              <tr><td colspan="5"><strong>A사 2020년 영업이익률: 3.8%</strong></td></tr>
-            </table>
-            <table class="compare-table" style="margin:.5rem 0">
-              <tr><th>분석 방법</th><th>정상가격범위</th><th>A사(3.8%)</th><th>결론</th></tr>
-              <tr><td>단일연도(2020)</td><td>-3.2% ~ 1.2%</td><td>범위 초과</td><td><strong style="color:var(--red)">조정 필요</strong></td></tr>
-              <tr><td>다중연도(2018~2020)</td><td>2.0% ~ 5.2%</td><td>범위 내</td><td><strong style="color:var(--green)">조정 불필요</strong></td></tr>
-            </table>
-            <p><strong>시사점:</strong> 단일연도(2020)만 사용 시 COVID-19 충격으로 범위가 왜곡되어 이중과세 위험이 발생합니다. 3개년 다중연도 사용 시 경기침체 이전 수준이 반영되어 A사 3.8%는 범위 내에 있습니다. 단, 다중연도 자료 사용 이유와 연도 선택 근거를 이전가격 문서에 상세히 기재해야 합니다.</p>
+          <div class="practice-note">
+            <div class="pn-label">💼 실무 포인트</div>
+            <p>상업 데이터베이스에서 비교가능회사를 검색할 때, 해당 회사의 최신 자료가 분석대상연도와 일치하는지 확인해야 한다. 일부 회사는 데이터베이스 업데이트 지연으로 인해 1~2년 이전 자료만 제공될 수 있으므로 주의가 필요하다.</p>
           </div>
         </div>
       </div>
+    </section>
+
+    <!-- 섹션 3: B.2 자료 수집의 시간성 -->
+    <section class="card" id="s3">
+      <h2>3. 자료 수집의 시간성 (B.2) <span class="tag tag-para">¶3.69–¶3.71</span></h2>
+      <p>B.2는 납세자가 <strong>이전가격을 설정하는 시점</strong>과 그 설정에 활용된 <strong>비교가능 자료의 수집 시점</strong> 사이의 시간적 차이 문제를 다룬다. 이는 실무에서 필연적으로 발생하는 구조적 문제이다.</p>
+
       <div class="accordion">
         <button class="acc-header" onclick="toggleAcc(this)">
-          <span><span class="para">§3.76</span>다중연도 자료 적용 방법</span>
-          <span class="arrow">&#9660;</span>
+          <span>이전가격 설정 시점과 자료 시차 문제 <span class="para">¶3.69</span></span>
+          <span class="arrow">▼</span>
         </button>
         <div class="acc-body">
-          <p>§3.76은 다중연도 자료를 실제로 적용하는 방법에 대한 지침을 제공하고 있습니다.</p>
+          <p>납세자는 회계연도 시작 시 또는 거래 발생 시점에 이전가격을 설정한다. 그러나 비교가능 자료(비교가능회사의 재무제표)는 <strong>통상 설정 시점보다 1~2년 이전의 자료</strong>가 가장 최신 자료로 활용 가능하다.</p>
+          <div class="timeline">
+            <div class="tl-item">
+              <h4>🕐 T-2 연도: 비교가능회사 자료 수집</h4>
+              <p>상업 데이터베이스에서 활용 가능한 가장 최신 비교가능회사 재무 자료 (예: 2022년 데이터)</p>
+            </div>
+            <div class="tl-item">
+              <h4>🕑 T-1 연도: 이전가격 정책 설정</h4>
+              <p>납세자가 2022년 자료를 기반으로 다음 회계연도(2024년)의 이전가격을 설정. 이 시점에 APA 신청 또는 내부 이전가격 정책 문서화.</p>
+            </div>
+            <div class="tl-item">
+              <h4>🕒 T 연도: 실제 거래 발생</h4>
+              <p>2024년 회계연도 동안 설정된 이전가격으로 특수관계 거래 수행</p>
+            </div>
+            <div class="tl-item">
+              <h4>🕓 T+1~T+3: 과세당국 사후 검토</h4>
+              <p>과세당국이 2024년 거래를 감사할 때는 2025~2027년에 수행. 이 시점에는 2024년 비교가능회사 자료도 이미 공개되어 있음.</p>
+            </div>
+          </div>
+          <div class="key-point">💡 <strong>핵심 문제:</strong> 납세자는 이전가격 설정 시점에 과거 자료만 사용할 수 있지만, 과세당국은 사후 검토 시점에 최신 자료를 보유하고 있다. 이 시차는 구조적으로 납세자에게 불리한 정보 비대칭을 만든다.</div>
+        </div>
+      </div>
+
+      <div class="accordion">
+        <button class="acc-header" onclick="toggleAcc(this)">
+          <span>사후(事後) 정보 사용의 원칙 — 정상가격 측정 <span class="para">¶3.70</span></span>
+          <span class="arrow">▼</span>
+        </button>
+        <div class="acc-body">
+          <p>¶3.70은 납세자가 대체로 <strong>회계연도말에 설정된 이전가격과 실제 실현한 가격·이익의 차이를 측정</strong>한다는 점을 설명한다.</p>
+          <div class="two-col">
+            <div class="col-box">
+              <h4>📋 납세자의 사후 점검</h4>
+              <ul>
+                <li>연도 초에 설정한 이전가격이 연도말에도 정상가격범위 내에 있는지 확인</li>
+                <li>실제 실현 이익지표와 정상가격범위를 비교</li>
+                <li>범위 이탈 시 가격 조정(year-end adjustment) 검토</li>
+              </ul>
+            </div>
+            <div class="col-box orange">
+              <h4>⚠️ 연도말 조정(Year-End Adjustment)</h4>
+              <ul>
+                <li>실제 이익이 정상가격범위 밖으로 이탈한 경우 연도말에 가격 조정 수행</li>
+                <li>조정 가능 여부는 계약 조건에 따라 다름</li>
+                <li>세무 처리 및 원천징수 이슈 발생 가능</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion">
+        <button class="acc-header" onclick="toggleAcc(this)">
+          <span>이중과세 위험과 대응 방안 <span class="para">¶3.71</span></span>
+          <span class="arrow">▼</span>
+        </button>
+        <div class="acc-body">
+          <p>¶3.71은 <strong>납세자가 설정한 이전가격과 실제 실현 가격의 차이</strong>로 인해 이중과세가 발생할 수 있다는 문제를 제기한다.</p>
+          <ul>
+            <li><strong>이중과세 발생 메커니즘:</strong> 국가 A의 과세당국이 납세자의 이전가격이 너무 낮다고 조정하면, 국가 B의 관계회사는 이미 해당 가격으로 과세되어 있어 이중과세 상황이 발생한다</li>
+            <li><strong>MAP(상호합의절차):</strong> 조세조약에 근거한 상호합의절차를 통해 이중과세를 해소할 수 있다</li>
+            <li><strong>APA(사전가격협의):</strong> 사전에 과세당국과 합의된 이전가격 방법론을 적용하여 사후 조정 위험을 최소화할 수 있다</li>
+          </ul>
+          <div class="note-point">✅ <strong>한국 국조법:</strong> 한국세법은 상호합의(MAP)가 있는 경우 세액을 조정할 수 있다고 규정하며, 이중과세 해소를 위한 절차를 국조법 제23~25조에서 규정하고 있다.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 섹션 4: B.3 가치평가 불확실성 -->
+    <section class="card" id="s4">
+      <h2>4. 가치평가 불확실성과 예측불가능 사건 (B.3) <span class="tag tag-para">¶3.72–¶3.73</span></h2>
+      <p>B.3는 거래 당시 <strong>가치평가가 매우 불확실(highly uncertain)</strong>하거나, 거래 후 예측불가능한 사건이 발생한 경우의 이전가격 처리 원칙을 다룬다. 특히 무형자산 이전 거래에서 중요하다.</p>
+
+      <div class="accordion">
+        <button class="acc-header" onclick="toggleAcc(this)">
+          <span>초기 가치평가 불확실성의 문제 <span class="para">¶3.72</span></span>
+          <span class="arrow">▼</span>
+        </button>
+        <div class="acc-body">
+          <p>¶3.72는 <strong>무형자산 개발 당시</strong> 무형자산 개발로 인한 수익을 측정하기 매우 어려운 경우, 향후 이전가격을 결정하기 위한 소득 측정 방법 문제를 다룬다.</p>
+          <div class="two-col">
+            <div class="col-box red">
+              <h4>🔴 가치평가 불확실성 시나리오</h4>
+              <ul>
+                <li>개발 초기 단계의 무형자산 이전</li>
+                <li>임상 시험 전 단계의 제약 특허 이전</li>
+                <li>상업화 성공 여부가 불명확한 기술 이전</li>
+                <li>신사업 진출 초기의 사업권 이전</li>
+              </ul>
+            </div>
+            <div class="col-box green">
+              <h4>🟢 대응 방안</h4>
+              <ul>
+                <li>가격 조정 조항(price adjustment clause) 삽입</li>
+                <li>수익 연계형 로열티 구조 설계</li>
+                <li>단기 계약 후 재협상 구조</li>
+                <li>APA를 통한 사전 합의</li>
+              </ul>
+            </div>
+          </div>
+          <div class="key-point">💡 OECD는 이렇게 가치평가가 불확실한 무형자산 이전의 경우, 독립기업이라면 <strong>가격 조정 조항(price adjustment clause)</strong>을 계약에 삽입했을 것이라고 본다. 특수관계 거래에서도 이를 반영하는 것이 정상가격원칙에 부합한다.</div>
+        </div>
+      </div>
+
+      <div class="accordion">
+        <button class="acc-header" onclick="toggleAcc(this)">
+          <span>예측불가능 사건 발생 시 처리 원칙 <span class="para">¶3.73</span></span>
+          <span class="arrow">▼</span>
+        </button>
+        <div class="acc-body">
+          <p>¶3.73은 무형자산의 수익 측정이 어려운 경우 <strong>Chapter VI ¶6.181–6.185(Hard-to-Value Intangibles, HTVI)</strong>를 참고하여 결정하도록 안내한다.</p>
           <table class="compare-table">
-            <thead><tr><th>적용 방법</th><th>설명</th><th>특징</th></tr></thead>
+            <thead>
+              <tr><th>구분</th><th>예측 가능 사건</th><th>예측 불가능 사건</th></tr>
+            </thead>
             <tbody>
-              <tr><td><strong>단순 평균</strong></td><td>각 연도 이익률의 산술 평균을 계산합니다.</td><td>계산이 간단하며 각 연도에 동일한 가중치를 부여합니다.</td></tr>
-              <tr><td><strong>가중 평균</strong></td><td>매출액 등을 기준으로 가중치를 부여한 평균을 계산합니다.</td><td>규모가 큰 연도에 더 높은 비중을 부여합니다.</td></tr>
-              <tr><td><strong>중앙값</strong></td><td>다중연도 각 연도 이익률의 중앙값을 기준으로 합니다.</td><td>극단적 연도의 영향을 최소화합니다.</td></tr>
+              <tr>
+                <td><strong>정의</strong></td>
+                <td>거래 당시 합리적으로 예측할 수 있었던 결과</td>
+                <td>거래 당시 독립기업도 예측하기 어려웠던 사건</td>
+              </tr>
+              <tr>
+                <td><strong>처리 원칙</strong></td>
+                <td>사후 결과는 원래 이전가격 설정의 적정성 판단에 영향을 줄 수 있음</td>
+                <td>독립기업도 예상하지 못한 결과이므로 이를 이유로 이전가격을 소급 조정하는 것은 적절하지 않음</td>
+              </tr>
+              <tr>
+                <td><strong>사례</strong></td>
+                <td>시장 확대, 제품 성공 — 거래 당시 이미 관련 정보 존재</td>
+                <td>팬데믹, 자연재해, 규제 변화 — 거래 당시 예측 불가능</td>
+              </tr>
             </tbody>
           </table>
-          <div class="warn-point"><strong>주의사항:</strong> 선택한 방법의 이유를 이전가격 문서에 명확히 기재하여야 합니다.</div>
+          <div class="warn-point">⚠️ <strong>HTVI 규정:</strong> OECD BEPS Action 8의 결과물인 HTVI(Hard-to-Value Intangibles) 규정에 따르면, 과세당국은 사후 결과를 <strong>사전 예측이 얼마나 합리적이었는지</strong>를 판단하는 증거로 사용할 수 있다. 이는 특히 제약·바이오 산업의 특허 이전 거래에서 중요하다.</div>
+          <div class="practice-note">
+            <div class="pn-label">💼 실무 포인트</div>
+            <p>무형자산 이전 계약에 가격 조정 조항이 없는 경우, 사후에 가치가 크게 상승하면 과세당국이 이를 근거로 원래 이전가격이 과소하다고 주장할 수 있다. HTVI 규정 하에서 납세자는 거래 당시 가격 결정의 합리성을 적극적으로 증명해야 한다.</p>
+          </div>
         </div>
       </div>
+    </section>
+
+    <!-- 섹션 5: B.4·B.5 사후자료 & 다중연도 -->
+    <section class="card" id="s5">
+      <h2>5. 사후 자료 및 다중연도 자료 (B.4·B.5) <span class="tag tag-para">¶3.74–¶3.79</span></h2>
+      <p>B.4는 <strong>거래 발생 이후 연도의 자료(post-transaction data)</strong> 사용 제한을, B.5는 <strong>다중연도(multiple year) 자료</strong> 활용 원칙을 다룬다.</p>
+
       <div class="accordion">
         <button class="acc-header" onclick="toggleAcc(this)">
-          <span><span class="para">§3.77~3.79</span>국가별 다중연도 자료 규정 비교</span>
-          <span class="arrow">&#9660;</span>
+          <span>사후 자료(Post-Transaction Data) 사용 제한 <span class="para">¶3.74</span></span>
+          <span class="arrow">▼</span>
         </button>
         <div class="acc-body">
-          <p>§3.77~3.79는 다중연도 자료에 관한 각국의 실무 관행을 설명하고 있습니다.</p>
+          <p>¶3.74는 <strong>거래 발생 이후 연도의 자료를 비교가능성 분석에 사용하는 것을 OECD는 원칙적으로 권장하지 않는다</strong>고 명시한다.</p>
+          <div class="two-col">
+            <div class="col-box red">
+              <h4>❌ 사후 자료 사용의 문제</h4>
+              <ul>
+                <li>거래 당시 존재하지 않았던 정보를 소급 적용하는 것은 정상가격원칙의 취지에 반함</li>
+                <li>독립기업은 미래 정보 없이 거래 당시 이용 가능한 정보만으로 가격을 결정</li>
+                <li>사후 자료 사용은 결과론적(hindsight bias) 판단을 초래할 수 있음</li>
+                <li>납세자에게 불공평한 결과를 초래할 수 있음</li>
+              </ul>
+            </div>
+            <div class="col-box orange">
+              <h4>⚠️ 예외적 허용 상황</h4>
+              <ul>
+                <li>사후 자료가 거래 당시 이미 예측 가능했던 정보를 확인하는 데 사용되는 경우</li>
+                <li>장기계약의 적정성 검토 시 계약 기간 전체의 경과를 분석하는 경우</li>
+                <li>비교가능성 검토를 보완하는 목적으로 제한적으로 사용하는 경우</li>
+              </ul>
+            </div>
+          </div>
+          <div class="key-point">💡 <strong>원칙:</strong> 이전가격 설정의 적정성은 <strong>거래 당시 이용 가능한 정보(information reasonably available at the time of the transaction)</strong>를 기준으로 판단해야 한다. 이를 "사전적(ex ante) 관점"이라 한다.</div>
+        </div>
+      </div>
+
+      <div class="accordion">
+        <button class="acc-header" onclick="toggleAcc(this)">
+          <span>다중연도(Multiple Year) 자료의 개념과 장점 <span class="para">¶3.75–¶3.77</span></span>
+          <span class="arrow">▼</span>
+        </button>
+        <div class="acc-body">
+          <p>¶3.75–3.77은 단일 연도가 아닌 복수 연도의 자료를 사용하여 정상가격을 산출하는 방법과 그 장점을 설명한다.</p>
+          <p>다중연도 자료 사용의 주요 장점은 다음과 같다.</p>
+          <ul>
+            <li><strong>경기 변동 평활화:</strong> 단일 연도의 특수한 경기 상황(호황·불황)이 비교가능성 분석을 왜곡하는 효과를 줄임</li>
+            <li><strong>사업 전략 반영:</strong> 시장 진입 초기 손실처럼 복수 연도에 걸쳐 나타나는 사업 전략을 보다 정확하게 포착</li>
+            <li><strong>이상치(outlier) 완화:</strong> 특정 연도의 극단적 결과가 전체 분석에 미치는 영향을 분산</li>
+            <li><strong>비교가능회사 범위 확대:</strong> 특정 연도에 데이터가 없는 회사도 다중연도 기준으로는 포함될 수 있음</li>
+          </ul>
+          <div class="yr-flow">
+            <span class="yr-pill passive">2020</span>
+            <span class="yr-arrow">＋</span>
+            <span class="yr-pill passive">2021</span>
+            <span class="yr-arrow">＋</span>
+            <span class="yr-pill passive">2022</span>
+            <span class="yr-arrow">＋</span>
+            <span class="yr-pill passive">2023</span>
+            <span class="yr-arrow">＋</span>
+            <span class="yr-pill active">2024 (분석연도)</span>
+            <span class="yr-arrow">→</span>
+            <span class="yr-pill active">3개년 평균 사용</span>
+          </div>
+          <div class="practice-note">
+            <div class="pn-label">💼 실무 포인트</div>
+            <p>실무에서는 통상 <strong>3개년 평균(3-year average)</strong>을 사용하는 것이 일반적이다. 분석 대상연도를 포함하여 직전 2개년, 총 3개년의 비교가능회사 이익지표 평균을 사용하거나, 각 연도별로 IQR을 계산한 후 중위값 범위를 비교하는 방식도 사용된다.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion">
+        <button class="acc-header" onclick="toggleAcc(this)">
+          <span>다중연도 사용의 한계와 국조법 비교 <span class="para">¶3.78–¶3.79</span></span>
+          <span class="arrow">▼</span>
+        </button>
+        <div class="acc-body">
+          <p>¶3.78–3.79는 다중연도 자료 사용의 주의사항과 한계를 제시한다.</p>
           <table class="compare-table">
-            <thead><tr><th>국가/기관</th><th>다중연도 자료 기준</th><th>특이사항</th></tr></thead>
+            <thead>
+              <tr><th>구분</th><th>OECD 지침서</th><th>미국 IRC §482</th><th>한국 국조법</th></tr>
+            </thead>
             <tbody>
-              <tr><td><strong>한국 (국조법)</strong></td><td>당해 사업연도 포함 3개 사업연도</td><td>시행령에서 3년 기준을 명시하고 있습니다.</td></tr>
-              <tr><td><strong>미국 (Treas. Reg. §1.482)</strong></td><td>당해 연도 원칙, 다중연도 허용</td><td>IRS의 재량권이 있으며 사안별 판단을 합니다.</td></tr>
-              <tr><td><strong>OECD 가이드라인</strong></td><td>단일연도 원칙, 다중연도 활용 권고</td><td>3~5년을 일반적 기준으로 언급하고 있습니다.</td></tr>
-              <tr><td><strong>일본</strong></td><td>당해 연도 포함 3개 사업연도</td><td>한국과 유사한 기준을 적용하고 있습니다.</td></tr>
-              <tr><td><strong>중국</strong></td><td>1~3개 연도 자료 사용 가능</td><td>국가세무총국(SAT)의 지침을 적용합니다.</td></tr>
+              <tr>
+                <td><strong>다중연도 허용 여부</strong></td>
+                <td>필요한 경우 허용 (¶3.75)</td>
+                <td>규정상 허용 (Reg. §1.482-1)</td>
+                <td>법 제8조①·영 제15조③으로 허용</td>
+              </tr>
+              <tr>
+                <td><strong>연도 수</strong></td>
+                <td>명시적 규정 없음 — 사실관계에 따라</td>
+                <td>통상 3~5개년</td>
+                <td>원칙 미규정, 실무 3개년 우선</td>
+              </tr>
+              <tr>
+                <td><strong>단일연도 우선 여부</strong></td>
+                <td>다중연도 vs. 단일연도 어느 것도 절대 우선 없음</td>
+                <td>다중연도 규정 명시</td>
+                <td>실무상 개별연도 우선 사례도 있음</td>
+              </tr>
+              <tr>
+                <td><strong>주요 쟁점</strong></td>
+                <td>몇 년을 포함할지 사실관계 기반 판단 필요</td>
+                <td>연도 선택의 일관성</td>
+                <td>다중연도 범위에 대한 법원 판례 다수</td>
+              </tr>
             </tbody>
           </table>
-          <div class="key-point"><strong>실무 팁:</strong> 양국 간 다중연도 자료 기준이 다른 경우 이중과세 위험이 있습니다. APA 또는 MAP를 통해 사전에 합의하는 것이 이상적입니다.</div>
+          <div class="warn-point">⚠️ <strong>OECD 경고:</strong> 다중연도 자료를 사용하더라도 분석대상연도와 비교가능회사의 연도는 일치시켜야 한다. 예를 들어, 분석대상회사의 2022~2024년 평균을 비교가능회사의 2019~2021년 평균과 비교하는 것은 시간적 비교가능성을 훼손한다.</div>
+          <div class="practice-note">
+            <div class="pn-label">💼 한국 실무 포인트</div>
+            <p>한국 법원은 다중연도 자료 사용에 대해 개별 거래 상황 및 법률적 해석에 따라 다른 의견을 제시하고 있다. 정상가격 산출에 다중연도를 사용하는 경우 <strong>그 선택의 근거와 이유를 정확하게 문서화</strong>하는 것이 매우 중요하다.</p>
+          </div>
         </div>
       </div>
-    </div>
-    <div id="sec4" class="section">
-      <div class="card">
-        <h2>§3.80~3.83 납세자 이행부담</h2>
-        <p>이전가격 분석에서 요구되는 방대한 비교가능자료 수집 작업은 납세자에게 상당한 비용과 시간을 요구합니다. OECD는 이러한 <strong>이행부담(Compliance Burden)</strong>을 완화하기 위한 방향을 제시하고 있습니다.</p>
-      </div>
+    </section>
+
+    <!-- 섹션 6: C. Compliance 이슈 -->
+    <section class="card" id="s6">
+      <h2>6. Compliance 이슈 (C) <span class="tag tag-para">¶3.80–¶3.83</span></h2>
+      <p>Section C는 납세자가 비교가능회사를 검색하기 위해 부담하는 <strong>노력(effort)과 비용(cost)</strong>에 관한 원칙을 다룬다. OECD는 비례원칙(proportionality principle)에 따라 Compliance 부담이 과도하지 않아야 한다고 강조한다.</p>
+
       <div class="accordion">
         <button class="acc-header" onclick="toggleAcc(this)">
-          <span><span class="para">§3.80</span>납세자 이행부담 개요</span>
-          <span class="arrow">&#9660;</span>
+          <span>납세자의 Compliance 부담 원칙 <span class="para">¶3.80–¶3.81</span></span>
+          <span class="arrow">▼</span>
         </button>
         <div class="acc-body">
-          <p>§3.80은 비교가능성 분석에 수반되는 납세자의 이행부담을 인정하고, 이를 최소화하는 방향으로 규정을 운용하여야 한다는 OECD의 입장을 제시하고 있습니다.</p>
-          <ul class="body-list">
-            <li><strong>상업 데이터베이스 이용 비용:</strong> Orbis/Amadeus 등 상업 데이터베이스 이용에는 상당한 비용이 소요됩니다.</li>
-            <li><strong>전문 인력 비용:</strong> 이전가격 전문가(세무사, 회계사, 컨설턴트)의 인건비가 발생합니다.</li>
-            <li><strong>문서화 비용:</strong> Local File, Master File 등 이전가격 보고서 작성에 많은 시간과 비용이 필요합니다.</li>
-            <li><strong>연간 갱신 비용:</strong> 비교가능자료는 매년 갱신하여야 하므로, 반복적인 비용이 발생합니다.</li>
+          <p>¶3.80–3.81은 비교가능거래 탐색 과정에서 납세자가 부담하는 노력과 비용의 합리적 범위를 다룬다.</p>
+          <div class="burden-grid">
+            <div class="burden-item bi-effort">
+              <h4>🔍 탐색 노력 기준</h4>
+              <p>납세자는 <strong>합리적인 노력(reasonable efforts)</strong> 범위 내에서 비교가능거래를 탐색하면 된다. 모든 가능한 비교가능거래를 망라하는 완전한 탐색은 요구되지 않는다.</p>
+            </div>
+            <div class="burden-item bi-cost">
+              <h4>💰 비용 합리성</h4>
+              <p>비교가능거래 탐색에 드는 비용은 분석 대상 거래 규모에 <strong>비례(proportionate)</strong>해야 한다. 소규모 거래에 대해 방대한 조사를 요구하는 것은 부당하다.</p>
+            </div>
+            <div class="burden-item bi-limit">
+              <h4>📉 정보 부재 시 한계 인정</h4>
+              <p>충분한 노력을 기울였음에도 비교가능거래를 찾을 수 없는 경우, <strong>그 사실 자체를 문서화</strong>하면 된다. 부재를 이유로 무한한 추가 탐색을 요구할 수 없다.</p>
+            </div>
+            <div class="burden-item bi-prop">
+              <h4>⚖️ 비례원칙 (Proportionality)</h4>
+              <p>Compliance 부담은 이전가격 위험의 크기에 비례해야 한다. 고위험·고가치 거래에는 더 많은 노력이 요구되지만, 저위험·단순 거래에는 간소화된 방법이 허용된다.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion">
+        <button class="acc-header" onclick="toggleAcc(this)">
+          <span>정보 비대칭과 과세당국의 의무 <span class="para">¶3.82–¶3.83</span></span>
+          <span class="arrow">▼</span>
+        </button>
+        <div class="acc-body">
+          <p>¶3.82–3.83은 과세당국이 비교가능거래를 사용하는 경우 납세자가 해당 비교가능거래에 접근하고 그 적정성을 평가할 수 있도록 해야 한다는 원칙을 제시한다.</p>
+          <ul>
+            <li><strong>정보 제공 의무:</strong> 과세당국이 납세자에게 공개되지 않은 비교가능거래(비공개 정보)를 사용하여 조정을 하는 경우, 납세자의 이의 제기 권리를 보장해야 한다</li>
+            <li><strong>비공개 정보의 제한적 사용:</strong> 과세당국 보유 비공개 정보는 조정의 정당성 검토에 사용할 수 있으나, 납세자가 반박할 수 없는 방식으로 사용해서는 안 된다</li>
+            <li><strong>투명성과 적법절차:</strong> MAP·APA 절차에서의 정보 공유를 통해 납세자와 과세당국 간 정보 비대칭을 줄이는 것이 바람직하다</li>
           </ul>
-          <div class="key-point"><strong>OECD 원칙:</strong> 과세관청은 납세자가 합리적인 노력(Reasonable Efforts) 범위 내에서 최선의 분석을 수행하였다면 이를 인정하여야 합니다.</div>
+          <div class="note-point">✅ <strong>실무 적용:</strong> 한국 국조법 제6조 및 시행령은 이전가격 문서화 의무를 규정하면서도, 문서화 요건이 납세자에게 과도한 부담이 되지 않도록 중소기업 등에 대한 간소화 특례를 두고 있다. BEPS Action 13의 3계층 문서화 체계도 거래 규모에 따라 의무를 차등화한다.</div>
+          <div class="practice-note">
+            <div class="pn-label">💼 Compliance 부담 경감 방안</div>
+            <p><strong>APA(사전가격협의):</strong> 사전에 과세당국과 이전가격 방법론을 합의하여 사후 분쟁 위험과 문서화 부담을 동시에 줄인다.</p>
+            <p><strong>안전항(Safe Harbor) 규정:</strong> 일부 국가는 소규모 또는 단순 거래에 대해 안전항을 제공하여 Compliance 부담을 줄인다. 한국도 국조법 시행령에서 일부 안전항 조건을 규정한다.</p>
+            <p><strong>간소화 문서화:</strong> 저위험 거래(low-risk distribution, contract manufacturing 등)에 대해 OECD는 간소화된 문서화를 허용하는 방향을 논의 중이다.</p>
+          </div>
         </div>
       </div>
+
       <div class="accordion">
         <button class="acc-header" onclick="toggleAcc(this)">
-          <span><span class="para">§3.81</span>중소기업(SME) 특례와 Safe Harbour</span>
-          <span class="arrow">&#9660;</span>
+          <span>Chapter III 전체 종합 정리</span>
+          <span class="arrow">▼</span>
         </button>
         <div class="acc-body">
-          <p>§3.81은 <strong>중소기업(SME)</strong>에 대한 완화된 기준 적용 가능성을 언급하고 있습니다.</p>
           <table class="compare-table">
-            <thead><tr><th>구분</th><th>대기업</th><th>중소기업</th></tr></thead>
+            <thead>
+              <tr><th>모듈</th><th>핵심 주제</th><th>주요 OECD 조항</th></tr>
+            </thead>
             <tbody>
-              <tr><td>이전가격 전문 인력</td><td>사내 전담팀 운영이 가능합니다.</td><td>외부 전문가 의존도가 높습니다.</td></tr>
-              <tr><td>문서화 요건</td><td>전체 요건이 적용됩니다.</td><td>간소화된 요건 적용이 가능한 경우가 있습니다.</td></tr>
-              <tr><td>APA 활용</td><td>적극적으로 활용할 수 있습니다.</td><td>비용 부담으로 접근성이 낮습니다.</td></tr>
-              <tr><td>Safe Harbour</td><td>일반적으로 적용되지 않습니다.</td><td>적용 가능한 경우가 있습니다.</td></tr>
+              <tr><td><strong>M3-1</strong></td><td>비교가능성 분석 9단계 프로세스, 개별·통합거래, 패키지거래</td><td>¶3.1–¶3.12</td></tr>
+              <tr><td><strong>M3-2</strong></td><td>의도적 상계, 분석대상회사 선정(one-sided), 정보 범위</td><td>¶3.13–¶3.23</td></tr>
+              <tr><td><strong>M3-3</strong></td><td>내부/외부비교가능거래, 상업DB, 질적·양적 기준, 해외비교거래</td><td>¶3.24–¶3.39</td></tr>
+              <tr><td><strong>M3-4</strong></td><td>가산법·연역법, 정량적 기준 4종, 비교가능성 조정 4유형, 문서화</td><td>¶3.40–¶3.54</td></tr>
+              <tr><td><strong>M3-5</strong></td><td>정상가격범위, IQR·사분위, 최적점 선정, 극단값 처리</td><td>¶3.55–¶3.66</td></tr>
+              <tr><td><strong>M3-6</strong></td><td>시간적 비교가능성 5유형, 다중연도, HTVI, Compliance 비례원칙</td><td>¶3.67–¶3.83</td></tr>
             </tbody>
           </table>
-          <div class="key-point"><strong>Safe Harbour 제도:</strong> OECD 및 일부 국가(한국 포함)에서는 특정 기준을 충족하는 중소기업에 대해 간소화된 이전가격 규정을 적용할 수 있습니다.</div>
         </div>
       </div>
-      <div class="accordion">
-        <button class="acc-header" onclick="toggleAcc(this)">
-          <span><span class="para">§3.82~3.83</span>정보 접근성 한계와 실무 대응</span>
-          <span class="arrow">&#9660;</span>
-        </button>
-        <div class="acc-body">
-          <p>§3.82~3.83은 비교가능자료 수집에서 발생하는 <strong>정보 접근성 한계</strong>와 실무적 대응 방안을 설명하고 있습니다.</p>
-          <ul class="body-list">
-            <li><strong>비밀정보 원칙:</strong> 비교가능회사의 미공개 내부 정보는 접근이 불가하므로, 공개된 재무제표만을 기반으로 분석하여야 합니다.</li>
-            <li><strong>상업 데이터베이스의 한계:</strong> 공개 DB는 주로 대기업 위주로 구성되며, 특정 산업이나 지역의 데이터가 부족한 경우가 있습니다.</li>
-            <li><strong>신흥국 데이터 부족:</strong> 중국, 인도 등 신흥국 기업의 데이터는 공개 DB에서 찾기 어려운 경우가 많습니다.</li>
-          </ul>
-          <p>실무적 대응 방안은 다음과 같습니다.</p>
-          <ul class="body-list">
-            <li><strong>내부 비교가능거래 우선 탐색:</strong> 가장 신뢰성 높은 비교가능성을 제공하므로 우선적으로 검토하여야 합니다.</li>
-            <li><strong>복수 데이터베이스 활용:</strong> Orbis, Amadeus, Compustat 등 복수의 DB를 활용하여 탐색합니다.</li>
-            <li><strong>비교가능성 조정:</strong> 완전히 비교가능하지 않더라도 적절한 조정을 통해 비교가능성을 높입니다.</li>
-            <li><strong>APA 신청:</strong> 적절한 비교가능자료를 찾기 어려운 경우, APA를 통해 방법론을 사전 합의합니다.</li>
-          </ul>
-          <div class="warn-point"><strong>실무 원칙:</strong> 납세자가 합리적인 노력을 기울여 최선의 비교가능자료를 선정하였다면 이는 인정되어야 합니다. OECD는 절대적 정확성보다는 합리성을 강조하고 있습니다.</div>
-        </div>
-      </div>
+    </section>
+
+    <!-- Chapter III 완료 배너 -->
+    <div class="completion-banner">
+      <h3>🎉 Chapter III 비교가능성 분석 완료!</h3>
+      <p>M3-1부터 M3-6까지 ¶3.1–¶3.83 전 구간을 완주하셨습니다. 수고하셨습니다!</p>
     </div>
 
-    <div id="sec-quiz" class="section">
-      <div class="quiz-section">
-        <h2>&#9999; 자가 퀴즈</h2>
-        <div class="q-count">총 5문항 | 정답 확인 후 자동으로 진도에 반영됩니다.</div>
-        <div class="quiz-item" id="q1">
-          <div class="q-text"><span class="q-num">Q1</span>OECD 이전가격지침서에 따라 비교가능자료로 원칙적으로 사용하여야 하는 자료의 시기는 무엇입니까?</div>
-          <ul class="opt-list">
-            <li><button onclick="answer(1,this,false)">① 거래 직전 연도의 자료</button></li>
-            <li><button onclick="answer(1,this,true)">② 통제거래와 동일한 회계연도의 자료</button></li>
-            <li><button onclick="answer(1,this,false)">③ 세무조사 시점 기준 가장 최신의 자료</button></li>
-            <li><button onclick="answer(1,this,false)">④ 최근 5개 사업연도의 평균 자료</button></li>
-          </ul>
-          <div class="q-feedback" id="fb1"></div>
+    <!-- 퀴즈 -->
+    <section class="card" id="quiz">
+      <h2>📝 확인 퀴즈</h2>
+      <p style="font-size:.9rem;color:var(--text2);margin-bottom:1.2rem">5문항 · 각 20점 · 80점 이상 통과</p>
+
+      <!-- Q1 -->
+      <div class="q-block">
+        <div class="q-text">1. OECD Chapter III Section B가 다루는 <strong>시간적 비교가능성 유형 5가지</strong>를 올바르게 나열한 것은?</div>
+        <div class="q-options" id="q1">
+          <label><input type="radio" name="q1" value="a"> (A) 자료 기원의 시간성 / 자료 수집의 시간성 / 가치평가 불확실성 / 사후 자료 제한 / 다중연도 자료</label>
+          <label><input type="radio" name="q1" value="b"> (B) 단일연도 / 다중연도 / 사전자료 / 사후자료 / APA 자료</label>
+          <label><input type="radio" name="q1" value="c"> (C) 자료 기원 / 자료 수집 / 가격 조정 / 운전자본 / 다중연도</label>
+          <label><input type="radio" name="q1" value="d"> (D) 회계연도 / 경기 사이클 / 산업 변화 / 무형자산 / Compliance</label>
         </div>
-        <div class="quiz-item" id="q2">
-          <div class="q-text"><span class="q-num">Q2</span>이전가격 세무조사 시 사후자료(Hindsight) 사용에 대한 OECD의 기본 입장은 무엇입니까?</div>
-          <ul class="opt-list">
-            <li><button onclick="answer(2,this,false)">① 정확도가 높으므로 사후자료를 적극 활용하여야 합니다.</button></li>
-            <li><button onclick="answer(2,this,false)">② 당해 연도 자료보다 사후자료를 우선 사용하여야 합니다.</button></li>
-            <li><button onclick="answer(2,this,true)">③ 원칙적으로 사용하지 않아야 하며, 납세자가 가격 결정 당시 이용 가능한 정보를 기준으로 평가하여야 합니다.</button></li>
-            <li><button onclick="answer(2,this,false)">④ 납세자의 동의가 있으면 무제한으로 활용할 수 있습니다.</button></li>
-          </ul>
-          <div class="q-feedback" id="fb2"></div>
-        </div>
-        <div class="quiz-item" id="q3">
-          <div class="q-text"><span class="q-num">Q3</span>다중연도 자료를 이전가격 분석에 활용하는 주된 이유는 무엇입니까?</div>
-          <ul class="opt-list">
-            <li><button onclick="answer(3,this,false)">① 분석 기간을 늘려 세무조사를 지연하기 위함입니다.</button></li>
-            <li><button onclick="answer(3,this,true)">② 경기순환 및 연도별 이상값의 영향을 제거하여 보다 안정적인 정상가격범위를 도출하기 위함입니다.</button></li>
-            <li><button onclick="answer(3,this,false)">③ 최신 연도 자료보다 과거 자료가 더 신뢰성이 높기 때문입니다.</button></li>
-            <li><button onclick="answer(3,this,false)">④ 비교가능회사 수를 늘리기 위한 것입니다.</button></li>
-          </ul>
-          <div class="q-feedback" id="fb3"></div>
-        </div>
-        <div class="quiz-item" id="q4">
-          <div class="q-text"><span class="q-num">Q4</span>한국 국제조세조정법상 정상가격 산출 시 인정되는 비교연도의 범위는 얼마입니까?</div>
-          <ul class="opt-list">
-            <li><button onclick="answer(4,this,false)">① 당해 사업연도만</button></li>
-            <li><button onclick="answer(4,this,false)">② 당해 사업연도를 포함한 2개 사업연도</button></li>
-            <li><button onclick="answer(4,this,true)">③ 당해 사업연도를 포함한 3개 사업연도</button></li>
-            <li><button onclick="answer(4,this,false)">④ 당해 사업연도를 포함한 5개 사업연도</button></li>
-          </ul>
-          <div class="q-feedback" id="fb4"></div>
-        </div>
-        <div class="quiz-item" id="q5">
-          <div class="q-text"><span class="q-num">Q5</span>무형자산 거래에서 시간적 비교가능성 문제가 특히 어려운 주된 이유는 무엇입니까?</div>
-          <ul class="opt-list">
-            <li><button onclick="answer(5,this,false)">① 무형자산은 이전가격 규정의 적용 대상이 아니기 때문입니다.</button></li>
-            <li><button onclick="answer(5,this,false)">② 무형자산 거래에는 항상 비교가능거래가 존재하기 때문입니다.</button></li>
-            <li><button onclick="answer(5,this,true)">③ 개발 단계에서 미래 가치 예측이 불확실하여 실현된 결과와 큰 차이가 발생할 수 있기 때문입니다.</button></li>
-            <li><button onclick="answer(5,this,false)">④ 무형자산에는 단일연도 분석만 허용되기 때문입니다.</button></li>
-          </ul>
-          <div class="q-feedback" id="fb5"></div>
-        </div>
+        <div class="q-feedback" id="fb1"></div>
       </div>
+
+      <!-- Q2 -->
+      <div class="q-block">
+        <div class="q-text">2. OECD가 <strong>거래 발생 이후 연도의 자료(사후 자료)</strong> 사용에 대해 취하는 입장으로 가장 적절한 것은?</div>
+        <div class="q-options" id="q2">
+          <label><input type="radio" name="q2" value="a"> (A) 사후 자료가 더 정확하므로 적극 활용을 권장한다</label>
+          <label><input type="radio" name="q2" value="b"> (B) 원칙적으로 권장하지 않으며, 거래 당시 이용 가능한 정보를 기준으로 판단해야 한다</label>
+          <label><input type="radio" name="q2" value="c"> (C) 과세당국이 사용하는 경우에 한해 허용하며, 납세자는 사용할 수 없다</label>
+          <label><input type="radio" name="q2" value="d"> (D) 3년 이내 사후 자료는 예외 없이 허용된다</label>
+        </div>
+        <div class="q-feedback" id="fb2"></div>
+      </div>
+
+      <!-- Q3 -->
+      <div class="q-block">
+        <div class="q-text">3. <strong>다중연도(Multiple Year) 자료</strong>를 사용하는 주된 장점으로 가장 적절하지 않은 것은?</div>
+        <div class="q-options" id="q3">
+          <label><input type="radio" name="q3" value="a"> (A) 단일 연도의 특수한 경기 상황이 분석을 왜곡하는 효과를 줄인다</label>
+          <label><input type="radio" name="q3" value="b"> (B) 시장 진입 초기 손실 같은 복수 연도에 걸친 사업 전략을 반영할 수 있다</label>
+          <label><input type="radio" name="q3" value="c"> (C) 분석대상연도와 비교가능회사의 연도를 일치시키지 않아도 된다</label>
+          <label><input type="radio" name="q3" value="d"> (D) 특정 연도의 극단적 결과가 전체 분석에 미치는 영향을 분산시킨다</label>
+        </div>
+        <div class="q-feedback" id="fb3"></div>
+      </div>
+
+      <!-- Q4 -->
+      <div class="q-block">
+        <div class="q-text">4. <strong>무형자산의 초기 가치평가가 매우 불확실한 경우</strong>, 독립기업이라면 계약에 포함시켰을 것이라고 OECD가 제시하는 조치는?</div>
+        <div class="q-options" id="q4">
+          <label><input type="radio" name="q4" value="a"> (A) 거래를 취소하고 가치가 확정된 후 재거래</label>
+          <label><input type="radio" name="q4" value="b"> (B) 가격 조정 조항(price adjustment clause)을 계약에 삽입</label>
+          <label><input type="radio" name="q4" value="c"> (C) 이익분할방법(PSM)만을 사용하여 이전가격 설정</label>
+          <label><input type="radio" name="q4" value="d"> (D) 과세당국의 사전 승인을 받은 후에만 거래 수행</label>
+        </div>
+        <div class="q-feedback" id="fb4"></div>
+      </div>
+
+      <!-- Q5 -->
+      <div class="q-block">
+        <div class="q-text">5. OECD가 <strong>Compliance 부담</strong>에 관해 제시하는 원칙으로 가장 적절한 것은?</div>
+        <div class="q-options" id="q5">
+          <label><input type="radio" name="q5" value="a"> (A) 납세자는 모든 가능한 비교가능거래를 망라하는 완전한 탐색을 수행해야 한다</label>
+          <label><input type="radio" name="q5" value="b"> (B) Compliance 부담은 거래 규모와 위험에 비례해야 하며, 합리적 노력 범위 내의 탐색으로 충분하다</label>
+          <label><input type="radio" name="q5" value="c"> (C) 비교가능거래를 찾지 못한 경우 자동으로 세무 조정의 대상이 된다</label>
+          <label><input type="radio" name="q5" value="d"> (D) 과세당국이 보유한 비공개 정보는 납세자에게 공개하지 않고 이전가격 조정에 자유롭게 사용할 수 있다</label>
+        </div>
+        <div class="q-feedback" id="fb5"></div>
+      </div>
+
+      <button class="quiz-btn" id="submitBtn" onclick="gradeQuiz()">채점하기</button>
+      <div class="score-box" id="scoreBox">
+        <div class="big" id="scoreNum"></div>
+        <p id="scoreMsg"></p>
+      </div>
+    </section>
+
+    <!-- 실무 체크리스트 -->
+    <section class="card" id="check">
+      <h2>☑ 실무 체크리스트</h2>
+      <ul class="checklist">
+        <li><input type="checkbox" id="c1"><label for="c1">분석대상회사의 재무 자료와 비교가능회사의 재무 자료가 동일한 회계연도를 기준으로 비교되고 있습니까?</label></li>
+        <li><input type="checkbox" id="c2"><label for="c2">이전가격 설정 시점과 사용된 비교가능 자료의 시점 차이를 인식하고 그 한계를 문서화하였습니까?</label></li>
+        <li><input type="checkbox" id="c3"><label for="c3">연도말 실제 이익지표가 정상가격범위 내에 있는지 사후 점검(year-end review)을 수행하였습니까?</label></li>
+        <li><input type="checkbox" id="c4"><label for="c4">이전가격 범위 이탈 시 연도말 조정(year-end adjustment) 가능 여부와 절차를 계약서에 명시하였습니까?</label></li>
+        <li><input type="checkbox" id="c5"><label for="c5">무형자산 이전 거래의 경우, 초기 가치평가의 불확실성을 고려하여 가격 조정 조항(price adjustment clause)을 계약에 포함하였습니까?</label></li>
+        <li><input type="checkbox" id="c6"><label for="c6">예측불가능한 사건(팬데믹, 규제 변화 등)이 발생한 경우, 거래 당시 예측 가능 여부를 분석하여 이전가격 재검토 필요성을 평가하였습니까?</label></li>
+        <li><input type="checkbox" id="c7"><label for="c7">다중연도 자료를 사용하는 경우, 분석대상회사와 비교가능회사의 연도를 동일하게 맞추었습니까?</label></li>
+        <li><input type="checkbox" id="c8"><label for="c8">다중연도 자료 사용의 근거(경기 변동 평활화, 사업 전략 반영 등)를 문서화하였습니까?</label></li>
+        <li><input type="checkbox" id="c9"><label for="c9">비교가능거래 탐색 노력이 거래 규모와 위험에 비례하고 있으며, 탐색 과정을 투명하게 문서화하였습니까?</label></li>
+        <li><input type="checkbox" id="c10"><label for="c10">이중과세 위험을 평가하고, 필요한 경우 APA 신청 또는 MAP 절차 활용을 검토하였습니까?</label></li>
+      </ul>
+    </section>
+
+    <!-- 하단 네비게이션 -->
+    <div class="nav-bottom">
+      <a class="btn-nav secondary" href="M3-5_정상가격범위.html">← M3-5 정상가격범위</a>
+      <button class="btn-nav secondary" onclick="alert('Chapter III 목차 페이지로 이동합니다.')">📋 목차로</button>
+      <button class="btn-nav success" onclick="alert('🎉 Chapter III 비교가능성 분석을 완주하셨습니다! M3-1 ~ M3-6 전 모듈 완료.')">🎉 Chapter III 완료!</button>
     </div>
-    <div id="sec-check" class="section">
-      <div class="card">
-        <h2>&#9745; 실무 체크리스트</h2>
-        <p>시간적 비교가능성 관련 주요 실무 항목을 점검해 보시기 바랍니다.</p>
-        <ul class="checklist">
-          <li><input type="checkbox" id="c1" onchange="saveCheck()"><label for="c1">비교가능자료의 회계연도가 통제거래 연도와 일치하는지 확인하였습니까?</label></li>
-          <li><input type="checkbox" id="c2" onchange="saveCheck()"><label for="c2">가격설정 시점(거래 당시)과 세무조사 시점의 자료 차이를 검토하였습니까?</label></li>
-          <li><input type="checkbox" id="c3" onchange="saveCheck()"><label for="c3">사후자료 사용이 불가피한 경우 그 정당성 및 근거를 문서화하였습니까?</label></li>
-          <li><input type="checkbox" id="c4" onchange="saveCheck()"><label for="c4">다중연도(3개년) 자료를 고려하여 경기순환 영향을 검토하였습니까?</label></li>
-          <li><input type="checkbox" id="c5" onchange="saveCheck()"><label for="c5">다중연도 평균과 단일연도 결과가 크게 다를 경우 그 원인을 분석하였습니까?</label></li>
-          <li><input type="checkbox" id="c6" onchange="saveCheck()"><label for="c6">무형자산 관련 거래에서 가치 불확실성에 대한 설명을 이전가격 문서에 포함하였습니까?</label></li>
-          <li><input type="checkbox" id="c7" onchange="saveCheck()"><label for="c7">이중과세 위험이 있는 경우 상호합의절차(MAP) 또는 사전가격합의(APA)를 검토하였습니까?</label></li>
-          <li><input type="checkbox" id="c8" onchange="saveCheck()"><label for="c8">자료 수집의 비용 부담을 고려하여 합리적인 노력 범위 내에서 최선의 분석을 수행하였습니까?</label></li>
-        </ul>
-        <div style="margin-top:1rem">
-          <button class="btn btn-primary" onclick="saveCheck()">체크리스트 저장</button>
-        </div>
-      </div>
-      <div class="nav-btns">
-        <a href="M3-5_정상가격범위.html" class="btn btn-outline">&#8592; M3-5 정상가격범위</a>
-        <a href="../index_ch3.html" class="btn btn-primary">Chapter III 목차로 &#8594;</a>
-      </div>
-    </div>
-  </div>
+
+  </main>
 </div>
+
 <script>
-var MODKEY='m3_6';
-function lsGet(k){return localStorage.getItem(k);}
-function lsSet(k,v){localStorage.setItem(k,v);}
-function updateProgress(pct){
-  document.getElementById('mod-prog').style.width=pct+'%';
-  document.getElementById('pct-display').textContent=pct+'%';
-  document.getElementById('pct-display2').textContent=pct+'%';
-  if(pct>=80)document.getElementById('complete-banner').classList.add('show');
+function updateProgress(){
+  const el=document.documentElement;
+  const scrolled=el.scrollTop||document.body.scrollTop;
+  const total=(el.scrollHeight||document.body.scrollHeight)-el.clientHeight;
+  const pct=total>0?Math.round(scrolled/total*100):0;
+  document.getElementById('topBar').style.width=pct+'%';
+  document.getElementById('pctDisp').textContent=pct+'%';
+  const secs=['obj','s1','s2','s3','s4','s5','s6','quiz','check'];
+  let cur='obj';
+  secs.forEach(id=>{
+    const el=document.getElementById(id);
+    if(el&&el.getBoundingClientRect().top<160)cur=id;
+  });
+  document.querySelectorAll('.nav-item').forEach(btn=>{
+    btn.classList.remove('active');
+    if(btn.getAttribute('onclick')&&btn.getAttribute('onclick').includes("'"+cur+"'"))btn.classList.add('active');
+  });
 }
+window.addEventListener('scroll',updateProgress);
+
+function goTo(id){
+  const el=document.getElementById(id);
+  if(el)el.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
 function toggleAcc(btn){
-  var body=btn.nextElementSibling;
-  var isOpen=body.classList.contains('open');
-  body.classList.toggle('open');
-  btn.classList.toggle('open');
-  if(!isOpen){
-    var opened=parseInt(lsGet(MODKEY+'_opened')||'0')+1;
-    lsSet(MODKEY+'_opened',opened);
-    var pct=Math.min(50,opened*8);
-    var existing=parseInt(lsGet(MODKEY+'_pct')||'0');
-    if(pct>existing){lsSet(MODKEY+'_pct',pct);updateProgress(pct);}
+  const body=btn.nextElementSibling;
+  const isOpen=body.classList.contains('open');
+  body.classList.toggle('open',!isOpen);
+  body.style.display=isOpen?'none':'block';
+  btn.classList.toggle('open',!isOpen);
+}
+
+const answers={q1:'a',q2:'b',q3:'c',q4:'b',q5:'b'};
+const feedbacks={
+  q1:{
+    a:'✅ 정답! OECD Chapter III Section B의 5가지 Timing 유형은 B.1 자료 기원의 시간성, B.2 자료 수집의 시간성, B.3 가치평가 불확실성, B.4 사후 자료 제한, B.5 다중연도 자료입니다.',
+    b:'❌ 이 분류는 OECD 지침서의 공식 분류가 아닙니다. OECD는 B.1~B.5의 5가지 유형으로 시간적 비교가능성 이슈를 분류합니다.',
+    c:'❌ 가격 조정과 운전자본은 비교가능성 조정(A.6)의 내용이며, 시간적 비교가능성(Section B)의 분류가 아닙니다.',
+    d:'❌ 이 항목들은 OECD Section B의 공식 분류가 아닙니다. Compliance는 별도의 Section C에서 다룹니다.'
+  },
+  q2:{
+    a:'❌ OECD는 사후 자료의 적극 활용을 권장하지 않습니다. 거래 당시 이용 가능한 정보를 기준으로 이전가격의 적정성을 판단하는 "사전적(ex ante) 관점"을 강조합니다.',
+    b:'✅ 정답! ¶3.74는 거래 발생 이후 연도의 자료 사용을 원칙적으로 권장하지 않으며, 독립기업이 거래 당시 이용 가능한 정보만으로 가격을 결정한다는 점에서 사후 자료 사용은 결과론적 판단이 될 수 있다고 경고합니다.',
+    c:'❌ 과세당국만이 사용 가능하다는 원칙은 없습니다. OECD는 납세자와 과세당국 모두 사후 자료 사용에 신중해야 한다고 제시합니다.',
+    d:'❌ 3년 이내 사후 자료를 예외 없이 허용하는 규정은 OECD 지침서에 없습니다. 사후 자료 사용은 사실관계에 따라 개별 판단이 필요합니다.'
+  },
+  q3:{
+    a:'❌ 이것은 다중연도 자료의 장점입니다. 단일 연도의 경기적 특수성이 분석을 왜곡하는 효과를 줄이는 것은 다중연도 사용의 핵심 이유입니다.',
+    b:'❌ 이것은 다중연도 자료의 장점입니다. 시장 진입 초기 손실 전략처럼 복수 연도에 걸쳐 경제적 의미가 드러나는 사업 전략을 반영할 수 있습니다.',
+    c:'✅ 정답! 다중연도 자료를 사용하더라도 분석대상회사와 비교가능회사의 연도는 일치시켜야 합니다. 다중연도 사용이 연도 불일치를 허용하는 것은 아닙니다. 예를 들어 분석대상 2022-2024년 평균과 비교가능회사 2019-2021년 평균을 비교하는 것은 시간적 비교가능성을 훼손합니다.',
+    d:'❌ 이것은 다중연도 자료의 장점입니다. 특정 연도의 이상치(극단적 결과)가 전체 분석에 미치는 영향을 여러 연도로 분산시킬 수 있습니다.'
+  },
+  q4:{
+    a:'❌ 거래를 취소하고 재거래하는 것은 현실적으로 불가능하거나 비효율적이며, OECD가 제시하는 해법도 아닙니다.',
+    b:'✅ 정답! ¶3.72는 무형자산의 초기 가치평가가 불확실한 경우 독립기업이라면 가격 조정 조항(price adjustment clause)을 계약에 삽입했을 것이라고 설명합니다. 수익 연계형 로열티 구조도 이와 관련된 대응 방안입니다.',
+    c:'❌ 이익분할방법 사용이 OECD의 권장 해법은 아닙니다. 방법론 선택은 사실관계에 따라 결정되며, 가치평가 불확실성 자체가 특정 방법을 강제하지 않습니다.',
+    d:'❌ 모든 무형자산 이전에 과세당국의 사전 승인을 받아야 한다는 원칙은 없습니다. APA는 납세자의 선택사항입니다.'
+  },
+  q5:{
+    a:'❌ OECD는 모든 가능한 비교가능거래의 완전한 탐색을 요구하지 않습니다. 합리적인 노력(reasonable efforts) 범위 내의 탐색으로 충분하다고 명시합니다.',
+    b:'✅ 정답! ¶3.80–3.83의 핵심입니다. Compliance 부담은 거래 규모와 이전가격 위험에 비례(proportionate)해야 하며, 합리적 노력 범위 내에서 비교가능거래를 탐색하면 충분합니다. 과도한 Compliance 부담을 납세자에게 요구하는 것은 비례원칙에 반합니다.',
+    c:'❌ 충분한 노력을 기울였음에도 비교가능거래를 찾지 못한 경우, 그 사실 자체를 문서화하면 됩니다. 자동으로 세무 조정의 대상이 되지는 않습니다.',
+    d:'❌ 과세당국이 비공개 정보를 사용하는 경우에도 납세자의 이의 제기 권리를 보장해야 합니다. 납세자가 반박할 수 없는 방식으로 비공개 정보를 사용하는 것은 OECD 원칙에 반합니다.'
   }
+};
+
+function gradeQuiz(){
+  let score=0;
+  const keys=Object.keys(answers);
+  let allAnswered=true;
+  keys.forEach(q=>{
+    const sel=document.querySelector(`input[name="${q}"]:checked`);
+    if(!sel){allAnswered=false;return;}
+    const fbEl=document.getElementById('fb'+q.slice(1));
+    const correct=sel.value===answers[q];
+    if(correct)score+=20;
+    fbEl.textContent=feedbacks[q][sel.value];
+    fbEl.className='q-feedback '+(correct?'correct':'wrong');
+    fbEl.style.display='block';
+  });
+  if(!allAnswered){alert('모든 문항에 답해 주세요.');return;}
+  const box=document.getElementById('scoreBox');
+  document.getElementById('scoreNum').textContent=score+'점';
+  document.getElementById('scoreMsg').textContent=score>=80?'🎉 통과! Chapter III 비교가능성 분석을 완전히 마스터하셨습니다!':'📚 '+score+'점 — 80점 이상이어야 통과입니다. 해설을 참고하여 다시 시도하세요.';
+  box.style.display='block';
+  document.getElementById('submitBtn').disabled=true;
+  tpSet('ch3_m6_quiz', score);
+  tpSet('ch3_m6_pct', score >= 80 ? 100 : 50);
+  box.scrollIntoView({behavior:'smooth'});
 }
-function showSec(id,btn){
-  document.querySelectorAll('.section').forEach(function(s){s.style.display='none';});
-  document.querySelectorAll('.nav-item').forEach(function(b){b.classList.remove('active');});
-  document.getElementById(id).style.display='block';
-  btn.classList.add('active');
-}
-function answer(qnum,btn,isCorrect){
-  var qi=document.getElementById('q'+qnum);
-  qi.querySelectorAll('button').forEach(function(b){b.disabled=true;});
-  var fb=document.getElementById('fb'+qnum);
-  if(isCorrect){btn.classList.add('correct');fb.className='q-feedback ok show';fb.textContent='\u2713 정답입니다!';}
-  else{btn.classList.add('wrong');fb.className='q-feedback no show';fb.textContent='\u2717 오답입니다. 다시 확인해 보세요.';}
-  checkQuizDone();
-}
-function checkQuizDone(){
-  var done=document.querySelectorAll('.q-feedback.show').length;
-  if(done>=5){
-    var correct=document.querySelectorAll('.q-feedback.ok.show').length;
-    var score=Math.round(correct/5*30);
-    var existing=parseInt(lsGet(MODKEY+'_pct')||'0');
-    var newPct=existing+score;
-    if(newPct>existing){lsSet(MODKEY+'_pct',newPct);updateProgress(newPct);}
+
+tpOnReady(function(user) {
+  document.getElementById('tpLoading').style.display = 'none';
+  document.getElementById('topUserName').textContent = user.displayName || user.email;
+  var savedPct  = parseInt(tpGet('ch3_m6_pct') || '0');
+  var savedQuiz = tpGet('ch3_m6_quiz');
+  if (savedPct > 0) {
+    document.getElementById('topBar').style.width = savedPct + '%';
+    document.getElementById('pctDisp').textContent = savedPct + '%';
   }
-}
-function saveCheck(){
-  var checks='';
-  for(var i=1;i<=8;i++){var el=document.getElementById('c'+i);checks+=el&&el.checked?'1':'0';}
-  lsSet(MODKEY+'_checks',checks);
-  var cnt=0;for(var j=0;j<checks.length;j++){if(checks[j]==='1')cnt++;}
-  var score=Math.round(cnt/8*20);
-  var existing=parseInt(lsGet(MODKEY+'_pct')||'0');
-  var newPct=existing+score;
-  if(newPct>existing){lsSet(MODKEY+'_pct',newPct);updateProgress(newPct);}
-}
-(function(){
-  var pct=parseInt(lsGet(MODKEY+'_pct')||'0');
-  updateProgress(pct);
-  var checks=lsGet(MODKEY+'_checks')||'';
-  for(var i=0;i<checks.length;i++){var el=document.getElementById('c'+(i+1));if(el&&checks[i]==='1')el.checked=true;}
-  if(pct>=80)document.getElementById('complete-banner').classList.add('show');
-  document.querySelectorAll('.section').forEach(function(s,i){s.style.display=i===0?'block':'none';});
-})();
+  if (savedQuiz) {
+    var _qpct = parseInt(savedQuiz);
+    var _sb = document.getElementById('scoreBox');
+    if (_sb) _sb.style.display = 'block';
+    var _sn = document.getElementById('scoreBig') || document.getElementById('scoreNum');
+    if (_sn) _sn.textContent = _qpct + '점';
+    var _sm = document.getElementById('scoreMsg');
+    if (_sm) _sm.textContent = '이미 완료된 퀴즈입니다. 복습 후 다음 모듈로 진행하세요.';
+    var _qb = document.querySelector('.quiz-btn') || document.getElementById('submitBtn');
+    if (_qb) _qb.disabled = true;
+  }
+});
 </script>
 </body>
 </html>

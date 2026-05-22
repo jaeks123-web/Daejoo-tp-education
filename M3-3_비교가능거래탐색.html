@@ -1,543 +1,814 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>M3-3 비교가능거래 탐색 | OECD 이전가격 지침서</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700&display=swap" rel="stylesheet"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>M3-3: 비교가능거래 탐색</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-:root{--accent:#0f7a7a;--accent-light:#e0f5f5;--accent-mid:#1a9a9a;--green:#1a7a4a;--green-light:#e6f5ee;--orange:#c06000;--orange-light:#fff3e0;--red:#b02020;--red-light:#fdecea;--gray:#555;--gray-light:#f5f5f5;--gray-border:#ddd;--text:#222;--text2:#555;--white:#fff;--radius:10px;--shadow:0 2px 8px rgba(0,0,0,.10);}
+:root{
+  --purple:#6b21a8;--purple-light:#f5f3ff;--purple-mid:#9333ea;--purple-dark:#4c1d95;
+  --green:#1a7a4a;--green-light:#e6f5ee;
+  --orange:#c06000;--orange-light:#fff3e0;
+  --red:#b02020;--red-light:#fdecea;
+  --gray:#555;--gray-light:#f5f5f5;--gray-border:#ddd;
+  --text:#222;--text2:#555;--white:#fff;
+  --radius:10px;--shadow:0 2px 8px rgba(0,0,0,.10);
+}
 body{font-family:'Noto Sans KR',Arial,sans-serif;background:#f0f4f8;color:var(--text);line-height:1.75;font-size:16px}
-a{color:var(--accent);text-decoration:none}
-.mod-header{background:var(--accent);color:#fff;padding:1.5rem 2rem}
+a{color:var(--purple);text-decoration:none}
+.mod-header{background:linear-gradient(135deg,var(--purple-dark) 0%,var(--purple) 60%,var(--purple-mid) 100%);color:#fff;padding:1.5rem 2rem}
 .mod-header .breadcrumb{font-size:.8rem;opacity:.7;margin-bottom:.4rem}
 .mod-header h1{font-size:1.4rem;font-weight:700}
-.mod-header .sub{font-size:.9rem;opacity:.8;margin-top:.3rem}
-.prog-strip{background:rgba(255,255,255,.15);height:6px;margin-top:1rem;border-radius:99px;overflow:hidden}
+.mod-header .sub{font-size:.9rem;opacity:.85;margin-top:.3rem}
+.prog-strip{background:rgba(255,255,255,.2);height:6px;margin-top:1rem;border-radius:99px;overflow:hidden}
 .prog-strip-inner{height:100%;background:#fff;border-radius:99px;transition:width .4s}
 .layout{display:flex;max-width:1100px;margin:0 auto;padding:2rem 1.5rem 4rem;gap:1.5rem}
-.sidebar{width:220px;flex-shrink:0}
+.sidebar{width:230px;flex-shrink:0;position:sticky;top:1rem;align-self:flex-start;max-height:calc(100vh - 2rem);overflow-y:auto}
 .content{flex:1;min-width:0}
-.nav-card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:1.2rem;margin-bottom:1rem;position:sticky;top:1rem}
-.nav-card h4{font-size:.85rem;color:var(--gray);margin-bottom:.8rem}
-.nav-item{display:block;padding:.45rem .75rem;border-radius:6px;font-size:.85rem;color:var(--text2);margin-bottom:3px;cursor:pointer;border:none;width:100%;text-align:left;background:none;transition:background .12s}
-.nav-item:hover{background:var(--accent-light);color:var(--accent)}
-.nav-item.active{background:var(--accent);color:#fff;font-weight:600}
+.nav-card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:1.2rem;margin-bottom:1rem}
+.nav-card h4{font-size:.85rem;color:var(--gray);margin-bottom:.8rem;letter-spacing:.04em}
+.nav-item{display:block;padding:.45rem .75rem;border-radius:6px;font-size:.84rem;color:var(--text2);margin-bottom:3px;cursor:pointer;border:none;width:100%;text-align:left;background:none;transition:background .12s;font-family:inherit}
+.nav-item:hover{background:var(--purple-light);color:var(--purple)}
+.nav-item.active{background:var(--purple);color:#fff;font-weight:600}
 .card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:1.8rem 2rem;margin-bottom:1.5rem}
-.card h2{font-size:1.15rem;font-weight:700;color:var(--accent);margin-bottom:1rem;padding-bottom:.6rem;border-bottom:2px solid var(--accent-light)}
+.card h2{font-size:1.15rem;font-weight:700;color:var(--purple);margin-bottom:1rem;padding-bottom:.6rem;border-bottom:2px solid var(--purple-light)}
 .card p{font-size:.95rem;color:var(--text2);margin-bottom:.7rem}
+.card ul,.card ol{padding-left:1.4rem;font-size:.93rem;color:var(--text2);margin-bottom:.7rem}
+.card li{margin-bottom:.35rem;line-height:1.75}
+.tag{display:inline-block;padding:2px 9px;border-radius:20px;font-size:.75rem;font-weight:600;margin-left:.4rem}
+.tag-para{background:var(--purple-light);color:var(--purple)}
 .obj-list{list-style:none;padding:0}
 .obj-list li{display:flex;gap:.7rem;align-items:flex-start;padding:.5rem 0;border-bottom:1px solid var(--gray-border);font-size:.93rem}
 .obj-list li:last-child{border:none}
-.obj-num{background:var(--accent);color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;flex-shrink:0;margin-top:2px}
+.obj-num{background:var(--purple);color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;flex-shrink:0;margin-top:2px}
+.key-point{background:var(--purple-light);border-left:4px solid var(--purple);padding:.75rem 1rem;border-radius:0 6px 6px 0;margin:.8rem 0;font-size:.9rem;color:#3b0764;line-height:1.75}
+.warn-point{background:var(--orange-light);border-left:4px solid var(--orange);padding:.75rem 1rem;border-radius:0 6px 6px 0;margin:.8rem 0;font-size:.9rem;color:#6b3a00;line-height:1.75}
+.note-point{background:var(--green-light);border-left:4px solid var(--green);padding:.75rem 1rem;border-radius:0 6px 6px 0;margin:.8rem 0;font-size:.9rem;color:#0d3d25;line-height:1.75}
+.practice-note{background:#fffbeb;border:1px solid #fcd34d;border-radius:8px;padding:.9rem 1.1rem;margin:.8rem 0}
+.practice-note .pn-label{font-weight:700;font-size:.78rem;color:#92400e;margin-bottom:.35rem}
+.practice-note p{font-size:.88rem;color:#78350f;margin-bottom:.35rem}
+.practice-note p:last-child{margin-bottom:0}
 .accordion{border:1px solid var(--gray-border);border-radius:var(--radius);overflow:hidden;margin-bottom:1rem}
-.acc-header{display:flex;justify-content:space-between;align-items:center;padding:.9rem 1.2rem;cursor:pointer;background:var(--gray-light);font-weight:600;font-size:.95rem;border:none;width:100%;text-align:left;transition:background .12s}
+.acc-header{display:flex;justify-content:space-between;align-items:center;padding:.9rem 1.2rem;cursor:pointer;background:var(--gray-light);font-weight:600;font-size:.95rem;border:none;width:100%;text-align:left;transition:background .12s;font-family:inherit}
 .acc-header:hover{background:#ebebeb}
-.acc-header .para{font-size:.78rem;color:var(--accent);background:var(--accent-light);padding:2px 8px;border-radius:20px;margin-right:.6rem}
-.acc-header .arrow{font-size:1rem;color:var(--gray);transition:transform .2s}
-.acc-body{display:none;padding:1.1rem 1.3rem;background:#fff;font-size:.93rem;color:var(--text2);line-height:1.8;border-top:1px solid var(--gray-border)}
-.acc-body.open{display:block}
+.acc-header .para{font-size:.75rem;color:var(--purple);background:var(--purple-light);padding:2px 8px;border-radius:20px;margin-left:.5rem;font-weight:500;white-space:nowrap}
+.acc-header .arrow{font-size:1rem;color:var(--gray);transition:transform .2s;margin-left:.5rem;flex-shrink:0}
 .acc-header.open .arrow{transform:rotate(180deg)}
-.key-point{background:#e0f5f5;border-left:4px solid #0f7a7a;padding:.7rem 1rem;border-radius:0 6px 6px 0;margin:.8rem 0;font-size:.9rem;color:#0a4a4a}
-.warn-point{background:var(--orange-light);border-left:4px solid var(--orange);padding:.7rem 1rem;border-radius:0 6px 6px 0;margin:.8rem 0;font-size:.9rem;color:#6b3a00}
-.compare-table{width:100%;border-collapse:collapse;font-size:.9rem;margin:.8rem 0}
-.compare-table th{background:var(--accent);color:#fff;padding:.7rem 1rem;text-align:left;font-weight:600}
-.compare-table td{padding:.65rem 1rem;border-bottom:1px solid var(--gray-border);vertical-align:top}
+.acc-body{display:none;padding:1.1rem 1.3rem;background:#fff;font-size:.93rem;color:var(--text2);line-height:1.85;border-top:1px solid var(--gray-border)}
+.acc-body.open{display:block}
+.acc-body ul,.acc-body ol{padding-left:1.3rem;margin:.5rem 0 .7rem}
+.acc-body li{margin-bottom:.35rem;line-height:1.75}
+.compare-table{width:100%;border-collapse:collapse;font-size:.88rem;margin:.8rem 0}
+.compare-table th{background:var(--purple);color:#fff;padding:.6rem .9rem;text-align:left;font-weight:600}
+.compare-table td{padding:.55rem .9rem;border-bottom:1px solid var(--gray-border);color:var(--text2);vertical-align:top}
 .compare-table tr:last-child td{border:none}
-.compare-table tr:nth-child(even) td{background:#fafafa}
-.case-box{background:#fff;border:1.5px solid var(--accent-mid);border-radius:var(--radius);padding:1.3rem 1.5rem;margin:1rem 0}
-.case-box .case-label{font-size:.78rem;font-weight:700;color:var(--accent);letter-spacing:.05em;margin-bottom:.5rem}
-.case-box h4{font-size:.95rem;font-weight:700;color:var(--text);margin-bottom:.6rem}
-.quiz-section{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:1.8rem 2rem;margin-bottom:1.5rem}
-.quiz-section h2{font-size:1.15rem;font-weight:700;color:var(--accent);margin-bottom:.4rem}
-.quiz-section .q-count{font-size:.85rem;color:var(--gray);margin-bottom:1.5rem}
-.quiz-item{margin-bottom:1.8rem;padding-bottom:1.5rem;border-bottom:1px solid var(--gray-border)}
-.quiz-item:last-of-type{border:none}
-.quiz-item .q-text{font-size:.97rem;font-weight:600;color:var(--text);margin-bottom:.9rem}
-.quiz-item .q-num{font-size:.78rem;background:var(--accent-light);color:var(--accent);padding:2px 9px;border-radius:20px;margin-right:.5rem;font-weight:700}
-.opt-list{list-style:none;padding:0;display:flex;flex-direction:column;gap:.5rem}
-.opt-list li button{width:100%;text-align:left;padding:.7rem 1rem;border-radius:8px;border:1.5px solid var(--gray-border);background:#fff;font-size:.9rem;cursor:pointer;color:var(--text);transition:all .15s}
-.opt-list li button:hover{border-color:var(--accent-mid);background:var(--accent-light)}
-.opt-list li button.correct{background:var(--green-light);border-color:var(--green);color:var(--green);font-weight:600}
-.opt-list li button.wrong{background:var(--red-light);border-color:var(--red);color:var(--red)}
-.opt-list li button:disabled{cursor:default}
-.q-feedback{margin-top:.7rem;padding:.6rem 1rem;border-radius:8px;font-size:.88rem;display:none}
-.q-feedback.show{display:block}
-.q-feedback.ok{background:var(--green-light);color:var(--green);border:1px solid #a0d8b8}
-.q-feedback.no{background:var(--red-light);color:var(--red);border:1px solid #f5b8b8}
+.compare-table tr:nth-child(even) td{background:var(--gray-light)}
+.compare-table td strong{color:var(--text)}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:.8rem 0}
+.col-box{border-radius:8px;padding:1rem 1.1rem;border:1.5px solid #d8b4fe;background:var(--purple-light)}
+.col-box h4{font-size:.88rem;font-weight:700;color:var(--purple);margin-bottom:.4rem}
+.col-box p{font-size:.85rem;margin:0;color:var(--text2);line-height:1.65}
+.col-box.green{border-color:#86efac;background:#f0fdf4}
+.col-box.green h4{color:var(--green)}
+.col-box.orange{border-color:#fdba74;background:#fff7ed}
+.col-box.orange h4{color:var(--orange)}
+.col-box.red{border-color:#fca5a5;background:#fef2f2}
+.col-box.red h4{color:var(--red)}
+.case-box{background:#faf5ff;border:1.5px solid #d8b4fe;border-radius:10px;padding:1.1rem 1.3rem;margin:.8rem 0}
+.case-box .case-label{font-size:.75rem;font-weight:700;color:var(--purple);margin-bottom:.5rem;letter-spacing:.03em}
+.case-box p{font-size:.9rem;color:var(--text2);margin-bottom:.4rem}
+.case-box p:last-child{margin-bottom:0}
+.case-box strong{color:var(--text)}
+/* ── 우선순위 흐름도 ── */
+.priority-flow{display:flex;flex-direction:column;gap:.5rem;margin:.8rem 0}
+.pf-step{display:flex;align-items:center;gap:.8rem;padding:.7rem 1rem;border-radius:8px;font-size:.9rem}
+.pf-step.p1{background:#ede9fe;border:1.5px solid var(--purple)}
+.pf-step.p2{background:#f0fdf4;border:1.5px solid #4ade80}
+.pf-step.p3{background:#fff7ed;border:1.5px solid #fdba74}
+.pf-num{font-weight:800;font-size:1.1rem;min-width:28px;text-align:center}
+.pf-step.p1 .pf-num{color:var(--purple)}
+.pf-step.p2 .pf-num{color:var(--green)}
+.pf-step.p3 .pf-num{color:var(--orange)}
+.pf-arrow{text-align:center;font-size:1.1rem;color:var(--gray)}
+/* ── DB 카드 그리드 ── */
+.db-grid{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;margin:.8rem 0}
+.db-card{border-radius:8px;padding:.9rem 1rem;border:1.5px solid #d8b4fe;background:var(--purple-light)}
+.db-card h4{font-size:.88rem;font-weight:700;color:var(--purple);margin-bottom:.35rem}
+.db-card p{font-size:.82rem;color:var(--text2);margin:0;line-height:1.6}
+.db-card.warn{border-color:#fdba74;background:#fff7ed}
+.db-card.warn h4{color:var(--orange)}
+/* ── 검색조건 뱃지 ── */
+.screen-grid{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin:.8rem 0}
+.screen-item{border-radius:8px;padding:.75rem 1rem;font-size:.86rem}
+.screen-item.qual{background:#ede9fe;border-left:3px solid var(--purple)}
+.screen-item.quant{background:#f0fdf4;border-left:3px solid var(--green)}
+.screen-item strong{display:block;font-size:.8rem;margin-bottom:.25rem}
+.screen-item.qual strong{color:var(--purple)}
+.screen-item.quant strong{color:var(--green)}
+/* 지역 확장 시각화 */
+.region-flow{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;margin:.8rem 0}
+.region-pill{padding:.4rem .9rem;border-radius:20px;font-size:.83rem;font-weight:600;border:1.5px solid transparent}
+.rp-1{background:var(--purple-light);border-color:var(--purple);color:var(--purple)}
+.rp-2{background:#f0fdf4;border-color:var(--green);color:var(--green)}
+.rp-3{background:#fff7ed;border-color:var(--orange);color:var(--orange)}
+.region-arrow{font-size:1rem;color:var(--gray)}
+/* ── 퀴즈 ── */
+.q-block{background:var(--gray-light);border-radius:8px;padding:1rem 1.2rem;margin-bottom:1rem}
+.q-block .q-text{font-weight:600;font-size:.93rem;margin-bottom:.7rem;color:var(--text);line-height:1.65}
+.q-options label{display:flex;align-items:flex-start;gap:.5rem;padding:.4rem .5rem;border-radius:6px;cursor:pointer;font-size:.91rem;color:var(--text2);transition:background .1s;margin-bottom:3px;line-height:1.55}
+.q-options label:hover{background:#e8e8e8}
+.q-options input[type=radio]{margin-top:3px;flex-shrink:0;accent-color:var(--purple)}
+.q-feedback{display:none;margin-top:.7rem;padding:.6rem .9rem;border-radius:6px;font-size:.88rem;font-weight:500;line-height:1.6}
+.q-feedback.correct{background:var(--green-light);color:var(--green);border-left:3px solid var(--green)}
+.q-feedback.wrong{background:var(--red-light);color:var(--red);border-left:3px solid var(--red)}
+.quiz-btn{background:var(--purple);color:#fff;border:none;padding:.7rem 2rem;border-radius:8px;font-size:.95rem;font-weight:600;cursor:pointer;margin-top:.5rem;transition:background .15s;font-family:inherit}
+.quiz-btn:hover{background:var(--purple-mid)}
+.quiz-btn:disabled{background:#aaa;cursor:default}
+.score-box{display:none;background:var(--purple-light);border:2px solid var(--purple);border-radius:10px;padding:1.2rem;text-align:center;margin-top:1rem}
+.score-box .big{font-size:2rem;font-weight:800;color:var(--purple)}
+.score-box p{font-size:.92rem;color:var(--text2);margin-top:.3rem}
 .checklist{list-style:none;padding:0}
 .checklist li{display:flex;gap:.8rem;align-items:flex-start;padding:.55rem 0;border-bottom:1px solid var(--gray-border);font-size:.92rem}
 .checklist li:last-child{border:none}
 .checklist input[type=checkbox]{width:18px;height:18px;margin-top:2px;cursor:pointer;flex-shrink:0;accent-color:var(--green)}
-.checklist label{cursor:pointer;color:var(--text2)}
+.checklist label{cursor:pointer;color:var(--text2);line-height:1.65}
 .checklist input:checked+label{color:var(--green);text-decoration:line-through;opacity:.7}
-.nav-btns{display:flex;justify-content:space-between;margin-top:1.5rem}
-.btn{display:inline-flex;align-items:center;gap:.4rem;padding:.7rem 1.5rem;border-radius:8px;font-size:.9rem;font-weight:600;cursor:pointer;border:none;transition:all .15s;text-decoration:none}
-.btn-primary{background:var(--accent);color:#fff}
-.btn-primary:hover{background:#0a5a5a}
-.btn-outline{background:#fff;color:var(--accent);border:1.5px solid var(--accent)}
-.btn-outline:hover{background:var(--accent-light)}
-.btn-success{background:var(--green);color:#fff}
-.complete-banner{background:var(--green-light);border:2px solid var(--green);border-radius:var(--radius);padding:1.3rem 1.8rem;text-align:center;display:none;margin-bottom:1.5rem}
-.complete-banner.show{display:block}
-.complete-banner h3{color:var(--green);font-size:1.1rem;margin-bottom:.4rem}
-.complete-banner p{font-size:.9rem;color:#2a6040}
-ul.body-list{padding-left:1.3rem;margin:.5rem 0}
-ul.body-list li{margin-bottom:.35rem}
-@media(max-width:720px){.layout{flex-direction:column}.sidebar{width:100%;position:static}.nav-card{position:static}}
+.nav-bottom{display:flex;justify-content:space-between;align-items:center;margin-top:2rem;gap:.5rem}
+.btn-nav{background:var(--purple);color:#fff;padding:.65rem 1.4rem;border-radius:8px;font-size:.93rem;font-weight:600;cursor:pointer;border:none;transition:background .15s;text-decoration:none;display:inline-block;font-family:inherit}
+.btn-nav:hover{background:var(--purple-mid)}
+.btn-nav.secondary{background:#fff;color:var(--purple);border:2px solid var(--purple)}
+.btn-nav.secondary:hover{background:var(--purple-light)}
+@media(max-width:720px){
+  .layout{flex-direction:column}
+  .sidebar{width:100%;position:static}
+  .two-col,.db-grid,.screen-grid{grid-template-columns:1fr}
+  .region-flow{flex-direction:column;align-items:flex-start}
+}
 </style>
+  <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore-compat.js"></script>
+  <script src="tp-firebase.js"></script>
 </head>
 <body>
 
-<!-- 모듈 헤더 -->
-<div class="mod-header">
-  <div class="breadcrumb"><a href="index_ch3.html" style="color:#fff;opacity:.8;">← Chapter III 목록으로</a></div>
-  <h1>Module 3 — 비교가능거래 탐색</h1>
-  <div class="sub">§3.24 ~ §3.39 · OECD Transfer Pricing Guidelines Chapter III · A.4</div>
-  <div class="prog-strip"><div class="prog-strip-inner" id="progBar" style="width:0%"></div></div>
+<div id="tpLoading" style="position:fixed;top:0;left:0;width:100%;height:100%;background:#0f7a7a;display:flex;align-items:center;justify-content:center;z-index:9999;color:#fff;font-family:'Noto Sans KR',Arial,sans-serif">
+  <div style="text-align:center">
+    <div style="font-size:2.5rem;margin-bottom:.8rem">📙</div>
+    <div style="font-size:1rem;font-weight:600">대주 이전가격 교육</div>
+    <div style="font-size:.82rem;opacity:.75;margin-top:.4rem">로딩 중...</div>
+  </div>
 </div>
+<header class="mod-header">
+  <div class="breadcrumb">기초과정 › Chapter III 비교가능성 분석 › M3-3</div>
+  <h1>M3-3. 비교가능거래 탐색</h1>
+  <div class="sub">A.4 Comparable Uncontrolled Transactions — 내부·외부 비교가능거래, 데이터베이스, 해외비교거래 &nbsp;|&nbsp; ¶3.24 – ¶3.39 &nbsp;|&nbsp; 예상 학습시간: 55분</div>
+  <div class="prog-strip"><div class="prog-strip-inner" id="topBar" style="width:0%"></div></div>
+  <div style="display:flex;justify-content:flex-end;align-items:center;gap:.7rem;margin-top:.3rem;font-size:.8rem">
+    <span id="topUserName" style="color:rgba(255,255,255,.8)"></span>
+    <button onclick="tpSignOut()" style="background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.35);color:#fff;padding:2px 12px;border-radius:20px;cursor:pointer;font-size:.76rem;font-family:inherit">로그아웃</button>
+  </div>
+</header>
 
 <div class="layout">
-  <!-- 사이드바 -->
+
   <aside class="sidebar">
     <div class="nav-card">
-      <h4>목차</h4>
-      <button class="nav-item active" onclick="scrollTo('sec-obj')">학습목표</button>
-      <button class="nav-item" onclick="scrollTo('sec1')">§3.24-3.26 비교가능거래 구분</button>
-      <button class="nav-item" onclick="scrollTo('sec2')">§3.27-3.28 내부비교가능거래</button>
-      <button class="nav-item" onclick="scrollTo('sec3')">§3.29-3.34 외부비교가능거래·상업DB</button>
-      <button class="nav-item" onclick="scrollTo('sec4')">§3.35-3.39 해외비교·비밀정보</button>
-      <button class="nav-item" onclick="scrollTo('sec-db-case')">§3.35 탐색 사례</button>
-      <button class="nav-item" onclick="scrollTo('sec-quiz')">퀴즈</button>
-      <button class="nav-item" onclick="scrollTo('sec-check')">체크리스트</button>
+      <h4>📑 목차</h4>
+      <button class="nav-item" onclick="goTo('obj')">🎯 학습목표</button>
+      <button class="nav-item" onclick="goTo('s1')">1. 비교가능거래 구분 및 일반 원칙</button>
+      <button class="nav-item" onclick="goTo('s2')">2. 내부 비교가능거래</button>
+      <button class="nav-item" onclick="goTo('s3')">3. 외부 비교가능거래 및 데이터베이스</button>
+      <button class="nav-item" onclick="goTo('s4')">4. 해외비교거래·비공개정보·Non-Transactional Data</button>
+      <button class="nav-item" onclick="goTo('s5')">5. 비교가능거래 범위 확장</button>
+      <button class="nav-item" onclick="goTo('quiz')">📝 확인 퀴즈</button>
+      <button class="nav-item" onclick="goTo('check')">☑ 실무 체크리스트</button>
     </div>
     <div class="nav-card">
-      <h4>진도</h4>
-      <div style="font-size:.85rem;color:var(--gray);">
-        <div style="margin-bottom:.4rem;">아코디언 <span id="accPct">0</span>% / 50%</div>
-        <div style="margin-bottom:.4rem;">퀴즈 <span id="quizPct">0</span>% / 30%</div>
-        <div>체크리스트 <span id="chkPct">0</span>% / 20%</div>
+      <h4>📊 모듈 진도</h4>
+      <div style="text-align:center;padding:.5rem 0">
+        <div style="font-size:1.6rem;font-weight:800;color:var(--purple)" id="pctDisp">0%</div>
+        <div style="font-size:.8rem;color:var(--gray);margin-top:.2rem">학습 완료율</div>
       </div>
-      <div style="margin-top:.8rem;font-size:.9rem;font-weight:700;color:var(--accent);">총 <span id="totalPct">0</span>%</div>
     </div>
   </aside>
 
-  <!-- 본문 -->
   <main class="content">
 
-    <!-- 완료 배너 -->
-    <div class="complete-banner" id="completeBanner">
-      <h3>모듈 완료!</h3>
-      <p>M3-3 비교가능거래 탐색을 완료하셨습니다. 다음 모듈로 이동하세요.</p>
-    </div>
-
-    <!-- 학습목표 -->
-    <div class="card" id="sec-obj">
-      <h2>학습목표</h2>
+    <!-- 학습 목표 -->
+    <section class="card" id="obj">
+      <h2>🎯 학습 목표</h2>
       <ul class="obj-list">
-        <li><span class="obj-num">1</span><span>내부 비교가능거래와 외부 비교가능거래의 차이와 우선순위를 설명하실 수 있습니다.</span></li>
-        <li><span class="obj-num">2</span><span>상업 데이터베이스(Commercial Database)의 특성, 활용 방법, 한계를 이해하십니다.</span></li>
-        <li><span class="obj-num">3</span><span>질적 검색기준과 양적 검색기준의 차이를 설명하실 수 있습니다.</span></li>
-        <li><span class="obj-num">4</span><span>해외 비교가능거래 사용의 허용 조건과 검색 범위 확장 원칙을 설명하실 수 있습니다.</span></li>
-        <li><span class="obj-num">5</span><span>과세당국만 보유한 비밀정보 사용 시 납세자 방어권 보호 원칙을 이해하십니다.</span></li>
+        <li><span class="obj-num">1</span><span>내부비교가능거래와 외부비교가능거래의 개념적 구분과 우선순위 원칙을 설명할 수 있다</span></li>
+        <li><span class="obj-num">2</span><span>내부비교가능거래가 외부비교가능거래보다 선호되는 이유와 비교가능성 측정 기준을 이해한다</span></li>
+        <li><span class="obj-num">3</span><span>상업 데이터베이스의 유형, 활용 방법, 구조적 한계를 파악하고 질적·양적 검색조건을 구별한다</span></li>
+        <li><span class="obj-num">4</span><span>해외 비교가능거래 활용 기준과 납세자에게 미공개된 과세당국 정보의 사용 제한 원칙을 이해한다</span></li>
+        <li><span class="obj-num">5</span><span>비교가능거래 부족 시 범위 확장 방법과 Non-Transactional Third-Party Data 활용 조건을 설명할 수 있다</span></li>
       </ul>
-    </div>
+    </section>
 
-    <!-- 섹션 1: §3.24-3.26 -->
-    <div class="card" id="sec1">
-      <h2>§3.24-3.26 · 비교가능거래 구분과 소액주주</h2>
+    <!-- 섹션 1 -->
+    <section class="card" id="s1">
+      <h2>1. 비교가능거래 구분 및 일반 원칙 <span class="tag tag-para">¶3.24–¶3.26</span></h2>
+      <p>A.4는 특수관계거래와 비교할 수 있는 <strong>독립기업 간 제3자 거래(comparable uncontrolled transactions)</strong>를 탐색하는 방법을 다룬다.</p>
 
-      <div class="accordion" id="acc1">
-        <button class="acc-header" onclick="toggleAcc('acc1')">
-          <span><span class="para">§3.24-3.25</span>비교가능거래 구분 — 내부 vs 외부</span>
+      <div class="accordion">
+        <button class="acc-header" onclick="toggleAcc(this)">
+          <span>비교가능거래의 구분: 내부 vs. 외부 <span class="para">¶3.24</span></span>
           <span class="arrow">▼</span>
         </button>
         <div class="acc-body">
-          <p><strong>비교가능거래(comparable uncontrolled transaction)</strong>란 특수관계거래와 비교할 수 있는 독립기업 간 제3자 거래를 의미합니다.</p>
-          <ul class="body-list">
-            <li><strong>내부비교가능거래(Internal comparable)</strong>: 납세자 또는 특수관계기업이 제3자와 맺은 거래</li>
-            <li><strong>외부비교가능거래(External comparable)</strong>: 두 독립기업 간 거래</li>
-            <li><strong>우선순위</strong>: 내부비교가능거래 &gt; 외부비교가능거래 (단, 비교가능성 조건 충족 전제)</li>
-            <li>NME 그룹 간 다른 당사자 간의 특수관계거래는 비교가능거래로 사용 불가합니다.</li>
-          </ul>
-          <div class="key-point">내부비교가능거래가 있는 경우 거래 수가 많지 않아도 외부비교가능거래보다 우선합니다.</div>
+          <p><strong>비교가능 거래(comparable uncontrolled transaction)</strong>는 특수관계 거래와 비교할 수 있는 독립기업 간 제3자 거래로서, 정상가격 설정의 기준이 되는 핵심이다.</p>
+          <div class="two-col">
+            <div class="col-box green">
+              <h4>🏠 내부비교가능거래 (Internal Comparable)</h4>
+              <p>납세자 또는 특수관계기업이 <strong>제3자와 직접 수행하는</strong> 유사 거래. 예: 동일 제품을 특수관계사와 독립기업 모두에게 판매하는 경우</p>
+            </div>
+            <div class="col-box">
+              <h4>🌐 외부비교가능거래 (External Comparable)</h4>
+              <p>납세자와 무관한 <strong>독립된 제3자 간에 이루어진</strong> 유사 거래. 주로 상업 데이터베이스를 통해 탐색</p>
+            </div>
+          </div>
+          <div class="key-point">
+            💡 <strong>우선순위 원칙:</strong> 내부비교가능거래가 존재하는 경우, 그 거래 수가 많지 않더라도 <strong>외부비교가능거래에 우선하여 적용</strong>한다. 내부 자료가 더 직접적이고 신뢰성이 높기 때문이다.
+          </div>
+          <div class="priority-flow">
+            <div class="pf-step p1"><span class="pf-num">①</span><span><strong>내부비교가능거래</strong> — 납세자가 제3자와 직접 수행한 유사 거래 (최우선 적용)</span></div>
+            <div class="pf-arrow">↓ 내부비교가능거래 없거나 신뢰성 부족 시</div>
+            <div class="pf-step p2"><span class="pf-num">②</span><span><strong>외부비교가능거래</strong> — 데이터베이스 등에서 탐색한 독립기업 간 거래 (차선 적용)</span></div>
+            <div class="pf-arrow">↓ 충분한 비교가능거래 확보 어려울 때</div>
+            <div class="pf-step p3"><span class="pf-num">③</span><span><strong>범위 확장</strong> — 연관 산업 또는 유사 지역으로 검색 범위 확장 (¶3.38)</span></div>
+          </div>
         </div>
       </div>
 
-      <div class="accordion" id="acc2">
-        <button class="acc-header" onclick="toggleAcc('acc2')">
-          <span><span class="para">§3.26</span>소액주주 존재의 영향</span>
+      <div class="accordion">
+        <button class="acc-header" onclick="toggleAcc(this)">
+          <span>동일 그룹 내 다른 당사자 간 거래의 적용 불가 <span class="para">¶3.25</span></span>
           <span class="arrow">▼</span>
         </button>
         <div class="acc-body">
-          <p>소액주주의 존재는 비교가능성 판단에 있어 결정적인 요소가 아닙니다. 경제적 실질(실제 거래 조건, 의사결정 영향력)이 더 중요합니다.</p>
-          <div class="warn-point">형식적 지배구조 요소(소액주주 유무)보다 실질적인 거래 조건과 의사결정 영향력을 분석해야 합니다.</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 섹션 2: §3.27-3.28 -->
-    <div class="card" id="sec2">
-      <h2>§3.27-3.28 · 내부비교가능거래 적용</h2>
-
-      <div class="accordion" id="acc3">
-        <button class="acc-header" onclick="toggleAcc('acc3')">
-          <span><span class="para">§3.27-3.28</span>내부비교가능거래 적용 원칙</span>
-          <span class="arrow">▼</span>
-        </button>
-        <div class="acc-body">
-          <p>내부비교가능거래 적용 시 ¶1.33-38의 비교가능성 요건 기준을 기반으로 검토합니다.</p>
-          <ul class="body-list">
-            <li>제조업자가 특수관계기업과 제3자 모두에게 판매하는 경우, 거래량 차이가 비교가능성에 영향을 미칠 수 있습니다.</li>
-            <li><strong>내부비교가능거래의 장점</strong>: 더 직접적이고 분석대상거래를 더 합리적으로 설명할 수 있습니다.</li>
-          </ul>
-          <div class="key-point">내부비교가능거래는 납세자 또는 특수관계기업이 직접 관여한 거래이므로 거래 조건에 대한 정보 접근성이 높고, 신뢰성 있는 비교가능성 분석이 가능합니다.</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 섹션 3: §3.29-3.34 -->
-    <div class="card" id="sec3">
-      <h2>§3.29-3.34 · 외부비교가능거래와 상업 데이터베이스</h2>
-
-      <div class="accordion" id="acc4">
-        <button class="acc-header" onclick="toggleAcc('acc4')">
-          <span><span class="para">§3.29</span>외부비교가능거래 활용 원칙</span>
-          <span class="arrow">▼</span>
-        </button>
-        <div class="acc-body">
-          <p>내부비교가능거래가 없는 경우 외부 데이터를 사용합니다.</p>
-          <ul class="body-list">
-            <li><strong>데이터 출처</strong>: 공개 데이터베이스, 업계 데이터, 상업 데이터베이스</li>
-            <li>내부비교가능거래가 있으면 외부비교가능거래는 불필요합니다.</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="accordion" id="acc5">
-        <button class="acc-header" onclick="toggleAcc('acc5')">
-          <span><span class="para">§3.30-3.31</span>상업 데이터베이스의 특성과 한계</span>
-          <span class="arrow">▼</span>
-        </button>
-        <div class="acc-body">
-          <p>상업 데이터베이스 활용 시 다음 4가지 한계를 인식해야 합니다.</p>
-          <ul class="body-list">
-            <li>모든 관할권에 데이터베이스가 존재하지 않습니다.</li>
-            <li>기업의 법적 형태·상장 여부에 따라 정보 공시 수준이 상이합니다.</li>
-            <li>기업 단위 정보(재무제표 기준)만 포함되어 개별 거래 기준 비교가능성 확보가 어렵습니다.</li>
-            <li>이전가격 목적이 아닌 일반 회계·재무보고를 위해 설계되어 세부 정보가 부족합니다.</li>
-          </ul>
-          <div class="key-point">상업 데이터베이스는 도구일 뿐이며, 데이터 출처의 투명성·비교가능성 요인의 질적 평가·문서화가 핵심입니다.</div>
-        </div>
-      </div>
-
-      <div class="accordion" id="acc6">
-        <button class="acc-header" onclick="toggleAcc('acc6')">
-          <span><span class="para">§3.32-3.34</span>내부비교가능거래 vs DB · 독점DB</span>
-          <span class="arrow">▼</span>
-        </button>
-        <div class="acc-body">
-          <p><strong>§3.32 — 내부비교가능거래 우선 적용:</strong> 신뢰성 있는 내부비교가능거래가 존재하는 경우, 상업 데이터베이스 검색은 불필요합니다. 내부비교가능거래는 실제 거래 조건에 대한 직접적 정보를 제공하기 때문입니다.</p>
-          <p><strong>§3.33 — 검색기준 유형:</strong> 비교가능거래 검색에는 두 가지 기준을 병행 적용해야 합니다.</p>
-          <table class="compare-table" style="margin:.5rem 0">
-            <tr><th>기준 유형</th><th>내용</th><th>예시</th></tr>
-            <tr><td><strong>질적 검색조건<br>(Qualitative Screen)</strong></td><td>사업 내용·특성 심층 검토</td><td>SIC/NACE 코드, 사업기술서, 제품·서비스 유사성, FAR 분석 결과</td></tr>
-            <tr><td><strong>양적 검색조건<br>(Quantitative Screen)</strong></td><td>재무수치 기반 필터링</td><td>무형자산/총자산 비율, R&D/매출 비율, 해외매출 비율, 재고/매출 비율</td></tr>
-          </table>
-          <p><strong>§3.34 — 독점 데이터베이스(Proprietary Database):</strong> 일부 자문기관이 독자적으로 구축·운영하는 비공개 데이터베이스를 의미합니다. 일반 상업 데이터베이스보다 시장 범위가 좁아질 수 있고, 검색 결과의 재현 가능성이 낮을 수 있으므로 추가적인 투명성 확보가 필요합니다.</p>
+          <p><strong>NME(Non-Market Economy) 그룹</strong> 간 또는 동일 다국적기업 그룹 내 다른 특수관계기업 간의 거래는 비교가능거래로 사용할 수 없다.</p>
           <div class="warn-point">
-            독점 데이터베이스를 사용하는 경우 과세당국이 동일한 결과를 재현할 수 없을 수 있습니다. 검색 조건과 탈락 이유를 상세히 문서화하여 절차적 투명성을 확보해야 합니다(§3.46 참조).
+            ⚠️ 예를 들어 A그룹의 계열사 X와 Y 간의 가격이 시장에서 거래되더라도, 이를 동일 그룹 내 다른 특수관계거래의 비교기준으로 삼을 수 없다. 특수관계 영향이 배제되지 않기 때문이다.
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- 섹션 4: §3.35-3.39 -->
-    <div class="card" id="sec4">
-      <h2>§3.35-3.39 · 해외비교가능거래·비밀정보·한계</h2>
-
-      <div class="accordion" id="acc7">
-        <button class="acc-header" onclick="toggleAcc('acc7')">
-          <span><span class="para">§3.35</span>해외 비교가능거래 검색 범위</span>
+      <div class="accordion">
+        <button class="acc-header" onclick="toggleAcc(this)">
+          <span>특수관계기업이 소액주주인 경우 <span class="para">¶3.26</span></span>
           <span class="arrow">▼</span>
         </button>
         <div class="acc-body">
-          <p>비교가능거래 검색 범위를 확장할 때에는 단계적 접근이 필요합니다.</p>
-          <table class="compare-table" style="margin:.5rem 0">
-            <tr><th>우선순위</th><th>검색 범위</th><th>비교가능성 고려사항</th></tr>
-            <tr><td>1순위</td><td>분석대상회사 소재 국가</td><td>동일한 경제환경, 법규, 경쟁 구조</td></tr>
-            <tr><td>2순위</td><td>동일 지역권(예: 동아시아, 유럽)</td><td>유사한 경제발전 수준 확인 필요</td></tr>
-            <tr><td>3순위</td><td>글로벌 범위</td><td>경제환경·규제 차이에 따른 조정 불가피</td></tr>
+          <p>소수 주주(minority shareholder)의 존재는 특수관계 거래가 정상가격에 근접하게 이루어질 가능성에 영향을 줄 수 있으나, <strong>그 자체로 결정적인 요소는 아니다.</strong></p>
+          <div class="note-point">
+            📌 이전가격 분석 시, 형식적인 지배구조 요소(예: 소수주주 존재)보다는 <strong>실질적인 거래 조건과 의사결정 영향력</strong>이 중요하다. 정상가격 여부 판단의 기준은 경제적 실질 분석이다.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 섹션 2 -->
+    <section class="card" id="s2">
+      <h2>2. 내부 비교가능거래 <span class="tag tag-para">¶3.27–¶3.28</span></h2>
+      <p>A.4.2는 내부비교가능거래의 탐색과 비교가능성 측정 방법을 다룬다.</p>
+
+      <div class="accordion">
+        <button class="acc-header" onclick="toggleAcc(this)">
+          <span>내부비교가능거래의 우선 적용 <span class="para">¶3.27</span></span>
+          <span class="arrow">▼</span>
+        </button>
+        <div class="acc-body">
+          <p>9단계 프로세스의 <strong>Step 4</strong>에서 내부비교가능거래를 먼저 탐색하며, 조건을 만족하는 내부비교가능거래가 존재하는 경우 이를 외부비교가능거래보다 <strong>더 직접적이고 합리적인 비교 기준</strong>으로 사용할 수 있다.</p>
+          <table class="compare-table">
+            <thead>
+              <tr><th>구분</th><th>내부비교가능거래</th><th>외부비교가능거래</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>정보 접근성</strong></td>
+                <td>납세자가 직접 보유</td>
+                <td>데이터베이스 등 제3자 소스</td>
+              </tr>
+              <tr>
+                <td><strong>신뢰성</strong></td>
+                <td>거래 세부내용 파악 가능 → 높음</td>
+                <td>공시 정보 기반 → 상대적으로 낮음</td>
+              </tr>
+              <tr>
+                <td><strong>비교가능성</strong></td>
+                <td>동일 회사·시장 환경 → 더 직접적</td>
+                <td>산업·지역 차이 존재 가능</td>
+              </tr>
+              <tr>
+                <td><strong>OECD 우선순위</strong></td>
+                <td>✅ 우선 적용</td>
+                <td>내부비교가능거래 없을 때 적용</td>
+              </tr>
+            </tbody>
           </table>
-          <div class="warn-point">해외 비교가능거래 사용 시 경제환경 차이(시장 성숙도, 임금 수준, 경쟁 강도)에 따른 비교가능성 조정 필요성을 검토해야 합니다. ¶1.132–1.133 참조.</div>
-          <div class="case-box" id="sec-db-case" style="margin-top:1rem">
-            <div class="case-label">§3.35 적용 사례 — 한국 IT 서비스회사의 동아시아 비교가능거래 탐색</div>
-            <h4>상업 DB 활용 한계와 범위 확장 사례</h4>
-            <p><strong>사실관계:</strong> 한국 IT 서비스 자회사 A가 TNMM 적용을 위해 Orbis(Bureau van Dijk) DB에서 비교가능기업을 검색합니다. 한국 내 IT 서비스 기업 대부분이 비상장·소규모여서 공시 데이터가 제한적입니다.</p>
-            <p><strong>단계별 검색 결과:</strong></p>
-            <table class="compare-table" style="margin:.5rem 0">
-              <tr><th>검색 단계</th><th>범위</th><th>초기 후보</th><th>최종 선정</th><th>탈락 이유</th></tr>
-              <tr><td>1차</td><td>한국 내</td><td>45개</td><td>3개</td><td>재무정보 불충분, R&D 비중 과다</td></tr>
-              <tr><td>2차 확장</td><td>동아시아<br>(한국+일본+대만)</td><td>180개</td><td>12개</td><td>경제환경 차이 조정 필요, 사업 내용 불일치</td></tr>
-            </table>
-            <p><strong>결론:</strong> 검색 범위를 동아시아로 확장하여 12개 기업을 최종 선정합니다. 일본·대만 기업과의 경제환경 차이(임금 수준, 시장 성숙도)에 대한 비교가능성 조정 여부를 검토하고, 검색 과정과 각 기업의 탈락 이유를 문서화합니다.</p>
+          <div class="practice-note">
+            <div class="pn-label">💼 실무 포인트</div>
+            <p>내부비교가능거래 탐색은 납세자가 <strong>제3자에게 동일·유사 제품/용역을 공급하거나 조달</strong>하는 경우에 가능하다. 이전가격 보고서 작성 초기에 내부비교가능거래 존재 여부를 우선 확인해야 한다.</p>
           </div>
         </div>
       </div>
 
-      <div class="accordion" id="acc8">
-        <button class="acc-header" onclick="toggleAcc('acc8')">
-          <span><span class="para">§3.36</span>과세당국만 보유한 비밀정보</span>
+      <div class="accordion">
+        <button class="acc-header" onclick="toggleAcc(this)">
+          <span>내부비교가능거래의 비교가능성 측정 <span class="para">¶3.28</span></span>
           <span class="arrow">▼</span>
         </button>
         <div class="acc-body">
-          <p>과세당국이 납세자에게 공개되지 않은 비밀정보(예: 다른 납세자의 이전가격 자료)를 이전가격 조정의 근거로 사용하는 것은 납세자의 <strong>방어권(right of defense)</strong> 침해 문제를 야기합니다.</p>
-          <p><strong>OECD의 요구 사항:</strong></p>
-          <ul class="body-list" style="margin:.4rem 0 .7rem 1.2rem;line-height:2.1">
-            <li>납세자가 비교가능거래의 적정성을 검토·반박할 수 있도록 충분한 정보를 제공해야 합니다.</li>
-            <li>비밀 보호가 필요한 경우, 비교가능회사의 신원 공개 없이도 적정성 평가가 가능한 수준의 요약 정보를 제공해야 합니다.</li>
-            <li>납세자가 반박할 수 없는 비밀 비교가능거래에 근거한 조정은 원칙적으로 허용되지 않습니다.</li>
+          <p>비교가능성 측정은 <strong>¶1.33–1.38에서 요구하는 비교가능성 요건</strong>을 기준으로 검토한다.</p>
+          <div class="case-box">
+            <div class="case-label">📋 비교가능성 영향 요인 사례</div>
+            <p>특수관계 제조업자가 동일 제품을 <strong>제3자와 특수관계기업 모두에게 판매</strong>하더라도, 제3자에게는 판매 수량이 훨씬 많은 경우: <strong>거래량 차이가 가격에 중요한 영향</strong>을 줄 수 있으므로 비교가능성을 신중히 평가해야 한다.</p>
+          </div>
+          <p>비교가능성 평가 시 주요 검토 항목:</p>
+          <ul>
+            <li><strong>거래량 차이</strong> — 볼륨 할인 또는 가격 협상력에 영향</li>
+            <li><strong>계약 조건 차이</strong> — 대금 결제 기간, 보증 조건, 독점권 여부</li>
+            <li><strong>시장·지역 차이</strong> — 내부거래가 다른 지역·시장에서 발생한 경우</li>
+            <li><strong>기능·위험 차이</strong> — 제3자 거래와 특수관계거래의 FAR 구조 비교</li>
           </ul>
-          <div class="key-point">이 조항은 이전가격 세무조사 및 MAP·APA 절차에서 절차적 공정성의 핵심 원칙입니다. 한국 국조법 및 조세심판원 결정례에서도 비밀 비교가능거래에 기반한 과세처분의 위법성이 문제된 사례가 있습니다.</div>
         </div>
       </div>
+    </section>
 
-      <div class="accordion" id="acc9">
-        <button class="acc-header" onclick="toggleAcc('acc9')">
-          <span><span class="para">§3.37-3.39</span>비거래데이터·정보한계·PSM 보완</span>
+    <!-- 섹션 3 -->
+    <section class="card" id="s3">
+      <h2>3. 외부 비교가능거래 및 데이터베이스 <span class="tag tag-para">¶3.29–¶3.34</span></h2>
+      <p>A.4.3은 외부비교가능거래 탐색을 위한 정보 출처와 상업 데이터베이스의 활용 방법을 다룬다.</p>
+
+      <div class="accordion">
+        <button class="acc-header" onclick="toggleAcc(this)">
+          <span>외부 비교가능거래 탐색 개요 <span class="para">¶3.29</span></span>
           <span class="arrow">▼</span>
         </button>
         <div class="acc-body">
-          <p>비교가능거래 탐색의 한계에 대한 대응 방안을 이해하는 것이 중요합니다.</p>
-          <ul class="body-list">
-            <li><strong>비거래데이터(Non-Transactional Third Party Data)</strong>: 산업 평균, 시장조사 자료 등은 신중하게 사용해야 합니다.</li>
-            <li>비교가능거래 부족 시 검색 범위를 확장합니다(연관 산업, 확대 지역).</li>
-            <li>제3자 거래가 없는 경우 PSM(이익분할방법) 적용을 고려할 수 있으나, 잔여이익분할방법 적용 시에도 제3자 비교가능거래가 필요합니다.</li>
-          </ul>
+          <p>A.4.3은 다음 세 가지 주제를 다룬다:</p>
+          <ol>
+            <li>외부비교가능거래 탐색을 위한 <strong>외부 데이터의 사용</strong></li>
+            <li><strong>해외비교가능거래 데이터</strong>(또는 국내가 아닌 비교가능거래)의 적용</li>
+            <li><strong>납세자에게 공개되지 않은 자료</strong>의 사용 가능 여부</li>
+          </ol>
+          <div class="key-point">
+            💡 <strong>실무 참조:</strong> OECD가 제시하는 비교가능거래 검색 기준은 복잡하다. 실무에서는 IMF et al. (2017, p.43; Box 7. "A Typical Process to Screen for Comparables")에 기술된 검색기준도 유용하게 참조할 수 있다.
+          </div>
         </div>
       </div>
-    </div>
 
+      <div class="accordion">
+        <button class="acc-header" onclick="toggleAcc(this)">
+          <span>상업 데이터베이스(Commercial Database)의 활용 <span class="para">¶3.30</span></span>
+          <span class="arrow">▼</span>
+        </button>
+        <div class="acc-body">
+          <p>이전가격 실무에서 자주 활용되는 주요 상업 데이터베이스는 다음과 같다:</p>
+          <div class="db-grid">
+            <div class="db-card">
+              <h4>📊 Bureau van Dijk (BvD)</h4>
+              <p>Orbis, Amadeus, Ruslana 등 포함. 전 세계 약 4억 개 기업 재무 데이터. TNMM 분석에 가장 널리 사용</p>
+            </div>
+            <div class="db-card">
+              <h4>📊 TP Catalyst</h4>
+              <p>Thomson Reuters 계열. 이전가격 전용 데이터베이스. 비교가능회사 검색 최적화</p>
+            </div>
+            <div class="db-card">
+              <h4>📊 RoyaltyStat</h4>
+              <p>무형자산 로열티율 데이터 특화. 라이선스 거래 이전가격 분석에 활용</p>
+            </div>
+            <div class="db-card warn">
+              <h4>⚠️ 독점 데이터베이스 (Proprietary)</h4>
+              <p>일부 자문기관이 자체 운영. 시장 범위가 좁고 투명성 부족. 추가 주의 필요 (¶3.34)</p>
+            </div>
+          </div>
+          <div class="note-point">
+            📌 데이터베이스 선택 시 <strong>정보 출처의 투명성, 비교가능성 요인의 질적 평가, 문서화 필요성</strong>을 실무상 판단의 중심으로 삼아야 한다.
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion">
+        <button class="acc-header" onclick="toggleAcc(this)">
+          <span>상업 데이터베이스의 구조적 한계 <span class="para">¶3.31</span></span>
+          <span class="arrow">▼</span>
+        </button>
+        <div class="acc-body">
+          <p>상업 데이터베이스는 다음과 같은 <strong>구조적 한계</strong>로 인해 신중하게 사용해야 한다:</p>
+          <table class="compare-table">
+            <thead>
+              <tr><th>한계 유형</th><th>내용</th><th>실무 시사점</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>지역 불균형</strong></td>
+                <td>모든 관할권에 데이터베이스가 존재하지 않음</td>
+                <td>특정 지역 분석 시 데이터 공백 발생 가능</td>
+              </tr>
+              <tr>
+                <td><strong>공시 수준 차이</strong></td>
+                <td>법적 형태·상장 여부에 따라 정보 공시 수준 상이</td>
+                <td>비상장 기업 데이터는 상장 기업보다 부족</td>
+              </tr>
+              <tr>
+                <td><strong>기업 단위 중심</strong></td>
+                <td>대부분 기업 전체 재무제표 기준 — 개별 거래 단위 데이터 없음</td>
+                <td>특정 사업부·거래 유형 분석 어려움</td>
+              </tr>
+              <tr>
+                <td><strong>목적 불일치</strong></td>
+                <td>이전가격 목적이 아닌 일반 회계·재무보고용 설계</td>
+                <td>이전가격에 필요한 세부 정보 부족</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="warn-point">
+            ⚠️ <strong>신뢰성 있는 내부 데이터(¶3.32)가 존재하는 경우</strong>, 이를 외부 상업 데이터보다 우선적으로 활용하는 것이 원칙이다.
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion">
+        <button class="acc-header" onclick="toggleAcc(this)">
+          <span>질적·양적 검색조건 (Qualitative & Quantitative Screens) <span class="para">¶3.33</span></span>
+          <span class="arrow">▼</span>
+        </button>
+        <div class="acc-body">
+          <p>데이터베이스에서 비교가능거래를 탐색할 때 두 가지 유형의 검색조건을 적용한다:</p>
+          <div class="screen-grid">
+            <div class="screen-item qual">
+              <strong>🔍 질적 검색조건 (Qualitative Screens)</strong>
+              산업분류(SIC/NAICS 코드), 주요 활동 설명, 계약 제조 여부, 무형자산 보유 여부, 관련 당사자 거래 비율 등
+            </div>
+            <div class="screen-item quant">
+              <strong>📐 양적 검색조건 (Quantitative Screens)</strong>
+              매출 규모, 총자산 대비 무형자산 비율, 매출 대비 R&amp;D 비용 비율, 해외 매출 비율, 재고자산 회전율 등
+            </div>
+          </div>
+          <p style="margin-top:.7rem">대표적인 <strong>양적 검색 기준</strong>(¶3.43 참조):</p>
+          <ul>
+            <li><strong>크기 관련:</strong> 매출, 자산, 직원 수 (거래 주도 영향력 반영)</li>
+            <li><strong>무형자산 관련:</strong> 총자산 대비 무형자산 순가치 비율, 매출 대비 R&amp;D 비용 비율</li>
+            <li><strong>수출 관련:</strong> 총매출 대비 해외 판매 매출 비율</li>
+            <li><strong>재고자산 관련:</strong> 재고자산 크기 및 회전율</li>
+          </ul>
+          <div class="practice-note">
+            <div class="pn-label">💼 실무 포인트</div>
+            <p>양적 검색조건은 주로 <strong>One-sided methods(RPM·CPM·TNMM)</strong>에서 단순 제조·판매 기능만을 수행하는 비교가능회사를 선정할 때 적용한다. 가치 있는 무형자산을 보유하거나 중요한 R&amp;D 활동을 수행하는 회사를 <strong>제외</strong>하는 기준으로 활용된다.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion">
+        <button class="acc-header" onclick="toggleAcc(this)">
+          <span>독점 데이터베이스(Proprietary Database)의 주의사항 <span class="para">¶3.34</span></span>
+          <span class="arrow">▼</span>
+        </button>
+        <div class="acc-body">
+          <p>일부 자문기관이 자체 개발·운영하는 <strong>독점 데이터베이스(Proprietary Database)</strong>는 상업용 데이터베이스보다 시장 범위가 좁은 경우가 많다.</p>
+          <div class="warn-point">
+            ⚠️ 독점 데이터베이스는 <strong>정보 범위와 투명성</strong> 측면에서 추가적인 주의가 필요하다. '독점적으로 사용되는 자료'란 일반에게 공개되지 않는 비공개 자료를 의미하며, 이를 사용할 경우 상대방(납세자·과세당국)이 검증하기 어렵다는 문제가 있다.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 섹션 4 -->
+    <section class="card" id="s4">
+      <h2>4. 해외비교거래 · 비공개정보 · Non-Transactional Data <span class="tag tag-para">¶3.35–¶3.37</span></h2>
+      <p>A.4.3.2~A.4.4는 외부비교가능거래 탐색에서 발생하는 특수 쟁점들을 다룬다.</p>
+
+      <div class="accordion">
+        <button class="acc-header" onclick="toggleAcc(this)">
+          <span>해외 비교가능거래의 검색 범위 <span class="para">¶3.35</span></span>
+          <span class="arrow">▼</span>
+        </button>
+        <div class="acc-body">
+          <p>비교가능회사 선정의 지역적 범위에 관한 원칙이다.</p>
+          <div class="key-point">
+            💡 <strong>원칙:</strong> 분석대상회사가 속해 있는 국가에서 사업활동을 수행하는 비교가능회사를 <strong>우선적으로 선정</strong>한다.
+          </div>
+          <p><strong>해외 비교가능거래가 허용되는 경우:</strong></p>
+          <ul>
+            <li>해당 국가에 비교가능회사가 존재하지 않는 경우</li>
+            <li>유사한 지역 또는 국가에 비교가능회사가 존재하는 경우</li>
+            <li>경제환경이 유사하여 조정이 가능한 경우</li>
+          </ul>
+          <div class="region-flow">
+            <div class="region-pill rp-1">🇰🇷 한국 (1순위)</div>
+            <div class="region-arrow">→ 없으면</div>
+            <div class="region-pill rp-2">🌏 동아시아 지역</div>
+            <div class="region-arrow">→ 없으면</div>
+            <div class="region-pill rp-3">🌍 범아시아·글로벌</div>
+          </div>
+          <div class="practice-note">
+            <div class="pn-label">💼 실무 포인트 — 다중국가 비교가능검색</div>
+            <p>특정 국가 대신 <strong>유럽, 미주, 동아시아</strong> 지역 등을 기준으로 비교가능회사를 검색하는 방법도 허용된다 (참조 ¶1.132–1.133). 단, 지역 확장 시 경제환경 차이에 대한 비교가능성 조정이 필요하다.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion">
+        <button class="acc-header" onclick="toggleAcc(this)">
+          <span>과세당국 보유 비공개 정보의 사용 제한 <span class="para">¶3.36</span></span>
+          <span class="arrow">▼</span>
+        </button>
+        <div class="acc-body">
+          <p>과세당국만이 보유할 수 있는 <strong>비밀정보(confidential information)</strong>를 비교가능거래에 이용하는 경우에 관한 원칙이다.</p>
+          <div class="two-col">
+            <div class="col-box red">
+              <h4>❌ 문제점</h4>
+              <p>납세자가 접근할 수 없는 비공개 정보를 과세당국이 일방적으로 사용하면 납세자의 방어권이 침해된다</p>
+            </div>
+            <div class="col-box green">
+              <h4>✅ 원칙</h4>
+              <p>비교가능거래에 사용된 정보는 납세자가 검토·반박할 수 있어야 한다는 투명성 원칙이 적용된다</p>
+            </div>
+          </div>
+          <div class="key-point">
+            💡 <strong>¶3.36의 핵심 의의:</strong> 이전가격 세무조사 및 조정 과정에서 <strong>정보의 비대칭성에 따른 납세자의 방어권 침해</strong>를 방지하고, 투명하고 공정한 과세 행정을 실현하기 위한 원칙이다. 특히 국제적 조정이나 상호합의절차(MAP)에서도 절차적 정당성 확보를 위한 핵심 조항으로 간주된다.
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion">
+        <button class="acc-header" onclick="toggleAcc(this)">
+          <span>Non-Transactional Third-Party Data의 사용 <span class="para">¶3.37</span></span>
+          <span class="arrow">▼</span>
+        </button>
+        <div class="acc-body">
+          <p><strong>Non-Transactional Third-Party Data</strong>란 개별 거래 데이터가 아닌, <strong>기업 전체 또는 사업부 단위로 집계된 제3자 데이터</strong>(산업 평균, 시장조사 자료 등)를 말한다.</p>
+          <div class="two-col">
+            <div class="col-box green">
+              <h4>📌 원칙</h4>
+              <p>개별 거래를 기준으로 이전가격 분석을 하는 것이 원칙 (Transaction-by-transaction)</p>
+            </div>
+            <div class="col-box orange">
+              <h4>⚡ 예외 허용</h4>
+              <p>거래별 데이터가 부족한 경우, 기업 전체 사업부 단위의 집계된 제3자 데이터를 사용할 수 있음</p>
+            </div>
+          </div>
+          <p style="margin-top:.7rem"><strong>주의사항:</strong></p>
+          <ul>
+            <li>Non-Transactional Data 사용 시 <strong>자료의 정확성 및 적합성을 신중히 평가</strong>해야 한다</li>
+            <li>특수관계거래만을 분리한 구분 재무자료 사용이 원칙이나, 기업 전체 재무자료를 사용하는 경우 OECD는 개별 사안에 따라 합리적으로 결정한다고 한다</li>
+          </ul>
+          <div class="practice-note">
+            <div class="pn-label">💼 실무 예시</div>
+            <p>국내 시장에서 동종 산업의 비교가능거래가 충분하지 않을 때, 한국은행 산업 통계, 금융감독원 업종 평균 수익률, 무역협회 수출 단가 자료 등 Non-Transactional Data를 보완 자료로 활용할 수 있다.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 섹션 5 -->
+    <section class="card" id="s5">
+      <h2>5. 비교가능거래 범위 확장 및 한계 <span class="tag tag-para">¶3.38–¶3.39</span></h2>
+      <p>A.4.5는 충분한 비교가능거래를 확보하지 못하는 경우 탐색 범위를 확장하는 방법을 다룬다.</p>
+
+      <div class="accordion">
+        <button class="acc-header" onclick="toggleAcc(this)">
+          <span>비교가능거래 범위 확장 방법 <span class="para">¶3.38</span></span>
+          <span class="arrow">▼</span>
+        </button>
+        <div class="acc-body">
+          <p>비교가능한 제3자 독립 거래의 수가 적거나 없는 경우, 다음 방향으로 검색 범위를 확장할 수 있다:</p>
+          <table class="compare-table">
+            <thead>
+              <tr><th>확장 방향</th><th>방법</th><th>주의사항</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>연관 산업으로 확장</strong></td>
+                <td>동일 산업이 아닌 유사 기능을 수행하는 연관 산업으로 비교가능회사 범위 확장</td>
+                <td>사업전략 관련 활동에서 <strong>근본적인 차이</strong>가 있을 수 있음 → 비교가능성 조정 필요</td>
+              </tr>
+              <tr>
+                <td><strong>지역으로 확장</strong></td>
+                <td>한국 → 동아시아 → 아시아·태평양 등 지역 순으로 검색 범위 확대</td>
+                <td><strong>관련 경제환경에서 차이</strong>가 발생할 수 있음 → 지역 조정 고려</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="warn-point">
+            ⚠️ 범위를 확장하면 비교가능성이 낮아질 수 있다. 확장 사유, 차이 분석, 비교가능성 조정 내용을 반드시 <strong>문서화</strong>해야 한다.
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion">
+        <button class="acc-header" onclick="toggleAcc(this)">
+          <span>이익분할방법 적용 시 비교자료 보강 <span class="para">¶3.39</span></span>
+          <span class="arrow">▼</span>
+        </button>
+        <div class="acc-body">
+          <p>제3자 거래가격이 존재하지 않아 이익분할방법(PSM)을 적용하는 경우에도, 다음 상황에서는 <strong>제3자 비교가능거래가 필요</strong>하다:</p>
+          <ul>
+            <li>적용된 이익분할 이익지표를 보강해야 하는 경우</li>
+            <li><strong>잔여이익분할방법(Residual PSM)</strong>이 적용되는 경우 — 기본이익 산정을 위한 비교 데이터 필요</li>
+          </ul>
+          <div class="key-point">
+            💡 이익분할방법을 적용한다고 해서 비교가능거래 탐색 의무가 완전히 면제되는 것은 아니다. <strong>이익 분할 근거를 지지하거나 잔여이익 산정을 위해</strong> 비교가능 데이터가 보완적으로 요구된다.
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- 퀴즈 -->
-    <div class="quiz-section" id="sec-quiz">
-      <h2>확인 퀴즈</h2>
-      <div class="q-count">5문항 · 퀴즈 점수는 진도에 반영됩니다</div>
+    <section class="card" id="quiz">
+      <h2>📝 확인 퀴즈 — M3-3</h2>
+      <p style="font-size:.9rem;color:var(--gray);margin-bottom:1.2rem">5문항 · 80점 이상 통과 (각 20점)</p>
 
-      <!-- Q1 -->
-      <div class="quiz-item" id="qi1">
-        <div class="q-text"><span class="q-num">Q1</span>비교가능거래 적용 우선순위로 옳은 것은?</div>
-        <ul class="opt-list">
-          <li><button onclick="checkQ(1,this,false)">① 외부비교가능거래 &gt; 내부비교가능거래</button></li>
-          <li><button onclick="checkQ(1,this,true)">② 내부비교가능거래 &gt; 외부비교가능거래</button></li>
-          <li><button onclick="checkQ(1,this,false)">③ 항상 양자를 동등하게 사용한다.</button></li>
-          <li><button onclick="checkQ(1,this,false)">④ 국내 비교가능거래 &gt; 해외 비교가능거래</button></li>
-        </ul>
-        <div class="q-feedback" id="qf1"></div>
+      <div class="q-block">
+        <div class="q-text">Q1. ¶3.24에 따른 내부비교가능거래와 외부비교가능거래의 우선순위 원칙으로 가장 옳은 것은?</div>
+        <div class="q-options">
+          <label><input type="radio" name="q1" value="a"> ① 외부비교가능거래가 더 객관적이므로 항상 우선 적용한다</label>
+          <label><input type="radio" name="q1" value="b"> ② 내부비교가능거래가 존재하면, 거래 수가 적더라도 외부비교가능거래보다 우선 적용한다</label>
+          <label><input type="radio" name="q1" value="c"> ③ 내부비교가능거래와 외부비교가능거래는 동등한 우선순위를 가진다</label>
+          <label><input type="radio" name="q1" value="d"> ④ 내부비교가능거래는 이해 충돌 우려가 있으므로 사용이 제한된다</label>
+        </div>
+        <div class="q-feedback" id="f1"></div>
       </div>
 
-      <!-- Q2 -->
-      <div class="quiz-item" id="qi2">
-        <div class="q-text"><span class="q-num">Q2</span>OECD 이전가격지침서에서 제시한 상업 데이터베이스의 한계에 해당하지 않는 것은?</div>
-        <ul class="opt-list">
-          <li><button onclick="checkQ(2,this,false)">① 모든 관할권에 데이터베이스가 존재하지 않는다.</button></li>
-          <li><button onclick="checkQ(2,this,false)">② 기업 법적 형태나 상장 여부에 따라 정보 공시 수준이 다르다.</button></li>
-          <li><button onclick="checkQ(2,this,true)">③ 상업 데이터베이스는 이전가격 전용으로 설계되어 있어 다른 목적에는 사용 불가하다.</button></li>
-          <li><button onclick="checkQ(2,this,false)">④ 대부분 기업 단위 정보만 포함되어 거래 기준 비교가능성 확보가 어렵다.</button></li>
-        </ul>
-        <div class="q-feedback" id="qf2"></div>
+      <div class="q-block">
+        <div class="q-text">Q2. ¶3.31의 상업 데이터베이스의 '구조적 한계'로 옳지 않은 것은?</div>
+        <div class="q-options">
+          <label><input type="radio" name="q2" value="a"> ① 모든 관할권에 데이터베이스가 존재하지 않아 지역 불균형이 발생한다</label>
+          <label><input type="radio" name="q2" value="b"> ② 기업 단위 정보 중심이라 개별 거래 기준 비교가능성 확보가 어렵다</label>
+          <label><input type="radio" name="q2" value="c"> ③ 이전가격 분석 목적으로 설계되어 세부 정보가 풍부하다</label>
+          <label><input type="radio" name="q2" value="d"> ④ 법적 형태·상장 여부에 따라 정보 공시 수준이 다르다</label>
+        </div>
+        <div class="q-feedback" id="f2"></div>
       </div>
 
-      <!-- Q3 -->
-      <div class="quiz-item" id="qi3">
-        <div class="q-text"><span class="q-num">Q3</span>해외 비교가능거래 사용 시 가장 우선적으로 고려해야 할 사항은?</div>
-        <ul class="opt-list">
-          <li><button onclick="checkQ(3,this,false)">① 해외 기업은 항상 비교가능거래에서 제외해야 한다.</button></li>
-          <li><button onclick="checkQ(3,this,true)">② 분석대상회사가 속한 국가에서 먼저 비교가능회사를 탐색하고, 없는 경우 지역 범위를 확장한다.</button></li>
-          <li><button onclick="checkQ(3,this,false)">③ 항상 글로벌 데이터베이스를 사용하여 전 세계 기업을 검색한다.</button></li>
-          <li><button onclick="checkQ(3,this,false)">④ 과세당국이 인정하는 특정 국가의 기업만 사용할 수 있다.</button></li>
-        </ul>
-        <div class="q-feedback" id="qf3"></div>
+      <div class="q-block">
+        <div class="q-text">Q3. ¶3.33의 양적 검색조건(Quantitative screens)에서 '가치 있는 무형자산 보유 회사를 제외'하기 위해 주로 활용하는 기준은?</div>
+        <div class="q-options">
+          <label><input type="radio" name="q3" value="a"> ① 총매출 규모</label>
+          <label><input type="radio" name="q3" value="b"> ② 직원 수</label>
+          <label><input type="radio" name="q3" value="c"> ③ 총자산 대비 무형자산 비율 및 매출 대비 R&D 비용 비율</label>
+          <label><input type="radio" name="q3" value="d"> ④ 재고자산 회전율</label>
+        </div>
+        <div class="q-feedback" id="f3"></div>
       </div>
 
-      <!-- Q4 -->
-      <div class="quiz-item" id="qi4">
-        <div class="q-text"><span class="q-num">Q4</span>과세당국만 보유한 비밀정보를 비교가능거래로 사용하는 경우 OECD의 원칙은?</div>
-        <ul class="opt-list">
-          <li><button onclick="checkQ(4,this,false)">① 비밀 보호를 위해 납세자에게 어떠한 정보도 제공할 필요가 없다.</button></li>
-          <li><button onclick="checkQ(4,this,true)">② 납세자가 비교가능거래의 적정성을 검토할 수 있도록 충분한 정보(또는 요약본)를 제공해야 한다.</button></li>
-          <li><button onclick="checkQ(4,this,false)">③ 비밀정보는 과세 목적으로 항상 사용 가능하다.</button></li>
-          <li><button onclick="checkQ(4,this,false)">④ 비밀정보는 납세자에게 공개한 후에만 사용 가능하다.</button></li>
-        </ul>
-        <div class="q-feedback" id="qf4"></div>
+      <div class="q-block">
+        <div class="q-text">Q4. ¶3.36에서 과세당국 보유 비공개 정보의 일방적 사용을 제한하는 근본 이유는?</div>
+        <div class="q-options">
+          <label><input type="radio" name="q3" value="a"> ① 비공개 정보는 신뢰성이 낮아 이전가격 분석에 적합하지 않기 때문</label>
+          <label><input type="radio" name="q4" value="b"> ② 납세자가 접근·검토·반박할 수 없는 정보 사용은 납세자의 방어권을 침해하기 때문</label>
+          <label><input type="radio" name="q4" value="c"> ③ 비공개 정보는 OECD 모델협약 제9조에서 사용이 금지되어 있기 때문</label>
+          <label><input type="radio" name="q4" value="d"> ④ 과세당국이 보유한 정보는 특수관계거래에만 해당하기 때문</label>
+        </div>
+        <div class="q-feedback" id="f4"></div>
       </div>
 
-      <!-- Q5 -->
-      <div class="quiz-item" id="qi5">
-        <div class="q-text"><span class="q-num">Q5</span>비교가능거래 정보가 부족한 경우 범위 확장 방법으로 잘못된 것은?</div>
-        <ul class="opt-list">
-          <li><button onclick="checkQ(5,this,false)">① 연관 산업으로 검색 범위를 확장한다.</button></li>
-          <li><button onclick="checkQ(5,this,false)">② 지역 범위를 확장한다(예: 한국→동아시아).</button></li>
-          <li><button onclick="checkQ(5,this,false)">③ 제3자 거래가 전혀 없는 경우 이익분할방법(PSM) 적용을 고려한다.</button></li>
-          <li><button onclick="checkQ(5,this,true)">④ 검색 범위 확장 없이 무조건 가장 유리한 비교가능거래만 선택한다.</button></li>
-        </ul>
-        <div class="q-feedback" id="qf5"></div>
+      <div class="q-block">
+        <div class="q-text">Q5. ¶3.39에 따르면, 이익분할방법(PSM) 적용 시에도 제3자 비교가능거래가 필요한 경우는?</div>
+        <div class="q-options">
+          <label><input type="radio" name="q5" value="a"> ① PSM은 항상 비교가능거래가 필요 없으므로 해당 없다</label>
+          <label><input type="radio" name="q5" value="b"> ② 잔여이익분할방법(Residual PSM) 적용 시 기본이익 산정을 위한 비교 데이터가 필요하다</label>
+          <label><input type="radio" name="q5" value="c"> ③ PSM 적용 시에는 내부비교가능거래만 사용해야 한다</label>
+          <label><input type="radio" name="q5" value="d"> ④ PSM은 비교가능거래 탐색 없이 재무제표만으로 분석한다</label>
+        </div>
+        <div class="q-feedback" id="f5"></div>
       </div>
-    </div>
 
-    <!-- 체크리스트 -->
-    <div class="card" id="sec-check">
-      <h2>실무 체크리스트</h2>
+      <button class="quiz-btn" onclick="submitQuiz()">채점하기</button>
+      <div class="score-box" id="scoreBox">
+        <div class="big" id="scoreBig"></div>
+        <p id="scoreMsg"></p>
+      </div>
+    </section>
+
+    <!-- 실무 체크리스트 -->
+    <section class="card" id="check">
+      <h2>☑ 실무 체크리스트 — M3-3</h2>
+      <p style="font-size:.9rem;color:var(--gray);margin-bottom:1rem">비교가능거래 탐색 단계에서 확인해야 할 사항입니다.</p>
       <ul class="checklist">
-        <li>
-          <input type="checkbox" id="chk1" onchange="updateChk()"/>
-          <label for="chk1">내부비교가능거래(제3자와의 유사 거래)를 우선 검토하였습니까?</label>
-        </li>
-        <li>
-          <input type="checkbox" id="chk2" onchange="updateChk()"/>
-          <label for="chk2">상업 데이터베이스 사용 시 검색 과정(SIC 코드, 검색 조건)을 완전히 문서화하였습니까?</label>
-        </li>
-        <li>
-          <input type="checkbox" id="chk3" onchange="updateChk()"/>
-          <label for="chk3">질적 검색기준과 양적 검색기준을 모두 적용하였습니까?</label>
-        </li>
-        <li>
-          <input type="checkbox" id="chk4" onchange="updateChk()"/>
-          <label for="chk4">해외 비교가능거래 사용 시 경제환경 차이에 따른 비교가능성 조정 가능성을 검토하였습니까?</label>
-        </li>
-        <li>
-          <input type="checkbox" id="chk5" onchange="updateChk()"/>
-          <label for="chk5">과세당국이 비밀정보를 사용하는 경우 납세자의 검토 가능성을 요구하였습니까?</label>
-        </li>
-        <li>
-          <input type="checkbox" id="chk6" onchange="updateChk()"/>
-          <label for="chk6">비교가능거래가 충분하지 않은 경우 범위 확장(연관 산업, 지역 확장) 또는 PSM 전환을 검토하였습니까?</label>
-        </li>
+        <li><input type="checkbox" id="c1"><label for="c1">비교가능거래 탐색에 앞서 내부비교가능거래(납세자가 제3자와 수행하는 유사 거래)를 우선적으로 검토하였습니까? (¶3.27)</label></li>
+        <li><input type="checkbox" id="c2"><label for="c2">내부비교가능거래 사용 시 거래량, 계약 조건, 시장·지역 차이 등 비교가능성 영향 요인을 ¶1.33–1.38 기준으로 검토하였습니까? (¶3.28)</label></li>
+        <li><input type="checkbox" id="c3"><label for="c3">상업 데이터베이스 활용 시 정보 출처의 투명성, 지역 불균형, 기업단위 중심의 한계를 인식하고 적합성을 평가하였습니까? (¶3.31)</label></li>
+        <li><input type="checkbox" id="c4"><label for="c4">비교가능회사 선정 시 질적 검색조건(산업 분류, 무형자산 보유 여부)과 양적 검색조건(R&D 비율, 무형자산 비율)을 모두 적용하였습니까? (¶3.33)</label></li>
+        <li><input type="checkbox" id="c5"><label for="c5">해외 비교가능거래를 사용하는 경우, 국내 비교가능거래를 먼저 탐색하였으며 해외 사용 이유와 경제환경 차이에 대한 조정 근거를 문서화하였습니까? (¶3.35)</label></li>
+        <li><input type="checkbox" id="c6"><label for="c6">과세당국이 납세자에게 공개하지 않은 비밀정보를 비교가능거래에 사용하는 경우 납세자의 방어권 침해 여부를 확인하였습니까? (¶3.36)</label></li>
+        <li><input type="checkbox" id="c7"><label for="c7">Non-Transactional Third-Party Data(산업 평균 등)를 사용하는 경우 그 적합성과 정확성을 평가하고 문서화하였습니까? (¶3.37)</label></li>
+        <li><input type="checkbox" id="c8"><label for="c8">비교가능거래 수가 부족하여 산업 또는 지역 범위를 확장한 경우, 확장 사유, 비교가능성 차이 분석, 조정 내용을 이전가격 보고서에 기재하였습니까? (¶3.38)</label></li>
       </ul>
-    </div>
+    </section>
 
-    <!-- 네비게이션 버튼 -->
-    <div class="nav-btns">
-      <a href="M3-2_분석대상회사.html" class="btn btn-outline">← 이전: M3-2 분석대상회사</a>
-      <a href="M3-4_비교가능회사선정.html" class="btn btn-primary">다음: M3-4 비교가능회사선정 →</a>
+    <!-- 하단 네비 -->
+    <div class="nav-bottom">
+      <a href="M3-2_분석대상회사.html" class="btn-nav secondary">← M3-2: 분석대상회사 선정</a>
+      <a href="#" class="btn-nav secondary">📋 Chapter III 목차</a>
+      <a href="M3-4_선정과조정.html" class="btn-nav">M3-4: 비교가능회사 선정과 조정 →</a>
     </div>
 
   </main>
 </div>
 
 <script>
-const MODKEY = 'm3_3';
-const ACC_TOTAL = 9;
-const QUIZ_TOTAL = 5;
-const CHK_TOTAL = 6;
-
-// 상태 로드
-let state = JSON.parse(localStorage.getItem(MODKEY) || '{"acc":[],"quiz":{},"chk":[]}');
-
-// 아코디언
-function toggleAcc(id) {
-  const el = document.getElementById(id);
-  const header = el.querySelector('.acc-header');
-  const body = el.querySelector('.acc-body');
-  const isOpen = body.classList.contains('open');
-  body.classList.toggle('open', !isOpen);
-  header.classList.toggle('open', !isOpen);
-  if (!isOpen && !state.acc.includes(id)) {
-    state.acc.push(id);
-    saveState();
-    updateProg();
-  }
+function goTo(id){
+  const el=document.getElementById(id);
+  if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+  document.querySelectorAll('.nav-item').forEach(b=>b.classList.remove('active'));
+  event.currentTarget.classList.add('active');
 }
-
-// 퀴즈
-const feedbacks = {
-  1: {ok:'정답입니다. 내부비교가능거래는 더 직접적인 정보를 제공하므로 외부비교가능거래보다 우선합니다.', no:'틀렸습니다. OECD 지침서는 내부비교가능거래를 외부비교가능거래보다 우선시합니다.'},
-  2: {ok:'정답입니다. 상업 데이터베이스는 이전가격 전용이 아닌 일반 회계·재무보고 목적으로 설계되어 있습니다. 즉, ③의 설명이 틀린 내용입니다.', no:'틀렸습니다. OECD가 제시한 한계에 해당하지 않는 설명(틀린 설명)은 ③번입니다.'},
-  3: {ok:'정답입니다. 분석대상회사가 속한 국가에서 먼저 탐색하고, 충분하지 않은 경우 지역 범위를 단계적으로 확장합니다.', no:'틀렸습니다. 해외 비교가능거래는 활용 가능하나, 우선 분석대상 국가에서 탐색해야 합니다.'},
-  4: {ok:'정답입니다. 납세자가 비교가능거래의 적정성을 검토할 수 있도록 충분한 정보(또는 요약본)를 제공해야 합니다.', no:'틀렸습니다. OECD는 비밀 보호와 납세자 방어권의 균형을 요구합니다.'},
-  5: {ok:'정답입니다. 가장 유리한 비교가능거래만을 선택하는 것은 객관적인 비교가능거래 탐색 원칙에 위반됩니다.', no:'틀렸습니다. 검색 범위 확장 없이 유리한 거래만 선택하는 것이 잘못된 방법입니다.'},
+const secIds=['obj','s1','s2','s3','s4','s5','quiz','check'];
+window.addEventListener('scroll',()=>{
+  let cur=0;
+  secIds.forEach((id,i)=>{const el=document.getElementById(id);if(el&&window.scrollY>=el.offsetTop-120)cur=i;});
+  document.querySelectorAll('.nav-item').forEach((b,i)=>b.classList.toggle('active',i===cur));
+  const pct=Math.min(100,Math.round(window.scrollY/(document.body.scrollHeight-window.innerHeight)*100));
+  document.getElementById('topBar').style.width=pct+'%';
+  document.getElementById('pctDisp').textContent=pct+'%';
+});
+function toggleAcc(btn){
+  const body=btn.nextElementSibling;
+  const isOpen=body.classList.contains('open');
+  body.classList.toggle('open',!isOpen);
+  btn.classList.toggle('open',!isOpen);
+}
+const answers={q1:'b',q2:'c',q3:'c',q4:'b',q5:'b'};
+const feedbacks={
+  q1:{
+    b:'✅ 정답! ¶3.27은 내부비교가능거래가 조건을 만족하는 경우 외부비교가능거래보다 더 직접적이고 신뢰성 높은 비교 기준이 된다고 명시한다. OECD는 내부비교가능거래를 우선 탐색하도록 권고한다.',
+    a:'❌ 오답. 외부비교가능거래가 더 객관적이라는 전제는 OECD 입장과 다르다. 내부비교가능거래가 더 직접적인 정보를 제공한다.',
+    c:'❌ 오답. ¶3.27은 내부비교가능거래에 우선순위를 부여한다.',
+    d:'❌ 오답. 내부비교가능거래를 이해 충돌로 제한한다는 규정은 없다. 오히려 우선 활용이 권장된다.'
+  },
+  q2:{
+    c:'✅ 정답(오답 찾기)! ¶3.31은 상업 데이터베이스가 이전가격 목적이 아닌 일반 회계·재무보고를 위해 설계되었기 때문에 이전가격 분석에 필요한 세부 정보가 부족할 수 있다고 명시한다. ③은 틀린 설명이다.',
+    a:'❌ 이 보기는 ¶3.31의 올바른 한계 설명이다(오답).',
+    b:'❌ 이 보기는 ¶3.31의 올바른 한계 설명이다(오답).',
+    d:'❌ 이 보기는 ¶3.31의 올바른 한계 설명이다(오답).'
+  },
+  q3:{
+    c:'✅ 정답! ¶3.33(및 ¶3.43)에 따르면 총자산 대비 무형자산 비율과 매출 대비 R&D 비용 비율이 가치 있는 무형자산을 보유하거나 중요한 R&D 활동을 수행하는 회사를 제외하기 위한 핵심 양적 검색 기준이다.',
+    a:'❌ 오답. 매출 규모는 거래 크기 관련 기준이며, 무형자산 보유 여부를 판단하는 기준이 아니다.',
+    b:'❌ 오답. 직원 수는 거래 크기 관련 기준이다.',
+    d:'❌ 오답. 재고자산 회전율은 재고자산 크기 관련 기준이다.'
+  },
+  q4:{
+    b:'✅ 정답! ¶3.36은 과세당국이 납세자에게 공개하지 않은 비밀정보를 일방적으로 사용하면 납세자가 해당 정보를 검토하거나 반박할 수 없어 방어권이 침해된다는 점을 강조한다. 이는 투명하고 공정한 과세 행정의 핵심 원칙이다.',
+    a:'❌ 오답. ¶3.36은 신뢰성 문제가 아닌 납세자의 방어권 보호를 이유로 한다.',
+    c:'❌ 오답. OECD 모델협약 제9조에 비공개 정보 사용 금지 규정이 명시되어 있지는 않다.',
+    d:'❌ 오답. 비공개 정보가 특수관계거래만 해당한다는 내용은 ¶3.36에 없다.'
+  },
+  q5:{
+    b:'✅ 정답! ¶3.39는 잔여이익분할방법(Residual PSM) 적용 시 기본이익(routine return) 산정을 위한 비교 데이터가 필요하다고 명시한다. PSM을 적용하더라도 비교가능거래 탐색 의무가 완전히 면제되는 것은 아니다.',
+    a:'❌ 오답. ¶3.39는 PSM 적용 시에도 보완적으로 비교가능거래가 필요한 경우를 명시한다.',
+    c:'❌ 오답. PSM 적용 시 내부비교가능거래만 사용해야 한다는 규정은 없다.',
+    d:'❌ 오답. PSM도 이익분할 근거를 지지하거나 잔여이익 산정을 위해 비교 데이터가 필요하다.'
+  }
 };
-
-function checkQ(qNum, btn, isCorrect) {
-  const item = document.getElementById('qi'+qNum);
-  if (item.querySelector('.correct') || item.querySelector('.wrong')) return;
-  const btns = item.querySelectorAll('button');
-  btns.forEach(b => b.disabled = true);
-  btn.classList.add(isCorrect ? 'correct' : 'wrong');
-  const fb = document.getElementById('qf'+qNum);
-  fb.textContent = isCorrect ? feedbacks[qNum].ok : feedbacks[qNum].no;
-  fb.className = 'q-feedback show ' + (isCorrect ? 'ok' : 'no');
-  state.quiz[qNum] = isCorrect;
-  saveState();
-  updateProg();
+function submitQuiz(){
+  let score=0;
+  ['q1','q2','q3','q4','q5'].forEach(q=>{
+    const sel=document.querySelector(`input[name=${q}]:checked`);
+    const fb=document.getElementById('f'+q.slice(1));
+    if(!sel){fb.className='q-feedback wrong';fb.style.display='block';fb.textContent='❌ 선택하지 않았습니다.';return;}
+    const isCorrect=sel.value===answers[q];
+    if(isCorrect)score+=20;
+    fb.className='q-feedback '+(isCorrect?'correct':'wrong');
+    fb.style.display='block';
+    fb.textContent=feedbacks[q][sel.value]||'❌ 오답입니다.';
+  });
+  const sb=document.getElementById('scoreBox');
+  sb.style.display='block';
+  document.getElementById('scoreBig').textContent=score+'점';
+  document.getElementById('scoreMsg').textContent=score>=80?'🎉 통과! 다음 모듈로 진행하세요.':'📚 '+score+'점 — 80점 이상이 되도록 다시 복습해 보세요.';
+  document.querySelector('.quiz-btn').disabled=true;
+  tpSet('ch3_m3_quiz', score);
+  tpSet('ch3_m3_pct', score >= 80 ? 100 : 50);
 }
 
-// 체크리스트
-function updateChk() {
-  state.chk = [];
-  for(let i=1;i<=CHK_TOTAL;i++){
-    if(document.getElementById('chk'+i)?.checked) state.chk.push(i);
+tpOnReady(function(user) {
+  document.getElementById('tpLoading').style.display = 'none';
+  document.getElementById('topUserName').textContent = user.displayName || user.email;
+  var savedPct  = parseInt(tpGet('ch3_m3_pct') || '0');
+  var savedQuiz = tpGet('ch3_m3_quiz');
+  if (savedPct > 0) {
+    document.getElementById('topBar').style.width = savedPct + '%';
+    document.getElementById('pctDisp').textContent = savedPct + '%';
   }
-  saveState();
-  updateProg();
-}
-
-// 진도 계산
-function updateProg() {
-  const accPct = Math.min(50, state.acc.length * 8);
-  const correctCount = Object.values(state.quiz).filter(Boolean).length;
-  const quizPct = Math.min(30, Math.round(correctCount / QUIZ_TOTAL * 30));
-  const chkPct = Math.min(20, Math.round(state.chk.length / CHK_TOTAL * 20));
-  const total = accPct + quizPct + chkPct;
-
-  document.getElementById('accPct').textContent = accPct;
-  document.getElementById('quizPct').textContent = quizPct;
-  document.getElementById('chkPct').textContent = chkPct;
-  document.getElementById('totalPct').textContent = total;
-  document.getElementById('progBar').style.width = total + '%';
-
-  if(total >= 100) document.getElementById('completeBanner').classList.add('show');
-}
-
-function saveState() {
-  localStorage.setItem(MODKEY, JSON.stringify(state));
-}
-
-function scrollTo(id) {
-  document.getElementById(id)?.scrollIntoView({behavior:'smooth', block:'start'});
-  document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
-  event.target.classList.add('active');
-}
-
-// 초기화: 저장된 상태 복원
-(function init() {
-  // 아코디언 복원
-  state.acc.forEach(id => {
-    const el = document.getElementById(id);
-    if(el) {
-      el.querySelector('.acc-body')?.classList.add('open');
-      el.querySelector('.acc-header')?.classList.add('open');
-    }
-  });
-  // 퀴즈 복원
-  Object.entries(state.quiz).forEach(([qNum, isCorrect]) => {
-    const item = document.getElementById('qi'+qNum);
-    if(!item) return;
-    const btns = item.querySelectorAll('button');
-    btns.forEach(b => b.disabled = true);
-    const feedbackData = feedbacks[qNum];
-    const fb = document.getElementById('qf'+qNum);
-    fb.textContent = isCorrect ? feedbackData.ok : feedbackData.no;
-    fb.className = 'q-feedback show ' + (isCorrect ? 'ok' : 'no');
-  });
-  // 체크리스트 복원
-  state.chk.forEach(i => {
-    const el = document.getElementById('chk'+i);
-    if(el) el.checked = true;
-  });
-  updateProg();
-})();
+  if (savedQuiz) {
+    var _qpct = parseInt(savedQuiz);
+    var _sb = document.getElementById('scoreBox');
+    if (_sb) _sb.style.display = 'block';
+    var _sn = document.getElementById('scoreBig') || document.getElementById('scoreNum');
+    if (_sn) _sn.textContent = _qpct + '점';
+    var _sm = document.getElementById('scoreMsg');
+    if (_sm) _sm.textContent = '이미 완료된 퀴즈입니다. 복습 후 다음 모듈로 진행하세요.';
+    var _qb = document.querySelector('.quiz-btn') || document.getElementById('submitBtn');
+    if (_qb) _qb.disabled = true;
+  }
+});
 </script>
 </body>
 </html>
