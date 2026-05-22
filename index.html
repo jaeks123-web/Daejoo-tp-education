@@ -36,8 +36,8 @@ a{color:var(--blue);text-decoration:none}
 .chapter-btn{flex:1;min-width:180px;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:1rem 1.2rem;border:2px solid var(--gray-border);text-decoration:none;color:var(--text);display:block;transition:all .15s}
 .chapter-btn:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(0,0,0,.12)}
 .chapter-btn.active-ch1{border-color:var(--blue);background:var(--blue-light)}
-.chapter-btn.active-ch2{border-color:var(--purple);background:var(--purple-light)}
-.chapter-btn.active-ch3{border-color:var(--teal);background:var(--teal-light)}
+.chapter-btn.active-ch2{border-color:var(--teal);background:var(--teal-light)}
+.chapter-btn.active-ch3{border-color:var(--purple);background:var(--purple-light)}
 .chapter-btn .ch-label{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-bottom:.25rem}
 .chapter-btn .ch-title{font-size:.98rem;font-weight:700;margin-bottom:.15rem}
 .chapter-btn .ch-desc{font-size:.8rem;color:var(--text2)}
@@ -45,8 +45,8 @@ a{color:var(--blue);text-decoration:none}
 /* 섹션 헤더 */
 .ch-section-header{font-size:1rem;font-weight:700;color:#333;margin:2.5rem 0 1rem;padding:.6rem 1rem;border-radius:8px;display:flex;align-items:center;gap:.6rem}
 .ch-section-header.ch1{background:var(--blue-light);border-left:4px solid var(--blue)}
-.ch-section-header.ch2{background:var(--purple-light);border-left:4px solid var(--purple)}
-.ch-section-header.ch3{background:var(--teal-light);border-left:4px solid var(--teal)}
+.ch-section-header.ch2{background:var(--teal-light);border-left:4px solid var(--teal)}
+.ch-section-header.ch3{background:var(--purple-light);border-left:4px solid var(--purple)}
 
 /* 진도 박스 */
 .overall-progress{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:1.2rem 1.8rem;margin-bottom:1.2rem}
@@ -54,8 +54,8 @@ a{color:var(--blue);text-decoration:none}
 .prog-outer{background:#e9ecef;border-radius:99px;height:10px;overflow:hidden;margin-bottom:.4rem}
 .prog-inner{height:100%;border-radius:99px;transition:width .5s}
 .prog-inner.ch1{background:linear-gradient(90deg,var(--blue),var(--blue-mid))}
-.prog-inner.ch2{background:linear-gradient(90deg,var(--purple),#9b4de0)}
-.prog-inner.ch3{background:linear-gradient(90deg,var(--teal),var(--teal-mid))}
+.prog-inner.ch2{background:linear-gradient(90deg,var(--teal),var(--teal-mid))}
+.prog-inner.ch3{background:linear-gradient(90deg,var(--purple),#9b4de0)}
 .prog-label{display:flex;justify-content:space-between;font-size:.83rem;color:var(--gray)}
 
 /* 학습 경로 */
@@ -64,8 +64,8 @@ a{color:var(--blue);text-decoration:none}
 .path-steps{display:flex;align-items:center;flex-wrap:wrap;gap:.4rem}
 .path-step{padding:.25rem .8rem;border-radius:20px;font-size:.8rem;font-weight:600}
 .path-step.ch1{background:var(--blue-light);color:var(--blue)}
-.path-step.ch2{background:var(--purple-light);color:var(--purple)}
-.path-step.ch3{background:var(--teal-light);color:var(--teal)}
+.path-step.ch2{background:var(--teal-light);color:var(--teal)}
+.path-step.ch3{background:var(--purple-light);color:var(--purple)}
 .path-arrow{color:#aaa;font-size:1rem}
 
 /* 팁 박스 */
@@ -98,19 +98,19 @@ a{color:var(--blue);text-decoration:none}
 
 /* Chapter II 카드 */
 .module-card.ch2.done{border-top-color:var(--green)}
-.module-card.ch2.inprog{border-top-color:var(--purple)}
-.module-card.ch2 .para-range{color:var(--purple);background:var(--purple-light)}
-.module-card.ch2 .tag-inprog{background:var(--purple-light);color:var(--purple)}
-.module-card.ch2 .btn-mod{background:var(--purple);color:#fff}
-.module-card.ch2 .btn-mod:hover{background:#561a8a}
+.module-card.ch2.inprog{border-top-color:var(--teal)}
+.module-card.ch2 .para-range{color:var(--teal);background:var(--teal-light)}
+.module-card.ch2 .tag-inprog{background:var(--teal-light);color:var(--teal)}
+.module-card.ch2 .btn-mod{background:var(--teal);color:#fff}
+.module-card.ch2 .btn-mod:hover{background:var(--teal-mid)}
 
 /* Chapter III 카드 */
 .module-card.ch3.done{border-top-color:var(--green)}
-.module-card.ch3.inprog{border-top-color:var(--teal)}
-.module-card.ch3 .para-range{color:var(--teal);background:var(--teal-light)}
-.module-card.ch3 .tag-inprog{background:var(--teal-light);color:var(--teal)}
-.module-card.ch3 .btn-mod{background:var(--teal);color:#fff}
-.module-card.ch3 .btn-mod:hover{background:var(--teal-mid)}
+.module-card.ch3.inprog{border-top-color:var(--purple)}
+.module-card.ch3 .para-range{color:var(--purple);background:var(--purple-light)}
+.module-card.ch3 .tag-inprog{background:var(--purple-light);color:var(--purple)}
+.module-card.ch3 .btn-mod{background:var(--purple);color:#fff}
+.module-card.ch3 .btn-mod:hover{background:#561a8a}
 
 /* 버튼 공통 */
 .btn-mod{display:inline-block;padding:.5rem 1.2rem;border-radius:8px;font-size:.85rem;font-weight:600;cursor:pointer;border:none;transition:all .15s;text-align:center;margin-top:auto}
@@ -158,12 +158,12 @@ a{color:var(--blue);text-decoration:none}
       <div class="ch-desc">The Arm's Length Principle · 7개 모듈</div>
     </a>
     <a href="#ch2-section" class="chapter-btn active-ch2">
-      <div class="ch-label" style="color:var(--purple)">Chapter II · §2.1–§2.187</div>
+      <div class="ch-label" style="color:var(--teal)">Chapter II · §2.1–§2.187</div>
       <div class="ch-title">이전가격 산출방법</div>
-      <div class="ch-desc">CUP · RPM · CPM · TNMM · PSM · 8개 모듈</div>
+      <div class="ch-desc">CUP · RPM · CPM · TNMM · PSM · 9개 모듈</div>
     </a>
     <a href="#ch3-section" class="chapter-btn active-ch3">
-      <div class="ch-label" style="color:var(--teal)">Chapter III · §3.1–§3.83</div>
+      <div class="ch-label" style="color:var(--purple)">Chapter III · §3.1–§3.83</div>
       <div class="ch-title">비교가능성 분석</div>
       <div class="ch-desc">Comparability Analysis · 6개 모듈</div>
     </a>
@@ -292,9 +292,9 @@ a{color:var(--blue);text-decoration:none}
       </div>
     </div>
 
-    <div class="tips-box" style="background:var(--purple-light);border-color:#c8a0e8">
-      <h4 style="color:var(--purple)">💡 Chapter II 학습 가이드</h4>
-      <ul style="color:#4a0f78">
+    <div class="tips-box" style="background:var(--teal-light);border-color:#8acece">
+      <h4 style="color:var(--teal)">💡 Chapter II 학습 가이드</h4>
+      <ul style="color:#0a4a4a">
         <li><strong>M2-1(방법 선택 기준)</strong>을 먼저 완료하면 나머지 방법론 모듈의 맥락을 이해하기 쉽습니다.</li>
         <li>M2-5·M2-6(TNMM)과 M2-7·M2-8(PSM)은 각각 2모듈 세트로 연속 학습을 권장합니다.</li>
       </ul>
@@ -305,8 +305,8 @@ a{color:var(--blue);text-decoration:none}
         <span class="status-tag tag-pending" id="c2-tag-m1">미시작</span>
         <div class="num">Ch. II · MODULE 1 — 방법론 기초</div>
         <span class="para-range">§2.1 – §2.12</span>
-        <h3>정상가격산출방법 선택</h3>
-        <p>5가지 방법의 분류 체계, '최적 방법' 선택 기준(MAS), 방법별 적합 거래 유형을 학습합니다.</p>
+        <h3>정상가격산출방법의 개요 및 선택</h3>
+        <p>5가지 방법의 분류 체계, '최적 방법(Most Appropriate Method)' 선택 기준, 방법별 적합 거래 유형과 우선순위를 학습합니다.</p>
         <div class="status-bar"><div class="status-fill" id="c2-fill-m1" style="width:0%"></div></div>
         <a href="M2-1_방법선택.html" class="btn-mod" id="c2-btn-m1">학습 시작 →</a>
       </div>
@@ -314,7 +314,7 @@ a{color:var(--blue);text-decoration:none}
         <span class="status-tag tag-pending" id="c2-tag-m2">미시작</span>
         <div class="num">Ch. II · MODULE 2 — 전통적 방법</div>
         <span class="para-range">§2.13 – §2.26</span>
-        <h3>비교가능 비통제가격법 (CUP)</h3>
+        <h3>비교가능 제3자 가격방법 (CUP)</h3>
         <p>내부·외부 CUP, 비교가능성 2대 조건, 상품 인용가격 특례, 가격산정일 규정을 학습합니다.</p>
         <div class="status-bar"><div class="status-fill" id="c2-fill-m2" style="width:0%"></div></div>
         <a href="M2-2_CUP.html" class="btn-mod" id="c2-btn-m2">학습 시작 →</a>
@@ -339,46 +339,46 @@ a{color:var(--blue);text-decoration:none}
       </div>
       <div class="module-card ch2" id="c2-card-m5">
         <span class="status-tag tag-pending" id="c2-tag-m5">미시작</span>
-        <div class="num">Ch. II · MODULE 5 — 거래이익방법</div>
+        <div class="num">Ch. II · MODULE 5 — 거래순이익방법</div>
         <span class="para-range">§2.62 – §2.81</span>
-        <h3>거래이익방법 & TNMM 기초</h3>
-        <p>TNMM 정의·검증대상(Tested Party) 선정, 강점(제품 차이 둔감)·약점(기업특유 요소)을 학습합니다.</p>
+        <h3>거래순이익률방법 기초 (TNMM)</h3>
+        <p>TNMM 정의·검증대상(Tested Party) 선정 기준, 강점(제품 차이 둔감)·약점(기업 특유 요소), 다른 방법과의 비교를 학습합니다.</p>
         <div class="status-bar"><div class="status-fill" id="c2-fill-m5" style="width:0%"></div></div>
         <a href="M2-5_TNMM기초.html" class="btn-mod" id="c2-btn-m5">학습 시작 →</a>
       </div>
       <div class="module-card ch2" id="c2-card-m6">
         <span class="status-tag tag-pending" id="c2-tag-m6">미시작</span>
-        <div class="num">Ch. II · MODULE 6 — 거래이익방법</div>
+        <div class="num">Ch. II · MODULE 6 — 거래순이익방법</div>
         <span class="para-range">§2.82 – §2.113</span>
-        <h3>TNMM 순이익 지표 선정</h3>
-        <p>순이익 지표 4종(ROS·원가기반·ROA·Berry Ratio) 비교, Berry Ratio 조건, 다년도 데이터를 학습합니다.</p>
+        <h3>거래순이익률방법 심화 (TNMM)</h3>
+        <p>순이익지표 4종(ROS·원가기반·ROA·Berry Ratio) 선정 기준, Berry Ratio 적용 조건, 다년도 평균 데이터 활용을 학습합니다.</p>
         <div class="status-bar"><div class="status-fill" id="c2-fill-m6" style="width:0%"></div></div>
         <a href="M2-6_TNMM심화.html" class="btn-mod" id="c2-btn-m6">학습 시작 →</a>
       </div>
       <div class="module-card ch2" id="c2-card-m7">
         <span class="status-tag tag-pending" id="c2-tag-m7">미시작</span>
-        <div class="num">Ch. II · MODULE 7 — 거래이익방법</div>
-        <span class="para-range">§2.114 – §2.153</span>
-        <h3>이익분할방법 (PSM) 개요</h3>
-        <p>PSM 원리·강점·약점, 적용 조건 3가지, 기여분석 vs 잔여이익분석 2단계를 학습합니다.</p>
+        <div class="num">Ch. II · MODULE 7 — 이익분할방법</div>
+        <span class="para-range">§2.114 – §2.145</span>
+        <h3>이익분할방법 개요 (PSM)</h3>
+        <p>PSM 원리·강점·약점, 적용 적합성 판단 기준, 기여분석(Contribution Analysis)과 잔여이익분석(Residual Analysis) 2단계를 학습합니다.</p>
         <div class="status-bar"><div class="status-fill" id="c2-fill-m7" style="width:0%"></div></div>
         <a href="M2-7_PSM개요.html" class="btn-mod" id="c2-btn-m7">학습 시작 →</a>
       </div>
       <div class="module-card ch2" id="c2-card-m8">
         <span class="status-tag tag-pending" id="c2-tag-m8">미시작</span>
-        <div class="num">Ch. II · MODULE 8 — 심화·종합</div>
-        <span class="para-range">§2.154 – §2.187</span>
-        <h3>PSM 심화 & Chapter II 결론</h3>
-        <p>관련이익 확정, 예상 vs 실제이익 차이 처리, 이익분할 요소, 5대 방법 종합 비교표를 학습합니다.</p>
+        <div class="num">Ch. II · MODULE 8 — 이익분할방법</div>
+        <span class="para-range">§2.146 – §2.187</span>
+        <h3>이익분할방법 심화 (PSM)</h3>
+        <p>관련이익 확정 기준, 예상이익 vs 실제이익 차이 처리, 이익분할 요소 유형(자산·비용·기타), 5대 방법 종합 비교를 학습합니다.</p>
         <div class="status-bar"><div class="status-fill" id="c2-fill-m8" style="width:0%"></div></div>
         <a href="M2-8_PSM심화.html" class="btn-mod" id="c2-btn-m8">학습 시작 →</a>
       </div>
       <div class="module-card ch2" id="c2-card-m9" style="grid-column:1/-1">
         <span class="status-tag tag-pending" id="c2-tag-m9">미시작</span>
-        <div class="num">Ch. II · MODULE 9 — PSM 심화 사례 (Annex 종합)</div>
+        <div class="num">Ch. II · MODULE 9 — PSM 종합사례</div>
         <span class="para-range">Annex to Chapter II</span>
-        <h3>PSM 적용 사례 종합 — Annex to Chapter II</h3>
-        <p>OECD가 제시한 PSM 적용 사례를 유형별로 분석합니다. 잔여이익분할법의 실제 계산 과정을 통해 PSM 적용 원리를 심화 학습합니다.</p>
+        <h3>Annex II 종합사례 — 이익분할방법</h3>
+        <p>OECD Annex II 16개 사례(PSM 적합 12개·부적합 2개)를 유형별로 분석하고, 잔여이익분할법의 실제 계산 과정을 심화 학습합니다.</p>
         <div class="status-bar"><div class="status-fill" id="c2-fill-m9" style="width:0%"></div></div>
         <a href="M2-9_Annex종합.html" class="btn-mod" id="c2-btn-m9">학습 시작 →</a>
       </div>
@@ -407,9 +407,9 @@ a{color:var(--blue);text-decoration:none}
       </div>
     </div>
 
-    <div class="tips-box" style="background:var(--teal-light);border-color:#8acece">
-      <h4 style="color:var(--teal)">💡 Chapter III 학습 가이드</h4>
-      <ul style="color:#0a4a4a">
+    <div class="tips-box" style="background:var(--purple-light);border-color:#c8a0e8">
+      <h4 style="color:var(--purple)">💡 Chapter III 학습 가이드</h4>
+      <ul style="color:#4a0f78">
         <li><strong>M3-1(분석 개관)</strong>에서 9단계 프로세스를 먼저 익히면 나머지 모듈의 흐름이 명확해집니다.</li>
         <li>Chapter II(방법론)와 연계하여 학습하면 실무 적용력이 높아집니다.</li>
       </ul>
@@ -420,8 +420,8 @@ a{color:var(--blue);text-decoration:none}
         <span class="status-tag tag-pending" id="c3-tag-m1">미시작</span>
         <div class="num">Ch. III · MODULE 1 — 분석 기초</div>
         <span class="para-range">§3.1 – §3.12</span>
-        <h3>비교가능성 분석 개관</h3>
-        <p>비교가능성 분석 vs 검색의 구분, 9단계 프로세스, 광범위한 분석, 개별/통합거래 원칙을 학습합니다.</p>
+        <h3>비교가능성 분석 개관 및 프로세스</h3>
+        <p>비교가능성 분석 vs 검색의 구분, 9단계 표준 프로세스, 광범위한 분석 개념, 개별·통합거래 원칙을 학습합니다.</p>
         <div class="status-bar"><div class="status-fill" id="c3-fill-m1" style="width:0%"></div></div>
         <a href="M3-1_분석프로세스.html" class="btn-mod" id="c3-btn-m1">학습 시작 →</a>
       </div>
@@ -429,8 +429,8 @@ a{color:var(--blue);text-decoration:none}
         <span class="status-tag tag-pending" id="c3-tag-m2">미시작</span>
         <div class="num">Ch. III · MODULE 2 — 분석대상 선정</div>
         <span class="para-range">§3.13 – §3.23</span>
-        <h3>분석대상회사 선정 & 통제거래 정보</h3>
-        <p>의도적 상계거래, Tested Party 선정 기준(one-sided approach), 통제거래 자료 수집 범위를 학습합니다.</p>
+        <h3>분석대상회사 선정 및 정보 범위</h3>
+        <p>의도적 상계거래(Intentional Set-offs), Tested Party 선정 기준(One-sided approach), 통제거래 정보 수집 범위를 학습합니다.</p>
         <div class="status-bar"><div class="status-fill" id="c3-fill-m2" style="width:0%"></div></div>
         <a href="M3-2_분석대상회사.html" class="btn-mod" id="c3-btn-m2">학습 시작 →</a>
       </div>
@@ -438,8 +438,8 @@ a{color:var(--blue);text-decoration:none}
         <span class="status-tag tag-pending" id="c3-tag-m3">미시작</span>
         <div class="num">Ch. III · MODULE 3 — 비교가능거래</div>
         <span class="para-range">§3.24 – §3.39</span>
-        <h3>비교가능 비통제거래 탐색</h3>
-        <p>내부/외부 비교가능거래 구분, 데이터베이스 한계, 해외 비교가능거래, 비공개 정보 활용을 학습합니다.</p>
+        <h3>비교가능거래 탐색</h3>
+        <p>내부·외부 비교가능거래 구분, 상업 데이터베이스의 한계, 해외 비교가능거래 활용, 비공개 정보 사용 쟁점을 학습합니다.</p>
         <div class="status-bar"><div class="status-fill" id="c3-fill-m3" style="width:0%"></div></div>
         <a href="M3-3_비교가능거래탐색.html" class="btn-mod" id="c3-btn-m3">학습 시작 →</a>
       </div>
@@ -447,8 +447,8 @@ a{color:var(--blue);text-decoration:none}
         <span class="status-tag tag-pending" id="c3-tag-m4">미시작</span>
         <div class="num">Ch. III · MODULE 4 — 선정·조정</div>
         <span class="para-range">§3.40 – §3.54</span>
-        <h3>비교가능회사 선정 & 비교가능성 조정</h3>
-        <p>가산법 vs 연역법, 정량적 검색기준, 비교가능성 조정 유형(회계·자산·기능), 운전자본 조정을 학습합니다.</p>
+        <h3>비교가능회사 선정과 비교가능성 조정</h3>
+        <p>가산법 vs 연역법, 정량적 검색기준, 비교가능성 조정 4유형(회계·자산·기능·운전자본), 신뢰성 조건과 문서화를 학습합니다.</p>
         <div class="status-bar"><div class="status-fill" id="c3-fill-m4" style="width:0%"></div></div>
         <a href="M3-4_선정과조정.html" class="btn-mod" id="c3-btn-m4">학습 시작 →</a>
       </div>
@@ -456,17 +456,17 @@ a{color:var(--blue);text-decoration:none}
         <span class="status-tag tag-pending" id="c3-tag-m5">미시작</span>
         <div class="num">Ch. III · MODULE 5 — 정상가격범위</div>
         <span class="para-range">§3.55 – §3.66</span>
-        <h3>정상가격범위 & 극단값 처리</h3>
-        <p>단일 정상가격 vs 범위, IQR(사분위범위) 적용, 범위 내 최적점 선정, 손실·고이익 회사 처리를 학습합니다.</p>
+        <h3>정상가격범위</h3>
+        <p>단일 정상가격 vs 범위 개념, IQR(사분위범위) 적용 원리, 범위 내 최적점 선정, 손실·고이익 회사 극단값 처리를 학습합니다.</p>
         <div class="status-bar"><div class="status-fill" id="c3-fill-m5" style="width:0%"></div></div>
         <a href="M3-5_정상가격범위.html" class="btn-mod" id="c3-btn-m5">학습 시작 →</a>
       </div>
       <div class="module-card ch3" id="c3-card-m6">
         <span class="status-tag tag-pending" id="c3-tag-m6">미시작</span>
         <div class="num">Ch. III · MODULE 6 — 심화·종합</div>
-        <span class="para-range">§3.68 – §3.83</span>
-        <h3>시간적 비교가능성 & 이행 사항</h3>
-        <p>동일회계연도 원칙, 자료수집 시점 차이, 다중연도 데이터 허용 조건, 납세자 이행 부담을 학습합니다.</p>
+        <span class="para-range">§3.67 – §3.83</span>
+        <h3>시간적 비교가능성 및 Compliance</h3>
+        <p>Timing 5유형(동시·사전·사후·예측·다중연도), 불확실성 처리, 사후자료 활용 조건, 납세자 Compliance 부담을 학습합니다.</p>
         <div class="status-bar"><div class="status-fill" id="c3-fill-m6" style="width:0%"></div></div>
         <a href="M3-6_시간적비교가능성.html" class="btn-mod" id="c3-btn-m6">학습 시작 →</a>
       </div>
