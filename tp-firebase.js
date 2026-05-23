@@ -38,6 +38,25 @@ _auth.onAuthStateChanged(async function(user) {
     return;
   }
 
+  // ─── 승인 여부 확인 (allowedUsers 컬렉션) ────────────────────
+  try {
+    var allowedSnap = await _db.collection('allowedUsers').doc(user.email).get();
+    if (!allowedSnap.exists) {
+      // 미승인 사용자 → 로그아웃 후 거절 메시지 표시
+      await _auth.signOut();
+      window.location.replace(
+        'login.html?denied=true&email=' + encodeURIComponent(user.email)
+      );
+      return;
+    }
+  } catch(e) {
+    console.warn('[tp-firebase] 승인 확인 실패:', e);
+    await _auth.signOut();
+    window.location.replace('login.html?denied=true');
+    return;
+  }
+  // ─────────────────────────────────────────────────────────────
+
   // 이미 로그인한 상태에서 login.html 접근 → index로 이동
   if (isLoginPage) {
     window.location.replace('index.html');
