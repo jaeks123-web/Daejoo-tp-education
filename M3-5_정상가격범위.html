@@ -209,7 +209,7 @@ a{color:var(--purple);text-decoration:none}
       <ul class="obj-list">
         <li><span class="obj-num">1</span><span>단일 정상가격이 아닌 정상가격범위(arm's length range)가 존재하는 이유를 설명할 수 있다</span></li>
         <li><span class="obj-num">2</span><span>완전비교가능 범위(full range)와 통계적으로 축소된 범위(IQR)의 차이 및 적용 조건을 이해한다</span></li>
-        <li><span class="obj-num">3</span><span>사분위수(IQR) 계산 방법과 중위값·평균값·가중평균값 적용 기준을 파악한다</span></li>
+        <li><span class="obj-num">3</span><span>사분위(IQR) 계산 방법과 중위값·평균값·가중평균값 적용 기준을 파악한다</span></li>
         <li><span class="obj-num">4</span><span>납세자의 이전가격이 정상가격범위 내에 있는 경우와 범위 밖에 있는 경우 각각의 과세 처리 원칙을 이해한다</span></li>
         <li><span class="obj-num">5</span><span>극단적 손실 또는 고이익 비교가능회사의 처리 방법과 비교가능성 재검토 원칙을 설명할 수 있다</span></li>
       </ul>
@@ -259,7 +259,7 @@ a{color:var(--purple);text-decoration:none}
               <ul>
                 <li>외부비교가능거래(상업 DB)만 사용하는 경우</li>
                 <li>완전히 조정되지 않은 잔여 차이가 존재하는 경우</li>
-                <li>IQR(사분위수 범위)로 좁히는 것이 권장됨</li>
+                <li>IQR(사분위 범위)로 좁히는 것이 권장됨</li>
               </ul>
             </div>
           </div>
@@ -361,7 +361,7 @@ a{color:var(--purple);text-decoration:none}
           <p><strong>결론: 정상가격범위 = 2.3% (Q1) ~ 7.1% (Q3), 중위값 = 5.0%</strong></p>
           <div class="note-point">✅ 분석대상회사의 OPM이 2.3%~7.1% 구간에 속하면 정상가격원칙 준수. 이 범위 밖이면 과세당국이 조정할 수 있으며, 조정점은 통상 중위값(5.0%)이 사용된다.</div>
           <div class="practice-note">
-            <div class="pn-label">💼 실무 포인트 — 사분위수 계산 방식</div>
+            <div class="pn-label">💼 실무 포인트 — 사분위 계산 방식</div>
             <p>Q1·Q3의 정확한 계산은 각국 과세과청이 제시하는 방법 또는 소프트웨어(Excel, BvD 플랫폼)에 따라 미세하게 다를 수 있다(예: 보간법 사용 여부). 문서에 사용한 계산 방식을 명시하는 것이 좋다.</p>
           </div>
         </div>
@@ -388,7 +388,7 @@ a{color:var(--purple);text-decoration:none}
               <p>산술평균 또는 가중평균. 극단값에 민감. 비교가능거래 수가 적거나 분포가 고른 경우 적합.</p>
             </div>
           </div>
-          <div class="warn-point">⚠️ <strong>국가별 차이:</strong> 미국은 규정상 사분위수 범위를 명시하며, 한국 국조법도 IQR 사용을 허용한다. 그러나 일부 국가는 전체 범위(full range)를 사용하기도 한다. 양측 APA나 MAP 협상 시 각국의 통계 도구 차이가 쟁점이 될 수 있다.</div>
+          <div class="warn-point">⚠️ <strong>국가별 차이:</strong> 미국은 규정상 사분위 범위를 명시하며, 한국 국조법도 IQR 사용을 허용한다. 그러나 일부 국가는 전체 범위(full range)를 사용하기도 한다. 양측 APA나 MAP 협상 시 각국의 통계 도구 차이가 쟁점이 될 수 있다.</div>
         </div>
       </div>
     </section>
@@ -593,7 +593,7 @@ a{color:var(--purple);text-decoration:none}
 
       <!-- Q2 -->
       <div class="q-block">
-        <div class="q-text">2. IQR(사분위수 범위)을 사용하여 정상가격범위를 설정하는 경우, 정상가격범위의 <strong>하한과 상한</strong>은 각각 무엇인가?</div>
+        <div class="q-text">2. IQR(사분위 범위)을 사용하여 정상가격범위를 설정하는 경우, 정상가격범위의 <strong>하한과 상한</strong>은 각각 무엇인가?</div>
         <div class="q-options" id="q2">
           <label><input type="radio" name="q2" value="a"> (A) 하한: 최솟값, 상한: 최댓값</label>
           <label><input type="radio" name="q2" value="b"> (B) 하한: Q1(25th percentile), 상한: Q3(75th percentile)</label>
@@ -651,7 +651,7 @@ a{color:var(--purple);text-decoration:none}
       <h2>☑ 실무 체크리스트</h2>
       <ul class="checklist">
         <li><input type="checkbox" id="c1"><label for="c1">비교가능거래의 비교가능성 품질을 평가하여 완전 비교가능 범위(Full Range) 또는 IQR 중 어느 것을 적용할지 결정하였습니까?</label></li>
-        <li><input type="checkbox" id="c2"><label for="c2">IQR 계산 시 사용한 소프트웨어와 사분위수 계산 방식(보간법 등)을 문서에 명시하였습니까?</label></li>
+        <li><input type="checkbox" id="c2"><label for="c2">IQR 계산 시 사용한 소프트웨어와 사분위 계산 방식(보간법 등)을 문서에 명시하였습니까?</label></li>
         <li><input type="checkbox" id="c3"><label for="c3">정상가격범위의 하한(Q1), 상한(Q3), 중위값(Median)을 산출하고 문서화하였습니까?</label></li>
         <li><input type="checkbox" id="c4"><label for="c4">분석대상회사의 이익지표가 정상가격범위 내에 있는지 여부를 확인하였습니까?</label></li>
         <li><input type="checkbox" id="c5"><label for="c5">이익지표가 범위 밖인 경우, 조정점(통상 중위값)과 조정 근거를 문서화하였습니까?</label></li>
