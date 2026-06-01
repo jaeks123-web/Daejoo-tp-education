@@ -525,7 +525,8 @@ a{color:var(--blue);text-decoration:none}
       <div class="score-box" id="scoreBox">
         <div class="big" id="scoreNum">0점</div>
         <div style="font-size:.95rem;color:var(--blue);margin-top:.3rem" id="scoreMsg"></div>
-      </div>
+        <button class="quiz-btn" id="retryBtn" onclick="resetQuiz()" style="margin-top:1rem;background:#555;color:#fff;">🔄 다시 응시하기</button>
+            </div>
     </section>
 
     <!-- 체크리스트 -->
@@ -609,6 +610,17 @@ function toggleAcc(btn,id){
     tpSet(KEY_OPENED,n);
     updateProg();
   }
+}
+
+function resetQuiz(){
+  document.querySelectorAll('input[type="radio"]').forEach(function(r){ r.checked=false; });
+  document.querySelectorAll('.q-feedback').forEach(function(el){
+    el.style.display='none'; el.textContent=''; el.className='q-feedback';
+  });
+  var sb=document.getElementById('scoreBox');
+  if(sb) sb.style.display='none';
+  var btn=document.getElementById('quizBtn')||document.getElementById('submitBtn')||document.querySelector('.quiz-btn');
+  if(btn){ btn.disabled=false; btn.style.opacity='1'; }
 }
 
 function submitQuiz(){

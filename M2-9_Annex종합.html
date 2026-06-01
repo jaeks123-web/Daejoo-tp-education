@@ -307,7 +307,7 @@ a{color:var(--blue);text-decoration:none}
             <span class="verdict no">PSM 부적합 — B의 기여가 비교가능거래로 평가 가능</span>
           </div>
           <div class="warn-point">
-            <strong>핵심 차이:</strong> Ex.3과 Ex.4는 동일한 구조이지만, B의 마케팅 기여의 <em>가치와 특수성</em>에서 차이가 난다. OECD는 단순히 통합 구조가 아닌, <strong>실질적 기여의 특수성</strong>이 PSM 선택의 기준임을 강조한다.
+            <strong>핵심 차이:</strong> Ex.3과 Ex.4는 동일한 구조이지만, B의 마케팅 기여의 <em>가치와 독특성</em>에서 차이가 난다. OECD는 단순히 통합 구조가 아닌, <strong>실질적 기여의 독특성</strong>이 PSM 선택의 기준임을 강조한다.
           </div>
         </div>
       </div>
@@ -859,7 +859,8 @@ a{color:var(--blue);text-decoration:none}
       <div class="score-box" id="scoreBox">
         <div class="big" id="scoreTxt"></div>
         <p id="scoreMsg"></p>
-      </div>
+        <button class="quiz-btn" id="retryBtn" onclick="resetQuiz()" style="margin-top:1rem;background:#555;color:#fff;">🔄 다시 응시하기</button>
+            </div>
     </section>
 
     <!-- 실무 체크리스트 -->
@@ -921,6 +922,17 @@ const feedbacks={
   q5:{c:'정답! ASSET Co는 FUND Co와의 계약 관련 기능·자산·위험이 전혀 없으므로 정상가격 보상도 영(Zero)이 됩니다. 실질적 기여를 수행한 A와 B가 수수료 전액을 배분받습니다.',
       wrong:'틀렸습니다. ASSET Co가 보상을 받지 못하는 이유는 FUND Co 계약과 관련하여 어떠한 기능도, 자산도, 위험도 부담하지 않기 때문입니다.'}
 };
+
+function resetQuiz(){
+  document.querySelectorAll('input[type="radio"]').forEach(function(r){ r.checked=false; });
+  document.querySelectorAll('.q-feedback').forEach(function(el){
+    el.style.display='none'; el.textContent=''; el.className='q-feedback';
+  });
+  var sb=document.getElementById('scoreBox');
+  if(sb) sb.style.display='none';
+  var btn=document.getElementById('quizBtn')||document.getElementById('submitBtn')||document.querySelector('.quiz-btn');
+  if(btn){ btn.disabled=false; btn.style.opacity='1'; }
+}
 
 function gradeQuiz(){
   let score=0;

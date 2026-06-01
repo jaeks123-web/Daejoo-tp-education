@@ -561,7 +561,8 @@ a{color:var(--blue);text-decoration:none}
       <div class="score-box" id="scoreBox">
         <div class="big" id="scoreNum"></div>
         <p id="scoreMsg"></p>
-      </div>
+        <button class="quiz-btn" id="retryBtn" onclick="resetQuiz()" style="margin-top:1rem;background:#555;color:#fff;">🔄 다시 응시하기</button>
+            </div>
     </section>
 
     <!-- 실무 체크리스트 -->
@@ -657,6 +658,17 @@ const feedbacks = {
     d:'❌ 오답. OECD는 이익분할방법보다 전통적 거래방법을 선호합니다. 이익분할방법은 전통적 방법 적용이 불가한 경우에 적용합니다.'
   }
 };
+
+function resetQuiz(){
+  document.querySelectorAll('input[type="radio"]').forEach(function(r){ r.checked=false; });
+  document.querySelectorAll('.q-feedback').forEach(function(el){
+    el.style.display='none'; el.textContent=''; el.className='q-feedback';
+  });
+  var sb=document.getElementById('scoreBox');
+  if(sb) sb.style.display='none';
+  var btn=document.getElementById('quizBtn')||document.getElementById('submitBtn')||document.querySelector('.quiz-btn');
+  if(btn){ btn.disabled=false; btn.style.opacity='1'; }
+}
 
 function submitQuiz() {
   let score = 0; let answered = 0;

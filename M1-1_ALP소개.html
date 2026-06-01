@@ -445,6 +445,7 @@ a{color:var(--blue);text-decoration:none}
       <div style="text-align:center;margin-top:1.5rem">
         <div id="quiz-score-display" style="font-size:1.1rem;font-weight:700;color:var(--blue);margin-bottom:.8rem"></div>
         <button class="btn btn-success" onclick="finishQuiz()" id="finish-btn" style="display:none">✓ 퀴즈 완료 & 진도 저장</button>
+        <button class="btn" onclick="resetQuiz()" id="retry-btn" style="display:none;margin-left:8px;background:#555;color:#fff;border:none;padding:.5rem 1.2rem;border-radius:8px;font-size:.9rem;font-weight:600;cursor:pointer;">🔄 다시 응시하기</button>
       </div>
     </div>
 
@@ -520,7 +521,25 @@ function checkAllAnswered(){
     var disp=document.getElementById('quiz-score-display');
     disp.textContent='점수: '+correctCount+' / '+totalQ+' ('+score+'%)';
     document.getElementById('finish-btn').style.display='inline-flex';
+    document.getElementById('retry-btn').style.display='inline-flex';
   }
+}
+
+function resetQuiz(){
+  answered={};
+  correctCount=0;
+  document.querySelectorAll('.quiz-item button').forEach(function(b){
+    b.classList.remove('correct','wrong','selected');
+    b.disabled=false; b.style.opacity='1';
+  });
+  document.querySelectorAll('.q-feedback').forEach(function(el){
+    el.textContent=''; el.className='q-feedback';
+  });
+  var sd=document.getElementById('quiz-score-display');
+  if(sd) sd.textContent='';
+  document.getElementById('finish-btn').style.display='none';
+  document.getElementById('retry-btn').style.display='none';
+  document.getElementById('complete-banner').classList.remove('show');
 }
 
 function finishQuiz(){

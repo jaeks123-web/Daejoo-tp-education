@@ -377,7 +377,8 @@ a{color:var(--blue);text-decoration:none}
       <div class="score-box" id="scoreBox">
         <div class="big" id="scoreNum"></div>
         <p id="scoreMsg"></p>
-      </div>
+        <button class="quiz-btn" id="retryBtn" onclick="resetQuiz()" style="margin-top:1rem;background:#555;color:#fff;">🔄 다시 응시하기</button>
+            </div>
     </section>
 
     <section class="card" id="check">
@@ -414,6 +415,17 @@ const feedbacks={
   q3:{b:"✅ 정답! §1.120에 따르면 위험가산율 = 무위험이익률 + 위험 부담에 따른 프리미엄으로 구성됩니다.",a:"❌ 오답. 정부채권 수익률 × 2가 아닙니다.",c:"❌ 오답. 이러한 계산법은 OECD 지침서에 없습니다.",d:"❌ 오답. WACC(가중평균자본비용)와 다른 개념입니다."},
   q4:{b:"✅ 정답! §1.119 사례에서 기업 F는 재무위험을 통제하므로 위험가산율에 해당하는 이익을 받습니다. 기업 F는 무형자산 개발 결과(높거나 낮은 수익)에 대한 이해관계가 없으며, 잔여이익은 실제 운영위험을 부담하는 기업 D에 귀속됩니다.",a:"❌ 오답. 기업 F는 개발 결과에 대한 이해관계가 없으므로 잔여이익을 받지 않습니다.",c:"❌ 오답. 50:50 분배는 일반적인 원칙이 아닙니다.",d:"❌ 오답. 기업 F는 재무위험을 통제하므로 무위험이익률이 아닌 위험가산율을 적용받습니다."}
 };
+function resetQuiz(){
+  document.querySelectorAll('input[type="radio"]').forEach(function(r){ r.checked=false; });
+  document.querySelectorAll('.q-feedback').forEach(function(el){
+    el.style.display='none'; el.textContent=''; el.className='q-feedback';
+  });
+  var sb=document.getElementById('scoreBox');
+  if(sb) sb.style.display='none';
+  var btn=document.getElementById('quizBtn')||document.getElementById('submitBtn')||document.querySelector('.quiz-btn');
+  if(btn){ btn.disabled=false; btn.style.opacity='1'; }
+}
+
 function submitQuiz(){
   let score=0,answered=0;
   ['q1','q2','q3','q4'].forEach(q=>{
